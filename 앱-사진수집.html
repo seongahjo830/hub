@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>사진 수집 앱 (누끼)</title>
+<style>
+:root{--bg:#FBF7EE;--panel:#FFFDF7;--ink:#2A2620;--soft:#5A5348;--muted:#8A8170;--line:#E4D6B4;--accent:#1D4ED8;--warm:#C2571F;--green:#3E7C43;--pink:#C2337E}
+@media(prefers-color-scheme:dark){:root{--bg:#17150F;--panel:#211E17;--ink:#EDE7D8;--soft:#C9C2B2;--muted:#98917F;--line:#39342A;--accent:#7AB0FF;--warm:#E8925C;--green:#7FB985;--pink:#F08AC0}}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:"Pretendard","Apple SD Gothic Neo","Malgun Gothic",sans-serif;line-height:1.6;padding-bottom:70px}
+.wrap{max-width:680px;margin:0 auto;padding:0 16px}
+.top{display:flex;align-items:center;gap:10px;padding:16px 0;border-bottom:1px solid var(--line)}
+.top a{color:var(--accent);text-decoration:none;font-weight:700;font-size:.9em}
+.hero{text-align:center;padding:18px 0 6px}
+.hero h1{font-size:1.5em;font-weight:900}
+.hero .sub{color:var(--soft);font-size:.85em;margin-top:3px}
+.controls{display:flex;gap:8px;margin:14px 0;flex-wrap:wrap}
+.controls label,.controls button{flex:1;min-width:130px;text-align:center;background:var(--panel);border:1px solid var(--line);border-radius:11px;padding:12px;font-weight:800;font-size:.92em;color:var(--ink);cursor:pointer;font-family:inherit}
+.controls .primary{background:var(--accent);color:#fff;border-color:var(--accent)}
+input[type=file]{display:none}
+.opt{display:flex;align-items:center;gap:8px;justify-content:center;font-size:.85em;color:var(--soft);margin:2px 0 6px;font-weight:700}
+.status{text-align:center;font-size:.84em;color:var(--warm);min-height:1.3em;font-weight:700}
+.gallery{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+@media(min-width:520px){.gallery{grid-template-columns:1fr 1fr 1fr}}
+.item{position:relative;background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden;aspect-ratio:1}
+.item img{width:100%;height:100%;object-fit:contain;background:
+  linear-gradient(45deg,#0001 25%,transparent 25%,transparent 75%,#0001 75%),
+  linear-gradient(45deg,#0001 25%,transparent 25%,transparent 75%,#0001 75%);background-size:16px 16px;background-position:0 0,8px 8px}
+.item .x{position:absolute;top:5px;right:5px;background:rgba(0,0,0,.55);color:#fff;border:0;border-radius:50%;width:24px;height:24px;font-weight:900;cursor:pointer}
+.empty{text-align:center;color:var(--muted);padding:34px;font-size:.9em}
+.count{text-align:center;font-size:.82em;color:var(--muted);margin-top:8px}
+.count b{color:var(--accent)}
+.note{background:var(--panel);border-left:3px solid var(--green);border-radius:8px;padding:10px 13px;margin:14px 0;font-size:.82em;color:var(--soft)}
+.foot{margin-top:26px;padding-top:14px;border-top:1px solid var(--line);text-align:center;font-size:.75em;color:var(--muted)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top"><a href="./index.html">← 프리렌 대시보드</a></div>
+  <div class="hero"><h1>📸 사진 수집 앱</h1><div class="sub">찍거나 고르면 → 배경 누끼 따서 → 컬렉션에 착착</div></div>
+
+  <div class="opt"><input type="checkbox" id="cut" checked><label for="cut" style="all:unset;cursor:pointer">✂️ 자동 누끼(배경 제거) 켜기</label></div>
+  <div class="controls">
+    <label class="primary">📷 사진 찍기<input type="file" id="cam" accept="image/*" capture="environment"></label>
+    <label>🖼️ 갤러리에서<input type="file" id="pick" accept="image/*" multiple></label>
+  </div>
+  <div class="status" id="status"></div>
+
+  <div class="count" id="count"></div>
+  <div class="gallery" id="gallery"></div>
+  <div class="empty" id="empty">아직 없어요. 위에서 사진을 찍거나 골라보세요 📷</div>
+
+  <div class="note">✂️ <b>누끼(배경 제거)</b>는 처음 한 번 AI 모델을 내려받아요(수십 MB, 와이파이 권장). 이후엔 폰에서 바로 처리돼요 — 사진은 서버로 안 나가고 이 기기 안에서만 처리·저장됩니다(IndexedDB). 누끼 끄면 원본 그대로 수집.</div>
+  <div class="foot">완전 로컬 저장 · 프리렌 대시보드 · 사진은 이 기기에만</div>
+</div>
+<script type="module">
+// ===== IndexedDB 초간단 래퍼 =====
+const DB='freeren_photos';
+function idb(){return new Promise((res,rej)=>{const r=indexedDB.open(DB,1);r.onupgradeneeded=()=>r.result.createObjectStore('imgs',{keyPath:'id'});r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error);});}
+async function put(o){const db=await idb();return new Promise((res,rej)=>{const t=db.transaction('imgs','readwrite');t.objectStore('imgs').put(o);t.oncomplete=res;t.onerror=()=>rej(t.error);});}
+async function del(id){const db=await idb();return new Promise((res)=>{const t=db.transaction('imgs','readwrite');t.objectStore('imgs').delete(id);t.oncomplete=res;});}
+async function all(){const db=await idb();return new Promise((res)=>{const t=db.transaction('imgs','readonly');const rq=t.objectStore('imgs').getAll();rq.onsuccess=()=>res(rq.result||[]);});}
+
+const $=s=>document.querySelector(s);
+const statusEl=$('#status');
+function setStatus(t){statusEl.textContent=t||'';}
+
+let removeBg=null;
+async function loadCutter(){
+  if(removeBg) return removeBg;
+  setStatus('✂️ 누끼 엔진 준비 중… (처음만 모델 다운로드, 잠시만)');
+  try{
+    const m=await import('https://esm.sh/@imgly/background-removal@1.5.5');
+    removeBg=m.removeBackground||m.default;
+    return removeBg;
+  }catch(e){ setStatus('⚠️ 누끼 엔진 로드 실패 — 원본으로 저장할게요'); return null; }
+}
+
+async function handle(files){
+  const cut=$('#cut').checked;
+  for(const f of files){
+    try{
+      let blob=f;
+      if(cut){
+        const fn=await loadCutter();
+        if(fn){ setStatus('✂️ 배경 제거 중…'); blob=await fn(f); }
+      }
+      const dataUrl=await blobToDataURL(blob);
+      await put({id:Date.now()+'-'+Math.random().toString(36).slice(2,7),data:dataUrl,ts:Date.now()});
+      setStatus('✅ 추가됨!');
+    }catch(e){ setStatus('⚠️ 이 사진 처리 실패, 건너뜀'); }
+  }
+  setTimeout(()=>setStatus(''),1500);
+  render();
+}
+function blobToDataURL(b){return new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(r.result);r.onerror=rej;r.readAsDataURL(b);});}
+
+async function render(){
+  const items=(await all()).sort((a,b)=>b.ts-a.ts);
+  $('#empty').style.display=items.length?'none':'block';
+  $('#count').innerHTML=items.length?('수집한 사진 <b>'+items.length+'</b>장'):'';
+  $('#gallery').innerHTML=items.map(x=>'<div class="item"><img src="'+x.data+'"><button class="x" data-id="'+x.id+'">×</button></div>').join('');
+  document.querySelectorAll('.item .x').forEach(b=>b.addEventListener('click',async()=>{await del(b.dataset.id);render();}));
+}
+
+$('#cam').addEventListener('change',e=>handle([...e.target.files]));
+$('#pick').addEventListener('change',e=>handle([...e.target.files]));
+render();
+</script>
+</body>
+</html>

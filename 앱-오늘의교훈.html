@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>오늘의 교훈 앱</title>
+<style>
+:root{--bg:#FBF7EE;--panel:#FFFDF7;--ink:#2A2620;--soft:#5A5348;--muted:#8A8170;--line:#E4D6B4;--accent:#1D4ED8;--warm:#C2571F;--gold:#B8860B;--green:#3E7C43;--pink:#C2337E}
+@media(prefers-color-scheme:dark){:root{--bg:#17150F;--panel:#211E17;--ink:#EDE7D8;--soft:#C9C2B2;--muted:#98917F;--line:#39342A;--accent:#7AB0FF;--warm:#E8925C;--gold:#E0B84C;--green:#7FB985;--pink:#F08AC0}}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:"Pretendard","Apple SD Gothic Neo","Malgun Gothic",sans-serif;line-height:1.6;padding-bottom:70px}
+.wrap{max-width:680px;margin:0 auto;padding:0 16px}
+.top{display:flex;align-items:center;gap:10px;padding:16px 0;border-bottom:1px solid var(--line)}
+.top a{color:var(--accent);text-decoration:none;font-weight:700;font-size:.9em}
+.hero{text-align:center;padding:20px 0 8px}
+.hero h1{font-size:1.5em;font-weight:900}
+.hero .sub{color:var(--soft);font-size:.85em;margin-top:3px}
+.box{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px 15px;margin:12px 0}
+textarea{width:100%;background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:11px;font-size:1em;color:var(--ink);font-family:inherit;resize:vertical;min-height:70px}
+.rowb{display:flex;gap:8px;align-items:center;margin-top:9px}
+select,button{font-family:inherit;font-weight:800}
+select{flex:1;background:var(--bg);border:1px solid var(--line);border-radius:9px;padding:9px;color:var(--ink)}
+.add{background:var(--accent);color:#fff;border:0;border-radius:10px;padding:10px 18px;font-size:.95em;cursor:pointer}
+.stat{text-align:center;font-size:.82em;color:var(--muted);margin:10px 0}
+.stat b{color:var(--accent)}
+.lesson{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin:9px 0}
+.lesson .meta{font-size:.72em;color:var(--muted);display:flex;justify-content:space-between;margin-bottom:5px}
+.lesson .txt{font-size:.97em;white-space:pre-wrap}
+.lesson .txt::before{content:"💡 "}
+.val{font-weight:900}.val.hi{color:var(--pink)}.val.mid{color:var(--gold)}.val.lo{color:var(--muted)}
+.del{background:none;border:0;color:var(--muted);font-size:.75em;cursor:pointer;float:right;font-weight:700}
+.react{margin-top:7px;font-size:.86em;color:var(--soft);background:var(--bg);border-radius:8px;padding:7px 10px}
+.empty{text-align:center;color:var(--muted);padding:30px;font-size:.9em}
+.foot{margin-top:30px;padding-top:14px;border-top:1px solid var(--line);text-align:center;font-size:.75em;color:var(--muted)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top"><a href="./index.html">← 프리렌 대시보드</a></div>
+  <div class="hero"><h1>💡 오늘의 교훈 앱</h1><div class="sub">적으면 봇이 톤 랜덤으로 리액션 · 이 폰에 저장</div></div>
+
+  <div class="box">
+    <textarea id="input" placeholder="오늘 얻은 교훈 + 그때 맥락을 적어봐요. 예: 급하게 보내지 말자 — 오타 3개..."></textarea>
+    <div class="rowb">
+      <select id="val">
+        <option value="">가치? (선택)</option>
+        <option value="9">🔥 두고두고 쓸 것</option>
+        <option value="6">👍 쓸 만함</option>
+        <option value="3">🙂 그냥 메모</option>
+      </select>
+      <button class="add" id="add">추가</button>
+    </div>
+  </div>
+
+  <div class="stat" id="stat"></div>
+  <div id="list"></div>
+
+  <div class="foot">이 기기에 저장(localStorage) · 봇 권한 켜지면 디스코드 #오늘의교훈과도 연동</div>
+</div>
+<script>
+(function(){
+  var KEY='freeren_lessons_app';
+  var db; try{db=JSON.parse(localStorage.getItem(KEY)||'[]');}catch(e){db=[];}
+  function save(){localStorage.setItem(KEY,JSON.stringify(db));}
+  function now(){var d=new Date();function p(n){return String(n).padStart(2,'0');}return d.getFullYear()+'-'+p(d.getMonth()+1)+'-'+p(d.getDate())+' '+p(d.getHours())+':'+p(d.getMinutes());}
+
+  // 톤 랜덤 리액션 (오프라인용 간이 버전)
+  var tones={
+    hi:['이건 진짜 두고두고 써먹겠는데? 각인 완료 🧠','오 이거 명언감이다. 액자로 걸자 🖼️','미래의 네가 고마워할 교훈이야 🙏'],
+    mid:['좋아, 하나 배웠으면 오늘 성공 ✅','이런 거 쌓이면 사람이 바뀌더라 🌱','기록한 사람만 안 까먹어요 📌'],
+    lo:['ㅇㅋ 접수 😌','메모 완료. 가볍게 흘려도 됨 🍃','툭 던져둔 것도 나중에 쓸모 있어요 🎒']
+  };
+  function react(v){var t=v>=7?'hi':(v>=4?'mid':'lo');var a=tones[t];return a[Math.floor(Math.random()*a.length)];}
+
+  function render(){
+    document.getElementById('stat').innerHTML= db.length?('총 <b>'+db.length+'</b>개의 교훈'):'';
+    var el=document.getElementById('list');
+    if(!db.length){el.innerHTML='<div class="empty">🌱 아직 없어요. 위에 첫 교훈을 적어보세요!</div>';return;}
+    el.innerHTML=db.map(function(x,i){
+      var v=x.val||0, cls=v>=7?'hi':(v>=4?'mid':'lo'), stars=v?'★'.repeat(Math.min(5,Math.ceil(v/2))):'';
+      return '<div class="lesson"><div class="meta"><span>'+x.date+'</span><span class="val '+cls+'">'+stars+'</span></div>'+
+        '<button class="del" data-i="'+i+'">삭제</button><div class="txt">'+x.text.replace(/</g,'&lt;')+'</div>'+
+        (x.react?'<div class="react">🤖 '+x.react+'</div>':'')+'</div>';
+    }).join('');
+    Array.prototype.forEach.call(el.querySelectorAll('.del'),function(b){
+      b.addEventListener('click',function(){db.splice(+b.dataset.i,1);save();render();});
+    });
+  }
+
+  document.getElementById('add').addEventListener('click',function(){
+    var t=document.getElementById('input').value.trim();
+    if(!t)return;
+    var v=parseInt(document.getElementById('val').value)||3;
+    db.unshift({date:now(),text:t,val:v,react:react(v)});
+    save();
+    document.getElementById('input').value='';
+    document.getElementById('val').value='';
+    render();
+  });
+  render();
+})();
+</script>
+</body>
+</html>

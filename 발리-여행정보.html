@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>🌴 발리 여행 정보</title>
+<style>
+:root{--bg:#FBF7EE;--panel:#FFFDF7;--ink:#2A2620;--soft:#5A5348;--muted:#8A8170;--line:#E4D6B4;--accent:#1D4ED8;--warm:#C2571F;--gold:#B8860B;--green:#3E7C43;--pink:#C2337E;--teal:#0E7C86}
+@media(prefers-color-scheme:dark){:root{--bg:#17150F;--panel:#211E17;--ink:#EDE7D8;--soft:#C9C2B2;--muted:#98917F;--line:#39342A;--accent:#7AB0FF;--warm:#E8925C;--gold:#E0B84C;--green:#7FB985;--pink:#F08AC0;--teal:#4FC3CE}}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:"Pretendard","Apple SD Gothic Neo","Malgun Gothic",sans-serif;line-height:1.65;padding-bottom:70px}
+.wrap{max-width:680px;margin:0 auto;padding:0 16px}
+.top{display:flex;align-items:center;gap:10px;padding:16px 0;border-bottom:1px solid var(--line)}
+.top a{color:var(--accent);text-decoration:none;font-weight:700;font-size:.9em}
+.hero{text-align:center;padding:22px 0 8px}
+.hero h1{font-size:1.7em;font-weight:900}
+.dday{font-size:2.1em;font-weight:900;color:var(--warm);margin:6px 0}
+.hero .sub{color:var(--soft);font-size:.88em}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:15px 16px;margin:13px 0}
+.card h2{font-size:1.08em;font-weight:900;margin-bottom:9px;display:flex;align-items:center;gap:7px}
+.chk{display:flex;align-items:flex-start;gap:9px;padding:7px 0;border-bottom:1px solid var(--line);font-size:.93em;cursor:pointer}
+.chk:last-child{border-bottom:0}
+.chk input{margin-top:3px;width:17px;height:17px;flex:none}
+.chk.done span{text-decoration:line-through;color:var(--muted)}
+.tip{font-size:.93em;margin:9px 0}
+.tip b{color:var(--warm)}
+.tip .k{display:inline-block;font-weight:900;color:var(--teal);min-width:66px}
+details{margin:8px 0;border:1px solid var(--line);border-radius:11px;overflow:hidden}
+summary{padding:11px 14px;font-weight:800;cursor:pointer;list-style:none;font-size:.95em}
+summary::-webkit-details-marker{display:none}
+summary::before{content:"▸ ";color:var(--muted)}
+details[open] summary::before{content:"▾ "}
+.dbody{padding:2px 15px 13px;font-size:.9em;color:var(--soft)}
+.warn{background:rgba(194,87,31,.1);border-left:3px solid var(--warm);border-radius:8px;padding:10px 13px;margin:10px 0;font-size:.85em;color:var(--soft)}
+.foot{margin-top:28px;padding-top:14px;border-top:1px solid var(--line);text-align:center;font-size:.75em;color:var(--muted)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top"><a href="./index.html">← 프리렌 대시보드</a></div>
+  <div class="hero">
+    <h1>🌴 발리 여행</h1>
+    <div class="dday" id="dday">D-?</div>
+    <div class="sub">출발 2026-08-18 · 준비물은 체크하면 저장돼요</div>
+  </div>
+
+  <div class="card">
+    <h2>🎒 준비물 체크</h2>
+    <div id="pack"></div>
+  </div>
+
+  <div class="card">
+    <h2>📋 출발 전 할 일</h2>
+    <div id="pre"></div>
+  </div>
+
+  <div class="card">
+    <h2>💡 현지 핵심 팁</h2>
+    <div class="tip"><span class="k">💵 돈</span> 통화는 <b>루피아(IDR)</b>. 공항 환전은 손해 — 시내 공식 환전소(파란 <b>BMC/Central Kuta</b>)나 ATM 인출. 카드 되는 곳 많지만 소액·시장은 현금.</div>
+    <div class="tip"><span class="k">📶 유심</span> 공항 or 편의점에서 <b>Telkomsel</b> eSIM/유심. 여행 전 한국서 eSIM 미리 사면 도착 즉시 개통 편함.</div>
+    <div class="tip"><span class="k">🛵 이동</span> <b>Grab / Gojek</b> 앱(택시·오토바이·음식배달 다 됨) 필수. 길에서 잡는 것보다 앱이 바가지 없음. 스쿠터 렌트는 국제면허+헬멧 필수.</div>
+    <div class="tip"><span class="k">📍 지역</span> 스미냑(세련·카페), 우붓(자연·요가·논뷰), 짱구(서핑·노마드), 울루와뚜(절벽·선셋), 누사두아(리조트).</div>
+    <div class="tip"><span class="k">🍽️ 음식</span> 나시고렝·미고렝·사테·바비굴링. <b>물은 꼭 생수</b>(수돗물 X, 얼음도 카페면 대개 OK). 와룽(현지식당)이 싸고 맛있음.</div>
+    <div class="tip"><span class="k">🙏 매너</span> 사원 입장 시 사롱(치마) 착용, 어깨·무릎 가리기. 머리 쓰다듬기 금물. 왼손으로 건네지 않기.</div>
+  </div>
+
+  <div class="warn">⚠️ <b>안전:</b> ①원숭이 숲(우붓)에서 선글라스·먹을거 뺏김 주의 ②설사 대비 지사제·전해질 챙기기(발리벨리) ③밤 스쿠터·인적 드문 곳 주의 ④여행자보험 가입 ⑤선크림·모기기피제 필수.</div>
+
+  <details><summary>🗓️ 첫날 동선 추천</summary><div class="dbody">공항(덴파사르) 도착 → Grab로 숙소 → 유심/환전 확인 → 근처 와룽에서 첫끼(나시고렝) → 마트(Pepito/Coco)에서 생수·간식 → 시차 없음(한국과 +1h 정도, KST-1) 이라 첫날은 가볍게 해변 산책 + 선셋 → 일찍 자고 컨디션 세팅.</div></details>
+  <details><summary>💸 대략 예산 감(1일)</summary><div class="dbody">와룽 식사 2~5천원, 카페 브런치 8천~1.5만, Grab 이동 2~6천원, 마사지 1시간 1~2만원, 클럽/비치클럽 입장·음료 별도. 전반적으로 한국보다 저렴하나 관광지 카페는 한국과 비슷.</div></details>
+
+  <div class="foot">체크는 이 기기에 저장 · 프리렌 대시보드 · 정보는 일반 여행팁(출발 전 최신 입국규정·환율 재확인)</div>
+</div>
+<script>
+  // D-day
+  (function(){var t=new Date('2026-08-18T00:00:00'),n=new Date();var d=Math.ceil((t-n)/86400000);
+    document.getElementById('dday').textContent=d>0?('D-'+d):(d===0?'오늘 출발! 🛫':'여행 중/다녀옴 🌴');})();
+  // 체크리스트 (localStorage)
+  (function(){
+    var packItems=['여권(유효기간 6개월+)','항공권/e-티켓','숙소 예약확인','여행자보험','국제운전면허(스쿠터 시)','달러/카드+약간의 현금','유심/eSIM','상비약(지사제·전해질·해열)','선크림·모기기피제','수영복·래시가드','샌들+운동화','보조배터리·충전기·220V어댑터(발리는 C타입)','사롱(사원용, 현지구매 가능)','선글라스·모자'];
+    var preItems=['입국 규정·비자(도착비자/VOA) 확인','환전 or 인출계획','Grab·Gojek 앱 설치','구글맵 오프라인 지도 저장','숙소·공항 픽업 확인','로밍/eSIM 개통','카드 해외결제 열어두기','비상연락처·대사관 번호 저장'];
+    function make(id,items,key){
+      var box=document.getElementById(id);
+      var st; try{st=JSON.parse(localStorage.getItem(key)||'{}');}catch(e){st={};}
+      box.innerHTML=items.map(function(t,i){return '<label class="chk'+(st[i]?' done':'')+'"><input type="checkbox" data-i="'+i+'"'+(st[i]?' checked':'')+'><span>'+t+'</span></label>';}).join('');
+      box.querySelectorAll('input').forEach(function(c){c.addEventListener('change',function(){st[c.dataset.i]=c.checked;localStorage.setItem(key,JSON.stringify(st));c.closest('.chk').classList.toggle('done',c.checked);});});
+    }
+    make('pack',packItems,'freeren_bali_pack');
+    make('pre',preItems,'freeren_bali_pre');
+  })();
+</script>
+</body>
+</html>
