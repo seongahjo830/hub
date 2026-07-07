@@ -55,9 +55,21 @@ body{background:var(--bg);color:var(--ink);font-family:"Pretendard","Apple SD Go
 .card.read,.big-card.read{opacity:.42}
 .card.read .t::after,.big-card.read .t::after{content:"✓ 읽음";display:inline-block;font-size:.66em;font-weight:800;color:var(--muted);background:var(--line);border-radius:999px;padding:0 6px;margin-left:6px;vertical-align:middle}
 .card.read:hover,.big-card.read:hover{opacity:.8}
-.readbar{display:flex;justify-content:flex-end;margin:14px 0 -8px}
+.readbar{display:flex;justify-content:flex-end;gap:8px;margin:14px 0 -8px}
 .readbar button{background:none;border:1px solid var(--line);color:var(--muted);font-size:.74em;font-weight:700;border-radius:999px;padding:4px 11px;cursor:pointer;font-family:inherit}
 .readbar button:active{background:var(--line)}
+/* 즐겨찾기·보관·숨김 */
+.card.fav .t::before,.big-card.fav .t::before{content:"⭐ "}
+.card.off,.big-card.off{opacity:.3;filter:grayscale(.8)}
+/* 길게 누르면 나오는 바텀시트 메뉴 */
+#sheetBg{position:fixed;inset:0;background:rgba(0,0,0,.45);display:none;z-index:50}
+#sheetBg.on{display:block}
+#sheet{position:fixed;left:0;right:0;bottom:-100%;background:var(--panel);border-radius:18px 18px 0 0;border:1px solid var(--line);padding:14px 16px 26px;z-index:51;transition:bottom .18s;max-width:680px;margin:0 auto}
+#sheet.on{bottom:0}
+#sheet .st{font-weight:800;font-size:.95em;margin-bottom:6px;color:var(--soft);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#sheet button{display:block;width:100%;text-align:left;background:none;border:0;border-top:1px solid var(--line);padding:13px 6px;font-size:1em;font-weight:700;color:var(--ink);font-family:inherit;cursor:pointer}
+#sheet button:active{background:var(--line)}
+#sheet button.danger{color:var(--warm)}
 .note{background:var(--panel);border-left:3px solid var(--gold);border-radius:8px;padding:11px 14px;margin:12px 0;font-size:.88em;color:var(--soft)}
 .note b{color:var(--warm)}
 .foot{margin-top:40px;padding-top:18px;border-top:1px solid var(--line);text-align:center;font-size:.76em;color:var(--muted)}
@@ -79,6 +91,13 @@ body{background:var(--bg);color:var(--ink);font-family:"Pretendard","Apple SD Go
     <span class="b">읽을거리 <span class="n">25편</span></span>
     <span class="b">✈️ 발리 <span class="n" id="dday">D-?</span></span>
   </div>
+
+  <!-- 즐겨찾기 (별표한 글, 상단 고정) -->
+  <section class="sec" id="favSec" style="display:none">
+    <h2>⭐ 즐겨찾기</h2>
+    <div class="desc">카드 길게 눌러 별표한 글 — 자주 다시 읽는 것들</div>
+    <div class="grid" id="favGrid"></div>
+  </section>
 
   <!-- 오늘의교훈 (핵심, 상단) -->
   <section class="sec">
@@ -138,6 +157,16 @@ body{background:var(--bg);color:var(--ink);font-family:"Pretendard","Apple SD Go
     </div>
   </section>
 
+  <!-- 건강 -->
+  <section class="sec">
+    <h2>🫀 건강 — 체중 · 식단 · 헬스장 · 기상</h2>
+    <div class="desc">오후 2시·7시에 디스코드가 "뭐 먹었어?" 물어봐요. 그때 여기 와서 한 줄 기록.</div>
+    <a class="big-card" href="./건강.html">
+      <div class="t">🫀 건강 기록실 열기 →</div>
+      <div class="d">아침 체중(OnToFit 보고 입력) · 아침/점심/저녁 뭐 먹었나 · 헬스장 인증 체크 · 기상시간. 그래프+14일 표 자동.</div>
+    </a>
+  </section>
+
   <!-- 넛지 시스템 -->
   <section class="sec">
     <h2>🏗️ 넛지 시스템 — 습관 자동화</h2>
@@ -152,7 +181,7 @@ body{background:var(--bg);color:var(--ink);font-family:"Pretendard","Apple SD Go
     </div>
   </section>
 
-  <div class="readbar"><button id="readReset">읽음 표시 전부 지우기</button></div>
+  <div class="readbar"><button id="hiddenMgr">숨긴 글 관리</button><button id="readReset">읽음 표시 전부 지우기</button></div>
 
   <div class="note">
     <b>이 대시보드의 구조:</b> 입력은 <b>디스코드 채널</b>(오늘의교훈·클로드알림)과 클로드코드로, 데이터는 <b>옵시디언 볼트</b> 뒷단에 쌓이고, 이 페이지는 그걸 <b>읽기 전용</b>으로 보여줘요. 노션 대신 깃허브 페이지라 폰에서 가볍게 열려요. 게시글 올리는 기능은 없음(입력은 디스코드로).
@@ -163,6 +192,18 @@ body{background:var(--bg);color:var(--ink);font-family:"Pretendard","Apple SD Go
     입력=디스코드/클로드코드 · 저장=볼트 · 열람=여기
   </div>
 </div>
+
+<!-- 길게 누르면 나오는 카드 메뉴 -->
+<div id="sheetBg"></div>
+<div id="sheet">
+  <div class="st" id="sheetTitle"></div>
+  <button id="mFav"></button>
+  <button id="mRead"></button>
+  <button id="mArch"></button>
+  <button id="mHide" class="danger"></button>
+  <button id="mClose">닫기</button>
+</div>
+
 <script>
   // 발리 D-day 계산 (임시 2026-08-18)
   var bali = new Date('2026-08-18T00:00:00');
@@ -170,25 +211,76 @@ body{background:var(--bg);color:var(--ink);font-family:"Pretendard","Apple SD Go
   var d = Math.ceil((bali - now) / 86400000);
   document.getElementById('dday').textContent = d > 0 ? ('D-' + d) : (d === 0 ? '오늘!' : '다녀옴');
 
-  // 읽은 것 흐릿하게 — 카드 한번 누르면 기록, 다시 오면 흐릿+"읽음"
+  // 카드 관리: 읽음(한번 누름) · 길게 누르면 메뉴(⭐즐겨찾기/📦보관/🗑️삭제)
   (function(){
-    var KEY = 'freeren_read';
-    var read;
-    try { read = JSON.parse(localStorage.getItem(KEY) || '[]'); } catch(e){ read = []; }
-    var links = document.querySelectorAll('a.card, a.big-card');
-    links.forEach(function(a){
+    var S = {};
+    ['read','fav','hidden','arch'].forEach(function(k){
+      try { S[k] = JSON.parse(localStorage.getItem('freeren_'+k) || '[]'); } catch(e){ S[k] = []; }
+    });
+    function save(k){ localStorage.setItem('freeren_'+k, JSON.stringify(S[k])); }
+    function has(k,h){ return S[k].indexOf(h) >= 0; }
+    function tog(k,h){ var i = S[k].indexOf(h); if (i>=0) S[k].splice(i,1); else S[k].push(h); save(k); }
+
+    var showOff = false, cur = null, timer = null, suppress = false;
+    var bg = document.getElementById('sheetBg'), sheet = document.getElementById('sheet');
+
+    function apply(){
+      var fg = document.getElementById('favGrid'); fg.innerHTML = '';
+      document.querySelectorAll('a.card, a.big-card').forEach(function(a){
+        if (a.dataset.clone) return;
+        var h = a.getAttribute('href');
+        a.classList.toggle('read', has('read',h));
+        a.classList.toggle('fav', has('fav',h));
+        var off = has('hidden',h) || has('arch',h);
+        a.classList.toggle('off', off);
+        a.style.display = (off && !showOff) ? 'none' : '';
+        if (has('fav',h) && !off){
+          var c = a.cloneNode(true);
+          c.dataset.clone = '1'; c.classList.remove('big-card'); c.classList.add('card');
+          bind(c); fg.appendChild(c);
+        }
+      });
+      document.getElementById('favSec').style.display = fg.children.length ? '' : 'none';
+    }
+
+    function openMenu(a){
+      cur = a; suppress = true;
       var h = a.getAttribute('href');
-      if (read.indexOf(h) >= 0) a.classList.add('read');
-      a.addEventListener('click', function(){
-        if (read.indexOf(h) < 0){ read.push(h); localStorage.setItem(KEY, JSON.stringify(read)); }
-        a.classList.add('read');
+      var t = a.querySelector('.t'); document.getElementById('sheetTitle').textContent = t ? t.textContent : h;
+      document.getElementById('mFav').textContent  = has('fav',h)    ? '⭐ 즐겨찾기 해제' : '⭐ 즐겨찾기 (상단 고정)';
+      document.getElementById('mRead').textContent = has('read',h)   ? '✓ 안 읽음으로 되돌리기' : '✓ 읽음으로 표시';
+      document.getElementById('mArch').textContent = has('arch',h)   ? '📦 보관 해제' : '📦 보관하기 (목록에서 숨김)';
+      document.getElementById('mHide').textContent = has('hidden',h) ? '🗑️ 삭제 취소 (복원)' : '🗑️ 대시보드에서 삭제';
+      bg.classList.add('on'); sheet.classList.add('on');
+    }
+    function closeMenu(){ bg.classList.remove('on'); sheet.classList.remove('on'); setTimeout(function(){ suppress = false; }, 250); }
+    bg.addEventListener('click', closeMenu);
+    document.getElementById('mClose').addEventListener('click', closeMenu);
+    [['mFav','fav'],['mRead','read'],['mArch','arch'],['mHide','hidden']].forEach(function(p){
+      document.getElementById(p[0]).addEventListener('click', function(){
+        if (cur){ tog(p[1], cur.getAttribute('href')); apply(); }
+        closeMenu();
       });
     });
-    var btn = document.getElementById('readReset');
-    if (btn) btn.addEventListener('click', function(){
-      localStorage.removeItem(KEY);
-      document.querySelectorAll('a.read').forEach(function(a){ a.classList.remove('read'); });
-    });
+
+    function bind(a){
+      a.addEventListener('click', function(e){
+        if (suppress){ e.preventDefault(); return; }
+        var h = a.getAttribute('href');
+        if (!has('read',h)){ S.read.push(h); save('read'); }
+        a.classList.add('read');
+      });
+      a.addEventListener('contextmenu', function(e){ e.preventDefault(); openMenu(a); });
+      a.addEventListener('touchstart', function(){ timer = setTimeout(function(){ openMenu(a); }, 550); }, {passive:true});
+      a.addEventListener('touchmove', function(){ clearTimeout(timer); }, {passive:true});
+      a.addEventListener('touchend', function(){ clearTimeout(timer); });
+    }
+    document.querySelectorAll('a.card, a.big-card').forEach(bind);
+
+    document.getElementById('readReset').addEventListener('click', function(){ S.read = []; save('read'); apply(); });
+    var mgr = document.getElementById('hiddenMgr');
+    mgr.addEventListener('click', function(){ showOff = !showOff; mgr.textContent = showOff ? '숨긴 글 다시 숨기기' : '숨긴 글 관리'; apply(); });
+    apply();
   })();
 </script>
 </body>
