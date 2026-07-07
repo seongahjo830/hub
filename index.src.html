@@ -124,6 +124,13 @@ a.card.sel,a.big-card.sel{border-color:var(--accent);box-shadow:0 0 0 2px var(--
     </a>
   </section>
 
+  <!-- 유튜브 정리 -->
+  <section class="sec">
+    <h2>🎬 유튜브 정리</h2>
+    <div class="desc">디스코드 #유튜브정리에 링크만 던지면 → 봇이 요약 HTML로 만들어 여기 쌓아줘요.</div>
+    <div class="grid" id="ytGrid"><div class="desc" style="grid-column:1/-1">아직 없어요. 디스코드 #유튜브정리에 유튜브 링크를 보내보세요!</div></div>
+  </section>
+
   <!-- 프리렌 시리즈 -->
   <section class="sec">
     <h2>🧭 프리렌 시리즈 — 인생·사고</h2>
@@ -255,6 +262,16 @@ a.card.sel,a.big-card.sel{border-color:var(--accent);box-shadow:0 0 0 2px var(--
     var el = document.getElementById('ident');
     if (el) el.textContent = '🧠 ' + lines[Math.floor(Math.random()*lines.length)];
   })();
+
+  // 유튜브 정리 목록 (봇이 youtube-list.json 에 쌓음)
+  fetch('./youtube-list.json?t=' + Date.now()).then(function(r){ return r.ok ? r.json() : []; }).then(function(arr){
+    if (!arr || !arr.length) return;
+    arr.sort(function(a,b){ return (b.date||'').localeCompare(a.date||''); });
+    document.getElementById('ytGrid').innerHTML = arr.map(function(x){
+      return '<a class="card" href="./' + x.file + '"><div class="t">🎬 ' + (x.title||'유튜브 정리') +
+        '</div><div class="d">' + (x.note||'') + '</div><span class="tag tg-f">유튜브</span></a>';
+    }).join('');
+  }).catch(function(){});
 
   // 카드 관리: 읽음(한번 누름) · 길게 누르면 메뉴(⭐즐겨찾기/📦보관/🗑️삭제)
   (function(){
