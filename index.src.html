@@ -82,6 +82,7 @@ body{background:var(--bg);color:var(--ink);font-family:"Pretendard","Apple SD Go
     <div class="rune">🧙‍♀️📊</div>
     <h1>프리렌 대시보드</h1>
     <div class="sub">내 생활 관제탑 · 디스코드로 넣고, 여기서 본다</div>
+    <div class="ident" id="ident" style="margin-top:10px;font-weight:800;color:var(--magic);font-size:1.02em"></div>
     <div class="meta">입력 = 디스코드 + 클로드코드 · 저장 = 옵시디언 볼트 · 열람 = 이 페이지(폰 언제든)</div>
   </header>
 
@@ -210,6 +211,15 @@ body{background:var(--bg);color:var(--ink);font-family:"Pretendard","Apple SD Go
   var now = new Date();
   var d = Math.ceil((bali - now) / 86400000);
   document.getElementById('dday').textContent = d > 0 ? ('D-' + d) : (d === 0 ? '오늘!' : '다녀옴');
+
+  // 정체성 문구 로테이션 (자기지각: 반복 노출된 자기 서술 = 진짜가 됨)
+  (function(){
+    var lines = ['나는 만드는 사람이다.','나는 문만 통과하는 사람이다.','쉬는 것도 실력이다.',
+      '나는 완벽 말고 완료를 고르는 사람이다.','나는 충동을 무기로 쓰는 사람이다.',
+      '나는 오늘 딱 한 걸음만 남기는 사람이다.','나는 기록하는 사람이다.'];
+    var el = document.getElementById('ident');
+    if (el) el.textContent = '🧠 ' + lines[Math.floor(Math.random()*lines.length)];
+  })();
 
   // 카드 관리: 읽음(한번 누름) · 길게 누르면 메뉴(⭐즐겨찾기/📦보관/🗑️삭제)
   (function(){
