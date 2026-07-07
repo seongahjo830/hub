@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>📸 큐티 위치 조련봇 — 위치 알람 + 인증샷 증명</title>
+<style>
+:root{--bg:#FBF7EE;--panel:#FFFDF7;--ink:#2A2620;--soft:#5A5348;--muted:#8A8170;--line:#E4D6B4;--accent:#1D4ED8;--warm:#C2571F;--gold:#B8860B;--green:#3E7C43;--pink:#C2337E;--teal:#0E7C86}
+@media(prefers-color-scheme:dark){:root{--bg:#17150F;--panel:#211E17;--ink:#EDE7D8;--soft:#C9C2B2;--muted:#98917F;--line:#39342A;--accent:#7AB0FF;--warm:#E8925C;--gold:#E0B84C;--green:#7FB985;--pink:#F08AC0;--teal:#4FC3CE}}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:"Pretendard","Apple SD Gothic Neo","Malgun Gothic",sans-serif;line-height:1.7;padding-bottom:70px}
+.wrap{max-width:660px;margin:0 auto;padding:0 18px}
+.top{display:flex;gap:10px;padding:16px 0;border-bottom:1px solid var(--line)}
+.top a{color:var(--accent);text-decoration:none;font-weight:700;font-size:.9em}
+h1{font-size:1.55em;font-weight:900;letter-spacing:-0.03em;margin:20px 0 6px;line-height:1.3}
+.summary{background:linear-gradient(135deg,rgba(194,51,126,.1),rgba(29,78,216,.07));border:1px solid var(--pink);border-radius:13px;padding:13px 16px;margin:14px 0;font-size:.95em}
+.summary b{color:var(--pink)}
+h2{font-size:1.12em;font-weight:900;margin:22px 0 8px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin:12px 0}
+.card .t{font-weight:900;color:var(--teal);margin-bottom:4px}
+.card p{font-size:.93em;margin:6px 0}
+.flow{background:var(--panel);border-left:3px solid var(--green);border-radius:8px;padding:11px 14px;margin:12px 0;font-size:.9em}
+.flow.bad{border-color:var(--warm)}
+.ment{background:var(--bg);border:1px dashed var(--line);border-radius:10px;padding:10px 13px;margin:8px 0;font-size:.9em;color:var(--soft)}
+.status{display:inline-block;font-size:.76em;font-weight:900;border-radius:999px;padding:3px 11px;margin-left:6px}
+.on{background:rgba(62,124,67,.14);color:var(--green)}
+.wait{background:rgba(194,87,31,.13);color:var(--warm)}
+.step{display:flex;gap:10px;margin:10px 0;font-size:.92em}
+.step .n{flex:none;width:24px;height:24px;background:var(--accent);color:#fff;border-radius:50%;text-align:center;font-weight:900;line-height:24px;font-size:.85em}
+.foot{margin-top:28px;padding-top:14px;border-top:1px solid var(--line);text-align:center;font-size:.75em;color:var(--muted)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top"><a href="./index.html">← 프리렌 대시보드</a></div>
+  <h1>📸 큐티 위치 조련봇 — 적절한 곳에 가면 꼬드기고, 셀카로 증명</h1>
+
+  <div class="summary"><b>제품 재정의:</b> 당신은 앱을 안 열어요. 그래서 — <b>①위치+시간에 알람이 먼저 울리고 ②매일 다른 큐티 멘트로 꼬드기고 ③도착 셀카로 증명</b>하는 시스템. 명령이 아니라 아이 어르듯.</div>
+
+  <h2>🧩 역할 분담 (현재 상태)</h2>
+  <div class="card"><div class="t">📍 트리거 — MacroDroid (폰)<span class="status wait">사람 몫 5분</span></div>
+    <p>위치(지오펜스)+시간 감지는 폰만 가능. MacroDroid에서:</p>
+    <div class="step"><span class="n">1</span><span>매크로 추가 → 트리거: <b>위치 → 지오펜스 진입</b> → 두정역/헬스장 반경 200m</span></div>
+    <div class="step"><span class="n">2</span><span>제약: 시간 <b>18:00~20:30</b> (월목금) — 2차 피크대</span></div>
+    <div class="step"><span class="n">3</span><span>액션: <b>알림 표시</b> "📸 문만 통과! 셀카 찍어서 #클로드알림에 올려!" (소리 크게)</span></div>
+    <div class="step"><span class="n">4</span><span>같은 방식으로 "집 나섬(집 지오펜스 이탈, 아침)" → "🎧 오디오북 켰어?" 알림 추가</span></div>
+  </div>
+  <div class="card"><div class="t">💬 멘트 — 매일 다른 큐티톤<span class="status on">가동 중</span></div>
+    <p>PC의 멘트 풀(nudge-messages.json)에서 랜덤 → 18:20(월목금)·19:20(수)·12:50(토) 디스코드로 이미 발송 중. 과학 이유 섞인 <b>_sci 버전</b>도 30~40% 확률로 섞임.</p>
+    <div class="ment">🍬 "우리 애기 오늘도 헬스장 갈 거지?? 🥹 문만 통과하면 끝! 도착 셀카 안 올리면 나 삐질 거야 ㅠㅠ📸"</div>
+    <div class="ment">🍬 "츤데레 모드) 딱히 널 위해서가 아니라... 그냥 문만 통과해줘 ㅋㅋ 셀카는 필수야 알겠지?📸💢"</div>
+    <div class="ment">🍬 "발리까지 얼마 안 남았어!!🌴 오늘의 나=미래 발리 사진의 나. 문만 콕 찍고 와~ 셀카로 도장 쾅!"</div>
+  </div>
+  <div class="card"><div class="t">📸 증명 + 🎁 보상 — 인증샷 감지<span class="status wait">봇 권한 대기</span></div>
+    <p>헬스장 도착 → 셀카 → <b>#클로드알림에 업로드</b> = 성공의 정의(애매함 0). 봇이 감지하면 <b>"꺄악 왔다!! 항아리 +1 🫙"</b> 축하 + 건강 기록실 헬스장 ✅. 봇 채널읽기 권한이 켜지는 순간 활성화.</p>
+  </div>
+
+  <h2>✅ / ❌ 판정 플로우</h2>
+  <div class="flow"><b>✅ 성공:</b> 도착 → 알림 "📸 셀카!" → 찍어서 채널 업로드 → 봇 감지 → "항아리 +1! 발리 한 칸 🌴" 축하 + 카운터 증가.</div>
+  <div class="flow bad"><b>❌ 실패(부드럽게):</b> 22시까지 사진 없으면 → "오늘은 패스로 기록할게 🥺 근데 붕괴는 안 했으니 아직 이기는 중! 내일 두 배로 귀엽게 조를게" — 죄책감 폭탄 금지, 다음날 리셋.</div>
+
+  <div class="foot">📸 큐티 위치 조련봇 · 트리거=폰(MacroDroid) · 멘트=PC봇(가동중) · 인증=봇 권한 대기 · 프리렌 대시보드</div>
+</div>
+</body>
+</html>
