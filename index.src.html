@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>프리렌 대시보드 — 내 생활 관제탑</title>
+<style>
+:root{
+  --bg:#FBF7EE; --panel:#FFFDF7; --ink:#2A2620; --soft:#5A5348; --muted:#8A8170; --line:#E4D6B4;
+  --accent:#1D4ED8; --warm:#C2571F; --magic:#6A4A9C; --gold:#B8860B; --green:#3E7C43; --pink:#C2337E; --teal:#0E7C86;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#17150F;--panel:#211E17;--ink:#EDE7D8;--soft:#C9C2B2;--muted:#98917F;--line:#39342A;--accent:#7AB0FF;--warm:#E8925C;--magic:#C6A6F0;--gold:#E0B84C;--green:#7FB985;--pink:#F08AC0;--teal:#4FC3CE;}
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--ink);font-family:"Pretendard","Apple SD Gothic Neo","Malgun Gothic",sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased;padding-bottom:60px}
+.wrap{max-width:680px;margin:0 auto;padding:0 16px}
+
+.hero{text-align:center;padding:44px 0 22px;border-bottom:1px solid var(--line)}
+.hero .rune{font-size:2.4em;line-height:1}
+.hero h1{font-size:1.9em;font-weight:900;letter-spacing:-0.03em;margin:.2em 0 .15em}
+@media(min-width:700px){.hero h1{font-size:2.3em}}
+.hero .sub{color:var(--soft);font-size:.98em;font-weight:600}
+.hero .meta{margin-top:12px;font-size:.8em;color:var(--muted)}
+
+/* live status strip */
+.status{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:18px 0 6px}
+.status .b{background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:7px 13px;font-size:.82em;font-weight:700}
+.status .b .n{color:var(--accent)}
+.status .b.live .n{color:var(--green)}
+#dday{color:var(--warm)}
+
+/* section */
+.sec{margin:26px 0 0}
+.sec>h2{font-size:1.15em;font-weight:900;letter-spacing:-0.02em;margin-bottom:4px;display:flex;align-items:center;gap:8px}
+.sec>.desc{font-size:.88em;color:var(--muted);margin-bottom:12px}
+
+.grid{display:grid;grid-template-columns:1fr;gap:9px}
+@media(min-width:560px){.grid{grid-template-columns:1fr 1fr}}
+.card{display:block;text-decoration:none;color:inherit;background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:13px 15px;transition:transform .1s,border-color .1s}
+.card:hover{border-color:var(--accent);transform:translateY(-1px)}
+.card .t{font-weight:800;letter-spacing:-0.02em;font-size:.98em}
+.card .d{font-size:.82em;color:var(--soft);margin-top:2px;line-height:1.45}
+.card .tag{display:inline-block;font-size:.68em;font-weight:800;padding:1px 7px;border-radius:999px;margin-top:6px}
+.tg-b{background:rgba(29,78,216,.13);color:var(--accent)} .tg-f{background:rgba(194,51,126,.14);color:var(--pink)}
+.tg-l{background:rgba(62,124,67,.14);color:var(--green)} .tg-s{background:rgba(14,124,134,.13);color:var(--teal)}
+
+.big-card{background:linear-gradient(135deg,rgba(106,74,156,.12),rgba(29,78,216,.08));border:1px solid var(--magic);border-radius:15px;padding:16px 18px;margin:12px 0;text-decoration:none;color:inherit;display:block}
+.big-card:hover{border-color:var(--accent)}
+.big-card .t{font-weight:900;font-size:1.1em;letter-spacing:-0.02em}
+.big-card .d{font-size:.88em;color:var(--soft);margin-top:4px}
+
+/* 읽은 카드 흐릿하게 (모바일서 한번 누른 것) */
+.card.read,.big-card.read{opacity:.42}
+.card.read .t::after,.big-card.read .t::after{content:"✓ 읽음";display:inline-block;font-size:.66em;font-weight:800;color:var(--muted);background:var(--line);border-radius:999px;padding:0 6px;margin-left:6px;vertical-align:middle}
+.card.read:hover,.big-card.read:hover{opacity:.8}
+.readbar{display:flex;justify-content:flex-end;margin:14px 0 -8px}
+.readbar button{background:none;border:1px solid var(--line);color:var(--muted);font-size:.74em;font-weight:700;border-radius:999px;padding:4px 11px;cursor:pointer;font-family:inherit}
+.readbar button:active{background:var(--line)}
+.note{background:var(--panel);border-left:3px solid var(--gold);border-radius:8px;padding:11px 14px;margin:12px 0;font-size:.88em;color:var(--soft)}
+.note b{color:var(--warm)}
+.foot{margin-top:40px;padding-top:18px;border-top:1px solid var(--line);text-align:center;font-size:.76em;color:var(--muted)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <div class="rune">🧙‍♀️📊</div>
+    <h1>프리렌 대시보드</h1>
+    <div class="sub">내 생활 관제탑 · 디스코드로 넣고, 여기서 본다</div>
+    <div class="meta">입력 = 디스코드 + 클로드코드 · 저장 = 옵시디언 볼트 · 열람 = 이 페이지(폰 언제든)</div>
+  </header>
+
+  <div class="status">
+    <span class="b live">넛지 <span class="n">● LIVE</span></span>
+    <span class="b">알림 <span class="n">9개</span></span>
+    <span class="b">읽을거리 <span class="n">25편</span></span>
+    <span class="b">✈️ 발리 <span class="n" id="dday">D-?</span></span>
+  </div>
+
+  <!-- 오늘의교훈 (핵심, 상단) -->
+  <section class="sec">
+    <h2>💡 오늘의 교훈</h2>
+    <div class="desc">밖에서든 언제든 디스코드 #오늘의교훈에 적으면 → 볼트 저장 + 봇이 그때그때 다른 톤으로 리액션</div>
+    <a class="big-card" href="./오늘의교훈-대시보드.html">
+      <div class="t">💡 내 교훈 리스트 보기 →</div>
+      <div class="d">쌓인 교훈들을 최신순으로. 각 교훈은 맥락·사진과 함께 저장돼요. (봇 토큰 연결되면 리액션 시작)</div>
+    </a>
+  </section>
+
+  <!-- 프리렌 시리즈 -->
+  <section class="sec">
+    <h2>🧭 프리렌 시리즈 — 인생·사고</h2>
+    <div class="desc">"AI는 프리렌"에서 시작해 내 삶·의도·자유·실행까지. 위에서부터 읽으면 하나의 이야기.</div>
+    <div class="grid">
+      <a class="card" href="./프리렌으로-배우는-AI시대-공부법.html"><div class="t">1부 · AI시대 공부법</div><div class="d">시리즈의 출발점, 프리렌 비유</div><span class="tag tg-b">사고</span></a>
+      <a class="card" href="./프리렌-2부-내삶에선-어떻게-물을까.html"><div class="t">2부 · 내 삶에선 뭘 물을까</div><div class="d">1·3·5·7·10년 후회 최소화</div><span class="tag tg-l">내삶</span></a>
+      <a class="card" href="./프리렌-2-2부-못고르겠을때-대가들은-어떻게.html"><div class="t">2-2부 · 못 고르겠을 때</div><div class="d">버핏·콜린스 + 벌통·성적표</div><span class="tag tg-l">내삶</span></a>
+      <a class="card" href="./프리렌-2-3부-몰랐거나-빌렸는데-잘된-사람들.html"><div class="t">2-3부 · 빌렸는데 잘된 사람들</div><div class="d">크록·하루키·베라왕</div><span class="tag tg-b">사고</span></a>
+      <a class="card" href="./프리렌-2-4부-살아보니-이렇더라.html"><div class="t">2-4부 · 살아보니 이렇더라</div><div class="d">40·50·60대의 후회·깨달음</div><span class="tag tg-b">사고</span></a>
+      <a class="card" href="./프리렌-3부-분명한-의도란-무엇인가.html"><div class="t">3부 · 분명한 의도란</div><div class="d">의도=증폭기</div><span class="tag tg-b">사고</span></a>
+      <a class="card" href="./프리렌-4부-뭘-하고싶은지-모를때.html"><div class="t">4부 · 뭘 하고 싶은지 모를 때</div><div class="d">생각 말고 만들며 발견</div><span class="tag tg-l">내삶</span></a>
+      <a class="card" href="./프리렌-4-2부-자아가-없다는-사람의-지문.html"><div class="t">4-2부 · 자아 없다는 사람의 지문</div><div class="d">지문 5가닥=구조 설계자</div><span class="tag tg-l">내삶</span></a>
+      <a class="card" href="./프리렌-5부-말은-잘하네-AI대화-주의사항.html"><div class="t">5부 · 말은 잘하네</div><div class="d">AI 아첨·지어냄·자기감사</div><span class="tag tg-b">사고</span></a>
+      <a class="card" href="./프리렌-6부-레드팀-전체공격.html"><div class="t">6부 · 레드팀 전체공격</div><div class="d">시리즈 반대편 공격</div><span class="tag tg-b">사고</span></a>
+    </div>
+  </section>
+
+  <!-- 방향·자유 -->
+  <section class="sec">
+    <h2>💰 방향 · 자유 · 실행</h2>
+    <div class="grid">
+      <a class="card" href="./프리렌-나침반-모델후보-누구를-잡을까.html"><div class="t">나침반 · 누구를 모델로</div><div class="d">거울 6명</div><span class="tag tg-l">내삶</span></a>
+      <a class="card" href="./프리렌-나침반-심층편-여섯거장의-비밀.html"><div class="t">나침반 심층 · 여섯 거장</div><div class="d">오클리·사사키·가완디 해부</div><span class="tag tg-b">사고</span></a>
+      <a class="card" href="./프리렌-지식번역가-사례집-성공과실패.html"><div class="t">지식 번역가 사례집</div><div class="d">알리압달·하우절·닥터프렌즈</div><span class="tag tg-l">내삶</span></a>
+      <a class="card" href="./프리렌-자유-다섯개의-자유-그리고-역설.html"><div class="t">자유 · 다섯 자유의 역설</div><div class="d">벌린·슈워츠·프롬</div><span class="tag tg-l">내삶</span></a>
+      <a class="card" href="./프리렌-자유-2부-너-방금-답을-말했어.html"><div class="t">자유 2부 · 너 방금 답을</div><div class="d">답 없다며 답을 씀</div><span class="tag tg-l">내삶</span></a>
+      <a class="card" href="./프리렌-자유-2-2부-노잼이면-못견디는-사람.html"><div class="t">자유 2-2부 · 노잼이면 못견딤</div><div class="d">성과·인정·축적</div><span class="tag tg-l">내삶</span></a>
+      <a class="card" href="./프리렌-자유-3부-내가-굳이-왜-여기.html"><div class="t">자유 3부 · 굳이 왜 여기</div><div class="d">대체 가능한 나=자유</div><span class="tag tg-l">내삶</span></a>
+      <a class="card" href="./프리렌-시간편-시간은-못늘려도-두배로쓴다.html"><div class="t">시간 · 못 늘려도 두 배로</div><div class="d">체력×의지=시간 배율</div><span class="tag tg-l">내삶</span></a>
+      <a class="card" href="./프리렌-실행-다짐형은-30년실패-충동형은-팍팍.html"><div class="t">실행 · 다짐형 vs 충동형</div><div class="d">충동을 무기로</div><span class="tag tg-l">내삶</span></a>
+      <a class="card" href="./프리렌-핵심-머리에박는카드-1-2-3-5-7.html"><div class="t">핵심 카드 · 1·2·3·5·7</div><div class="d">전부 잊어도 이것만</div><span class="tag tg-b">사고</span></a>
+    </div>
+  </section>
+
+  <!-- 만화 -->
+  <section class="sec">
+    <h2>😂 만화 — 가볍게</h2>
+    <div class="grid">
+      <a class="card" href="./프리렌-개그만화-나침반-여섯거장-레전드.html"><div class="t">여섯 거장 레전드썰</div><div class="d">멱살잡기 개그 ㅋㅋ</div><span class="tag tg-f">만화</span></a>
+      <a class="card" href="./프리렌-개그만화-가완디-종이한장의-기적.html"><div class="t">종이 한 장의 기적</div><div class="d">가완디 실화+숫자</div><span class="tag tg-f">만화</span></a>
+      <a class="card" href="./프리렌-개그만화-4화-계획하면-하기싫어지는-병.html"><div class="t">계획하면 하기싫어지는 병</div><div class="d">장전=파도타기</div><span class="tag tg-f">만화</span></a>
+      <a class="card" href="./프리렌-만화-1화-아무나-못가지는-것.html"><div class="t">만화 1화 · 희소성</div><div class="d">아무나 못 가지는 것</div><span class="tag tg-f">만화</span></a>
+      <a class="card" href="./프리렌-만화-2화-시간이-없다는-거짓말.html"><div class="t">만화 2화 · 시간 거짓말</div><div class="d">시간이 없다는 거짓말</div><span class="tag tg-f">만화</span></a>
+      <a class="card" href="./프리렌-만화-3화-주말은-일하는-날이-아니다.html"><div class="t">만화 3화 · 주말</div><div class="d">주말은 일하는 날 아님</div><span class="tag tg-f">만화</span></a>
+    </div>
+  </section>
+
+  <!-- 넛지 시스템 -->
+  <section class="sec">
+    <h2>🏗️ 넛지 시스템 — 습관 자동화</h2>
+    <div class="desc">의지 0으로 굴러가는 하루. 지금 디스코드 #클로드알림으로 알림 LIVE 중.</div>
+    <div class="grid">
+      <a class="card" href="./프리렌-넛지설계도-의지0으로-굴러가는-하루.html"><div class="t">🏗️ 넛지 설계도 (마스터)</div><div class="d">32섹션 전체 설계</div><span class="tag tg-s">시스템</span></a>
+      <a class="card" href="./프리렌-개그만화-인간개조대작전-실행판.html"><div class="t">🎮 인간개조 실행판</div><div class="d">퀘스트 체크박스</div><span class="tag tg-s">시스템</span></a>
+      <a class="card" href="./폰정리-4시반-따라하기-가이드.html"><div class="t">📱 폰정리 가이드</div><div class="d">체크하며 폰 세팅</div><span class="tag tg-s">시스템</span></a>
+      <a class="card" href="./헬스장-지오펜스-세팅가이드.html"><div class="t">📸 헬스장 지오펜스</div><div class="d">두정역 도착 알람</div><span class="tag tg-s">시스템</span></a>
+      <a class="card" href="./_읽을거리-목차-이동시간용.html"><div class="t">📚 읽을거리 목차</div><div class="d">이동시간 순서표</div><span class="tag tg-s">시스템</span></a>
+      <a class="card" href="./폰-잠금화면-세뇌월페이퍼-갤폴드.html"><div class="t">🖼️ 갤폴드 월페이퍼</div><div class="d">잠금화면용</div><span class="tag tg-s">시스템</span></a>
+    </div>
+  </section>
+
+  <div class="readbar"><button id="readReset">읽음 표시 전부 지우기</button></div>
+
+  <div class="note">
+    <b>이 대시보드의 구조:</b> 입력은 <b>디스코드 채널</b>(오늘의교훈·클로드알림)과 클로드코드로, 데이터는 <b>옵시디언 볼트</b> 뒷단에 쌓이고, 이 페이지는 그걸 <b>읽기 전용</b>으로 보여줘요. 노션 대신 깃허브 페이지라 폰에서 가볍게 열려요. 게시글 올리는 기능은 없음(입력은 디스코드로).
+  </div>
+
+  <div class="foot">
+    프리렌 대시보드 · 개인용 · seongahjo830<br>
+    입력=디스코드/클로드코드 · 저장=볼트 · 열람=여기
+  </div>
+</div>
+<script>
+  // 발리 D-day 계산 (임시 2026-08-18)
+  var bali = new Date('2026-08-18T00:00:00');
+  var now = new Date();
+  var d = Math.ceil((bali - now) / 86400000);
+  document.getElementById('dday').textContent = d > 0 ? ('D-' + d) : (d === 0 ? '오늘!' : '다녀옴');
+
+  // 읽은 것 흐릿하게 — 카드 한번 누르면 기록, 다시 오면 흐릿+"읽음"
+  (function(){
+    var KEY = 'freeren_read';
+    var read;
+    try { read = JSON.parse(localStorage.getItem(KEY) || '[]'); } catch(e){ read = []; }
+    var links = document.querySelectorAll('a.card, a.big-card');
+    links.forEach(function(a){
+      var h = a.getAttribute('href');
+      if (read.indexOf(h) >= 0) a.classList.add('read');
+      a.addEventListener('click', function(){
+        if (read.indexOf(h) < 0){ read.push(h); localStorage.setItem(KEY, JSON.stringify(read)); }
+        a.classList.add('read');
+      });
+    });
+    var btn = document.getElementById('readReset');
+    if (btn) btn.addEventListener('click', function(){
+      localStorage.removeItem(KEY);
+      document.querySelectorAll('a.read').forEach(function(a){ a.classList.remove('read'); });
+    });
+  })();
+</script>
+</body>
+</html>
