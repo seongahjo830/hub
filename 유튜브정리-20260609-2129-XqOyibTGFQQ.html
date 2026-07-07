@@ -1,0 +1,225 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>🎬 [무료세미나] 이제는 이렇게 AI 직원들을 부려야 할 때 입니다</title>
+<style>
+:root{--bg:#FBF7EE;--panel:#FFFDF7;--ink:#2A2620;--soft:#5A5348;--muted:#8A8170;--line:#E4D6B4;--accent:#1D4ED8;--warm:#C2571F;--gold:#B8860B}
+@media(prefers-color-scheme:dark){:root{--bg:#17150F;--panel:#211E17;--ink:#EDE7D8;--soft:#C9C2B2;--muted:#98917F;--line:#39342A;--accent:#7AB0FF;--warm:#E8925C;--gold:#E0B84C}}
+*{box-sizing:border-box}body{background:var(--bg);color:var(--ink);font-family:"Pretendard","Apple SD Gothic Neo","Malgun Gothic",sans-serif;line-height:1.75;margin:0;padding:0 18px 70px}
+.wrap{max-width:680px;margin:0 auto}.top{padding:16px 0;border-bottom:1px solid var(--line)}.top a{color:var(--accent);text-decoration:none;font-weight:700;font-size:.9em}
+.vwrap{position:relative;padding-bottom:56.25%;height:0;border-radius:13px;overflow:hidden;margin:16px 0;border:1px solid var(--line)}
+.vwrap iframe{position:absolute;inset:0;width:100%;height:100%}
+#c h1{font-size:1.5em;font-weight:900;letter-spacing:-.02em;margin:18px 0 8px;line-height:1.3}
+#c h2{font-size:1.2em;font-weight:900;margin:24px 0 8px;padding-top:6px;border-top:1px solid var(--line)}
+#c h3{font-size:1.05em;font-weight:800;margin:18px 0 6px;color:var(--warm)}
+#c blockquote{border-left:3px solid var(--gold);background:var(--panel);border-radius:0 8px 8px 0;padding:8px 14px;margin:12px 0;color:var(--soft)}
+#c ul,#c ol{padding-left:22px}#c li{margin:5px 0}#c strong{color:var(--ink)}#c hr{border:0;border-top:1px solid var(--line);margin:18px 0}
+#c code{background:var(--panel);border:1px solid var(--line);border-radius:5px;padding:1px 5px;font-size:.9em}
+.btn{display:inline-block;background:var(--accent);color:#fff;border-radius:10px;padding:10px 16px;margin:16px 0;text-decoration:none;font-weight:700}
+.foot{margin-top:30px;padding-top:14px;border-top:1px solid var(--line);font-size:.75em;color:var(--muted);text-align:center}
+</style></head>
+<body><div class="wrap">
+<div class="top"><a href="./index.html">← 프리렌 대시보드</a></div>
+<div class="vwrap"><iframe src="https://www.youtube.com/embed/XqOyibTGFQQ" frameborder="0" allowfullscreen></iframe></div>
+<div id="c"></div>
+<a class="btn" href="https://youtu.be/XqOyibTGFQQ?si=Gq0lN3_eZa6ok4cf" target="_blank">▶️ 원본 영상 보기</a>
+<div class="foot">🎬 유튜브 정리 · #유튜브정리 채널 정리 기반 · 프리렌 대시보드</div>
+</div>
+<script type="text/markdown" id="md">
+# 🎬 [무료세미나] 이제는 이렇게 AI 직원들을 부려야 할 때 입니다
+영상 보면서 같이 읽기 좋게 정리했어요 👇 (옵시디언에도 저장됨)
+
+## 🎯 한눈에 요약
+> - **OpenClaw**는 2026년 AI 에이전트 혁명을 이끈 오픈소스 플랫폼 — "잠들지 않는 직원"을 내 기기에서 24시간 돌리는 개념
+> - 챗봇과의 결정적 차이: 챗봇은 내가 말 걸어야 작동, 에이전트는 **스스로 질문·답변·리서치를 반복**하며 8시간씩 독립 운영
+> - 디스코드·텔레그램 연동으로 **핸드폰 메시지만으로 원격 지시** 가능 — 맥 미니가 핫해진 이유
+> - **멀티 에이전트** = 채널 하나당 동료 한 명 — 역할·컨텍스트를 분리해 YouTube/리서치/개발/Second Brain 각각 전담
+> - 앞으로의 핵심 역량은 **프롬프트 잘 치기 → AI Agent Orchestration(지휘·위임·관리)**로 전환
+> - 설치·연동 모두 Claude에게 채팅으로 부탁하면 끝 — 기술 장벽이 거의 없음
+
+────────────────────────────
+
+## 📑 목차
+
+1. 왜 지금 OpenClaw인가 — [00:00]
+2. 혼자라는 개념의 변화 / 자는 시간이 일하는 시간 — [02:38]
+3. 챗봇 vs AI Agent — 결정적 차이 — [06:47]
+4. OpenClaw 핵심 기능 4가지 — [09:26]
+5. 설치는 Claude에게 맡겨라 — [11:31]
+6. 실전 활용 사례 — [14:39]
+7. 멀티 에이전트 — 채널 하나당 동료 한 명 — [17:48]
+8. AI Agent Orchestration — 앞으로의 핵심 역량 — [22:27]
+
+────────────────────────────
+
+## 🚀 왜 지금 OpenClaw인가 [00:00]
+
+OpenClaw는 **2026년 AI 에이전트 시대를 실질적으로 열어젖힌 오픈소스 플랫폼**이다.
+
+> "에이전트라는 개념이 프로덕트로서 자리매김하면서 실질적인 업무를 바꿨던 데에는 이 OpenClaw라는 아이디어가 엄청나게 큰 일조를 했다고 생각해요."
+
+- 젠슨 황, 안드레 카르파티 등 업계 리더들이 "에이전트를 어떻게 활용할지 감이 잡혔다"고 말하게 만든 계기
+- **공개 10개월 만에 GitHub 스타 37만** — 1인 개발자 Peter Steinberg가 만든 오픈소스
+- 이 프로덕트 하나가 수많은 다른 산업의 제품들을 바꿔놓음
+
+핵심 이미지: *모니터 6개짜리 책상에서 내가 자는 사이에도 에이전트들이 스스로 일하는 장면* — 오늘 세미나 전체를 한 장으로 압축한 그림.
+
+────────────────────────────
+
+## 🌙 혼자라는 개념의 변화 / 자는 시간이 일하는 시간 [02:38]
+
+### 혼자서 낼 수 있는 임팩트의 폭발적 확장
+
+- 과거: 개인 1명이 낼 수 있는 성과·임팩트·스케일은 **극히 한정적**
+- 현재: 여러 기업에서 한 명이 **10배~100배** 임팩트를 내는 사례 속출
+- Peter Steinberg 본인도 AI 에이전트를 수십 개 동시에 돌리며 **한 달에 6,000억 토큰** 사용
+
+### 자는 시간 = 일하는 시간
+
+> "OpenClaw라고 하는 AI Agent 플랫폼도 어떻게 보면 우리가 자고 있을 때 그 자는 시간까지 함축해서 일하는 시간으로 만들 수 있을까의 고민이고 싸움이에요."
+
+- 코드는 한 번 짜두면 기계가 대신 실행 → 개발자들이 높은 대우를 받아온 이유
+- 이제는 **개발자·비개발자 모두** AI Agent를 통해 상시 대기 상태로 업무 처리 가능
+- 이 패러다임은 *도구* 차원이 아니라 **팀 매니지먼트·AI Agent 매니지먼트** 차원으로 봐야 함
+
+────────────────────────────
+
+## 💬 챗봇 vs AI Agent — 결정적 차이 [06:47]
+
+| 구분 | 챗봇 (ChatGPT·Claude 채팅) | AI Agent (OpenClaw) |
+|---|---|---|
+
+| 작동 조건 | **내가 질문해야** 답변 | **스스로** 질문·답변·리서치 반복 |
+| 지속성 | 대화 끝나면 종료 | **8시간씩 독립 운영** |
+| 접근 방법 | 컴퓨터 앞에 앉아야 | 핸드폰 메신저로 원격 지시 |
+| 자율성 | 없음 | 정해진 시간에 스스로 일 처리 |
+
+> "챗봇은 내가 말을 뗄 때까지 죽어있는 거니까."
+
+**맥 미니가 핫해진 이유**: 핸드폰으로 접속해 명령만 보내면 맥 미니가 24시간 에이전트를 돌려줌. 단, 맥 미니 없어도 **월 $20짜리 Claude Code 또는 Codex 구독**으로 더 좋은 성능을 낼 수 있어 굳이 필수는 아님.
+
+────────────────────────────
+
+## 🔧 OpenClaw 핵심 기능 4가지 [09:26]
+
+### 1. 🔒 온디바이스(내 기기) 실행
+- 로컬 모델 사용 시 **데이터가 외부 서버에 안 올라감** — 프라이버시 보호
+- Gemma 4 같은 무료 로컬 모델 구동 가능
+
+### 2. 📱 메신저 연동 (텔레그램·디스코드)
+- 핸드폰으로 접속 → 메시지 보내면 에이전트가 읽고 처리
+- **밖에서 밥 먹다가도** 원격 지시 가능
+
+### 3. 🧠 워크스페이스 & 메모리
+- 서브 에이전트마다 **고유의 워크스페이스·메모리·히스토리** 보유
+- __`Soul.md`__ — 각 에이전트에게 **고유한 성향(Characteristic)**을 부여하는 장치
+
+### 4. 💓 하트비트(Heartbeat)
+- 심장 박동처럼 **1분마다 서버에 핑** → 에이전트가 끊김 없이 상주
+- "5분마다 이걸 체크해서 이상 감지되면 나한테 바로 메시지 보내" 같은 **모니터링 자동화** 가능
+
+────────────────────────────
+
+## ⚙️ 설치는 Claude에게 맡겨라 [11:31]
+
+### 설치 방법
+
+> "Claude한테 '이거 설치해 줘', '창 띄워줘', '디스코드 연결하고 싶은데 어떻게 해야 돼?' — 그냥 처음부터 끝까지 다 물어보면 다 설치해 주고 다 작동시켜 줘요."
+
+```
+# 터미널에 한 줄 복붙으로 설치 시작
+# → Claude에게 "OpenClaw 설치해줘" 요청으로 완료
+```
+
+- 설치 완료 후 **대시보드(채팅창)** 자동 생성
+- 디스코드 연동: 봇 토큰 발급 → 복붙 → 채널 생성 — 이것도 전부 Claude가 안내
+- ⭐ **핵심 메시지**: 새로운 기술이 나와도 "어떻게 설치하지?" 두려워하지 말 것 — Claude가 다 해줌
+
+────────────────────────────
+
+## 🛠️ 실전 활용 사례 [14:39]
+
+### 웹 리서치 자동화
+- 인터넷 브라우저 열기 → 검색 → 링크 10개 다운로드 → Summary 작성까지 **원스톱**
+
+### YouTube 채널 관리
+- 하루 1회 영상 댓글·조회수·성과 자동 분석 → 리포트 전송
+
+### 프로젝트 개발 & 디버깅
+- AutoClick(썸네일 제작 서비스) 개발의 **99%를 Claude/OpenClaw**로 진행
+- "이 기능 이상한데 디버깅해서 바꿔볼래?" → 핸드폰 채팅으로 처리
+
+### 강의 제작 자동화
+- **Cron Job**(반복 예약 작업) 활용:
+  > "1시간마다 한 번씩 리서치→검증→슬라이드 제작→스크린샷→워딩 수정→필요 슬라이드 평가→리포트해줘"
+  - 이 사이클을 **200시간** 돌려 강의 자료 완성
+
+────────────────────────────
+
+## 👥 멀티 에이전트 — 채널 하나당 동료 한 명 [17:48]
+
+### 왜 에이전트를 여러 개로 나누는가?
+
+**역할 분담 + 컨텍스트 분리**가 핵심이다.
+
+- "오늘의 퍼포먼스가 어때?" → YouTube를 말하는 건지, Second Brain인지, AutoClick인지 **혼재되면 안 됨**
+- 에이전트를 분리해야 **각자 맡은 영역에 집중된 메모리·워크스페이스** 유지
+
+### 실제 에이전트 구성 예시
+
+| 채널(에이전트) | 담당 역할 |
+|---|---|
+| YouTube 에이전트 | 댓글·조회수 모니터링, 콘텐츠 성과 분석 |
+| 리서치 에이전트 | 특정 주제 심층 조사·논문 수집 |
+| 이미지 에이전트 | 마케팅 이미지·썸네일 제작 |
+| Second Brain 에이전트 | 지식 저장·큐레이션·업데이트 |
+| AutoClick 에이전트 | 서비스 개발·디버깅·배포 |
+
+### Second Brain 연동의 위력
+
+> "나의 뇌 구조를 읽고 네가 나라면 어떻게 판단할지 생각해 줘."
+
+- __내 모든 생각·지식·히스토리를 에이전트에게 미리 주입__ → 매번 딥 컨텍스트 설명 불필요
+- 차 타다가 음성으로 "오늘 미팅에서 이런 생각 들었는데 Second Brain에 저장해줘" → 즉시 처리
+- *Obsidian* 기반 + 여러 연구를 결합한 업그레이드 구조
+
+### 에이전트 생성 방법
+
+Claude에게 요청:
+> "내가 이런 식으로 작업을 처리하고 싶은데, 네가 에이전트들을 만들어서 채널을 구성해줘."
+
+→ OpenClaw가 서브 에이전트를 자동 생성, **대화창·메모리·워크스페이스를 분리해서 유지**
+
+────────────────────────────
+
+## 🎯 AI Agent Orchestration — 앞으로의 핵심 역량 [22:27]
+
+### 직군의 변화
+
+| 과거 | 앞으로 |
+|---|---|
+| 슬라이드 직접 제작 | 에이전트에게 위임·지시 |
+| 코드 직접 작성 | 에이전트 결과물 검토·방향 설정 |
+| 컴퓨터 앞에 상시 대기 | 핸드폰으로 원격 관리 |
+| **실무자** | **AI Agent 매니저** |
+
+> "이 AI Agent Orchestration이라는 영역은 새롭고, 개발자라고 해서 더 잘하는 것도 아니에요. 새로운 환경에서 새로운 기술들을 배우고 터득하면서 나의 노하우를 쌓아가는 시대입니다."
+
+### 핵심 선언
+
+- **"프롬프트를 잘 치는 법을 배우는 세상은 끝났다"**
+- __앞으로는 AI Agent들을 Orchestration(지휘·위임·관리)하는 방법이 핵심__
+- 전 직군·전 세계에서 **가장 수요(Demand)가 많은 역량**이 바로 이것
+
+────────────────────────────
+
+## 💡 핵심 정리
+> - **에이전트 = 지치지 않는 팀원** — 24시간 독립 운영, 하트비트로 상시 대기, 핸드폰으로 원격 지시
+> - **챗봇과의 결정적 차이**: 챗봇은 내가 말 걸어야 살아남, 에이전트는 스스로 루프를 돌며 일함
+> - **멀티 에이전트 = 역할+컨텍스트 분리** — 채널 하나당 담당 에이전트 1명, 섞으면 복잡해짐
+> - **설치·운용 모두 Claude에게 채팅으로** — 기술 장벽을 두려워할 필요 없음
+> - **앞으로의 핵심 역량**: 프롬프트 스킬 → **AI Agent Orchestration**(지휘·위임·최적화 환경 구성)
+</script>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script>
+try{ document.getElementById('c').innerHTML = marked.parse(document.getElementById('md').textContent.trim()); }
+catch(e){ document.getElementById('c').innerText = document.getElementById('md').textContent; }
+</script>
+</body></html>
