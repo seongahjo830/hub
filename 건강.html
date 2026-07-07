@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>건강 기록실 — 체중·식단·헬스장·기상</title>
+<title>건강 기록실 — 체중·수면·운동·식사</title>
 <style>
 :root{--bg:#FBF7EE;--panel:#FFFDF7;--ink:#2A2620;--soft:#5A5348;--muted:#8A8170;--line:#E4D6B4;--accent:#1D4ED8;--warm:#C2571F;--gold:#B8860B;--green:#3E7C43;--pink:#C2337E;--teal:#0E7C86}
 @media(prefers-color-scheme:dark){:root{--bg:#17150F;--panel:#211E17;--ink:#EDE7D8;--soft:#C9C2B2;--muted:#98917F;--line:#39342A;--accent:#7AB0FF;--warm:#E8925C;--gold:#E0B84C;--green:#7FB985;--pink:#F08AC0;--teal:#4FC3CE}}
@@ -12,29 +12,33 @@ body{background:var(--bg);color:var(--ink);font-family:"Pretendard","Apple SD Go
 .wrap{max-width:680px;margin:0 auto;padding:0 16px}
 .top{display:flex;align-items:center;gap:10px;padding:18px 0;border-bottom:1px solid var(--line)}
 .top a{color:var(--accent);text-decoration:none;font-weight:700;font-size:.9em}
-.hero{text-align:center;padding:24px 0 14px}
-.hero h1{font-size:1.6em;font-weight:900;letter-spacing:-0.03em}
-.hero .sub{color:var(--soft);font-size:.88em;margin-top:4px}
-.banner{border-radius:13px;padding:12px 15px;margin:14px 0;font-size:.92em;font-weight:700}
-.banner.go{background:rgba(194,87,31,.13);color:var(--warm);border:1px solid var(--warm)}
-.banner.done{background:rgba(62,124,67,.13);color:var(--green);border:1px solid var(--green)}
+.hero{text-align:center;padding:22px 0 10px}
+.hero h1{font-size:1.55em;font-weight:900;letter-spacing:-0.03em}
+.hero .sub{color:var(--soft);font-size:.86em;margin-top:4px}
 .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:15px 16px;margin:12px 0}
-.card h2{font-size:1.02em;font-weight:900;margin-bottom:10px;display:flex;align-items:center;gap:7px}
+.card h2{font-size:1.0em;font-weight:900;margin-bottom:10px;display:flex;align-items:center;gap:7px}
 .row{display:flex;align-items:center;gap:10px;margin:9px 0}
-.row label{font-size:.85em;font-weight:800;color:var(--soft);min-width:74px}
-input[type=time],input[type=number],input[type=text]{flex:1;background:var(--bg);border:1px solid var(--line);border-radius:9px;padding:9px 11px;font-size:.95em;color:var(--ink);font-family:inherit;min-width:0}
+.row label{font-size:.84em;font-weight:800;color:var(--soft);min-width:78px}
+.two{display:flex;gap:10px}
+.two>div{flex:1;min-width:0}
+.two .sub{font-size:.72em;color:var(--muted);font-weight:700;margin-bottom:3px}
+input[type=time],input[type=number],input[type=text]{width:100%;background:var(--bg);border:1px solid var(--line);border-radius:9px;padding:9px 11px;font-size:.95em;color:var(--ink);font-family:inherit;min-width:0}
 input:focus{outline:2px solid var(--accent);border-color:transparent}
-.gymbtn{width:100%;padding:13px;border-radius:11px;border:2px solid var(--line);background:var(--bg);font-size:1em;font-weight:900;color:var(--muted);font-family:inherit;cursor:pointer;margin-top:4px}
-.gymbtn.on{border-color:var(--green);color:var(--green);background:rgba(62,124,67,.1)}
+.calc{font-size:.82em;font-weight:800;color:var(--teal);text-align:center;margin-top:6px}
+.exbtns{display:flex;gap:10px}
+.exbtn{flex:1;padding:12px;border-radius:11px;border:2px solid var(--line);background:var(--bg);font-size:.92em;font-weight:900;color:var(--muted);font-family:inherit;cursor:pointer}
+.exbtn.on{border-color:var(--green);color:var(--green);background:rgba(62,124,67,.1)}
+.snackpraise{background:rgba(184,134,11,.12);border:1px solid var(--gold);border-radius:10px;padding:11px 13px;margin-top:8px;font-size:.86em;font-weight:800;color:var(--gold);text-align:center;display:none}
+.snackpraise.on{display:block}
 .hint{font-size:.76em;color:var(--muted);margin-top:6px;line-height:1.5}
 .saved{font-size:.78em;color:var(--green);font-weight:800;text-align:right;height:1.2em;margin-top:4px}
 svg.chart{width:100%;height:130px;display:block}
-table{width:100%;border-collapse:collapse;font-size:.8em}
-th,td{padding:6px 4px;border-bottom:1px solid var(--line);text-align:center}
+table{width:100%;border-collapse:collapse;font-size:.76em}
+th,td{padding:6px 3px;border-bottom:1px solid var(--line);text-align:center}
 th{color:var(--muted);font-weight:800}
-td.meal{text-align:left;font-size:.92em;max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+td.meal{text-align:left;font-size:.92em;max-width:130px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .foot{margin-top:32px;padding-top:16px;border-top:1px solid var(--line);text-align:center;font-size:.76em;color:var(--muted)}
-.exp{background:none;border:1px solid var(--line);color:var(--muted);font-size:.74em;font-weight:700;border-radius:999px;padding:4px 11px;cursor:pointer;font-family:inherit}
+.exp{background:none;border:1px solid var(--line);color:var(--muted);font-size:.74em;font-weight:700;border-radius:999px;padding:4px 11px;cursor:pointer;font-family:inherit;float:right}
 </style>
 </head>
 <body>
@@ -42,32 +46,50 @@ td.meal{text-align:left;font-size:.92em;max-width:160px;overflow:hidden;text-ove
   <div class="top"><a href="./index.html">← 프리렌 대시보드</a></div>
   <div class="hero">
     <h1>🫀 건강 기록실</h1>
-    <div class="sub">체중 · 식단 · 헬스장 · 기상 — 하루 30초 기록</div>
+    <div class="sub">아침·저녁 직접 입력 · 자동연동 없음 · 하루 1분</div>
   </div>
-
-  <div class="banner go" id="gymBanner">🏋️ 오늘 헬스장 인증 아직! 두정역 가서 📸 찍고 아래 버튼 누르기</div>
 
   <div class="card">
     <h2>📅 오늘 <span id="todayLbl" style="font-weight:600;color:var(--muted);font-size:.8em"></span></h2>
-    <div class="row"><label>⏰ 기상</label><input type="time" id="wake"></div>
-    <div class="row"><label>⚖️ 체중 kg</label><input type="number" id="wt" step="0.1" inputmode="decimal" placeholder="OnToFit 아침 숫자 그대로"></div>
-    <div class="row"><label>🌅 아침</label><input type="text" id="mB" placeholder="뭐 먹었어?"></div>
-    <div class="row"><label>🍚 점심</label><input type="text" id="mL" placeholder="2시에 디스코드가 물어봄"></div>
-    <div class="row"><label>🌙 저녁</label><input type="text" id="mD" placeholder="7시에 디스코드가 물어봄"></div>
-    <button class="gymbtn" id="gym">🏋️ 헬스장 갔다옴!</button>
+
+    <h2 style="margin-top:4px">😴 수면</h2>
+    <div class="two">
+      <div><div class="sub">잔 시간(취침)</div><input type="time" id="sleepStart"></div>
+      <div><div class="sub">일어난 시간(기상)</div><input type="time" id="sleepEnd"></div>
+    </div>
+    <div class="calc" id="sleepCalc">수면시간: –</div>
+
+    <h2 style="margin-top:14px">⚖️ 체중</h2>
+    <div class="two">
+      <div><div class="sub">아침 (kg)</div><input type="number" id="wtAM" step="0.1" inputmode="decimal" placeholder="예: 70.5"></div>
+      <div><div class="sub">저녁 (kg)</div><input type="number" id="wtPM" step="0.1" inputmode="decimal" placeholder="예: 71.2"></div>
+    </div>
+
+    <h2 style="margin-top:14px">🏋️ 운동 (했으면 눌러)</h2>
+    <div class="exbtns">
+      <button class="exbtn" id="exAM">🌅 아침운동</button>
+      <button class="exbtn" id="exPM">🌙 저녁운동</button>
+    </div>
+
+    <h2 style="margin-top:14px">🍽️ 식사 (아침은 패스)</h2>
+    <div class="row"><label>🍚 점심</label><input type="text" id="lunch" placeholder="2시에 디스코드가 물어봄"></div>
+    <div class="row"><label>🌙 저녁</label><input type="text" id="dinner" placeholder="7시에 디스코드가 물어봄"></div>
+    <div class="row"><label>🍪 간식</label><input type="text" id="snack" placeholder="먹었으면 적기 (안 먹으면 비워둬!)"></div>
+    <div class="snackpraise" id="snackPraise">🏆 오늘 간식 기록 없음 = 안 먹었단 뜻! 자기관리 미쳤다 진짜 👏</div>
+
     <div class="saved" id="savedMsg"></div>
-    <div class="hint">쓰는 순간 자동 저장(이 폰에). 헬스장 사진은 폰 갤러리에 찍어두고 여기선 버튼만 — 사진 자체 보관은 #오늘의교훈에 올려도 돼요.</div>
+    <div class="hint">쓰는 순간 자동 저장(이 폰에). 체중 자동연동은 끔 — 아침·저녁에 직접 숫자만 톡.</div>
   </div>
 
   <div class="card">
-    <h2>⚖️ 체중 흐름</h2>
+    <h2>⚖️ 체중 흐름 <span style="font-weight:600;color:var(--muted);font-size:.78em">(아침 기준)</span></h2>
     <svg class="chart" id="chart" viewBox="0 0 340 130" preserveAspectRatio="none"></svg>
-    <div class="hint" id="chartHint">체중을 2일 이상 기록하면 선이 그려져요. OnToFit은 공개 API가 없어서 자동연동은 불가 — 아침에 앱에 뜬 숫자를 그대로 옮겨 적는 게 제일 빠른 10초 연동이에요.</div>
+    <div class="hint" id="chartHint">아침 체중을 2일 이상 적으면 선이 그려져요.</div>
   </div>
 
   <div class="card">
-    <h2>📋 최근 14일 <button class="exp" id="expBtn" style="float:right">데이터 복사</button></h2>
-    <table id="tbl"><thead><tr><th>날짜</th><th>⏰</th><th>⚖️</th><th>🏋️</th><th style="text-align:left">🍽️ 식사</th></tr></thead><tbody></tbody></table>
+    <h2>📋 최근 14일 <button class="exp" id="expBtn">데이터 복사</button></h2>
+    <table id="tbl"><thead><tr><th>날짜</th><th>😴</th><th>⚖️아침</th><th>⚖️저녁</th><th>🌅</th><th>🌙</th><th style="text-align:left">🍽️/🍪</th></tr></thead><tbody></tbody></table>
   </div>
 
   <div class="foot">기록은 이 기기(폰) localStorage에 저장 · 프리렌 대시보드 · 개인용</div>
@@ -81,22 +103,30 @@ td.meal{text-align:left;font-size:.92em;max-width:160px;overflow:hidden;text-ove
   if(!db[T]) db[T]={};
   document.getElementById('todayLbl').textContent=T;
 
-  var F={wake:'wake',wt:'wt',mB:'b',mL:'l',mD:'d'};
-  Object.keys(F).forEach(function(id){
-    var el=document.getElementById(id);
-    if(db[T][F[id]]!=null) el.value=db[T][F[id]];
-    el.addEventListener('input',function(){ db[T][F[id]]=el.value; save(); });
-  });
-  var gym=document.getElementById('gym');
-  function gymUI(){
-    var on=!!db[T].gym;
-    gym.classList.toggle('on',on);
-    gym.textContent=on?'✅ 오늘 헬스장 인증 완료!':'🏋️ 헬스장 갔다옴!';
-    var b=document.getElementById('gymBanner');
-    b.className='banner '+(on?'done':'go');
-    b.textContent=on?'✅ 오늘 헬스장 도장 찍음. 멋지다!':'🏋️ 오늘 헬스장 인증 아직! 두정역 가서 📸 찍고 아래 버튼 누르기';
+  // 수면시간 계산 (자정 넘김 처리)
+  function sleepHours(s,e){
+    if(!s||!e) return null;
+    var a=s.split(':'), b=e.split(':');
+    var m1=(+a[0])*60+(+a[1]), m2=(+b[0])*60+(+b[1]);
+    var diff=m2-m1; if(diff<=0) diff+=1440;
+    return diff/60;
   }
-  gym.addEventListener('click',function(){ db[T].gym=!db[T].gym; save(); gymUI(); render(); });
+  function fmtH(h){ if(h==null) return '–'; var hh=Math.floor(h), mm=Math.round((h-hh)*60); return hh+'시간'+(mm?(' '+mm+'분'):''); }
+
+  var text={sleepStart:'sleepStart',sleepEnd:'sleepEnd',wtAM:'wtAM',wtPM:'wtPM',lunch:'lunch',dinner:'dinner',snack:'snack'};
+  Object.keys(text).forEach(function(id){
+    var el=document.getElementById(id);
+    if(db[T][id]!=null) el.value=db[T][id];
+    el.addEventListener('input',function(){ db[T][id]=el.value; save(); });
+  });
+
+  // 운동 토글 2개
+  ['exAM','exPM'].forEach(function(id){
+    var b=document.getElementById(id);
+    function ui(){ var on=!!db[T][id]; b.classList.toggle('on',on); b.textContent=(id==='exAM'?'🌅 아침운동':'🌙 저녁운동')+(on?' ✅':''); }
+    b.addEventListener('click',function(){ db[T][id]=!db[T][id]; save(); ui(); });
+    b._ui=ui; ui();
+  });
 
   var savedT=null;
   function save(){
@@ -107,17 +137,25 @@ td.meal{text-align:left;font-size:.92em;max-width:160px;overflow:hidden;text-ove
   }
 
   function render(){
+    // 수면 계산
+    var h=sleepHours(db[T].sleepStart, db[T].sleepEnd);
+    document.getElementById('sleepCalc').textContent='수면시간: '+fmtH(h);
+    // 간식 칭찬
+    document.getElementById('snackPraise').classList.toggle('on', !(db[T].snack&&db[T].snack.trim()));
+    // 표
     var days=Object.keys(db).sort().reverse();
-    // 14일 표
     var tb=document.querySelector('#tbl tbody'); tb.innerHTML='';
     days.slice(0,14).forEach(function(d){
-      var r=db[d], meals=[r.b,r.l,r.d].filter(Boolean).join(' / ');
+      var r=db[d];
+      var hh=sleepHours(r.sleepStart,r.sleepEnd);
+      var meals=[r.lunch,r.dinner].filter(Boolean).join('/');
+      var snk=(r.snack&&r.snack.trim())?('🍪'+r.snack):'🚫간식X';
       var tr=document.createElement('tr');
-      tr.innerHTML='<td>'+d.slice(5)+'</td><td>'+(r.wake||'–')+'</td><td>'+(r.wt||'–')+'</td><td>'+(r.gym?'✅':'–')+'</td><td class="meal">'+(meals||'–')+'</td>';
+      tr.innerHTML='<td>'+d.slice(5)+'</td><td>'+(hh!=null?hh.toFixed(1):'–')+'</td><td>'+(r.wtAM||'–')+'</td><td>'+(r.wtPM||'–')+'</td><td>'+(r.exAM?'✅':'–')+'</td><td>'+(r.exPM?'✅':'–')+'</td><td class="meal">'+(meals||'–')+' <span style="color:var(--gold)">'+snk+'</span></td>';
       tb.appendChild(tr);
     });
-    // 체중 차트 (최근 30개)
-    var pts=Object.keys(db).sort().map(function(d){return {d:d,w:parseFloat(db[d].wt)};}).filter(function(p){return p.w>0;}).slice(-30);
+    // 체중 차트 (아침 기준, 최근 30)
+    var pts=Object.keys(db).sort().map(function(d){return {d:d,w:parseFloat(db[d].wtAM)};}).filter(function(p){return p.w>0;}).slice(-30);
     var svg=document.getElementById('chart'); svg.innerHTML='';
     if(pts.length>=2){
       var ws=pts.map(function(p){return p.w}), mn=Math.min.apply(0,ws)-0.5, mx=Math.max.apply(0,ws)+0.5;
@@ -127,15 +165,15 @@ td.meal{text-align:left;font-size:.92em;max-width:160px;overflow:hidden;text-ove
         + pts.map(function(p,i){return '<circle cx="'+X(i).toFixed(1)+'" cy="'+Y(p.w).toFixed(1)+'" r="3" fill="var(--teal)"/>';}).join('')
         + '<text x="10" y="12" font-size="10" fill="var(--muted)">'+mx.toFixed(1)+'</text><text x="10" y="128" font-size="10" fill="var(--muted)">'+mn.toFixed(1)+'</text>'
         + '<text x="330" y="'+(Y(pts[pts.length-1].w)-8)+'" font-size="11" font-weight="800" text-anchor="end" fill="var(--ink)">'+pts[pts.length-1].w+'kg</text>';
-      document.getElementById('chartHint').textContent='최근 '+pts.length+'회 기록 · 최저 '+Math.min.apply(0,ws)+' ~ 최고 '+Math.max.apply(0,ws)+'kg';
+      document.getElementById('chartHint').textContent='최근 '+pts.length+'회 · 최저 '+Math.min.apply(0,ws)+' ~ 최고 '+Math.max.apply(0,ws)+'kg';
     }
   }
 
   document.getElementById('expBtn').addEventListener('click',function(){
-    navigator.clipboard.writeText(JSON.stringify(db,null,1)).then(function(){alert('전체 기록 JSON이 복사됐어요. 디스코드 #프리업에 붙여넣으면 백업/분석해줘요.');});
+    navigator.clipboard.writeText(JSON.stringify(db,null,1)).then(function(){alert('전체 기록 JSON 복사됨. 디스코드 #프리업에 붙여넣으면 백업/분석해줘요.');});
   });
 
-  gymUI(); render();
+  render();
 })();
 </script>
 </body>
