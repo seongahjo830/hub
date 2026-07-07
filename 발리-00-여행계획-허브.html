@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>🌴 발리 여행계획 허브 — 지역·테마·일정</title>
+<style>
+:root{--bg:#FBF7EE;--panel:#FFFDF7;--ink:#2A2620;--soft:#5A5348;--muted:#8A8170;--line:#E4D6B4;--accent:#1D4ED8;--warm:#C2571F;--gold:#B8860B;--green:#3E7C43;--pink:#C2337E;--teal:#0E7C86;--magic:#6A4A9C}
+@media(prefers-color-scheme:dark){:root{--bg:#17150F;--panel:#211E17;--ink:#EDE7D8;--soft:#C9C2B2;--muted:#98917F;--line:#39342A;--accent:#7AB0FF;--warm:#E8925C;--gold:#E0B84C;--green:#7FB985;--pink:#F08AC0;--teal:#4FC3CE;--magic:#C6A6F0}}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:"Pretendard","Apple SD Gothic Neo","Malgun Gothic",sans-serif;line-height:1.6;padding-bottom:70px}
+.wrap{max-width:680px;margin:0 auto;padding:0 16px}
+.top{display:flex;gap:10px;padding:16px 0;border-bottom:1px solid var(--line)}
+.top a{color:var(--accent);text-decoration:none;font-weight:700;font-size:.9em}
+.hero{text-align:center;padding:22px 0 10px}
+.hero h1{font-size:1.65em;font-weight:900}
+.hero .sub{color:var(--soft);font-size:.88em;margin-top:4px}
+.dday{font-size:1.5em;font-weight:900;color:var(--warm)}
+.sec{margin:22px 0 0}
+.sec>h2{font-size:1.1em;font-weight:900;margin-bottom:4px}
+.sec>.desc{font-size:.85em;color:var(--muted);margin-bottom:10px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.card{display:block;text-decoration:none;color:inherit;background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:13px 14px}
+.card:hover{border-color:var(--accent)}
+.card .t{font-weight:800;font-size:.95em;letter-spacing:-0.02em}
+.card .d{font-size:.78em;color:var(--soft);margin-top:3px;line-height:1.45}
+.card .tag{display:inline-block;font-size:.66em;font-weight:800;padding:1px 7px;border-radius:999px;margin-top:6px}
+.tg-r{background:rgba(29,78,216,.13);color:var(--accent)}
+.tg-t{background:rgba(194,51,126,.14);color:var(--pink)}
+.tg-p{background:rgba(62,124,67,.14);color:var(--green)}
+.big{grid-column:1/-1;background:linear-gradient(135deg,rgba(106,74,156,.12),rgba(29,78,216,.08));border-color:var(--magic)}
+.note{background:var(--panel);border-left:3px solid var(--gold);border-radius:8px;padding:11px 14px;margin:16px 0;font-size:.85em;color:var(--soft)}
+.foot{margin-top:30px;padding-top:14px;border-top:1px solid var(--line);text-align:center;font-size:.75em;color:var(--muted)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top"><a href="./index.html">← 프리렌 대시보드</a> · <a href="./발리-여행정보.html">🎒 준비물·팁</a></div>
+  <div class="hero">
+    <h1>🌴 발리 여행계획 허브</h1>
+    <div class="dday" id="dday">D-?</div>
+    <div class="sub">커플여행 · 어느 지역에 몇 박? 이 고민을 여기서 끝내기</div>
+  </div>
+
+  <div class="sec">
+    <h2>🗺️ 전체 그림 먼저</h2>
+    <div class="grid">
+      <a class="card big" href="./발리-01-전체지도-어디서-몇박.html">
+        <div class="t">📍 발리 전체 지도 & "어디서 몇 박?" 결정 가이드</div>
+        <div class="d">지역 간 이동시간 표 · 커플 추천 조합 3가지 · 후기들이 공통으로 말하는 것</div>
+        <span class="tag tg-r">시작은 여기</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="sec">
+    <h2>🏝️ 지역별 — 성격·후기·몇 박이 적당?</h2>
+    <div class="desc">각 페이지: 테마·기대할 것·아쉬운 것·실제 후기 요지·추천 박수·가는 법</div>
+    <div class="grid">
+      <a class="card" href="./발리-02-스미냑-꾸따-짱구.html"><div class="t">🍸 스미냑 · 꾸따 · 짱구</div><div class="d">비치클럽·카페·선셋 — 서쪽 해안 벨트</div><span class="tag tg-r">지역</span></a>
+      <a class="card" href="./발리-03-우붓.html"><div class="t">🌿 우붓</div><div class="d">논뷰·정글·요가·몽키포레스트 — 발리의 심장</div><span class="tag tg-r">지역</span></a>
+      <a class="card" href="./발리-04-울루와뚜-남부.html"><div class="t">🌊 울루와뚜 · 남부</div><div class="d">절벽 선셋·서핑·클리프 비치클럽</div><span class="tag tg-r">지역</span></a>
+      <a class="card" href="./발리-05-누사두아-사누르.html"><div class="t">🏖️ 누사두아 · 사누르</div><div class="d">리조트 호캉스·잔잔한 바다</div><span class="tag tg-r">지역</span></a>
+      <a class="card" href="./발리-06-길리-vs-누사페니다.html"><div class="t">⚖️ 길리 vs 누사페니다</div><div class="d">둘 다 못 가면? 이동시간·후기 비교 — 당신 고민 그거</div><span class="tag tg-r">비교</span></a>
+    </div>
+  </div>
+
+  <div class="sec">
+    <h2>💕 테마 & 일정</h2>
+    <div class="grid">
+      <a class="card" href="./발리-07-커플-테마가이드.html"><div class="t">💕 커플 테마 가이드</div><div class="d">선셋디너·플로팅브런치·스파·포토스팟</div><span class="tag tg-t">테마</span></a>
+      <a class="card" href="./발리-08-추천일정-조합.html"><div class="t">🗓️ 추천 일정 조합 3안</div><div class="d">6박·7박 기준 실전 코스 (이동 최소화)</div><span class="tag tg-p">일정</span></a>
+    </div>
+  </div>
+
+  <div class="note">💡 <b>읽는 순서 추천:</b> ①전체지도(01) → ②끌리는 지역 2~3개 → ③길리vs페니다(06) 결정 → ④일정 조합(08)에서 픽. 다 읽어도 20분. 읽다가 "여기다!" 싶으면 카드 길게 눌러 ⭐즐겨찾기.</div>
+
+  <div class="foot">🌴 발리 여행계획 허브 · 커플여행 기준 · 정보는 여행자 후기 통념 기반(출발 전 최신 확인) · 프리렌 대시보드</div>
+</div>
+<script>
+(function(){var t=new Date('2026-08-18T00:00:00');var d=Math.ceil((t-new Date())/86400000);
+document.getElementById('dday').textContent=d>0?('D-'+d+' 🛫'):(d===0?'오늘 출발!':'여행 중 🌴');})();
+</script>
+</body>
+</html>

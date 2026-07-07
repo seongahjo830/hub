@@ -107,6 +107,8 @@ a.card.sel,a.big-card.sel{border-color:var(--accent);box-shadow:0 0 0 2px var(--
     <span class="b">✈️ 발리 <span class="n" id="dday">D-?</span></span>
   </div>
 
+  <div class="readbar"><button id="multiSel">☑️ 여러 개 선택</button><button id="hiddenMgr">숨긴 글 관리</button><button id="readReset">읽음 표시 지우기</button></div>
+
   <!-- 즐겨찾기 (별표한 글, 상단 고정) -->
   <section class="sec" id="favSec" style="display:none">
     <h2>⭐ 즐겨찾기</h2>
@@ -127,10 +129,17 @@ a.card.sel,a.big-card.sel{border-color:var(--accent);box-shadow:0 0 0 2px var(--
   <!-- 발리 -->
   <section class="sec">
     <h2>🌴 발리 여행</h2>
-    <a class="big-card" href="./발리-여행정보.html">
-      <div class="t">🌴 발리 여행 정보 열기 →</div>
-      <div class="d">D-day · 준비물 체크 · 현지 팁(돈·유심·이동·매너·안전) · 첫날 동선 · 예산</div>
+    <div class="desc">커플여행 · 지역별·테마별·일정별 계획. 바둑판처럼 쭉 읽어보기.</div>
+    <a class="big-card" href="./발리-00-여행계획-허브.html">
+      <div class="t">🗺️ 발리 여행계획 허브 열기 → (지역·테마·일정 전부)</div>
+      <div class="d">전체지도·어디서몇박 · 우붓/스미냑/울루/누사두아 · <b>길리 vs 페니다</b> · 커플테마 · 추천일정 3안</div>
     </a>
+    <div class="grid" style="margin-top:9px">
+      <a class="card" href="./발리-01-전체지도-어디서-몇박.html"><div class="t">📍 전체지도·몇박</div><div class="d">이동시간+커플조합</div><span class="tag tg-b">시작</span></a>
+      <a class="card" href="./발리-06-길리-vs-누사페니다.html"><div class="t">⚖️ 길리 vs 페니다</div><div class="d">갈까 말까 결정</div><span class="tag tg-f">비교</span></a>
+      <a class="card" href="./발리-08-추천일정-조합.html"><div class="t">🗓️ 추천 일정 3안</div><div class="d">6·7박 실전 코스</div><span class="tag tg-l">일정</span></a>
+      <a class="card" href="./발리-여행정보.html"><div class="t">🎒 준비물·현지팁</div><div class="d">D-day·돈·유심·매너</div><span class="tag tg-s">준비</span></a>
+    </div>
   </section>
 
   <!-- 읽을거리 -->
@@ -246,8 +255,6 @@ a.card.sel,a.big-card.sel{border-color:var(--accent);box-shadow:0 0 0 2px var(--
 
 
 
-
-  <div class="readbar"><button id="multiSel">☑️ 여러 개 선택</button><button id="hiddenMgr">숨긴 글 관리</button><button id="readReset">읽음 표시 전부 지우기</button></div>
 
   <div class="note">
     <b>이 대시보드의 구조:</b> 입력은 <b>디스코드 채널</b>(오늘의교훈·클로드알림)과 클로드코드로, 데이터는 <b>옵시디언 볼트</b> 뒷단에 쌓이고, 이 페이지는 그걸 <b>읽기 전용</b>으로 보여줘요. 노션 대신 깃허브 페이지라 폰에서 가볍게 열려요. 게시글 올리는 기능은 없음(입력은 디스코드로).
