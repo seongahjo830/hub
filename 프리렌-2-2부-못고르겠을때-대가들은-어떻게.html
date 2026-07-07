@@ -1,0 +1,325 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2-2부 — 못 고르겠을 때, 대가들은 어떻게 골랐나</title>
+<style>
+:root{
+  --bg:#FBFAF7; --bg-soft:#F4F1EA; --fg:#1F1F1F; --fg-soft:#3A3A3A;
+  --muted:#6E6E6E; --rule:#E8E3D6; --accent:#1D4ED8; --warm:#B8451F;
+  --magic:#5B3A8C; --magic-bg:#F1ECF7; --gold:#B8860B; --honey:#C98A1B; --green:#3E7C43;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#1A1816; --bg-soft:#252220; --fg:#E8E4DC; --fg-soft:#C7C2B8;
+    --muted:#9A968D; --rule:#36322C; --accent:#7AB0FF; --warm:#E89464;
+    --magic:#C9A9F0; --magic-bg:#2A2333; --gold:#E0B84C; --honey:#E0AC4C; --green:#7FB985;
+  }
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; background:var(--bg); color:var(--fg);
+  font-family:"Pretendard","Pretendard Variable",-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Segoe UI","Malgun Gothic",sans-serif;
+  font-size:17px; line-height:1.85; letter-spacing:-0.011em;
+  -webkit-font-smoothing:antialiased;
+}
+@media (min-width:700px){ body{font-size:18px} }
+.wrap{max-width:680px; margin:0 auto; padding:0 22px 90px}
+
+.hero{padding:58px 0 30px; text-align:center; border-bottom:1px solid var(--rule)}
+.hero .kicker{font-size:.82em; letter-spacing:.14em; color:var(--muted); text-transform:uppercase; margin-bottom:16px}
+.hero .rune{font-size:2.1em; line-height:1; margin-bottom:14px}
+.hero h1{font-size:1.85em; line-height:1.32; letter-spacing:-0.03em; font-weight:800; margin:.1em 0 .35em}
+@media (min-width:700px){ .hero h1{font-size:2.25em} }
+.hero .sub{color:var(--fg-soft); font-size:1.05em; font-style:italic; max-width:31em; margin:0 auto}
+.hero .meta{margin-top:20px; font-size:.8em; color:var(--muted)}
+
+.pull{margin:38px 0; padding:6px 0 6px 22px; border-left:3px solid var(--accent);
+  font-size:1.18em; line-height:1.6; font-weight:600; letter-spacing:-0.02em; color:var(--fg)}
+.pull small{display:block; margin-top:8px; font-size:.62em; font-weight:500; color:var(--muted); font-style:normal}
+
+b{color:var(--warm); font-weight:700}
+u{text-decoration:none; background:linear-gradient(180deg,transparent 62%,rgba(29,78,216,.16) 62%); padding:0 2px}
+mark{background:rgba(255,214,64,.42); padding:1px 5px; border-radius:4px; font-weight:600; color:inherit}
+@media (prefers-color-scheme: dark){ mark{background:rgba(226,180,60,.28)} }
+
+section.card{border-top:1px solid var(--rule); padding-top:14px; margin-top:8px}
+details.sec{margin:0}
+details.sec>summary{
+  list-style:none; cursor:pointer; padding:20px 0 18px;
+  font-size:1.26em; font-weight:800; letter-spacing:-0.028em; line-height:1.35;
+  display:flex; gap:14px; align-items:baseline;
+}
+details.sec>summary::-webkit-details-marker{display:none}
+.sec-num{flex:0 0 auto; font-size:.62em; font-weight:800; color:var(--accent)}
+.sec-body{padding-bottom:14px}
+.sec-body>p:first-child{margin-top:0}
+
+p{margin:.9em 0}
+h3{font-size:1.05em; font-weight:800; letter-spacing:-0.02em; margin:1.4em 0 .5em}
+.lead{font-size:1.05em; color:var(--fg-soft)}
+
+.co{margin:18px 0; padding:16px 18px; border-radius:12px; border-left:3px solid var(--accent);
+  background:linear-gradient(100deg, rgba(29,78,216,.07), transparent 70%); font-size:.98em}
+.co.magic{border-left-color:var(--magic); background:linear-gradient(100deg,var(--magic-bg),transparent 70%)}
+.co.warm{border-left-color:var(--warm); background:linear-gradient(100deg,rgba(184,69,31,.09),transparent 70%)}
+.co.gold{border-left-color:var(--gold); background:linear-gradient(100deg,rgba(184,134,11,.10),transparent 70%)}
+.co.honey{border-left-color:var(--honey); background:linear-gradient(100deg,rgba(201,138,27,.12),transparent 70%)}
+.co.green{border-left-color:var(--green); background:linear-gradient(100deg,rgba(62,124,67,.10),transparent 70%)}
+.co .co-t{font-weight:800; margin-bottom:4px; letter-spacing:-0.02em}
+.co.magic .co-t{color:var(--magic)} .co.gold .co-t{color:var(--gold)}
+.co.honey .co-t{color:var(--honey)} .co.green .co-t{color:var(--green)}
+
+.chips{display:flex; flex-wrap:wrap; gap:8px; margin:26px 0 8px}
+.chip{font-size:.85em; font-weight:600; text-decoration:none; color:var(--fg-soft);
+  padding:7px 13px; border:1px solid var(--rule); border-radius:999px; background:var(--bg-soft)}
+.chip:hover{border-color:var(--accent); color:var(--accent)}
+
+/* your-words quote */
+.you{margin:14px 0; padding:10px 14px; border-radius:10px; background:var(--bg-soft);
+  font-size:.9em; color:var(--muted); border:1px solid var(--rule)}
+.you b{color:var(--fg-soft)}
+
+/* Framework card */
+.fw{margin:16px 0; padding:16px 18px; border:1px solid var(--rule); border-radius:14px; background:var(--bg-soft)}
+.fw .fwh{font-weight:800; letter-spacing:-0.02em; display:flex; align-items:baseline; gap:8px}
+.fw .fwh .who{font-size:.72em; color:var(--muted); font-weight:600}
+.fw .fwd{font-size:.96em; margin-top:6px}
+
+/* Ladder (stairs) */
+.ladder{margin:18px 0; counter-reset:rung}
+.rung{position:relative; margin:0 0 0 6px; padding:12px 0 12px 42px; border-left:2px dashed var(--rule)}
+.rung::before{counter-increment:rung; content:counter(rung); position:absolute; left:-14px; top:11px;
+  width:26px; height:26px; border-radius:8px; background:var(--accent); color:#fff; font-weight:800; font-size:.82em;
+  display:flex; align-items:center; justify-content:center}
+.rung .rq{font-weight:700; letter-spacing:-0.01em}
+.rung .ra{font-size:.92em; color:var(--fg-soft); margin-top:2px}
+.rung.top::before{background:var(--gold)}
+.rung.top{border-left-color:transparent}
+
+/* Ranked list */
+.rank{list-style:none; padding:0; margin:18px 0}
+.rank li{display:flex; gap:14px; padding:13px 0; border-bottom:1px solid var(--rule); align-items:flex-start}
+.rank li:last-child{border-bottom:none}
+.rank .medal{flex:0 0 auto; font-size:1.15em; font-weight:800; width:1.6em; text-align:center}
+.rank .rt{font-weight:800; letter-spacing:-0.02em}
+.rank .rd{font-size:.93em; color:var(--fg-soft); margin-top:1px}
+
+/* layers */
+.layers{margin:18px 0}
+.lyr{padding:12px 15px; border-radius:12px; margin-bottom:8px; border:1px solid var(--rule)}
+.lyr .lh{font-weight:800; letter-spacing:-0.02em}
+.lyr .ld{font-size:.93em; color:var(--fg-soft); margin-top:2px}
+.lyr.id{background:linear-gradient(100deg,var(--magic-bg),transparent 70%); border-left:3px solid var(--magic)}
+.lyr.soil{background:linear-gradient(100deg,rgba(62,124,67,.10),transparent 70%); border-left:3px solid var(--green)}
+.lyr.out{background:linear-gradient(100deg,rgba(184,134,11,.10),transparent 70%); border-left:3px solid var(--gold)}
+
+.finale{margin-top:44px; padding:34px 0 0; border-top:2px solid var(--fg); text-align:center}
+.finale .rune{font-size:1.6em}
+.finale .big{font-size:1.28em; font-weight:800; letter-spacing:-0.03em; line-height:1.5; margin:.4em 0}
+.foot{margin-top:44px; padding-top:18px; border-top:1px solid var(--rule); font-size:.78em; color:var(--muted); text-align:center}
+.src{font-size:.82em; color:var(--muted)}
+.src a{color:var(--accent); text-decoration:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <div class="kicker">프리렌으로 배우는 AI 시대 · 2-2부</div>
+    <div class="rune">🪜</div>
+    <h1>못 고르겠을 때,<br>세상에서 제일 잘한<br>사람들은 어떻게 골랐나</h1>
+    <p class="sub">"많은데 하나를 못 고르겠어"에 대한 답. 큰 질문을 <u>사다리처럼 잘게</u> 쪼개서, 한 칸씩 올라가 봐요.</p>
+    <div class="meta">버핏 · 콜린스 · 나발의 방법 + 당신 답에 직접 붙인 사다리 + 양봉가의 통찰</div>
+  </header>
+
+  <div class="co gold" style="margin-top:34px">
+    <div class="co-t">🎯 먼저, 왜 못 고르는지부터</div>
+    <p style="margin:.4em 0 0">당신은 지금 <b>8가지쯤</b>을 동시에 원해요 — 뭔가 만든 사람, 애엄마+일, 남들 못하는 가치, 돈, 남들 못 갖는 것, 디지게 건강·동안·행복. <mark>못 고르는 게 당연해요. 이것들이 서로 '경쟁'하는 게 아니거든요.</mark> 사실 서로 <u>다른 층(層)</u>에 있어요. 그걸 3층으로 나누면, 고를 게 8개가 아니라 <b>딱 1개</b>로 줄어요. 아래에서 그 트릭을 보여줄게요.</p>
+  </div>
+
+  <nav class="chips">
+    <a class="chip" href="#s1">🪜 단 하나 고르는 법</a>
+    <a class="chip" href="#s2">🎋 7년 복리자산 (직답)</a>
+    <a class="chip" href="#s3">⚖️ 5년 핵심 vs 노이즈</a>
+    <a class="chip" href="#s4">📐 3년·1년·오늘</a>
+    <a class="chip" href="#s5">🐝 전혀 다른 곳의 통찰</a>
+  </nav>
+
+  <!-- S1 -->
+  <section class="card" id="s1">
+    <details class="sec" open>
+      <summary><span class="sec-num">01</span> '단 하나'를 고르는 법</summary>
+      <div class="sec-body">
+        <div class="you">🗣️ 당신의 말: <b>"안 하면 아쉬울 게 단 하나밖에 없네… 엄청 많은데. 사실 단 하나가 뭘지는 모르겠는데 그거 하나 고르는 방법을 알려줘. 뭔가 만든 사람이면 좋겠고, 시간들이 헛되지 않게 축적된 삶을 살았으면."</b></div>
+
+        <h3>트릭: 8개를 3층으로 나눠라</h3>
+        <p>당신이 원한 걸 층으로 나누면 이렇게 돼요. <mark>고르는 건 '정체성 층'에서만 하면 돼요.</mark> 나머지는 고를 대상이 아니라, 그 정체성을 <b>떠받치는 토대</b>거나 <b>정체성이 뿜어내는 결과</b>거든요.</p>
+        <div class="layers">
+          <div class="lyr id">
+            <div class="lh">🟣 정체성 층 — "누구로 불릴까" (여기서 하나만)</div>
+            <div class="ld">뭔가 <b>만든 사람</b> · 축적한 사람 · 남들 못하는 가치를 낸 사람 → 사실 이건 <u>하나</u>예요: <mark>"내가 만든 것이 나 없이도 남아 남을 이롭게 하고, 그 가치가 떳떳한 돈으로 돌아오는 사람"</mark></div>
+          </div>
+          <div class="lyr soil">
+            <div class="lh">🟢 토대 층 — 그걸 가능케 하는 흙</div>
+            <div class="ld">건강 · 동안 · 행복. 이건 <b>목표가 아니라 연료</b>예요. 목표로 삼으면 공허하고, 정체성을 오래 굴리는 토대로 두면 따라와요.</div>
+          </div>
+          <div class="lyr out">
+            <div class="lh">🟡 성적표 층 — 정체성이 진짜인지 '증명'하는 것</div>
+            <div class="ld"><b>돈</b> = 저절로 나오는 배기가스가 <u>아니라</u>, <mark>필수 결과이자 채점표</mark>예요. 만든 것이 진짜 남을 이롭게 했다는 가장 정직한 증거 = <b>남이 기꺼이 지불한 돈</b>. 정체성으로 뭘 다 만들었는데 돈이 안 벌리면 = 가치 전달에 실패한 것 → 정체성이 미완성이라는 신호. 단, <u>떳떳하고 자랑스러운 방식</u>이라는 조건이 붙어요(그래야 성적표가 유효). '남들 못 갖는 것·못하는 일'만 배기가스 — 이건 안 좇아도 됨.</div>
+          </div>
+        </div>
+        <div class="co magic">
+          <div class="co-t">💡 그래서 당신의 '단 하나'는 이미 나왔어요</div>
+          <p style="margin:.3em 0 0">당신이 직접 말했어요 — <b>"뭔가 만든 사람 / 축적된 삶."</b> 건강·동안·행복은 그걸 오래 하기 위한 <u>흙</u>이고, 애엄마·후배·커뮤니티는 <u>무엇을 만들지</u>이고, <b>돈은 그게 진짜였는지 채점하는 성적표</b>예요. <mark>고민이 8개가 아니라, "무엇을 축적해서 떳떳하게 팔까?" 하나로 좁혀졌어요.</mark></p>
+        </div>
+
+        <div class="co warm">
+          <div class="co-t">🔧 v1.1 수정 — 당신의 반박이 맞았어요</div>
+          <p style="margin:.3em 0 0">v1.0은 "돈은 저절로 나오는 배기가스"라 썼는데, <b>틀렸어요.</b> 콜린스의 고슴도치 3원을 다시 보면 — <u>경제 엔진은 열정·최고와 '동급 필수' 원</u>이지 부산물이 아니에요. 셋 중 하나라도 빠지면 위대해질 수 없다고 못 박았죠. 나발도 같아요: 가치를 만들고도 <b>과금 경로(지분·제품·가격)를 설계 안 하면</b> 부는 안 와요. 좋은 것을 만드는 것과 그것이 돈이 되게 만드는 것은 <mark>둘 다 '설계'가 필요한 별개의 일</mark>이에요. 그래서 돈은 좇지 말 것도, 저절로 올 것도 아니고 — <u>정체성 문장 안에 박아 넣고 경로를 설계해야 하는 것.</u></p>
+        </div>
+
+        <h3>그래도 못 정하면 — 대가 3명의 방법</h3>
+        <div class="fw">
+          <div class="fwh">① 5/25 제거법 <span class="who">워런 버핏</span></div>
+          <div class="fwd">원하는 것 <b>25개</b> 적기 → 제일 중요한 <b>5개</b> 동그라미 → 나머지 20개는 백업이 아니라 <mark>"목숨 걸고 피할 목록"</mark>. 핵심은 5개 고르기가 아니라, <u>나머지를 안 하기로 못 박는 것</u>. 20개가 "그럴듯하고 급해 보여서" 5개의 시간을 훔치거든요. <span class="src">— <a href="https://modelthinkers.com/mental-model/buffetts-two-lists">Buffett's Two Lists</a></span></div>
+        </div>
+        <div class="fw">
+          <div class="fwh">② 고슴도치 3원 <span class="who">짐 콜린스</span></div>
+          <div class="fwd">세 원이 겹치는 <b>한 점</b>만 위대해져요: ⓐ 내가 <b>깊이 열정</b>인 것 ⓑ 내가 <b>세계 최고</b>가 될 수 있는 것 ⓒ <b>돈이 되는</b> 것. 열정은 만드는 게 아니라 <u>발견</u>하는 것. 세 개 다 되는 걸 찾으면 그게 당신의 하나예요. <span class="src">— <a href="https://www.jimcollins.com/concepts/the-hedgehog-concept.html">Jim Collins, Hedgehog Concept</a></span></div>
+        </div>
+        <div class="fw">
+          <div class="fwh">③ 후회 최소화 <span class="who">제프 베조스</span></div>
+          <div class="fwd">80살의 내가 봤을 때 <mark>안 해서 후회할 단 하나</mark>. 여러 개가 다 후회될 것 같으면 — <b>"이걸 안 하면, 나머지도 다 못 하게 되는 것"</b>을 골라요. 그게 <u>병목이자 관문</u>이에요.</div>
+        </div>
+
+        <div class="co">
+          <div class="co-t">🪜 '단 하나' 고르는 사다리 (쉬운 것부터)</div>
+          <div class="ladder">
+            <div class="rung"><div class="rq">지금 원하는 걸 <b>다 적어라</b> (10~20개, 순서 무시)</div></div>
+            <div class="rung"><div class="rq">각각에 층 딱지 붙이기: <b>정체성 / 흙 / 성적표</b></div><div class="ra">→ 흙은 후보에서 빼고, 성적표(돈)는 <b>정체성 문장 안에 붙여요</b>("…를 만들어 떳떳하게 파는 사람"). 정체성만 3~4개 남아요.</div></div>
+            <div class="rung"><div class="rq">남은 것 중 <b>"이걸 안 하면 나머지도 못 하는 것"</b> 하나</div><div class="ra">→ 베조스의 관문 질문. 보통 여기서 1개로 좁혀져요.</div></div>
+            <div class="rung top"><div class="rq">그 하나를 <b>동사 한 문장</b>으로: "나는 __를 축적해 <u>떳떳하게 파는</u> 사람이다"</div><div class="ra">→ '판다'가 들어가야 성적표(돈)가 문장에 박혀요. 완벽하지 않아도 돼요, 이번 분기용 임시 답이면 충분.</div></div>
+          </div>
+        </div>
+      </div>
+    </details>
+  </section>
+
+  <!-- S2 -->
+  <section class="card" id="s2">
+    <details class="sec" open>
+      <summary><span class="sec-num">02</span> 7년 뒤 스스로 굴러가는 자산 <span style="font-size:.6em;color:var(--muted);margin-left:auto;align-self:center">직접 답</span></summary>
+      <div class="sec-body">
+        <div class="you">🗣️ 당신의 말: <b>"노력과 상관없이 스스로 굴러가는 것… 후배랑 사람들? 아니면 시스템 안에서 굴러가는 환자들? 결국 사람이고 결국 커뮤니티일 것 같은데. 근데 보통 이런 걸로 뭘 가지지?"</b></div>
+        <p class="lead"><mark>당신 직관이 정확해요.</mark> "결국 사람·커뮤니티"라는 감(感) — 대가들 표현으로 바꾸면 나발 라비칸트의 <b>"잠자는 동안 복리로 불어나는 자산"</b>이에요. 초기엔 티가 안 나는 게 특징이고요. 유형을 정리하고, <u>당신 상황(애엄마 + MSO 치과의사 + 시간 부족)</u> 기준으로 순위를 매길게요.</p>
+
+        <h3>복리 자산 5유형 (초기엔 티 안 남 → 5~7년 뒤 터짐)</h3>
+        <ol class="rank">
+          <li><span class="medal">🥇</span><div><div class="rt">지식·시스템 자산 <span style="color:var(--muted);font-weight:600;font-size:.85em">(문서화된 노하우·SOP·리콜 프로그램·온톨로지)</span></div><div class="rd">한 번 만들면 <b>당신 없이도 남·소프트웨어가 굴려요.</b> 나발이 말한 "코드·미디어 = 허가 필요 없는 레버리지." 당신이 이미 짓고 있는 리콜 시스템·볼트가 이거예요. <mark>애엄마라 시간 없을수록 1등</mark> — 내 시간을 안 쓰고 굴러가니까. "시스템 안에서 굴러가는 환자"가 정확히 이겁니다.</div></div></li>
+          <li><span class="medal">🥈</span><div><div class="rt">관계·평판 자본 <span style="color:var(--muted);font-weight:600;font-size:.85em">(후배·동료·환자 네트워크)</span></div><div class="rd">5년 키운 후배가 동료·파트너·소개원(源)이 돼요. <b>신뢰는 복리로 불어나요.</b> 단, 시간이 들어요 → 그래서 1등(시스템)에 얹어서 레버리지: "한 번 만든 교육 시스템으로 여러 후배를 키운다." 숲의 <u>어미나무</u>가 뿌리 네트워크로 묘목을 먹이는 것과 같아요.</div></div></li>
+          <li><span class="medal">🥉</span><div><div class="rt">지분·소유권 <span style="color:var(--muted);font-weight:600;font-size:.85em">(법인 지분·인수·제품)</span></div><div class="rd">나발의 핵심: <b>시간을 팔지 말고 '것'을 소유하라.</b> 월급은 복리가 안 되지만 지분은 돼요. 당신의 '법인 참여·인수 우선권'이 여기 — <mark>비가역적 기회</mark>라 우선순위 높음(놓치면 다시 못 잡음).</div></div></li>
+          <li><span class="medal">4</span><div><div class="rt">콘텐츠·미디어 자산 <span style="color:var(--muted);font-weight:600;font-size:.85em">(유튜브·블로그·글)</span></div><div class="rd">한 번 쓰면 자는 동안 검색되고, 소개하고, 팔려요. 1~2년은 <b>거의 무반응</b>(그래서 다들 여기서 포기) → 5~7년이면 <u>도서관</u>이 됨. 애엄마엔 '몰아 찍기(batch)'로 시간 압축 가능.</div></div></li>
+          <li><span class="medal">5</span><div><div class="rt">건강·체력 자본 <span style="color:var(--muted);font-weight:600;font-size:.85em">(메타 자산)</span></div><div class="rd">위 4개를 <b>오래 굴리게 하는 흙.</b> 방치하면 마이너스 복리. 당신이 '가장 작은 걸음 = 운동·건강식'이라 한 감이 맞아요. 이게 무너지면 나머지 다 멈춰요.</div></div></li>
+        </ol>
+
+        <div class="co green">
+          <div class="co-t">🌳 당신 상황 맞춤 결론</div>
+          <p style="margin:.3em 0 0">애엄마 + 풀타임이라 <b>시간이 가장 희소</b>해요. 그러니 <mark>#1 지식·시스템에 90%를 걸고</mark>, 그 시스템으로 #2 관계(후배)를 레버리지하고, #3 지분은 기회 올 때만 잡고, #4 미디어는 시스템의 부산물(만든 걸 기록)로 흘려보내세요. "사람·커뮤니티가 자산"이라는 당신 직관은 맞되 — <u>사람을 직접 하나하나가 아니라, '사람을 굴리는 시스템'을 소유</u>하는 게 진짜 복리예요. <span class="src">— <a href="https://www.navalmanack.com/almanack-of-naval-ravikant/find-a-position-of-leverage">Naval, Leverage</a></span></p>
+        </div>
+      </div>
+    </details>
+  </section>
+
+  <!-- S3 -->
+  <section class="card" id="s3">
+    <details class="sec">
+      <summary><span class="sec-num">03</span> 5년 — 핵심 2 vs 노이즈 (질문조차 안 될 때)</summary>
+      <div class="sec-body">
+        <div class="you">🗣️ 당신의 말: <b>"질문조차 못하겠다… 법인 참여, 치과병원 인수 우선권(넘 부담스러워), 일 열심히, 이것저것 도전 환경 만들어둠, AI 관심. 근데 딱히 하는 건 없네."</b></div>
+        <p>"질문조차 못하겠다"는 게 사실 <mark>가장 중요한 신호</mark>예요. 5년 뒤 아쉬움 1위로 당신이 직접 꼽은 게 <b>"아무것도 깊이 못 한 것"</b>이었잖아요. 지금 "이것저것 열어만 뒀다"는 상태가 정확히 그 아쉬움의 씨앗이에요. 사다리로 잘게 갈게요.</p>
+        <div class="co">
+          <div class="co-t">🪜 5년 핵심/노이즈 사다리 (예/아니오만 답하면 됨)</div>
+          <div class="ladder">
+            <div class="rung"><div class="rq">이 중에 <b>"지금 안 잡으면 5년 뒤 다시 못 잡는 것"</b>은?</div><div class="ra">→ 인수 우선권·법인 지분. 기회의 창은 닫혀요. <mark>부담스러워도 '핵심' 후보 1.</mark></div></div>
+            <div class="rung"><div class="rq">이 중에 <b>"5년 계속하면 눈덩이처럼 커지는 것"</b> 딱 하나는?</div><div class="ra">→ 축적자산 1개(시스템 or 미디어). <mark>'핵심' 후보 2.</mark></div></div>
+            <div class="rung"><div class="rq">나머지("이것저것 도전 환경", "AI 관심")는 <b>깊이 파고 있나, 열어만 뒀나?</b></div><div class="ra">→ 열어만 뒀으면 = 노이즈. 5년 뒤 접어도 안 아쉬움. (AI는 목표가 아니라 위 2개를 굴리는 '도구'로 강등)</div></div>
+            <div class="rung top"><div class="rq">쇼츠 같은 시간 도둑은 <b>핵심 2개 시간을 훔치는 만큼</b>만 잘라내기</div><div class="ra">→ 0으로 만들 필요 X. "핵심에 쓸 시간을 뺏길 때만" 자르면 죄책감 없이 됨.</div></div>
+          </div>
+        </div>
+        <div class="co warm">
+          <div class="co-t">⚖️ 잠정 분류 (당신 답 기준)</div>
+          <p style="margin:.3em 0 0"><b>지켜야 할 핵심 2:</b> ① <mark>인수/지분 우선권</mark>(비가역 기회) ② <mark>축적 자산 1개</mark>(= "뭔가 만든 사람" 정체성을 실현하는 그것).<br><b>노이즈(접어도 됨):</b> 열어만 둔 잡다한 도전들, 목표로서의 'AI 관심'(도구로 격하), 시간 도둑 일부. <br><u>"딱히 하는 건 없네"의 해법 = 벌린 걸 늘리지 말고, 2개만 남기고 깊이 파기.</u></p>
+        </div>
+      </div>
+    </details>
+  </section>
+
+  <!-- S4 -->
+  <section class="card" id="s4">
+    <details class="sec">
+      <summary><span class="sec-num">04</span> 3년·1년·오늘 — 짧은 사다리</summary>
+      <div class="sec-body">
+        <div class="you">🗣️ 3년: <b>"인수·개원 고민… 보여줄 산출물? 통장잔고? 1살 아들? 프로그램 출시?"</b> · 1년: <b>"유튜브·블로그·추억, 지식 쌓기, 커뮤니티, 사람들과 대화"</b> · 오늘: <b>"그저 건강하게 운동하고 잘 먹고 스트레칭"</b></div>
+
+        <h3>📐 3년 — '증거' 하나로 좁히기</h3>
+        <div class="ladder">
+          <div class="rung"><div class="rq">나열한 것 중 <b>남에게 '이거요' 하고 보여줄 수 있는 것</b>은?</div><div class="ra">→ 통장잔고(사적)·아들(증거 아님, 그냥 축복)은 빼요. 남는 건 <mark>'출시한 프로그램/서비스'</mark>.</div></div>
+          <div class="rung top"><div class="rq">그럼 3년 산출물 = <b>"세상에 나간, 내 이름이 붙은 것 하나"</b></div><div class="ra">→ 인수·개원은 '무대', 프로그램은 '작품'. 둘 다면 무대 위에서 작품 하나.</div></div>
+        </div>
+
+        <h3>🔥 1년 — 4개를 1개 씨앗으로</h3>
+        <p>유튜브·블로그·지식·커뮤니티·대화 — 다 <b>같은 뿌리</b>예요: <mark>"내가 아는 걸 기록해서 사람을 모은다."</mark> 5개가 아니라 1개예요. 올해는 <u>한 채널에 한 편</u>만 올리면 시작된 거예요.</p>
+
+        <h3>👣 오늘 — 당신이 이미 맞혔어요</h3>
+        <p>"건강·운동·스트레칭"이 가장 작은 걸음이라는 감, 정확해요. 위 S2에서 건강이 <b>메타 자산(흙)</b>이라 했죠. <mark>다른 모든 복리를 오래 굴리게 하는 게 몸이에요.</mark> 오늘은 이거 하나면 충분.</p>
+      </div>
+    </details>
+  </section>
+
+  <!-- S5 divergent -->
+  <section class="card" id="s5">
+    <details class="sec" open>
+      <summary><span class="sec-num">05</span> 전혀 상관없는 곳에서 온 통찰 🐝🎋</summary>
+      <div class="sec-body">
+        <p class="lead">당신 요청대로, <b>당신 삶과 아무 상관 없는 두 세계</b>에서 인사이트를 끌어올게요. 멀리 있는 것끼리 이을 때 새 입구가 열려요(1부의 '연결력').</p>
+
+        <div class="co honey">
+          <div class="co-t">🐝 양봉가(養蜂家)의 비밀 — "꿀을 만들지 마라"</div>
+          <p style="margin:.3em 0 .6em">양봉가는 <b>꿀을 직접 안 만들어요.</b> 벌이 만들죠. 양봉가가 하는 건 딱 하나 — <mark>벌통(구조)을 잘 지어두는 것.</mark> 그럼 벌 5만 마리가 알아서 꿀을 모아요. 여기서 당신 삶으로 4가지가 넘어와요:</p>
+          <p style="margin:.3em 0">• <b>벌통 = 시스템/SOP.</b> 잘 지어두면 환자·후배가 그 안에서 알아서 굴러가요. (당신의 "시스템 안 환자"가 이거)<br>
+          • <b>여왕벌 = 정체성/북극성 단 하나.</b> 여왕이 없으면 군집 전체가 붕괴해요. 그래서 '단 하나'가 중요한 거예요.<br>
+          • <b>분봉(分蜂) = 후배가 독립해 새 벌통을 차림.</b> 이게 진짜 복리 — 커뮤니티가 <u>스스로 복제</u>돼요.<br>
+          • <b>꿀은 숙성이 필요.</b> 시간이 만드는 거지, 양봉가가 쥐어짜는 게 아니에요.</p>
+          <p style="margin:.6em 0 0">→ 통찰: 당신이 "노력과 상관없이 굴러가는 것"을 원한다면, <mark>일을 더 하려 하지 말고 '벌통'을 지으세요.</mark> 꿀(성과)을 직접 만드는 사람에서, 벌통(시스템)을 짓는 사람으로 <b>정체성을 바꾸는 것</b>이 7년 복리의 핵심이에요.</p>
+        </div>
+
+        <div class="co green">
+          <div class="co-t">🎋 모소 대나무 — "5년간 안 자라는 게 아니다"</div>
+          <p style="margin:.3em 0 0">모소 대나무는 심고 <b>4~5년간 땅 위로 거의 안 자라요.</b> 겉보기엔 실패 같죠. 그런데 그동안 땅속에서 <u>거대한 뿌리망</u>을 짜요. 그러다 5년째, <mark>단 6주 만에 25m로 솟구쳐요.</mark><br><br>→ 통찰: 지금 당신이 "딱히 하는 게 없네, 벌린 게 없네" 느끼는 그 시기가 — <b>안 자라는 게 아니라 뿌리 내리는 중</b>일 수 있어요. 후배·시스템·지식은 다 뿌리예요. 티가 안 나는 게 정상이고, <u>5~7년째 한꺼번에 솟구쳐요.</u> 조건은 딱 하나 — <b>그 5년을 버티고 뿌리를 계속 심는 것.</b> 대부분은 3년차 "티 안 남"에서 포기하죠.</p>
+        </div>
+
+        <div class="co magic">
+          <div class="co-t">🔗 두 통찰을 하나로</div>
+          <p style="margin:.3em 0 0"><mark>벌통을 짓고(시스템), 뿌리를 심어라(시간을 믿어라).</mark> 당신이 원한 "축적된 삶 · 스스로 굴러가는 것 · 후배·커뮤니티"는 전부 이 한 문장 안에 있어요. 꿀을 쥐어짜는 대신 벌통을 짓고, 당장의 무성함 대신 땅속 뿌리를 심는 것. 그게 7년 뒤 당신이 부러워하던 그 사람이 되는 길이에요.</p>
+        </div>
+      </div>
+    </details>
+  </section>
+
+  <div class="finale">
+    <div class="rune">🪜🎋</div>
+    <p class="big">고를 게 8개라 못 골랐던 게 아니에요.<br><u>층을 안 나눠서</u>였어요.</p>
+    <p style="color:var(--fg-soft); margin-top:18px">정체성 하나만 고르고,<br>건강이라는 흙 위에서, 벌통을 짓고, 뿌리를 심고 —<br><b>떳떳한 돈이라는 성적표로 채점받아요.</b><br>솟구침은 5~7년 뒤에 오지만, 성적표는 매년 확인하는 거예요.</p>
+  </div>
+
+  <div class="foot">
+    프리렌으로 배우는 AI 시대 · 2-2부 — 못 고르겠을 때, 대가들은 어떻게 골랐나<br>
+    Buffett 5/25 · Collins Hedgehog · Naval Leverage · 양봉 & 모소 대나무 · 개인 성찰 정리
+  </div>
+
+</div>
+</body>
+</html>

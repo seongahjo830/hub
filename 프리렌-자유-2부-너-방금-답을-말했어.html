@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>자유 2부 — 너, 방금 답을 말했어</title>
+<style>
+:root{
+  --bg:#FBFAF7; --bg-soft:#F4F1EA; --fg:#1F1F1F; --fg-soft:#3A3A3A;
+  --muted:#6E6E6E; --rule:#E8E3D6; --accent:#1D4ED8; --warm:#B8451F;
+  --magic:#5B3A8C; --magic-bg:#F1ECF7; --gold:#B8860B; --green:#3E7C43; --red:#B02A1F; --teal:#0E7C86;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#1A1816; --bg-soft:#252220; --fg:#E8E4DC; --fg-soft:#C7C2B8;
+    --muted:#9A968D; --rule:#36322C; --accent:#7AB0FF; --warm:#E89464;
+    --magic:#C9A9F0; --magic-bg:#2A2333; --gold:#E0B84C; --green:#7FB985; --red:#F08A7E; --teal:#4FC3CE;
+  }
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; background:var(--bg); color:var(--fg);
+  font-family:"Pretendard","Pretendard Variable",-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Segoe UI","Malgun Gothic",sans-serif;
+  font-size:17px; line-height:1.85; letter-spacing:-0.011em; -webkit-font-smoothing:antialiased;
+}
+@media (min-width:700px){ body{font-size:18px} }
+.wrap{max-width:680px; margin:0 auto; padding:0 22px 90px}
+
+.hero{padding:56px 0 30px; text-align:center; border-bottom:1px solid var(--rule)}
+.hero .kicker{font-size:.82em; letter-spacing:.14em; color:var(--muted); text-transform:uppercase; margin-bottom:16px}
+.hero .rune{font-size:2.2em; line-height:1; margin-bottom:14px}
+.hero h1{font-size:1.85em; line-height:1.32; letter-spacing:-0.03em; font-weight:800; margin:.1em 0 .35em}
+@media (min-width:700px){ .hero h1{font-size:2.25em} }
+.hero .sub{color:var(--fg-soft); font-size:1.05em; font-style:italic; max-width:31em; margin:0 auto}
+.hero .meta{margin-top:20px; font-size:.8em; color:var(--muted)}
+
+.counts{display:flex; justify-content:center; gap:8px; flex-wrap:wrap; margin:22px 0 4px}
+.counts .b{padding:6px 13px; border-radius:999px; background:var(--bg-soft); border:1px solid var(--rule); font-size:.82em; font-weight:700}
+.counts .b .n{color:var(--accent)}
+
+b{color:var(--warm); font-weight:700}
+u{text-decoration:none; background:linear-gradient(180deg,transparent 62%,rgba(29,78,216,.16) 62%); padding:0 2px}
+mark{background:rgba(255,214,64,.42); padding:1px 5px; border-radius:4px; font-weight:600; color:inherit}
+@media (prefers-color-scheme: dark){ mark{background:rgba(226,180,60,.28)} }
+
+.pull{margin:34px 0; padding:6px 0 6px 22px; border-left:3px solid var(--accent);
+  font-size:1.16em; line-height:1.6; font-weight:600; letter-spacing:-0.02em}
+.pull small{display:block; margin-top:8px; font-size:.6em; font-weight:500; color:var(--muted); font-style:normal}
+
+section.card{border-top:1px solid var(--rule); padding-top:14px; margin-top:8px}
+details.sec{margin:0}
+details.sec>summary{
+  list-style:none; cursor:pointer; padding:20px 0 16px;
+  font-size:1.2em; font-weight:800; letter-spacing:-0.028em; line-height:1.4;
+  display:flex; gap:12px; align-items:baseline;
+}
+details.sec>summary::-webkit-details-marker{display:none}
+.sec-num{flex:0 0 auto; font-size:.62em; font-weight:800; color:var(--accent)}
+.sec-body{padding-bottom:14px}
+.sec-body>p:first-child{margin-top:0}
+
+p{margin:.9em 0}
+h3{font-size:1.03em; font-weight:800; letter-spacing:-0.02em; margin:1.4em 0 .5em}
+.lead{font-size:1.05em; color:var(--fg-soft)}
+
+.co{margin:18px 0; padding:16px 18px; border-radius:12px; border-left:3px solid var(--accent);
+  background:linear-gradient(100deg, rgba(29,78,216,.07), transparent 70%); font-size:.98em}
+.co.magic{border-left-color:var(--magic); background:linear-gradient(100deg,var(--magic-bg),transparent 70%)}
+.co.gold{border-left-color:var(--gold); background:linear-gradient(100deg,rgba(184,134,11,.10),transparent 70%)}
+.co.green{border-left-color:var(--green); background:linear-gradient(100deg,rgba(62,124,67,.10),transparent 70%)}
+.co.red{border-left-color:var(--red); background:linear-gradient(100deg,rgba(176,42,31,.09),transparent 70%)}
+.co .co-t{font-weight:800; margin-bottom:4px; letter-spacing:-0.02em}
+.co.magic .co-t{color:var(--magic)} .co.gold .co-t{color:var(--gold)} .co.green .co-t{color:var(--green)} .co.red .co-t{color:var(--red)}
+
+/* your words highlighted */
+.yourwords{margin:16px 0; padding:16px 18px; border-radius:12px; background:var(--magic-bg); border:1px dashed var(--magic); font-size:1.0em; line-height:1.8}
+.yourwords .yl{font-size:.72em; font-weight:800; letter-spacing:.08em; color:var(--magic); text-transform:uppercase; margin-bottom:6px}
+.yourwords .hl{background:rgba(255,214,64,.5); padding:1px 4px; border-radius:4px; font-weight:700}
+
+/* loop diagram */
+.loopbox{margin:22px 0; padding:18px 10px 10px; border:1px solid var(--rule); border-radius:14px; background:var(--bg-soft)}
+.loopbox svg{width:100%; height:auto; display:block}
+.loopbox .cap{text-align:center; font-size:.85em; color:var(--muted); margin-top:8px}
+
+/* extraction table */
+.tbl{overflow-x:auto; margin:18px 0}
+table{border-collapse:collapse; width:100%; font-size:.92em}
+th,td{text-align:left; padding:10px 12px; border-bottom:1px solid var(--rule); vertical-align:top}
+th{font-weight:800; font-size:.84em; color:var(--muted)}
+td:first-child{font-weight:700; color:var(--fg-soft); white-space:nowrap}
+
+.chips{display:flex; flex-wrap:wrap; gap:8px; margin:24px 0 8px}
+.chip{font-size:.85em; font-weight:600; text-decoration:none; color:var(--fg-soft);
+  padding:7px 13px; border:1px solid var(--rule); border-radius:999px; background:var(--bg-soft)}
+.chip:hover{border-color:var(--accent); color:var(--accent)}
+
+.step{padding:14px 0; border-bottom:1px dashed var(--rule)}
+.step:last-child{border-bottom:none}
+.step .sh{font-weight:800; letter-spacing:-0.02em}
+.step .sh .num{color:var(--accent)}
+.step .sd{font-size:.94em; color:var(--fg-soft); margin-top:2px}
+
+.finale{margin-top:44px; padding:34px 0 0; border-top:2px solid var(--fg); text-align:center}
+.finale .rune{font-size:1.7em}
+.finale .big{font-size:1.24em; font-weight:800; letter-spacing:-0.03em; line-height:1.55; margin:.4em 0}
+.foot{margin-top:44px; padding-top:18px; border-top:1px solid var(--rule); font-size:.78em; color:var(--muted); text-align:center}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <div class="kicker">프리렌으로 배우는 AI 시대 · 자유 2부</div>
+    <div class="rune">🎯</div>
+    <h1>"답이 없다"면서<br>너, 방금 답을<br>말해버렸어</h1>
+    <p class="sub">"시간 자유엔 답이 없다"고 쓴 그 메시지 안에 — 이미 완성된 인생 설계도가 들어 있었어요. 그대로 꺼내 볼게요.</p>
+    <div class="meta">당신 문장을 한 조각도 안 바꾸고, 구조만 입혔어요</div>
+  </header>
+
+  <div class="counts">
+    <span class="b">당신이 말한 답 <span class="n">7</span></span>
+    <span class="b">숨은 루프 <span class="n">1</span></span>
+    <span class="b">to 자유 <span class="n">채워짐</span></span>
+    <span class="b">다음 행동 <span class="n">1</span></span>
+  </div>
+
+  <div class="co gold" style="margin-top:26px">
+    <div class="co-t">🎯 30초 요약</div>
+    <p style="margin:.4em 0 0">당신은 "시간 자유에 답이 없다"고 했어요. 근데 그 <b>바로 앞 문장에서 답을 6줄이나 쏟아냈어요.</b> 좋아하는 사람들과 여행·추억·콘텐츠·새 경험·느낀 것 나누기·가치 창출… <mark>이건 '답이 없는' 게 아니라 '답이 너무 자연스러워서 답인 줄 몰랐던' 거예요.</mark> 진짜 열정은 원래 이렇게 와요 — 힘주고 찾는 게 아니라, <u>무심코 술술 나오는 것.</u> 이 편은 그 6줄을 '실행 가능한 루프'로 접어드릴게요.</p>
+  </div>
+
+  <nav class="chips">
+    <a class="chip" href="#s1">🗣️ 네가 쓴 답</a>
+    <a class="chip" href="#s2">🔄 숨은 루프</a>
+    <a class="chip" href="#s3">🧩 왜 답인 줄 몰랐나</a>
+    <a class="chip" href="#s4">⚙️ 그래서 뭘 하나</a>
+  </nav>
+
+  <div class="pull">"열정은 우렁차게 오지 않는다. 대개 '뭐, 이건 그냥 재밌지'라는 심드렁한 얼굴로 온다."<small>— 그래서 대부분 자기 열정을 못 알아봐요. 너무 당연해서.</small></div>
+
+  <!-- S1 -->
+  <section class="card" id="s1">
+    <details class="sec" open>
+      <summary><span class="sec-num">01</span> 🗣️ 네가 방금 쓴 문장 — 그대로 가져왔어</summary>
+      <div class="sec-body">
+        <div class="yourwords">
+          <div class="yl">당신이 "답 없다"며 쓴 메시지</div>
+          "<span class="hl">좋아하는 사람들이랑 여행 다니면서 추억 쌓고 놀고</span>, <span class="hl">영상 콘텐츠 같은 거 잘 쓰거나</span> 아니면 최소 <span class="hl">여행 꿀팁 같은 거 만들고 올리고</span> 하면 그게 젤 잼있을 거 같은데, 그러다가 <span class="hl">뭔가 또 할 거 찾고 새로운 경험하고 새로운 거 보고 잼있게 하고</span>, 그러면서 <span class="hl">느낀 거 나누고</span>, 그때그때 <span class="hl">가치 창출할 수 있는 거 하고</span>. 이렇게 임. 하고 싶은 거 있네."
+        </div>
+        <p class="lead">보세요. <b>"하고 싶은 거 없다"는 사람의 문장이 아니에요.</b> 오히려 너무 또렷해서 — 여행·기록·창작·탐험·나눔·가치창출이 <mark>하나의 흐름</mark>으로 이어져 있어요. 당신 스스로도 문장 끝에서 깨달았죠: <b>"하고 싶은 거 있네."</b> 그리고 바로 뒤에 <u>"근데 그럼 준비됐네, 답도 있네, 뭐여 그럼 어캄"</u> — 이 당황이 이 편의 핵심이에요.</p>
+      </div>
+    </details>
+  </section>
+
+  <!-- S2 -->
+  <section class="card" id="s2">
+    <details class="sec" open>
+      <summary><span class="sec-num">02</span> 🔄 그 6줄은 사실 '하나의 루프'였다</summary>
+      <div class="sec-body">
+        <p class="lead">당신이 나열한 것들은 무작위가 아니에요. <b>완벽하게 순환하는 엔진</b>이에요. 순서대로 놓으면 저절로 돌아가요:</p>
+        <div class="loopbox">
+          <svg viewBox="0 0 620 300" xmlns="http://www.w3.org/2000/svg" aria-label="당신의 자유 루프">
+            <defs>
+              <marker id="ah" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6" fill="none" stroke="#8A857A" stroke-width="1.6"/></marker>
+            </defs>
+            <!-- 5 nodes around a circle -->
+            <g text-anchor="middle" font-weight="800" font-size="13">
+              <circle cx="310" cy="45" r="38" fill="#5B3A8C"/><text x="310" y="41" fill="#fff">경험·여행</text><text x="310" y="57" fill="#fff" font-size="11" font-weight="600">새로운 것</text>
+              <circle cx="540" cy="130" r="38" fill="#B8451F"/><text x="540" y="126" fill="#fff">느낌·발견</text><text x="540" y="142" fill="#fff" font-size="11" font-weight="600">깨달음</text>
+              <circle cx="450" cy="255" r="38" fill="#1D4ED8"/><text x="450" y="251" fill="#fff">기록·창작</text><text x="450" y="267" fill="#fff" font-size="11" font-weight="600">콘텐츠·꿀팁</text>
+              <circle cx="170" cy="255" r="38" fill="#3E7C43"/><text x="170" y="251" fill="#fff">나눔</text><text x="170" y="267" fill="#fff" font-size="11" font-weight="600">사람들과</text>
+              <circle cx="80" cy="130" r="38" fill="#B8860B"/><text x="80" y="126" fill="#fff">가치창출</text><text x="80" y="142" fill="#fff" font-size="11" font-weight="600">돈·의미</text>
+            </g>
+            <!-- arrows along circle -->
+            <path d="M348,60 A230,230 0 0 1 508,108" fill="none" stroke="#8A857A" stroke-width="2" marker-end="url(#ah)"/>
+            <path d="M545,170 A230,230 0 0 1 486,222" fill="none" stroke="#8A857A" stroke-width="2" marker-end="url(#ah)"/>
+            <path d="M410,278 A230,230 0 0 1 210,278" fill="none" stroke="#8A857A" stroke-width="2" marker-end="url(#ah)"/>
+            <path d="M134,222 A230,230 0 0 1 75,170" fill="none" stroke="#8A857A" stroke-width="2" marker-end="url(#ah)"/>
+            <path d="M112,108 A230,230 0 0 1 272,60" fill="none" stroke="#8A857A" stroke-width="2" marker-end="url(#ah)"/>
+          </svg>
+          <div class="cap">가치창출(돈·의미)이 다시 다음 여행의 연료가 됨 → 무한 순환</div>
+        </div>
+        <p>경험하고 → 느끼고 → 기록하고 → 나누고 → 가치(돈·의미)를 만들고 → <b>그 가치로 또 새 경험을 하고.</b> <mark>이건 취미 목록이 아니라, 스스로 굴러가는 '삶의 비즈니스 모델'</mark>이에요. 2-2부의 벌통, 자유 1부의 'to 자유'가 여기 다 들어있어요. 당신은 방향이 없던 게 아니라, 방향을 <u>목록</u>으로만 봐서 그게 <u>엔진</u>인 줄 몰랐던 거예요.</p>
+      </div>
+    </details>
+  </section>
+
+  <!-- S3 -->
+  <section class="card" id="s3">
+    <details class="sec" open>
+      <summary><span class="sec-num">03</span> 🧩 근데 왜 "답이 없다"고 느꼈을까</summary>
+      <div class="sec-body">
+        <p class="lead">이게 진짜 중요한 부분이에요. 답을 써놓고도 "답 없다"고 느낀 데는 <b>세 가지 심리 함정</b>이 있어요.</p>
+        <div class="tbl">
+          <table>
+            <thead><tr><th>왜 못 알아봤나</th><th>정체</th></tr></thead>
+            <tbody>
+              <tr><td>너무 당연해서</td><td>시버스의 말: <mark>"당신에게 당연한 게 남에겐 놀랍다."</mark> 자기 열정은 숨 쉬듯 자연스러워서 '이게 무슨 대단한 답이야' 싶음. 당연함 = 재능의 지문</td></tr>
+              <tr><td>'거창한 답'을 기대해서</td><td>"인생의 사명" 같은 웅장한 걸 찾다 보니, "친구랑 여행하며 콘텐츠" 같은 소박한 진짜 답을 <u>답으로 안 쳐줌</u></td></tr>
+              <tr><td>'돈·직업'이 안 보여서</td><td>이게 어떻게 밥벌이가 되는지 경로가 안 보이니 "답이 아닌가?" 의심. 근데 경로는 나중 문제 — 방향이 먼저</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="co magic">
+          <div class="co-t">🪞 그러니 진실은</div>
+          <p style="margin:.3em 0 0">당신은 <b>"시간이 필요한데 답이 없다"가 아니에요.</b> 정확히는 — <mark>답(방향)은 이미 있고, 그 답을 굴릴 '시간'과 '경로'가 아직 없는 것</mark>이에요. 자유 1부의 진단이 여기서 뒤집혀요: 당신의 'to'는 채워져 있었어요. 그러니 이제 진짜 질문은 "뭘 하고 싶나"가 아니라 — <b>"이 루프를 어떻게 지금 삶에 끼워넣나"</b>예요. 그건 준비된 사람의 질문이에요.</p>
+        </div>
+      </div>
+    </details>
+  </section>
+
+  <!-- S4 -->
+  <section class="card" id="s4">
+    <details class="sec" open>
+      <summary><span class="sec-num">04</span> ⚙️ "그럼 어캄?" — 루프를 오늘 삶에 끼우기</summary>
+      <div class="sec-body">
+        <p class="lead">당신의 당황("준비됐고 답도 있는데 어캄")에 대한 답. <b>지금 전부 못 해요. 하지만 루프의 '한 바퀴'는 이번 달에 돌릴 수 있어요.</b> 크게 시작하지 말고 — 작게, 한 사이클만.</p>
+        <div class="step"><div class="sh"><span class="num">1.</span> 다음 여행/나들이 하나를 '루프 실험'으로 지정</div><div class="sd">거창한 세계여행 말고 — 이번 달 가까운 <b>당일치기나 1박</b>이어도 됨. 좋아하는 사람과. 이게 루프의 1번 칸(경험).</div></div>
+        <div class="step"><div class="sh"><span class="num">2.</span> 그 여행에서 '느낀 것 + 꿀팁'을 딱 하나만 기록</div><div class="sd">영상 편집 부담 X. <b>사진 5장 + 3줄 메모</b>면 충분. "여기 이건 좋았고 이건 별로였다." 이게 2·3번 칸(느낌→기록). 콘텐츠의 씨앗.</div></div>
+        <div class="step"><div class="sh"><span class="num">3.</span> 그걸 한 사람에게라도 공유</div><div class="sd">인스타든, 단톡방이든, 블로그 초안이든. <b>반응 하나</b>만 관찰. 이게 4번 칸(나눔). 관객은 나중에 크는 것 — 지금은 1명이면 충분.</div></div>
+        <div class="step"><div class="sh"><span class="num">4.</span> 한 바퀴 돌고 '느낌' 체크</div><div class="sd">이 사이클 하면서 <mark>지겨웠나, 또 하고 싶었나?</mark> 또 하고 싶으면 — 축하해요, 그게 당신의 to 자유 확정. 그때 비로소 "시간을 어떻게 더 낼까"가 진짜 문제가 됨(그전엔 아님).</div></div>
+
+        <div class="co green">
+          <div class="co-t">🕊️ 자유 1부와의 연결 — 순서가 이거예요</div>
+          <p style="margin:.3em 0 0">"시간이 필요한데 없다"의 함정은 — <b>시간부터 만들려다 지치는 것</b>이에요. 올바른 순서: ①작은 루프를 한 바퀴 돌려 "정말 이걸 원한다"를 몸으로 확인 → ②그제야 시스템(2-2부 벌통)으로 시간·경로를 설계. <mark>확신이 시간을 부르지, 시간이 확신을 주지 않아요.</mark> 당신은 이미 ①의 재료(또렷한 루프)를 가졌으니, 남은 건 <u>딱 한 바퀴 실제로 돌려보는 것.</u></p>
+        </div>
+      </div>
+    </details>
+  </section>
+
+  <div class="finale">
+    <div class="rune">🎯🕊️</div>
+    <p class="big">"답이 없다"가 아니었어요.<br><u>답이 너무 당연해서<br>답인 줄 몰랐던 것</u>뿐이에요.</p>
+    <p style="color:var(--fg-soft); margin-top:18px">당신의 자유는 이미 얼굴이 있어요 —<br>사람들과 다니고, 느끼고, 남기고, 나누고, 가치를 만드는 순환.<br><b>이번 달, 그 루프를 작게 한 바퀴만 돌려보세요.</b></p>
+  </div>
+
+  <div class="foot">
+    프리렌으로 배우는 AI 시대 · 자유 2부 — 너, 방금 답을 말했어<br>
+    당신의 6줄 = 스스로 굴러가는 삶의 루프 · from→to 완성 · 시버스 "당연한 게 놀랍다"
+  </div>
+
+</div>
+</body>
+</html>

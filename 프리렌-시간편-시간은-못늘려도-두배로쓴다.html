@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>시간 편 — 시간은 못 늘려도, 쓸 수 있는 시간은 늘어난다</title>
+<style>
+:root{
+  --bg:#FBFAF7; --bg-soft:#F4F1EA; --fg:#1F1F1F; --fg-soft:#3A3A3A;
+  --muted:#6E6E6E; --rule:#E8E3D6; --accent:#1D4ED8; --warm:#B8451F;
+  --magic:#5B3A8C; --magic-bg:#F1ECF7; --gold:#B8860B; --green:#3E7C43; --red:#B02A1F; --teal:#0E7C86;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#1A1816; --bg-soft:#252220; --fg:#E8E4DC; --fg-soft:#C7C2B8;
+    --muted:#9A968D; --rule:#36322C; --accent:#7AB0FF; --warm:#E89464;
+    --magic:#C9A9F0; --magic-bg:#2A2333; --gold:#E0B84C; --green:#7FB985; --red:#F08A7E; --teal:#4FC3CE;
+  }
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--fg);
+  font-family:"Pretendard","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+  font-size:17px;line-height:1.85;letter-spacing:-0.011em;-webkit-font-smoothing:antialiased;}
+@media (min-width:700px){ body{font-size:18px} }
+.wrap{max-width:680px;margin:0 auto;padding:0 22px 90px}
+
+.hero{padding:56px 0 30px;text-align:center;border-bottom:1px solid var(--rule)}
+.hero .kicker{font-size:.82em;letter-spacing:.14em;color:var(--muted);text-transform:uppercase;margin-bottom:16px}
+.hero .rune{font-size:2.2em;line-height:1;margin-bottom:14px}
+.hero h1{font-size:1.72em;line-height:1.32;letter-spacing:-0.03em;font-weight:800;margin:.1em 0 .35em}
+@media (min-width:700px){ .hero h1{font-size:2.05em} }
+.hero .sub{color:var(--fg-soft);font-size:1.05em;font-style:italic;max-width:31em;margin:0 auto}
+.hero .meta{margin-top:20px;font-size:.8em;color:var(--muted)}
+
+.counts{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin:22px 0 4px}
+.counts .b{padding:6px 13px;border-radius:999px;background:var(--bg-soft);border:1px solid var(--rule);font-size:.82em;font-weight:700}
+.counts .b .n{color:var(--accent)}
+
+b{color:var(--warm);font-weight:700}
+u{text-decoration:none;background:linear-gradient(180deg,transparent 62%,rgba(29,78,216,.16) 62%);padding:0 2px}
+mark{background:rgba(255,214,64,.42);padding:1px 5px;border-radius:4px;font-weight:600}
+@media (prefers-color-scheme: dark){ mark{background:rgba(226,180,60,.28)} }
+
+.pull{margin:32px 0;padding:6px 0 6px 22px;border-left:3px solid var(--accent);
+  font-size:1.15em;line-height:1.6;font-weight:600;letter-spacing:-0.02em}
+.pull small{display:block;margin-top:8px;font-size:.6em;font-weight:500;color:var(--muted);font-style:normal}
+
+section.card{border-top:1px solid var(--rule);padding-top:14px;margin-top:8px}
+details.sec{margin:0}
+details.sec>summary{list-style:none;cursor:pointer;padding:20px 0 16px;
+  font-size:1.18em;font-weight:800;letter-spacing:-0.028em;line-height:1.4;display:flex;gap:12px;align-items:baseline;}
+details.sec>summary::-webkit-details-marker{display:none}
+.sec-num{flex:0 0 auto;font-size:.62em;font-weight:800;color:var(--accent)}
+.sec-body{padding-bottom:14px}
+.sec-body>p:first-child{margin-top:0}
+
+p{margin:.9em 0}
+h3{font-size:1.03em;font-weight:800;letter-spacing:-0.02em;margin:1.4em 0 .5em}
+.lead{font-size:1.05em;color:var(--fg-soft)}
+
+.co{margin:18px 0;padding:16px 18px;border-radius:12px;border-left:3px solid var(--accent);
+  background:linear-gradient(100deg,rgba(29,78,216,.07),transparent 70%);font-size:.98em}
+.co.magic{border-left-color:var(--magic);background:linear-gradient(100deg,var(--magic-bg),transparent 70%)}
+.co.gold{border-left-color:var(--gold);background:linear-gradient(100deg,rgba(184,134,11,.1),transparent 70%)}
+.co.green{border-left-color:var(--green);background:linear-gradient(100deg,rgba(62,124,67,.1),transparent 70%)}
+.co.red{border-left-color:var(--red);background:linear-gradient(100deg,rgba(176,42,31,.09),transparent 70%)}
+.co.teal{border-left-color:var(--teal);background:linear-gradient(100deg,rgba(14,124,134,.1),transparent 70%)}
+.co .co-t{font-weight:800;margin-bottom:4px;letter-spacing:-0.02em}
+.co.magic .co-t{color:var(--magic)} .co.gold .co-t{color:var(--gold)} .co.green .co-t{color:var(--green)} .co.red .co-t{color:var(--red)} .co.teal .co-t{color:var(--teal)}
+
+.yourwords{margin:16px 0;padding:15px 17px;border-radius:12px;background:var(--magic-bg);border:1px dashed var(--magic);font-size:.97em;line-height:1.75}
+.yourwords .yl{font-size:.72em;font-weight:800;letter-spacing:.08em;color:var(--magic);text-transform:uppercase;margin-bottom:5px}
+
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:24px 0 8px}
+.chip{font-size:.85em;font-weight:600;text-decoration:none;color:var(--fg-soft);padding:7px 13px;border:1px solid var(--rule);border-radius:999px;background:var(--bg-soft)}
+.chip:hover{border-color:var(--accent);color:var(--accent)}
+
+/* formula */
+.formula{margin:20px 0;padding:20px;border-radius:14px;background:var(--bg-soft);border:1px solid var(--rule);text-align:center}
+.formula .f{font-size:1.08em;font-weight:800;letter-spacing:-0.02em;line-height:2}
+.formula .term{padding:3px 11px;border-radius:8px;background:var(--bg);border:1px solid var(--rule);display:inline-block;margin:3px}
+.formula .op{color:var(--muted);margin:0 5px}
+.formula .t-time{border-color:var(--muted)} .formula .t-body{border-color:var(--red);color:var(--red)} .formula .t-will{border-color:var(--gold);color:var(--gold)}
+
+/* pocket audit */
+.tbl{overflow-x:auto;margin:18px 0}
+table{border-collapse:collapse;width:100%;font-size:.9em}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--rule);vertical-align:top}
+th{font-weight:800;font-size:.84em;color:var(--muted)}
+td:first-child{font-weight:700;color:var(--fg-soft)}
+td.hrs{font-weight:800;color:var(--accent);white-space:nowrap}
+tr.total td{border-top:2px solid var(--rule);font-weight:800}
+tr.total td.hrs{color:var(--green);font-size:1.05em}
+
+/* energy bars */
+.bars{margin:16px 0}
+.bar{margin:11px 0}
+.bar .bl{display:flex;justify-content:space-between;font-size:.9em;font-weight:700;margin-bottom:4px}
+.bar .bl .st{color:var(--muted);font-weight:600;font-size:.86em}
+.bar .track{height:13px;border-radius:7px;background:var(--bg-soft);overflow:hidden;border:1px solid var(--rule)}
+.bar .fill{height:100%;border-radius:7px}
+
+.step{padding:13px 0;border-bottom:1px dashed var(--rule)}
+.step:last-child{border-bottom:none}
+.step .sh{font-weight:800;letter-spacing:-0.02em}
+.step .sh .num{color:var(--accent)}
+.step .sd{font-size:.93em;color:var(--fg-soft);margin-top:2px}
+
+.finale{margin-top:44px;padding:34px 0 0;border-top:2px solid var(--fg);text-align:center}
+.finale .rune{font-size:1.7em}
+.finale .big{font-size:1.24em;font-weight:800;letter-spacing:-0.03em;line-height:1.55;margin:.4em 0}
+.foot{margin-top:44px;padding-top:18px;border-top:1px solid var(--rule);font-size:.78em;color:var(--muted);text-align:center}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <div class="kicker">프리렌으로 배우는 AI 시대 · 시간 편</div>
+    <div class="rune">⏳</div>
+    <h1>시간은 못 늘려도,<br>'쓸 수 있는 시간'은<br>두 배가 된다</h1>
+    <p class="sub">당신이 방금 스스로 도달한 공식 — <u>체력·의지를 확보하면 = 시간을 확보한 것</u>. 그리고 "생각보다 시간 많더라"까지, 실제 지도로 그려요.</p>
+    <div class="meta">이 편은 새 이론이 아니라, 당신이 오늘 스스로 조립한 결론의 설계도예요</div>
+  </header>
+
+  <div class="counts">
+    <span class="b">핵심 공식 <span class="n">1</span></span>
+    <span class="b">시간 주머니 <span class="n">3</span></span>
+    <span class="b">숨은 시간 <span class="n">발굴</span></span>
+    <span class="b">배치 규칙 <span class="n">충동형</span></span>
+  </div>
+
+  <div class="co gold" style="margin-top:26px">
+    <div class="co-t">🎯 30초 요약</div>
+    <p style="margin:.4em 0 0">당신 결론이 정확해요: <b>시간 총량은 못 늘려요. 근데 '쓸 수 있는 시간'은 늘릴 수 있어요.</b> 공식은 <mark>쓸 수 있는 시간 = 실제 시간 × 체력 × 의지</mark>. 잘 자서 안 피곤한 걸 요즘 느낀다 했죠? 그게 <u>체력 계수가 올라가서 같은 시간이 커진 것</u>이에요. 그리고 이동(와리가리)·평일·주말을 다 세어보면 — 생각보다 시간이 많아요. 단, 당신은 충동형이라 <b>'틈틈이'는 안 맞고 '덩어리째'가 맞아요.</b></p>
+  </div>
+
+  <nav class="chips">
+    <a class="chip" href="#s1">🧮 쓸 수 있는 시간 공식</a>
+    <a class="chip" href="#s2">😴 잘 자니 시간이 커졌다</a>
+    <a class="chip" href="#s3">🗺️ 시간 주머니 3곳</a>
+    <a class="chip" href="#s4">🧱 틈틈이 말고 덩어리</a>
+    <a class="chip" href="#s5">⚙️ 주머니별 배치</a>
+  </nav>
+
+  <div class="pull">"시간이 없다"는 대개 틀린 진단이다.<br>맞는 진단은 <u>"쓸 수 있는 상태의 시간이 없다"</u>이다.<small>— 같은 24시간도 방전이면 0, 충전이면 4시간</small></div>
+
+  <!-- S1 -->
+  <section class="card" id="s1">
+    <details class="sec" open>
+      <summary><span class="sec-num">01</span> 🧮 당신이 방금 만든 공식</summary>
+      <div class="sec-body">
+        <div class="yourwords">
+          <div class="yl">당신의 말</div>
+          "시간을 확보할 수가 없으니까 — 체력이랑 의지를 확보하면 <b>시간을 확보한 거랑 같은 효과</b>가 이 정도는 나긴 할 듯. 잘 자고 잘 먹고… 안 피곤한 걸 최근에 많이 느끼니까. 그러면 <b>시간이 많은 걸로 느끼게</b> 할 수가 있음."
+        </div>
+        <p class="lead">이거 그냥 위로가 아니라 <b>수학적으로 맞는 말</b>이에요. 시간은 '시계의 시간'과 '쓸 수 있는 시간'이 달라요:</p>
+        <div class="formula">
+          <div class="f"><span class="term t-time">⏰ 실제 시간</span><span class="op">×</span><span class="term t-body">🔋 체력</span><span class="op">×</span><span class="term t-will">⚡ 의지</span><br><span style="color:var(--muted);font-size:.85em">= 실제로 쓸 수 있는 시간</span></div>
+        </div>
+        <p><mark>곱하기라서, 체력이 0.3이면 3시간이 있어도 실질 1시간도 안 돼요.</mark> 반대로 체력을 0.3→0.6으로 올리면 — <b>시간을 한 시간도 안 늘렸는데 쓸 수 있는 시간이 2배</b>가 돼요. 당신이 "시간 확보랑 같은 효과"라 한 게 이 곱셈이에요. <u>시간은 못 늘려도 계수는 늘릴 수 있으니까</u>, 사실상 시간을 번 거예요.</p>
+      </div>
+    </details>
+  </section>
+
+  <!-- S2 -->
+  <section class="card" id="s2">
+    <details class="sec" open>
+      <summary><span class="sec-num">02</span> 😴 "잘 자니 안 피곤" = 이미 시간을 벌고 있다</summary>
+      <div class="sec-body">
+        <p class="lead">당신이 최근 느낀 변화가 결정적 증거예요. <b>잘 자서 안 피곤 → 저녁에 뭔가 할 수 있음 → 시간이 많게 느껴짐.</b> 이건 착각이 아니라 <mark>체력 계수가 실제로 오른 것</mark>이에요.</p>
+        <div class="bars">
+          <div class="bar"><div class="bl"><span>🔋 체력 (잘 자기 전)</span><span class="st">저녁 = 소파+쇼츠</span></div><div class="track"><div class="fill" style="width:30%;background:var(--red)"></div></div></div>
+          <div class="bar"><div class="bl"><span>🔋 체력 (요즘, 잘 자고 나서)</span><span class="st">저녁에 뭔가 됨 ✅</span></div><div class="track"><div class="fill" style="width:62%;background:var(--green)"></div></div></div>
+        </div>
+        <div class="co teal">
+          <div class="co-t">🔑 그래서 1순위는 여전히 잠·밥</div>
+          <p style="margin:.3em 0 0">자유 3부에서 "체력이 시간의 배율"이라 했는데, 당신이 <b>직접 체감으로 증명</b>했어요. 그러니 시간을 짜내려 하기 전에 — <mark>잘 자고 잘 먹는 것 자체가 이미 시간을 버는 행위</mark>예요. 이건 '자기관리 목표'(당신이 30년 실패한 것)가 아니라 <u>'시간을 2배로 만드는 레버'</u>로 다시 보세요. 목표가 아니라 인프라예요.</p>
+        </div>
+      </div>
+    </details>
+  </section>
+
+  <!-- S3 -->
+  <section class="card" id="s3">
+    <details class="sec" open>
+      <summary><span class="sec-num">03</span> 🗺️ 시간 주머니 3곳 — "생각보다 많더라"의 실체</summary>
+      <div class="sec-body">
+        <p class="lead">당신이 "와리가리(이동)·평일·주말 다 하면 생각보다 많다"고 했죠. 실제로 세어보면 눈에 보여요. (대략치 — 당신 걸로 채워 넣으면 됨)</p>
+        <div class="tbl">
+          <table>
+            <thead><tr><th>시간 주머니</th><th>체력 상태</th><th class="hrs">주간 대략</th></tr></thead>
+            <tbody>
+              <tr><td>🚗 이동(와리가리)</td><td>손 못 씀·귀·눈만</td><td class="hrs">5~7시간</td></tr>
+              <tr><td>🌆 평일 저녁</td><td>방전 주의(잠 잘 자면 ↑)</td><td class="hrs">3~5시간</td></tr>
+              <tr><td>☀️ 주말·휴일</td><td>충전 상태 = 최고</td><td class="hrs">8~12시간</td></tr>
+              <tr class="total"><td>합계</td><td>가용</td><td class="hrs">주 16~24시간</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>주 <b>16~24시간</b> — 이게 "시간 없다"의 실제 잔고예요. <mark>없는 게 아니라, 흩어져 있고 체력 편차가 커서 안 보였던 것</mark>이에요. 핵심은 각 주머니가 <u>'질'이 달라서 용도가 다르다</u>는 거예요:</p>
+        <ul style="margin:.4em 0">
+          <li>🚗 <b>이동</b> = 손 못 쓰니 <u>입력용</u>(듣기·보기·아이디어 메모)</li>
+          <li>🌆 <b>평일 저녁</b> = 체력 편차 큼 → 잘 잔 날만 <u>가벼운 만들기</u>, 방전날은 그냥 쉬기(죄책감 X)</li>
+          <li>☀️ <b>주말</b> = 유일한 <u>덩어리·고체력</u> 시간 → <b>진짜 작업은 여기 몰빵</b></li>
+        </ul>
+      </div>
+    </details>
+  </section>
+
+  <!-- S4 -->
+  <section class="card" id="s4">
+    <details class="sec" open>
+      <summary><span class="sec-num">04</span> 🧱 '틈틈이'는 당신한테 안 맞아 — 덩어리째</summary>
+      <div class="sec-body">
+        <div class="yourwords">
+          <div class="yl">당신의 말</div>
+          "틈틈이는… 모르겠땅."
+        </div>
+        <p class="lead">이 감(感)도 정확해요. <b>당신은 충동형(실행 편)이라 '틈틈이 조금씩'이 구조적으로 안 맞아요.</b> 틈틈이는 다짐형의 방식이거든요 — 매번 다시 시동을 걸어야 하는데, 당신 엔진은 <mark>한 번 크게 걸고 몰아치는 타입</mark>이에요.</p>
+        <div class="co red">
+          <div class="co-t">⚠️ 왜 틈틈이가 당신한텐 실패하나</div>
+          <p style="margin:.3em 0 0">틈틈이 15분씩 = 하루에 여러 번 "자, 시작" 하는 것 = 여러 번의 의지 소모. <u>의지가 바닥나는 당신에겐 최악</u>이에요. 반대로 <b>주말에 3시간 덩어리로 '해버리기'</b> = 시동 한 번 = 당신이 팍팍 하는 방식. 영상 편집·여행 예약을 몰아서 해버리듯, 작업도 <mark>덩어리로 해버리는 게</mark> 당신 물리법칙이에요.</p>
+        </div>
+        <p>그러니 시간 전략을 이렇게 뒤집어요: <b>매일 조금(틈틈이) ❌ → 주말에 몰아서 한 덩어리(해버리기) ⭕.</b> 평일은 <u>입력·충전만</u> 하고, 산출은 고체력 덩어리 시간에.</p>
+      </div>
+    </details>
+  </section>
+
+  <!-- S5 -->
+  <section class="card" id="s5">
+    <details class="sec">
+      <summary><span class="sec-num">05</span> ⚙️ 주머니별 배치 — 뭘 어디에 넣나</summary>
+      <div class="sec-body">
+        <p class="lead">체력의 '질'에 맞춰 배치하면 억지로 안 해도 굴러가요.</p>
+        <div class="step"><div class="sh"><span class="num">🚗</span> 이동 시간 → <b>입력 & 씨앗</b></div><div class="sd">오디오북·강의 듣기, 아이디어 음성메모("이거 콘텐츠로"). 손 안 쓰고 눈·귀만. 여기서 <u>주말에 만들 재료</u>를 모아둠.</div></div>
+        <div class="step"><div class="sh"><span class="num">🌆</span> 평일 저녁 → <b>가벼운 것 or 회복</b></div><div class="sd">잘 잔 날: 카드 1장·메모 정리 같은 <u>10분 완결</u> 것만. 방전날: <b>당당하게 쉬기</b>(이게 주말 체력을 지킴). 평일에 큰 걸 기대 안 하기.</div></div>
+        <div class="step"><div class="sh"><span class="num">☀️</span> 주말 덩어리 → <b>진짜 산출(몰빵)</b></div><div class="sd">이동·평일에 모은 씨앗을 <u>주말 3시간 블록</u>에 '해버리기'. 콘텐츠 만들기, 시스템 설계 — 무거운 건 전부 여기. 한 덩어리에 하나.</div></div>
+        <div class="step"><div class="sh"><span class="num">🎢</span> 연차·휴일 → <b>루프 한 바퀴</b></div><div class="sd">자유 2부의 여행→기록→나눔 루프를 하루 통째로. 맑은 하루 하나가 지친 저녁 열 번보다 큼.</div></div>
+        <div class="co green">
+          <div class="co-t">🌱 오늘 할 단 하나</div>
+          <p style="margin:.3em 0 0">복잡하면 다 무시하고 — <b>이번 주말에 3시간 블록 하나</b>를 달력에 '결제하듯' 박아넣기(충동형 방식). 그 블록에 뭘 할지는 그때 이동 시간에 모인 씨앗에서 고르면 됨. <mark>시간을 찾지 말고, 한 덩어리를 먼저 예약해버리기.</mark></p>
+        </div>
+      </div>
+    </details>
+  </section>
+
+  <div class="finale">
+    <div class="rune">⏳🔋</div>
+    <p class="big">시간이 없던 게 아니었어요.<br><u>쓸 수 있는 상태의 시간</u>이 없던 거예요.</p>
+    <p style="color:var(--fg-soft);margin-top:18px">잘 자서 체력을 올리면 같은 저녁이 커지고,<br>흩어진 주머니를 세면 주 16~24시간이 나오고,<br><b>틈틈이 대신 주말 한 덩어리에 해버리면 — 당신 방식으로 굴러가요.</b></p>
+  </div>
+
+  <div class="foot">
+    프리렌으로 배우는 AI 시대 · 시간 편 — 시간은 못 늘려도 두 배로 쓴다<br>
+    쓸수있는시간 = 시간×체력×의지 · 시간주머니 3곳 · 틈틈이(다짐형) 대신 덩어리(충동형)
+  </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>머리에 박는 카드 — 1·2·3·5·7</title>
+<style>
+:root{
+  --bg:#FBFAF7; --bg-soft:#F4F1EA; --fg:#1F1F1F; --fg-soft:#3A3A3A;
+  --muted:#6E6E6E; --rule:#E8E3D6; --accent:#1D4ED8; --warm:#B8451F;
+  --magic:#5B3A8C; --gold:#B8860B; --green:#3E7C43;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#1A1816; --bg-soft:#252220; --fg:#E8E4DC; --fg-soft:#C7C2B8;
+    --muted:#9A968D; --rule:#36322C; --accent:#7AB0FF; --warm:#E89464;
+    --magic:#C9A9F0; --gold:#E0B84C; --green:#7FB985;
+  }
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; background:var(--bg); color:var(--fg);
+  font-family:"Pretendard","Pretendard Variable",-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Segoe UI","Malgun Gothic",sans-serif;
+  font-size:17px; line-height:1.7; letter-spacing:-0.011em; -webkit-font-smoothing:antialiased;
+}
+@media (min-width:700px){ body{font-size:18px} }
+.wrap{max-width:640px; margin:0 auto; padding:0 20px 80px}
+
+.hero{padding:52px 0 26px; text-align:center}
+.hero .kicker{font-size:.8em; letter-spacing:.14em; color:var(--muted); text-transform:uppercase; margin-bottom:14px}
+.hero h1{font-size:1.8em; line-height:1.28; letter-spacing:-0.03em; font-weight:800; margin:.1em 0 .3em}
+.hero .sub{color:var(--fg-soft); font-size:1em}
+
+/* Mnemonic bar */
+.mnemo{margin:22px 0 8px; padding:20px 16px; border-radius:16px; text-align:center;
+  background:linear-gradient(135deg, rgba(29,78,216,.10), rgba(91,58,140,.08)); border:1px solid var(--rule)}
+.mnemo .nums{font-size:2em; font-weight:800; letter-spacing:.06em; color:var(--accent); line-height:1}
+.mnemo .say{margin-top:12px; font-size:1.12em; font-weight:800; letter-spacing:-0.02em; line-height:1.5}
+.mnemo .say b{color:var(--warm)}
+
+.hint{text-align:center; color:var(--muted); font-size:.85em; margin:16px 0 4px}
+
+/* Number tile */
+.tile{display:flex; gap:16px; padding:20px 18px; margin:14px 0; border-radius:16px;
+  background:var(--bg-soft); border:1px solid var(--rule)}
+.tile .num{flex:0 0 auto; width:60px; height:60px; border-radius:14px; display:flex; align-items:center; justify-content:center;
+  font-size:2em; font-weight:800; color:#fff; line-height:1}
+.tile.n1 .num{background:var(--magic)} .tile.n2 .num{background:var(--warm)}
+.tile.n3 .num{background:var(--accent)} .tile.n5 .num{background:var(--green)}
+.tile.n7 .num{background:var(--gold)}
+.tile .body{flex:1 1 auto; min-width:0}
+.tile .tt{font-size:1.12em; font-weight:800; letter-spacing:-0.02em}
+.tile .tt .cnt{font-size:.72em; color:var(--muted); font-weight:700; margin-left:4px}
+.tile .mean{font-size:.96em; color:var(--fg-soft); margin:4px 0 0}
+.tile .mean b{color:var(--fg)}
+.apply{margin-top:12px; padding:11px 13px; border-radius:10px; background:var(--bg);
+  border:1px dashed var(--rule); font-size:.9em}
+.apply .al{font-size:.72em; font-weight:800; letter-spacing:.06em; color:var(--accent); text-transform:uppercase}
+.apply .at{margin-top:2px}
+.apply .at b{color:var(--warm)}
+mark{background:rgba(255,214,64,.42); padding:1px 4px; border-radius:4px; font-weight:700}
+@media (prefers-color-scheme: dark){ mark{background:rgba(226,180,60,.28)} }
+
+/* Daily tool */
+.daily{margin:26px 0 8px; padding:18px; border-radius:16px; border:2px solid var(--accent)}
+.daily .dh{font-weight:800; letter-spacing:-0.02em; color:var(--accent); text-align:center; margin-bottom:10px}
+.daily .three{display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px}
+.daily .t{padding:10px 8px; border-radius:10px; background:var(--bg-soft); text-align:center; font-size:.85em; border:1px solid var(--rule)}
+.daily .t b{display:block; color:var(--accent); font-size:1.05em}
+
+/* Count summary */
+.count{margin:26px 0; padding:18px; border-radius:16px; background:linear-gradient(135deg, rgba(62,124,67,.10), transparent); border:1px solid var(--rule); text-align:center}
+.count .row{display:flex; justify-content:center; gap:8px; flex-wrap:wrap; margin-bottom:10px}
+.count .b{padding:6px 12px; border-radius:999px; background:var(--bg-soft); border:1px solid var(--rule); font-size:.85em; font-weight:700}
+.count .b .n{color:var(--accent)}
+.count .fin{font-size:1.05em; font-weight:800; letter-spacing:-0.02em; margin-top:6px}
+
+.finale{margin-top:34px; padding:28px 0 0; border-top:2px solid var(--fg); text-align:center}
+.finale .big{font-size:1.3em; font-weight:800; letter-spacing:-0.03em; line-height:1.5}
+.finale .big u{text-decoration:none; background:linear-gradient(180deg,transparent 60%,rgba(255,214,64,.42) 60%)}
+.foot{margin-top:36px; padding-top:16px; border-top:1px solid var(--rule); font-size:.76em; color:var(--muted); text-align:center}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <div class="kicker">프리렌 시리즈 · 머리에 박는 카드</div>
+    <h1>안 외워지면,<br>숫자로 박아라</h1>
+    <p class="sub">6편을 통째로 버리고 — 딱 <b>다섯 숫자</b>만 남겼어요.</p>
+  </header>
+
+  <div class="mnemo">
+    <div class="nums">1 · 2 · 3 · 5 · 7</div>
+    <div class="say">"<b>1</b>개 고르고 · <b>2</b>개만 지키고 ·<br><b>3</b>층으로 나누고 · <b>5</b>로 묻고 · <b>7</b>년을 심어라"</div>
+  </div>
+  <p class="hint">↓ 이 문장 하나면 끝. 각 숫자를 펼치면 뜻 + 오늘 할 일</p>
+
+  <!-- 1 -->
+  <div class="tile n1">
+    <div class="num">1</div>
+    <div class="body">
+      <div class="tt">단 하나의 정체성 <span class="cnt">1개</span></div>
+      <p class="mean">"뭔가 <b>만든 사람</b>·축적한 사람" — 원하는 8개 중 딱 하나. 나머지(돈·건강·행복)는 목표가 아니라 이걸 떠받치는 <b>흙</b>.</p>
+      <div class="apply"><div class="al">🎯 오늘 적용</div><div class="at">폰 배경화면/냉장고에 <b>"나는 ___ 만드는 사람"</b> 한 문장 적어 붙이기. 매일 보면 박힘.</div></div>
+    </div>
+  </div>
+
+  <!-- 2 -->
+  <div class="tile n2">
+    <div class="num">2</div>
+    <div class="body">
+      <div class="tt">지켜야 할 핵심, 2개만 <span class="cnt">2개</span></div>
+      <p class="mean">① <b>인수·지분</b>(놓치면 다시 못 잡는 기회) ② <b>축적자산 1개</b>. 버핏식: 나머지는 백업이 아니라 <mark>"목숨 걸고 피할 목록"</mark>. 5년 아쉬움 1위 = '다 열어두고 아무것도 깊이 못 함'.</p>
+      <div class="apply"><div class="al">🎯 오늘 적용</div><div class="at">할 일 목록에서 <b>2개만 남기고</b> 나머지에 "안 함" 표시. 벌린 것 늘리지 말기.</div></div>
+    </div>
+  </div>
+
+  <!-- 3 -->
+  <div class="tile n3">
+    <div class="num">3</div>
+    <div class="body">
+      <div class="tt">원하는 걸 3층으로 <span class="cnt">3층</span></div>
+      <p class="mean">🟣<b>정체성</b>(누구로 불릴까) · 🟢<b>흙</b>(건강·돈·행복) · 🟡<b>결과</b>(저절로 나오는 것). <mark>고르는 건 정체성 층에서만.</mark> 못 골랐던 건 층을 안 나눠서였음.</p>
+      <div class="apply"><div class="al">🎯 오늘 적용</div><div class="at">뭔가 하고 싶을 때마다 딱지 붙이기: <b>"이거 정체성이야? 흙이야? 결과야?"</b> 흙·결과면 좇지 말기.</div></div>
+    </div>
+  </div>
+
+  <!-- 5 -->
+  <div class="tile n5">
+    <div class="num">5</div>
+    <div class="body">
+      <div class="tt">AI에 묻는 5력 <span class="cnt">5개</span></div>
+      <p class="mean"><b>질문·연결·검증·맥락·목적.</b> AI는 증폭기 — 흐린 질문엔 흐린 답. <mark>"과학 알려줘"가 아니라 "누구에게·왜·검증"을 붙여라.</mark></p>
+      <div class="apply"><div class="al">🎯 오늘 적용</div><div class="at">AI 켜기 전 <b>3초 점검</b>(아래 파란 박스). 이거만 습관 되면 5력 다 굴러감.</div></div>
+    </div>
+  </div>
+
+  <!-- 7 -->
+  <div class="tile n7">
+    <div class="num">7</div>
+    <div class="body">
+      <div class="tt">7년을 심는 법 <span class="cnt">2비유</span></div>
+      <p class="mean">🐝<b>양봉가</b>: 꿀을 직접 만들지 말고 <b>벌통(시스템)</b>을 지어라 → 환자·후배가 알아서 굴러감. 🎋<b>모소 대나무</b>: 5년간 안 자라는 게 아니라 <mark>뿌리 내리는 중</mark>. 5~7년째 6주 만에 25m로 솟구침.</p>
+      <div class="apply"><div class="al">🎯 오늘 적용</div><div class="at">오늘은 성과(꿀) 말고 <b>시스템(벌통) 딱 하나</b> — 반복하는 일 1개를 문서/SOP로 박제. 그게 뿌리.</div></div>
+    </div>
+  </div>
+
+  <!-- Daily tool -->
+  <div class="daily">
+    <div class="dh">⚡ 매일 쓰는 도구 · AI 켜기 전 3초</div>
+    <div class="three">
+      <div class="t"><b>누구?</b>누구를 위한 거지</div>
+      <div class="t"><b>왜?</b>진짜 이유 한 겹</div>
+      <div class="t"><b>어떻게 알지?</b>잘 됐단 증거</div>
+    </div>
+  </div>
+
+  <!-- Count summary -->
+  <div class="count">
+    <div class="row">
+      <span class="b">읽은 편 <span class="n">6</span></span>
+      <span class="b">핵심 숫자 <span class="n">5</span></span>
+      <span class="b">외울 문장 <span class="n">1</span></span>
+      <span class="b">오늘 할 일 <span class="n">1</span></span>
+    </div>
+    <div class="fin">결국 오늘 할 건 딱 <mark>1개</mark> — 반복업무 하나를 시스템으로 박제.</div>
+  </div>
+
+  <div class="finale">
+    <p class="big">전부 잊어도 이 한 줄만:<br><u>1개 골라, 벌통 짓고, 뿌리 심어라.</u></p>
+  </div>
+
+  <div class="foot">
+    프리렌 시리즈 총정리 · 머리에 박는 카드 (1·2·3·5·7)<br>
+    1부 질문법 · 2/2-2부 인생·선택 · 3부 의도 · 4부 발견 압축본
+  </div>
+
+</div>
+</body>
+</html>

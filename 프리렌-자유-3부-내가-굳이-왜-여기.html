@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>자유 3부 — "내가 굳이 왜 여기 있어야 하나"</title>
+<style>
+:root{
+  --bg:#FBFAF7; --bg-soft:#F4F1EA; --fg:#1F1F1F; --fg-soft:#3A3A3A;
+  --muted:#6E6E6E; --rule:#E8E3D6; --accent:#1D4ED8; --warm:#B8451F;
+  --magic:#5B3A8C; --magic-bg:#F1ECF7; --gold:#B8860B; --green:#3E7C43; --red:#B02A1F; --teal:#0E7C86;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#1A1816; --bg-soft:#252220; --fg:#E8E4DC; --fg-soft:#C7C2B8;
+    --muted:#9A968D; --rule:#36322C; --accent:#7AB0FF; --warm:#E89464;
+    --magic:#C9A9F0; --magic-bg:#2A2333; --gold:#E0B84C; --green:#7FB985; --red:#F08A7E; --teal:#4FC3CE;
+  }
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; background:var(--bg); color:var(--fg);
+  font-family:"Pretendard","Pretendard Variable",-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Segoe UI","Malgun Gothic",sans-serif;
+  font-size:17px; line-height:1.85; letter-spacing:-0.011em; -webkit-font-smoothing:antialiased;
+}
+@media (min-width:700px){ body{font-size:18px} }
+.wrap{max-width:680px; margin:0 auto; padding:0 22px 90px}
+
+.hero{padding:56px 0 30px; text-align:center; border-bottom:1px solid var(--rule)}
+.hero .kicker{font-size:.82em; letter-spacing:.14em; color:var(--muted); text-transform:uppercase; margin-bottom:16px}
+.hero .rune{font-size:2.2em; line-height:1; margin-bottom:14px}
+.hero h1{font-size:1.8em; line-height:1.32; letter-spacing:-0.03em; font-weight:800; margin:.1em 0 .35em}
+@media (min-width:700px){ .hero h1{font-size:2.2em} }
+.hero .sub{color:var(--fg-soft); font-size:1.05em; font-style:italic; max-width:31em; margin:0 auto}
+.hero .meta{margin-top:20px; font-size:.8em; color:var(--muted)}
+
+.counts{display:flex; justify-content:center; gap:8px; flex-wrap:wrap; margin:22px 0 4px}
+.counts .b{padding:6px 13px; border-radius:999px; background:var(--bg-soft); border:1px solid var(--rule); font-size:.82em; font-weight:700}
+.counts .b .n{color:var(--accent)}
+
+b{color:var(--warm); font-weight:700}
+u{text-decoration:none; background:linear-gradient(180deg,transparent 62%,rgba(29,78,216,.16) 62%); padding:0 2px}
+mark{background:rgba(255,214,64,.42); padding:1px 5px; border-radius:4px; font-weight:600; color:inherit}
+@media (prefers-color-scheme: dark){ mark{background:rgba(226,180,60,.28)} }
+
+.pull{margin:32px 0; padding:6px 0 6px 22px; border-left:3px solid var(--accent);
+  font-size:1.16em; line-height:1.6; font-weight:600; letter-spacing:-0.02em}
+.pull small{display:block; margin-top:8px; font-size:.6em; font-weight:500; color:var(--muted); font-style:normal}
+
+section.card{border-top:1px solid var(--rule); padding-top:14px; margin-top:8px}
+details.sec{margin:0}
+details.sec>summary{
+  list-style:none; cursor:pointer; padding:20px 0 16px;
+  font-size:1.2em; font-weight:800; letter-spacing:-0.028em; line-height:1.4;
+  display:flex; gap:12px; align-items:baseline;
+}
+details.sec>summary::-webkit-details-marker{display:none}
+.sec-num{flex:0 0 auto; font-size:.62em; font-weight:800; color:var(--accent)}
+.sec-body{padding-bottom:14px}
+.sec-body>p:first-child{margin-top:0}
+
+p{margin:.9em 0}
+h3{font-size:1.03em; font-weight:800; letter-spacing:-0.02em; margin:1.4em 0 .5em}
+.lead{font-size:1.05em; color:var(--fg-soft)}
+
+.co{margin:18px 0; padding:16px 18px; border-radius:12px; border-left:3px solid var(--accent);
+  background:linear-gradient(100deg, rgba(29,78,216,.07), transparent 70%); font-size:.98em}
+.co.magic{border-left-color:var(--magic); background:linear-gradient(100deg,var(--magic-bg),transparent 70%)}
+.co.gold{border-left-color:var(--gold); background:linear-gradient(100deg,rgba(184,134,11,.10),transparent 70%)}
+.co.green{border-left-color:var(--green); background:linear-gradient(100deg,rgba(62,124,67,.10),transparent 70%)}
+.co.red{border-left-color:var(--red); background:linear-gradient(100deg,rgba(176,42,31,.09),transparent 70%)}
+.co.teal{border-left-color:var(--teal); background:linear-gradient(100deg,rgba(14,124,134,.1),transparent 70%)}
+.co .co-t{font-weight:800; margin-bottom:4px; letter-spacing:-0.02em}
+.co.magic .co-t{color:var(--magic)} .co.gold .co-t{color:var(--gold)} .co.green .co-t{color:var(--green)} .co.red .co-t{color:var(--red)} .co.teal .co-t{color:var(--teal)}
+
+.yourwords{margin:16px 0; padding:15px 17px; border-radius:12px; background:var(--magic-bg); border:1px dashed var(--magic); font-size:.98em; line-height:1.75}
+.yourwords .yl{font-size:.72em; font-weight:800; letter-spacing:.08em; color:var(--magic); text-transform:uppercase; margin-bottom:5px}
+
+.chips{display:flex; flex-wrap:wrap; gap:8px; margin:24px 0 8px}
+.chip{font-size:.85em; font-weight:600; text-decoration:none; color:var(--fg-soft);
+  padding:7px 13px; border:1px solid var(--rule); border-radius:999px; background:var(--bg-soft)}
+.chip:hover{border-color:var(--accent); color:var(--accent)}
+
+/* replaceable-me table */
+.tbl{overflow-x:auto; margin:18px 0}
+table{border-collapse:collapse; width:100%; font-size:.92em}
+th,td{text-align:left; padding:10px 12px; border-bottom:1px solid var(--rule); vertical-align:top}
+th{font-weight:800; font-size:.84em; color:var(--muted)}
+th.keep{color:var(--green)} th.drop{color:var(--warm)}
+
+/* freedom bars */
+.bars{margin:18px 0}
+.bar{margin:11px 0}
+.bar .bl{display:flex; justify-content:space-between; font-size:.9em; font-weight:700; margin-bottom:4px}
+.bar .bl .st{color:var(--muted); font-weight:600; font-size:.88em}
+.bar .track{height:13px; border-radius:7px; background:var(--bg-soft); overflow:hidden; border:1px solid var(--rule)}
+.bar .fill{height:100%; border-radius:7px}
+
+.step{padding:13px 0; border-bottom:1px dashed var(--rule)}
+.step:last-child{border-bottom:none}
+.step .sh{font-weight:800; letter-spacing:-0.02em}
+.step .sh .num{color:var(--accent)}
+.step .sd{font-size:.93em; color:var(--fg-soft); margin-top:2px}
+
+.finale{margin-top:44px; padding:34px 0 0; border-top:2px solid var(--fg); text-align:center}
+.finale .rune{font-size:1.7em}
+.finale .big{font-size:1.24em; font-weight:800; letter-spacing:-0.03em; line-height:1.55; margin:.4em 0}
+.foot{margin-top:44px; padding-top:18px; border-top:1px solid var(--rule); font-size:.78em; color:var(--muted); text-align:center}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <div class="kicker">프리렌으로 배우는 AI 시대 · 자유 3부</div>
+    <div class="rune">🚪</div>
+    <h1>"내가 굳이<br>왜 여기 있어야 하나"</h1>
+    <p class="sub">방금 던진 이 한 문장이 — 지금까지 시리즈 전체의 <u>진짜 북극성</u>이에요. 우연히 핵심을 관통했어요.</p>
+    <div class="meta">주3~4일 · 연차 자유 · 도생하며 여행 — 당신이 그린 그림을 설계도로</div>
+  </header>
+
+  <div class="counts">
+    <span class="b">북극성 문장 <span class="n">1</span></span>
+    <span class="b">대체 가능화 <span class="n">4단계</span></span>
+    <span class="b">이미 가진 to <span class="n">확인</span></span>
+    <span class="b">진짜 병목 <span class="n">체력</span></span>
+  </div>
+
+  <div class="co gold" style="margin-top:26px">
+    <div class="co-t">🎯 30초 요약</div>
+    <p style="margin:.4em 0 0">당신이 방금 세 가지를 동시에 깨달았어요: ①<mark>"내가 굳이 여기 없어도 되게 준비해두면 된다"</mark> — 이게 벌통·시스템의 진짜 목적을 스스로 정의한 거예요. ②<b>to자유(하고 싶은 것)는 이미 많이 갖고 있다</b>(여행·새 경험·독서) — 없던 건 방향이 아니라 시간·체력. ③그래서 진짜 병목은 돈도 방향도 아닌 <u>체력적 자유 + 대체 가능한 나</u>예요. 이 편은 그 둘을 어떻게 만드는지예요.</p>
+  </div>
+
+  <nav class="chips">
+    <a class="chip" href="#s1">🚪 그 문장의 무게</a>
+    <a class="chip" href="#s2">🔁 '대체 가능한 나' 만들기</a>
+    <a class="chip" href="#s3">📊 이미 가진 to자유</a>
+    <a class="chip" href="#s4">🔋 진짜 병목: 체력</a>
+    <a class="chip" href="#s5">⚙️ 주3~4일 설계도</a>
+  </nav>
+
+  <div class="pull">"자유란 내가 없어도 세상이 잘 돌아가도록 만들어 두고 — 그 위에서 내가 원하는 걸 하는 것이다."<small>당신이 방금 스스로 도달한 정의예요.</small></div>
+
+  <!-- S1 -->
+  <section class="card" id="s1">
+    <details class="sec" open>
+      <summary><span class="sec-num">01</span> 🚪 "내가 굳이 왜 여기 있어야 하나" — 이게 북극성이다</summary>
+      <div class="sec-body">
+        <div class="yourwords">
+          <div class="yl">당신이 방금 쓴 말</div>
+          "주3일 주4일 정도만 일할 수 있어도… 결국 <b>내가 굳이 여기 없어도 되는 걸 준비해두면</b> 될 거 같긴 하네. 내가 굳이 왜 여기 있어야 하나…"
+        </div>
+        <p class="lead">이 문장이 왜 중요하냐면 — <b>당신이 지난 며칠간 헤맨 모든 질문(뭘 하고 싶나·정체성·자유)의 답을 한 줄로 압축</b>했거든요. "내가 없어도 굴러가게 만든다"는 건:</p>
+        <div class="tbl">
+          <table>
+            <tbody>
+              <tr><td>= 시버스</td><td>"1년 떠나도 더 좋아져 있어야 진짜 내 사업"</td></tr>
+              <tr><td>= 가완디</td><td>"내가 아니라 시스템이 안 틀리게"</td></tr>
+              <tr><td>= 2-2부</td><td>벌통 짓기 (꿀 말고 벌통)</td></tr>
+              <tr><td>= 4-2부</td><td>당신 지문: "사람이 저절로 굴러가게 만드는 구조 설계자"</td></tr>
+              <tr><td>= 자유 1부</td><td>시간·경제 자유의 유일한 생산 경로</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p><mark>전부 같은 한 점을 가리키고 있었어요.</mark> 당신은 그걸 오늘 <b>가장 짧고 정확한 말</b>로 표현한 거예요 — "내가 굳이 여기 없어도 되게." 이게 앞으로 모든 결정의 기준이에요. 뭘 할지 고민될 때: <u>"이게 나를 더 대체 불가능하게 만드나, 대체 가능하게 만드나?"</u> — <b>대체 가능하게 만드는 쪽</b>이 자유로 가는 길이에요. (직관과 반대죠.)</p>
+      </div>
+    </details>
+  </section>
+
+  <!-- S2 -->
+  <section class="card" id="s2">
+    <details class="sec" open>
+      <summary><span class="sec-num">02</span> 🔁 '대체 가능한 나' 만들기 — 역설의 기술</summary>
+      <div class="sec-body">
+        <p class="lead">대부분은 <b>"내가 없으면 안 돌아가게"</b> 만들려고 해요(고용 안정). 근데 그건 자유의 반대 — <mark>스스로를 감옥에 가두는 것.</mark> 자유는 정확히 반대 방향, "내가 없어도 돌아가게"예요. 당신 업무를 4칸으로 나눠보면 경로가 보여요:</p>
+        <div class="tbl">
+          <table>
+            <thead><tr><th>업무 유형</th><th class="drop">위임/시스템화 (내가 빠짐)</th><th class="keep">나만 (남김)</th></tr></thead>
+            <tbody>
+              <tr><td>반복·설명·행정</td><td>✅ 최우선 — 시스템·직원·콘텐츠로</td><td></td></tr>
+              <tr><td>진단·치료계획 결정</td><td>🔶 체크리스트로 절반 위임 (가완디)</td><td>복잡 케이스만</td></tr>
+              <tr><td>손기술(치아 삭제 등)</td><td></td><td>✅ 당신이 안 귀찮아하는 것</td></tr>
+              <tr><td>시스템·교육 설계</td><td></td><td>✅ 당신 지문 — 여기에 시간을</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>당신은 이미 <b>"직원 자동화가 잘 돼 있어서 위임했다"</b>고 했어요(4-2부). 즉 <mark>1행은 이미 하고 있어요.</mark> 남은 건 2행(설명·설득의 반복 → 체크리스트·환자 콘텐츠로) — 그게 리콜/내원 시스템이고, 완성되면 <u>당신이 주 3~4일만 나와도 나머지가 굴러가요.</u></p>
+        <div class="co teal">
+          <div class="co-t">🔑 핵심 통찰</div>
+          <p style="margin:.3em 0 0">"내가 없어도 되게"는 <b>내 가치를 낮추는 게 아니에요.</b> 반복 노동에서 빠지는 대신 — <mark>설계자·소유자 자리로 올라가는 것</mark>이에요. 손을 빼는 게 아니라 <u>손의 위치를 바꾸는</u> 것. 크록이 햄버거를 안 굽고 시스템을 소유했듯이.</p>
+        </div>
+      </div>
+    </details>
+  </section>
+
+  <!-- S3 -->
+  <section class="card" id="s3">
+    <details class="sec" open>
+      <summary><span class="sec-num">03</span> 📊 "to자유는 내가 많이 가졌구나" — 맞아요</summary>
+      <div class="sec-body">
+        <div class="yourwords">
+          <div class="yl">당신의 깨달음</div>
+          "to자유의 중요성을 덜 인지했구나. 근데 사실 to자유는 내가 많이 가지고 있는 걸지도 몰라 — 여행 가고 싶다, 새로운 거 하고 싶다, 책 읽고 싶다… 아무래도 시간적 자유가 항상 부족하다고 느끼니까 더 그런 듯."
+        </div>
+        <p class="lead">이게 자유 1부에서 가장 큰 업데이트예요. 다섯 자유를 당신 상태로 그려보면 — <b>비어 있는 건 'to(방향)'가 아니에요.</b></p>
+        <div class="bars">
+          <div class="bar"><div class="bl"><span>🧭 방향(to) — 하고 싶은 것</span><span class="st">이미 충분 ✅</span></div><div class="track"><div class="fill" style="width:88%;background:var(--green)"></div></div></div>
+          <div class="bar"><div class="bl"><span>⏳ 시간 자유</span><span class="st">부족 — 근데 파생 문제</span></div><div class="track"><div class="fill" style="width:35%;background:var(--gold)"></div></div></div>
+          <div class="bar"><div class="bl"><span>🔋 체력 자유</span><span class="st">진짜 병목 ⚠️</span></div><div class="track"><div class="fill" style="width:28%;background:var(--red)"></div></div></div>
+          <div class="bar"><div class="bl"><span>💰 경제 자유</span><span class="st">시스템으로 해결 중</span></div><div class="track"><div class="fill" style="width:55%;background:var(--accent)"></div></div></div>
+        </div>
+        <p><mark>방향은 88% 차 있어요.</mark> 그런데 시간·체력이 바닥이라, 방향이 실행이 안 되니 "답이 없다"처럼 느껴진 거예요. <b>없는 걸 찾아 헤맬 필요가 없었어요</b> — 있는 걸 실행할 연료(시간·체력)가 없었을 뿐. 이건 훨씬 쉬운 문제예요. 방향 찾기는 몇 년이 걸리지만, 연료 만들기는 <u>설계의 문제</u>거든요.</p>
+      </div>
+    </details>
+  </section>
+
+  <!-- S4 -->
+  <section class="card" id="s4">
+    <details class="sec" open>
+      <summary><span class="sec-num">04</span> 🔋 진짜 병목 = 체력 자유 (제일 안 챙기는 것)</summary>
+      <div class="sec-body">
+        <div class="yourwords">
+          <div class="yl">당신의 말</div>
+          "체력적인 자유도 그렇고, 일하고 나면 못 하는 게 넘 많아."
+        </div>
+        <p class="lead">이거 진짜 중요한 자백이에요. <b>"일하고 나면 아무것도 못 한다"</b> — 이게 to자유(여행·독서·창작)를 실제로 막는 <mark>1차 병목</mark>이에요. 시간보다 먼저예요. 시간이 나도 방전돼 있으면 소파+쇼츠니까.</p>
+        <div class="co red">
+          <div class="co-t">⚡ 순서를 다시 — 체력이 0순위인 이유</div>
+          <p style="margin:.3em 0 0">자유 1부에서 "신체 자유가 나머지의 토대"라 했죠. 여기 실측 증거가 당신 입에서 나왔어요 — <b>"일하고 나면 못 하는 게 많다."</b> 즉 지금 당신에게 시간을 더 줘도, 체력이 없으면 그 시간은 회복(누워있기)에 다 쓰여요. <mark>체력이 곧 '쓸 수 있는 시간'의 배율</mark>이에요. 체력 2배 = 같은 저녁 시간의 가치 2배.</p>
+        </div>
+        <h3>💊 체력 자유 — 가장 작고 확실한 지렛대</h3>
+        <div class="step"><div class="sh"><span class="num">1.</span> 운동을 '추가'하지 말고 일과에 '심기'</div><div class="sd">지친 저녁에 헬스장 가기 = 실패 공식. 대신 <b>출근 자체를 운동으로</b>(한 정거장 걷기)·점심 후 10분 산책. 사사키식 — 의지 말고 <u>동선에 끼우기</u>.</div></div>
+        <div class="step"><div class="sh"><span class="num">2.</span> 저녁 방전의 진짜 범인 찾기</div><div class="sd">체력이 아니라 <b>수면·혈당·정신 피로</b>일 수 있어요. 진료의 고강도 '결정 피로'(자유 시리즈에서 다룬)가 저녁을 앗아가는 것. → 낮 결정을 시스템으로 줄이면 저녁 에너지가 남음. 체력 문제가 사실 결정 문제.</div></div>
+        <div class="step"><div class="sh"><span class="num">3.</span> "일하고 나면 못 한다" → 주 리듬을 재배치</div><div class="sd">매일 조금씩 말고 — <b>몰아서 쉬는 날</b>을 확보. 주4일이 가능하다면, 하루를 통째로 to자유(여행·독서)에 배정. 지친 평일 저녁 30분보다 <u>맑은 하루 하나</u>가 훨씬 큼.</div></div>
+      </div>
+    </details>
+  </section>
+
+  <!-- S5 -->
+  <section class="card" id="s5">
+    <details class="sec">
+      <summary><span class="sec-num">05</span> ⚙️ 주3~4일 + 자유로운 연차 — 실제 설계도</summary>
+      <div class="sec-body">
+        <p class="lead">당신이 그린 그림 — <b>"주3~4일 일하고, 연차 자유롭게, 도생하며 여행"</b> — 은 공상이 아니에요. 조건이 딱 하나: <mark>"내가 없어도 되는 상태"를 먼저 만드는 것.</mark> 순서가 있어요.</p>
+        <div class="step"><div class="sh"><span class="num">1.</span> 지금: 반복 설명 1개를 시스템화 (벌통 1호)</div><div class="sd">임플란트든 잇몸이든, 제일 자주 반복하는 설명 하나를 콘텐츠/체크리스트로. 이게 "나 없이 되는 것"의 첫 벽돌.</div></div>
+        <div class="step"><div class="sh"><span class="num">2.</span> 6개월: 진단·설득의 절반을 프로토콜화</div><div class="sd">가완디식 체크리스트로 후배·직원이 당신 없이도 표준 케이스를 처리. 당신은 복잡 케이스·설계에만.</div></div>
+        <div class="step"><div class="sh"><span class="num">3.</span> 그 사이 계속: 체력 자유 다지기</div><div class="sd">위 4번 섹션. 시스템이 완성돼도 몸이 방전이면 자유를 못 씀. 병행 필수.</div></div>
+        <div class="step"><div class="sh"><span class="num">4.</span> 결과: 주3~4일 + 맑은 연차 → to루프 가동</div><div class="sd">그때 자유 2부의 루프(여행→기록→나눔→가치)가 진짜로 돌아감. <mark>여행 콘텐츠가 또 다른 수입·경험이 되는 선순환.</mark></div></div>
+        <div class="co green">
+          <div class="co-t">🌱 오늘 할 단 하나</div>
+          <p style="margin:.3em 0 0">이 설계도 전체가 부담되면 — 무시하고 <b>딱 하나만</b>: 이번 주에 <u>가장 자주 반복하는 환자 설명 1개를 고르기.</u> 그거 하나가 "내가 없어도 되는 나"의 첫 벽돌이자, 주4일로 가는 첫 걸음이에요.</p>
+        </div>
+      </div>
+    </details>
+  </section>
+
+  <div class="finale">
+    <div class="rune">🚪🕊️</div>
+    <p class="big">"내가 굳이 왜 여기 있어야 하나" —<br>이건 도망이 아니라<br><u>가장 정확한 목표 선언</u>이었어요.</p>
+    <p style="color:var(--fg-soft); margin-top:18px">방향은 이미 가졌고(88%), 없는 건 시간이 아니라 체력과 시스템.<br>둘 다 '찾는' 게 아니라 '설계하는' 거예요.<br><b>내가 없어도 되게 만드는 것 — 그게 자유의 다른 이름이에요.</b></p>
+  </div>
+
+  <div class="foot">
+    프리렌으로 배우는 AI 시대 · 자유 3부 — "내가 굳이 왜 여기 있어야 하나"<br>
+    대체 가능한 나 = 북극성 · to자유는 이미 88% · 진짜 병목은 체력 · 주3~4일 설계도
+  </div>
+
+</div>
+</body>
+</html>

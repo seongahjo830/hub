@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>갤폴드 잠금화면 월페이퍼 — 펼친 화면용</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#0a0a0a;display:flex;flex-direction:column;align-items:center;gap:26px;padding:22px;font-family:"Pretendard","Apple SD Gothic Neo",sans-serif}
+.hint{color:#888;font-size:13px;text-align:center;max-width:520px;line-height:1.6}
+/* 갤폴드 내부화면 ≈ 5:4 (거의 정사각, 살짝 세로가 긺). 미리보기는 축소, 실제는 폰에서 전체화면 스샷 */
+.wall{width:min(92vw,440px);aspect-ratio:5/6;border-radius:26px;overflow:hidden;position:relative;flex-shrink:0}
+
+/* ── V1 딥네이비 별밤 (펼친화면: 중앙 여백 넓게) ── */
+.w1{background:radial-gradient(120% 90% at 50% 20%,#182238 0%,#101728 55%,#0b1120 100%)}
+.w1 i{position:absolute;background:#8FB0DA;border-radius:50%;opacity:.55}
+.w1 .zone{position:absolute;left:0;right:0;top:50%;transform:translateY(-42%);padding:0 46px;text-align:center}
+.w1 .nums{color:#F0C64C;font-size:19px;letter-spacing:.32em;font-weight:700;margin-bottom:26px}
+.w1 .main{color:#F4F1E6;font-size:32px;font-weight:800;line-height:1.7;letter-spacing:-0.01em}
+.w1 .main b{color:#F0C64C}
+.w1 .sub{margin-top:30px;color:#93AAC8;font-size:15px;line-height:2}
+/* 접힘선 힌트: 세로 중앙 아주 옅은 라인 (스샷 후 안 보이게 초옅게) */
+.w1 .fold{position:absolute;top:0;bottom:0;left:50%;width:1px;background:rgba(255,255,255,.025)}
+
+/* ── V2 크림 종이 + 프리렌 ── */
+.w2{background:radial-gradient(120% 90% at 50% 18%,#FCF8EE 0%,#F5ECDA 60%,#EFE4CE 100%)}
+.w2 .zone{position:absolute;left:0;right:0;top:52%;transform:translateY(-40%);padding:0 46px;text-align:center}
+.w2 .nums{color:#B8860B;font-size:16px;letter-spacing:.34em;font-weight:700;margin-bottom:22px}
+.w2 .main{color:#2A2620;font-size:30px;font-weight:800;line-height:1.75}
+.w2 .main b{color:#B8451F}
+.w2 .sub{margin-top:26px;color:#8A8170;font-size:14px;line-height:2}
+.w2 .frieren{position:absolute;top:15%;left:50%;transform:translateX(-50%)}
+</style>
+</head>
+<body>
+<p class="hint">📱 <b>갤럭시 폴드 펼친 화면용</b> (5:6 비율). 폰에서 이 파일 열고 → 원하는 쪽 <b>전체화면 스크린샷</b> → 잠금화면 배경 등록.<br>시계·알림은 위쪽 빈 공간에 뜨도록 문구를 가운데-아래에 뒀고, 중앙 접힘선을 피해 좌우 여백을 넓게 잡았어요.</p>
+
+<!-- V1 -->
+<div class="wall w1">
+  <i style="left:14%;top:9%;width:3px;height:3px"></i><i style="left:80%;top:7%;width:2px;height:2px"></i>
+  <i style="left:58%;top:12%;width:3px;height:3px"></i><i style="left:28%;top:16%;width:2px;height:2px"></i>
+  <i style="left:88%;top:22%;width:2px;height:2px"></i><i style="left:9%;top:26%;width:3px;height:3px"></i>
+  <i style="left:70%;top:30%;width:2px;height:2px"></i><i style="left:44%;top:22%;width:2px;height:2px"></i>
+  <i style="left:20%;top:34%;width:2px;height:2px"></i><i style="left:83%;top:35%;width:2px;height:2px"></i>
+  <div class="fold"></div>
+  <div class="zone">
+    <div class="nums">1 · 2 · 3 · 5 · 7</div>
+    <div class="main">문만 통과.<br>리셋은 <b>지금</b>.<br>심심하면 <b>몰입 큐</b>.</div>
+    <div class="sub">붕괴만 안 하면 이긴다<br>시스템은 나를 기다린다 ✈️</div>
+  </div>
+</div>
+
+<!-- V2 -->
+<div class="wall w2">
+  <svg class="frieren" width="128" height="128" viewBox="0 0 120 120" aria-label="프리렌">
+    <circle cx="60" cy="52" r="27" fill="#F2D9C0"/>
+    <path d="M33,46 Q27,112 40,120 L48,120 Q42,64 46,52 Z" fill="#EAE1CC"/>
+    <path d="M87,46 Q93,112 80,120 L72,120 Q78,64 74,52 Z" fill="#EAE1CC"/>
+    <path d="M35,44 Q60,9 85,44 Q78,35 60,33 Q42,35 35,44Z" fill="#EAE1CC"/>
+    <circle cx="52" cy="52" r="2.8" fill="#2A2620"/><circle cx="69" cy="52" r="2.8" fill="#2A2620"/>
+    <path d="M54,62 Q60,66 67,62" stroke="#B06A5A" stroke-width="2" fill="none" stroke-linecap="round"/>
+  </svg>
+  <div class="zone">
+    <div class="nums">벌통 · 뿌리 · 성적표</div>
+    <div class="main">나는 <b>만드는 사람</b>이다.<br>축적해서, 떳떳하게 판다.</div>
+    <div class="sub">어쩌다 보니 하게 되는 집에서 산다<br>과자는 음식이 아니라 공장 제품 🫙</div>
+  </div>
+</div>
+
+</body>
+</html>

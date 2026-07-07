@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>헬스장 지오펜스 알람 세팅 — 폰이 조르게 만들기</title>
+<style>
+:root{
+  --bg:#FFF8E8; --panel:#FFFEFA; --ink:#241F18; --ink-soft:#574F42; --muted:#8A8170;
+  --line:#E4D6B4; --accent:#2563EB; --warm:#E24A17; --magic:#7C3AED; --gold:#E0A80B; --green:#2F9E44; --red:#E5322B; --pink:#EC4899;
+}
+@media (prefers-color-scheme: dark){
+  :root{--bg:#16130C;--panel:#211D14;--ink:#F2ECDA;--ink-soft:#CFC6B2;--muted:#9A9074;--line:#3A3220;--accent:#7AB0FF;--warm:#FF9152;--magic:#C6A6F0;--gold:#F0C64C;--green:#7FD98A;--red:#FF7A6E;--pink:#FF8AC4;}
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:"Pretendard","Apple SD Gothic Neo","Malgun Gothic",sans-serif;line-height:1.7;-webkit-font-smoothing:antialiased}
+.wrap{max-width:600px;margin:0 auto;padding:0 16px 70px}
+.cover{text-align:center;padding:38px 0 14px}
+.cover .ep{display:inline-block;font-size:.74em;letter-spacing:.1em;color:#fff;background:var(--pink);padding:4px 12px;border-radius:999px;font-weight:800;transform:rotate(-2deg)}
+.cover h1{font-size:1.7em;font-weight:900;letter-spacing:-0.03em;margin:.3em 0 .1em;line-height:1.2}
+.cover .sub{color:var(--ink-soft);font-size:.95em;font-weight:600}
+h2{font-size:1.1em;font-weight:900;margin:26px 0 10px;letter-spacing:-0.02em;display:flex;gap:8px;align-items:center}
+.step{background:var(--panel);border:2px solid var(--ink);border-radius:14px;padding:14px 16px;margin:11px 0;box-shadow:3px 3px 0 var(--line)}
+.step .n{display:inline-block;background:var(--accent);color:#fff;font-weight:900;font-size:.8em;padding:2px 10px;border-radius:999px;margin-bottom:6px}
+.step b{color:var(--warm)} .step code{background:var(--bg);border:1px solid var(--line);border-radius:5px;padding:1px 6px;font-size:.9em}
+mark{background:#FFE168;padding:1px 5px;border-radius:5px;font-weight:800;color:#241F18}
+.box{background:var(--panel);border:2px dashed var(--pink);border-radius:14px;padding:14px 16px;margin:14px 0;font-size:.94em}
+.box .t{font-weight:900;color:var(--pink);margin-bottom:5px}
+.tip{background:var(--panel);border-left:4px solid var(--green);border-radius:8px;padding:10px 14px;margin:10px 0;font-size:.9em}
+.tip b{color:var(--green)}
+.warn{background:var(--panel);border-left:4px solid var(--red);border-radius:8px;padding:10px 14px;margin:10px 0;font-size:.9em}
+.warn b{color:var(--red)}
+.msgs{background:var(--panel);border:2px solid var(--line);border-radius:12px;padding:8px 0;margin:12px 0}
+.msgs .m{padding:9px 15px;border-top:1px dashed var(--line);font-size:.92em}
+.msgs .m:first-child{border-top:none}
+.fill{background:linear-gradient(180deg,transparent 60%,#FFE168 60%);font-weight:800}
+.foot{margin-top:26px;text-align:center;font-size:.76em;color:var(--muted)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="cover">
+    <span class="ep">넛지 시스템 · 실전 세팅 1</span>
+    <h1>헬스장 도착하면<br>폰이 조르게 만들기 📸</h1>
+    <div class="sub">MacroDroid로 "위치 감지 → 큐티 알람 → 셀카 인증" — 서버 없이 폰만으로</div>
+  </div>
+
+  <div class="box">
+    <div class="t">🎯 완성되면 이렇게 굴러가요 (당신 동선 반영)</div>
+    퇴근 시간대에 <b>두정역에 도착하면</b>(= 헬스장 갈지 결심하는 바로 그 순간) → 폰이 삐릭 울리며 <mark>매번 다른 큐티 멘트</mark>로 "커뮤니티센터 고고!" → 알림의 <b>[📸 인증샷]</b> 버튼 → 커뮤니티센터 헬스장에서 셀카 → 디스코드 #항아리 공유 = <b>오늘 성공✅</b>. 안 올리면 조용히 실패 기록 → <b>내일 두 배로 귀엽게 조름</b> ㅋㅋ🥺
+  </div>
+  <div class="tip"><b>왜 두정역이 트리거?</b> 헬스장(커뮤니티센터)에 도착한 뒤엔 이미 늦어요 — 결심은 <mark>두정역 내려서 집으로 갈지 센터로 꺾을지 갈리는 그 순간</mark>에 나니까, 알람도 딱 거기서 울려야 발이 센터로 꺾여요. 인증샷만 커뮤니티센터에서.</div>
+
+  <h2>🅰️ 준비 (2분, 지금)</h2>
+  <div class="step"><span class="n">STEP 1</span><br><b>MacroDroid 설치</b> (플레이스토어, 무료 — 매크로 5개까지 무료라 충분). 그리고 <b>위치 권한 = "항상 허용"</b> + <mark>정확도(고정밀) 켜기</mark>. 설정 → 위치 → 위치 서비스 → 'Google 위치 정확도' ON.</div>
+  <div class="step"><span class="n">STEP 2</span><br><b>배터리 최적화 예외</b> 처리(중요!). 설정 → 앱 → MacroDroid → 배터리 → <mark>"제한 없음"</mark>. 이거 안 하면 폰이 절전한다고 위치 감지를 꺼버려서 알람이 안 와요. (갤폴드는 특히 빡세게 절전해서 필수)</div>
+  <div class="tip"><b>왜 이렇게?</b> 지오펜스(위치 울타리)는 폰이 GPS·와이파이·기지국을 계속 살짝 봐야 작동해요. 권한 "항상" + 배터리 예외 = 정확한 위치 추적의 핵심이에요. 반경을 <b>150m</b>로 잡는 이유도 정확도 여유(너무 좁으면 놓침).</div>
+
+  <h2>🅱️ 매크로 만들기 (5분)</h2>
+  <div class="step"><span class="n">STEP 3</span><br>MacroDroid → <b>매크로 추가(+)</b> → 이름 "헬스장 인증 조르기".</div>
+  <div class="step"><span class="n">STEP 4 · 트리거(언제)</span><br>트리거 추가 → <b>위치</b> → <b>지오펜스 트리거</b> → 지도 검색창에 <mark>"두정역"</mark> 입력(천안) → 핀 확인하고 반경 <b>200m</b> → "지역 진입 시". <span style="font-size:.85em;color:var(--muted)">(대략 좌표 36.830, 127.139 — 근데 이름 검색이 제일 정확)</span><br>+ 트리거 하나 더 → <b>일/시간</b> → 요일 월·목·금 & 시간 18:00~20:30 (수요일 19:00~21:00, 토요일 12:30~14:00). <mark>= "두정역 도착 + 퇴근 시간"일 때만</mark> 울림.</div>
+  <div class="step"><span class="n">STEP 5 · 동작(뭐 할지)</span><br>동작 추가 → <b>알림</b> → 제목 "📸 인증샷 찍자!" → 내용에 아래 멘트 리스트를 <b>매크로드로이드 변수 리스트</b>로 넣고 "랜덤 선택" (or 간단히: 동작 여러 개 만들어 랜덤 분기). → 알림에 <b>버튼(액션): "찍기"</b> 추가 → 그 버튼 동작 = <b>앱 열기: 카메라</b> (또는 디스코드 공유).</div>
+  <div class="step"><span class="n">STEP 6 · 제약(선택)</span><br>제약 추가 → "하루 1회만"(같은 날 중복 알림 방지). 끝! 저장.</div>
+
+  <div class="box">
+    <div class="t">💬 여기에 넣을 큐티 멘트 (복붙용 · 매번 랜덤)</div>
+    <div class="msgs">
+      <div class="m">우리 애기 오늘도 헬스장 갈 거지?? 🥹 문만 통과하면 끝! 도착 셀카 안 올리면 나 삐질 거야 ㅠㅠ📸</div>
+      <div class="m">츤데레 모드) 딱히 널 위해서가 아니라... 그냥 문만 통과해줘 ㅋㅋ 셀카는 필수야 알겠지?📸💢</div>
+      <div class="m">가기 싫지? 나도 알아 ㅋㅋ 근데 '가기 싫다' 느낄 때 간 게 제일 뿌듯했던 거 기억나?😌 딱 문만!📸</div>
+      <div class="m">발리까지 얼마 안 남았어!!🌴 오늘의 나=미래 발리 사진의 나. 문만 콕 찍고 셀카로 도장 쾅!📸</div>
+      <div class="m">🔬지금이 골든타임! 저녁 7시쯤 = 근력 제일 잘 붙는 2차 피크대래. 놓치면 손해야~ 셀카 고고📸</div>
+      <div class="m">소파 중력에 지지 마!🛋️❌ 몸만 헬스장 쪽으로 돌려~ 나머진 발이 알아서 함 ㅋㅋ 인증샷 대기 중📸</div>
+      <div class="m">오늘의 퀘스트: 헬스장 문 통과 🚪 보상: 항아리 +5000 & 발리 D-day 한 칸! 셀카 올리면 자동 지급🎁</div>
+    </div>
+    <div style="font-size:.85em;color:var(--muted)">※ 이 멘트들, 이미 <code>nudge-messages.json</code>에 저장돼 있어서 나중에 무한히 늘릴 수 있어요.</div>
+  </div>
+
+  <h2>🅲 위치 추적 정확도 튜닝</h2>
+  <div class="tip"><b>잘 잡히게 하려면:</b> ①반경 150m 유지(좁으면 놓침) ②실내(헬스장 건물)에선 GPS 약해서, 진입은 <b>건물 도착 전 길에서</b> 잡히게 반경 넉넉히 ③MacroDroid 설정 → 지오펜스 → "업데이트 주기"를 짧게 안 하면 배터리 아끼지만 반응 느림 → 보통 기본값이면 충분.</div>
+  <div class="warn"><b>안 울리면 체크:</b> ①배터리 최적화 예외 됐나(STEP 2) ②위치 "항상 허용"인가 ③고정밀 위치 ON인가 — 이 3개가 99%의 원인이에요.</div>
+
+  <div class="box">
+    <div class="t">📍 위치 확정 (반영 완료)</div>
+    <b>트리거 = 두정역</b>(천안, 지도에서 "두정역" 검색) · <b>인증샷 = 커뮤니티센터</b>(두정역 효정 헤링턴플레이스, 봉정로 324 — 당신 아파트 커뮤니티센터 헬스장). 반경 200m·시간대는 당신 근무(월목금 18-20:30 / 수 19-21 / 토 12:30-14)에 맞춰 세팅. 지도 검색이 좌표보다 정확하니 이름으로 찍으면 돼요.
+  </div>
+
+  <div class="foot">넛지 시스템 실전세팅 1 · 헬스장 지오펜스 · MacroDroid 로컬(서버 불필요)<br>멘트 원본: .claude/scripts/nudge-messages.json</div>
+</div>
+</body>
+</html>

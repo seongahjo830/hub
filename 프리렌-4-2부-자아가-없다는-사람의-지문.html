@@ -1,0 +1,414 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>4-2부 — "자아가 없다"는 사람의 지문</title>
+<style>
+:root{
+  --bg:#FBFAF7; --bg-soft:#F4F1EA; --fg:#1F1F1F; --fg-soft:#3A3A3A;
+  --muted:#6E6E6E; --rule:#E8E3D6; --accent:#1D4ED8; --warm:#B8451F;
+  --magic:#5B3A8C; --magic-bg:#F1ECF7; --gold:#B8860B; --green:#3E7C43; --honey:#C98A1B;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#1A1816; --bg-soft:#252220; --fg:#E8E4DC; --fg-soft:#C7C2B8;
+    --muted:#9A968D; --rule:#36322C; --accent:#7AB0FF; --warm:#E89464;
+    --magic:#C9A9F0; --magic-bg:#2A2333; --gold:#E0B84C; --green:#7FB985; --honey:#E0AC4C;
+  }
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; background:var(--bg); color:var(--fg);
+  font-family:"Pretendard","Pretendard Variable",-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Segoe UI","Malgun Gothic",sans-serif;
+  font-size:17px; line-height:1.85; letter-spacing:-0.011em; -webkit-font-smoothing:antialiased;
+}
+@media (min-width:700px){ body{font-size:18px} }
+.wrap{max-width:680px; margin:0 auto; padding:0 22px 90px}
+
+.hero{padding:56px 0 30px; text-align:center; border-bottom:1px solid var(--rule)}
+.hero .kicker{font-size:.82em; letter-spacing:.14em; color:var(--muted); text-transform:uppercase; margin-bottom:16px}
+.hero .rune{font-size:2.2em; line-height:1; margin-bottom:14px}
+.hero h1{font-size:1.85em; line-height:1.32; letter-spacing:-0.03em; font-weight:800; margin:.1em 0 .35em}
+@media (min-width:700px){ .hero h1{font-size:2.25em} }
+.hero .sub{color:var(--fg-soft); font-size:1.05em; font-style:italic; max-width:31em; margin:0 auto}
+.hero .meta{margin-top:20px; font-size:.8em; color:var(--muted)}
+
+.counts{display:flex; justify-content:center; gap:8px; flex-wrap:wrap; margin:22px 0 4px}
+.counts .b{padding:6px 13px; border-radius:999px; background:var(--bg-soft); border:1px solid var(--rule); font-size:.82em; font-weight:700}
+.counts .b .n{color:var(--accent)}
+
+.pull{margin:38px 0; padding:6px 0 6px 22px; border-left:3px solid var(--accent);
+  font-size:1.18em; line-height:1.6; font-weight:600; letter-spacing:-0.02em}
+.pull small{display:block; margin-top:8px; font-size:.62em; font-weight:500; color:var(--muted); font-style:normal}
+
+b{color:var(--warm); font-weight:700}
+u{text-decoration:none; background:linear-gradient(180deg,transparent 62%,rgba(29,78,216,.16) 62%); padding:0 2px}
+mark{background:rgba(255,214,64,.42); padding:1px 5px; border-radius:4px; font-weight:600; color:inherit}
+@media (prefers-color-scheme: dark){ mark{background:rgba(226,180,60,.28)} }
+
+section.card{border-top:1px solid var(--rule); padding-top:14px; margin-top:8px}
+details.sec{margin:0}
+details.sec>summary{
+  list-style:none; cursor:pointer; padding:20px 0 18px;
+  font-size:1.24em; font-weight:800; letter-spacing:-0.028em; line-height:1.35;
+  display:flex; gap:14px; align-items:baseline;
+}
+details.sec>summary::-webkit-details-marker{display:none}
+.sec-num{flex:0 0 auto; font-size:.62em; font-weight:800; color:var(--accent)}
+.sec-body{padding-bottom:14px}
+.sec-body>p:first-child{margin-top:0}
+
+p{margin:.9em 0}
+h3{font-size:1.05em; font-weight:800; letter-spacing:-0.02em; margin:1.4em 0 .5em}
+.lead{font-size:1.05em; color:var(--fg-soft)}
+
+.co{margin:18px 0; padding:16px 18px; border-radius:12px; border-left:3px solid var(--accent);
+  background:linear-gradient(100deg, rgba(29,78,216,.07), transparent 70%); font-size:.98em}
+.co.magic{border-left-color:var(--magic); background:linear-gradient(100deg,var(--magic-bg),transparent 70%)}
+.co.warm{border-left-color:var(--warm); background:linear-gradient(100deg,rgba(184,69,31,.09),transparent 70%)}
+.co.gold{border-left-color:var(--gold); background:linear-gradient(100deg,rgba(184,134,11,.10),transparent 70%)}
+.co.green{border-left-color:var(--green); background:linear-gradient(100deg,rgba(62,124,67,.10),transparent 70%)}
+.co .co-t{font-weight:800; margin-bottom:4px; letter-spacing:-0.02em}
+.co.magic .co-t{color:var(--magic)} .co.gold .co-t{color:var(--gold)} .co.green .co-t{color:var(--green)}
+
+.chips{display:flex; flex-wrap:wrap; gap:8px; margin:26px 0 8px}
+.chip{font-size:.85em; font-weight:600; text-decoration:none; color:var(--fg-soft);
+  padding:7px 13px; border:1px solid var(--rule); border-radius:999px; background:var(--bg-soft)}
+.chip:hover{border-color:var(--accent); color:var(--accent)}
+
+.you{margin:14px 0; padding:11px 14px; border-radius:10px; background:var(--bg-soft);
+  font-size:.9em; color:var(--muted); border:1px solid var(--rule)}
+.you b{color:var(--fg-soft)}
+
+/* theory card w/ grade */
+.theory{margin:14px 0; padding:14px 16px; border:1px solid var(--rule); border-radius:12px; background:var(--bg-soft)}
+.theory .th{font-weight:800; letter-spacing:-0.02em; display:flex; gap:8px; align-items:baseline; flex-wrap:wrap}
+.theory .th .grade{font-size:.7em; font-weight:700; padding:2px 8px; border-radius:999px; background:var(--bg); border:1px solid var(--rule)}
+.theory .th .who{font-size:.72em; color:var(--muted); font-weight:600}
+.theory .td{font-size:.94em; margin-top:5px; color:var(--fg-soft)}
+.theory .td b{color:var(--fg)}
+
+/* compare table */
+.tbl{overflow-x:auto; margin:18px 0}
+table{border-collapse:collapse; width:100%; font-size:.92em}
+th,td{text-align:left; padding:10px 12px; border-bottom:1px solid var(--rule); vertical-align:top}
+th{font-weight:800; font-size:.85em; letter-spacing:.02em}
+th.no{color:var(--warm)} th.ok{color:var(--green)}
+
+/* SVG knot */
+.knot{margin:22px 0; padding:18px 10px; border:1px solid var(--rule); border-radius:14px; background:var(--bg-soft)}
+.knot svg{width:100%; height:auto; display:block}
+.knot .cap{text-align:center; font-size:.85em; color:var(--muted); margin-top:8px}
+
+/* interrogation rooms */
+.room{margin:18px 0; border:1px solid var(--rule); border-radius:14px; overflow:hidden}
+.room .rh{padding:13px 16px; font-weight:800; letter-spacing:-0.02em; background:var(--bg-soft); border-bottom:1px solid var(--rule); display:flex; gap:10px; align-items:baseline}
+.room .rh .tag{font-size:.68em; font-weight:800; color:#fff; background:var(--accent); padding:3px 9px; border-radius:999px; letter-spacing:.05em}
+.room.rA .rh .tag{background:var(--magic)} .room.rB .rh .tag{background:var(--warm)}
+.room.rC .rh .tag{background:var(--accent)} .room.rD .rh .tag{background:var(--gold)}
+.room.rE .rh .tag{background:var(--green)} .room.rF .rh .tag{background:var(--honey)}
+.room .q{padding:12px 16px; border-bottom:1px dashed var(--rule); font-size:.95em}
+.room .q:last-child{border-bottom:none}
+.room .q .qn{font-weight:800; color:var(--accent); margin-right:6px}
+.blank{display:inline-block; min-width:90px; border-bottom:2px dotted var(--muted); height:1em; vertical-align:baseline}
+
+.finale{margin-top:44px; padding:34px 0 0; border-top:2px solid var(--fg); text-align:center}
+.finale .rune{font-size:1.7em}
+.finale .big{font-size:1.28em; font-weight:800; letter-spacing:-0.03em; line-height:1.55; margin:.4em 0}
+.foot{margin-top:44px; padding-top:18px; border-top:1px solid var(--rule); font-size:.78em; color:var(--muted); text-align:center}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <div class="kicker">프리렌으로 배우는 AI 시대 · 4-2부</div>
+    <div class="rune">🫆</div>
+    <h1>"자아가 없다"고 말한<br>사람의 글에서<br>지문이 5개 나왔다</h1>
+    <p class="sub">당신의 4부 낙서를 한 줄씩 감식했어요. 결론: 자아는 '선언'에 없고, <u>짜증과 부러움</u>에 찍혀 있어요.</p>
+    <div class="meta">당신 문장 인용 9곳 · 심리학 이론 6개(출처등급 부착) · 심문 20문 · 매듭 1개</div>
+  </header>
+
+  <div class="counts">
+    <span class="b">인용 <span class="n">9</span></span>
+    <span class="b">이론 <span class="n">6</span></span>
+    <span class="b">심문 <span class="n">20</span></span>
+    <span class="b">매듭 <span class="n">1</span></span>
+    <span class="b">일탈 <span class="n">1</span>🎢</span>
+  </div>
+
+  <div class="co gold" style="margin-top:26px">
+    <div class="co-t">🎯 30초 요약</div>
+    <p style="margin:.4em 0 0">당신은 "독특한 자아 같은 건 없삼"이라 했어요. 그런데 그 글에서 <b>다섯 가닥의 일관된 무늬</b>가 나왔어요 — ①사람을 움직이는 심리 설계 ②지식의 직관적 전달 ③게임식 즉시 피드백 ④교육(후배·육아·청소년) ⑤진료 설득의 반복. 이 다섯이 전부 <mark>한 매듭</mark>으로 묶여요: <u>"사람이 저절로 움직이고, 저절로 이해하게 만드는 구조를 설계하는 사람."</u> 자아가 없는 게 아니라, 자아가 <b>설명서가 아니라 지문</b>으로 존재하는 거예요.</p>
+  </div>
+
+  <nav class="chips">
+    <a class="chip" href="#s1">🪞 남의 목표 빌리기</a>
+    <a class="chip" href="#s2">😤 귀찮음 감식</a>
+    <a class="chip" href="#s3">🔁 반복 = 원석</a>
+    <a class="chip" href="#s4">😍 부러움 = 열쇠</a>
+    <a class="chip" href="#s5">🫆 지문 5→1</a>
+    <a class="chip" href="#s6">🎮 게임 욕구</a>
+    <a class="chip" href="#s7">🎢 일탈: 디즈니</a>
+    <a class="chip" href="#s8">🔦 심문실 20문</a>
+  </nav>
+
+  <!-- S1 -->
+  <section class="card" id="s1">
+    <details class="sec" open>
+      <summary><span class="sec-num">01</span> "남의 목표를 빌린다" — 결함이 아니라 인간의 기본 사양</summary>
+      <div class="sec-body">
+        <div class="you">🗣️ 당신: <b>"나는 나만의 목표가 없음. 남의 목표를 빌려서 남들이 좋다고 할 만한 걸 이루는 게 최고임. 어차피 절대적인 것도 없고 다 상대적이니까… 독특한 자아 같은 건 없삼."</b></div>
+        <p class="lead">이 말, 부끄러워할 게 아니라 <b>철학사에서 가장 유명한 통찰 중 하나</b>랑 정확히 같아요.</p>
+        <div class="theory">
+          <div class="th">모방 욕망 (mimetic desire) <span class="who">르네 지라르, 『낭만적 거짓과 소설적 진실』 1961</span> <span class="grade">🟢 A · 인문학 고전</span></div>
+          <div class="td">인간은 <b>타인의 욕망을 욕망한다.</b> 아기가 말을 모방으로 배우듯, 욕망도 모방으로 배워요. "순수하게 내 것인 욕망"은 낭만적 거짓말이고, <mark>모두가 남의 욕망을 빌려 살아요.</mark> 당신만 그런 게 아니라 — 그걸 <u>솔직하게 인정한 사람이 드물 뿐</u>이에요.</div>
+        </div>
+        <p>그래서 진짜 질문이 바뀌어요. <b>"내 욕망이냐 남의 욕망이냐"</b>가 아니라 — <mark>"누구의 욕망을 빌릴 것인가(모델 선택)"</mark>예요. 지금 당신의 모델은 '막연한 남들(군중 평균)'이에요. 군중의 욕망은 흐릿하고 서로 모순돼서(돈+동안+행복+커뮤니티+시간 전부!) 빌려와도 방향이 안 나와요. <u>모델을 군중 → 구체적 인물 3명으로 바꾸는 순간</u>, 빌린 욕망도 또렷해져요.</p>
+        <div class="co warm">
+          <div class="co-t">⚠️ 지라르의 경고 하나</div>
+          <p style="margin:.3em 0 0"><b>가까운 사람을 모델로 삼으면 경쟁(rivalry)이 돼요.</b> 옆 치과, 동기, SNS 이웃 — 이들과의 비교는 지옥행이에요. 모델은 <u>멀리 있는 사람</u>(닿을 일 없는 대가)으로 고르세요. 부러움이 질투가 아니라 나침반이 돼요.</p>
+        </div>
+        <p>그리고 "다 상대적이니까"에 한 마디 — 맞아요, 가치는 상대적일 수 있어요. 근데 <mark>당신의 짜증과 부러움은 관측 가능한 '데이터'예요.</mark> 상대주의도 지문은 못 지워요. 자아는 선언이 아니라 데이터에 있어요. 그 데이터를 지금부터 감식할게요. 🔍</p>
+      </div>
+    </details>
+  </section>
+
+  <!-- S2 -->
+  <section class="card" id="s2">
+    <details class="sec" open>
+      <summary><span class="sec-num">02</span> 귀찮음 감식 — 당신은 게으른 게 아니라 '결정'이 새는 것</summary>
+      <div class="sec-body">
+        <div class="you">🗣️ 당신: <b>"밥 뭐 먹을지, 집 가서 뭐 할지, 뭐 살지, 정리, 청소… 결정하고 생각해야 하는 모든 것들이 극히 귀찮음. 내가 관심 있는 부분이 아니면."</b> · <b>"근데 치아 깎는 건 별로 안 귀찮다."</b></div>
+        <p>이 두 문장을 나란히 놓으면 무늬가 보여요. 표로 감식할게요.</p>
+        <div class="tbl">
+          <table>
+            <thead><tr><th class="no">😤 귀찮은 것</th><th class="ok">😌 안 귀찮은 것</th></tr></thead>
+            <tbody>
+              <tr><td>밥·쇼핑·집안일 <b>결정</b></td><td>치아 깎기 (손기술·크래프트)</td></tr>
+              <tr><td>잇몸·신경·비용·임플란트 <b>반복 설명</b></td><td>잘 설계된 게임 (자율+즉시 결과)</td></tr>
+              <tr><td>AI·컴퓨터가 <b>한 번에 안 될 때</b></td><td>이런 생각 하고 설명하기 (지금 이 문서!)</td></tr>
+              <tr><td>IoT 없이 <b>수동으로</b> TV·에어컨</td><td>시스템 만들기·새로 창조하기</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>패턴이 하나로 수렴해요: 당신이 싫은 건 <b>노력이 아니라, 저관심 영역의 '결정'과 성과 없는 '반복'</b>이에요. 좋은 건 관심 영역의 <u>창조와 몰입</u>이고요. 이건 성격 결함이 아니라 교과서적 현상이에요.</p>
+        <div class="theory">
+          <div class="th">결정 피로 (decision fatigue) <span class="who">바우마이스터 자아고갈 연구 계열, 1998~</span> <span class="grade">🟡 B · 재현 논쟁 있음, 실무 유효</span></div>
+          <div class="td">결정은 할 때마다 정신 에너지를 소모하고, 하루 결정 총량이 많을수록 뒤로 갈수록 질이 떨어져요. (재현성 논쟁이 있어 🟡B — 하지만 실무 처방은 검증됨.) 그래서 오바마·잡스가 <b>같은 옷만 입은</b> 거예요: <mark>"사소한 결정을 줄여야 중요한 결정에 쓸 에너지가 남는다."</mark> 당신의 '극한 귀찮음'은 게으름이 아니라 — <u>결정 예산이 진료실에서 이미 소진</u>되고 있다는 신호예요. 하루 종일 진단·치료계획·설득이 전부 고강도 결정이잖아요.</div>
+        </div>
+        <div class="co green">
+          <div class="co-t">💊 처방 — 저관심 결정은 '죽이고', 고관심 결정에 몰빵</div>
+          <p style="margin:.3em 0 0">밥=<b>고정 로테이션</b>(월화수목 메뉴 박제), 쇼핑=<b>정기 구독+재구매 버튼</b>, 집=<b>IoT 씬 1개</b>("도착→불+에어컨+TV"는 당신 실력이면 주말 반나절), 정리=<b>동선 설계</b>(당신이 좋아하는 그 주제!). <mark>결정을 잘하려 하지 말고, 결정 자체를 없애세요.</mark> 그게 벌통이에요.</p>
+        </div>
+      </div>
+    </details>
+  </section>
+
+  <!-- S3 -->
+  <section class="card" id="s3">
+    <details class="sec">
+      <summary><span class="sec-num">03</span> 반복 설명 = 짜증이 아니라 '시장 검증 끝난 원석'</summary>
+      <div class="sec-body">
+        <div class="you">🗣️ 당신: <b>"잇몸치료랑 신경치료 설득, 치료계획·방문계획 대화, 비용 설명, 임플란트 어떤 거 고를지 설명… 굉장히 반복되는 거라서 굉장히 귀찮다."</b></div>
+        <p class="lead">여기서 관점 하나만 뒤집을게요. <mark>하루에 같은 설명을 N번 반복한다 = 그 설명에 하루 N명의 수요가 있다.</mark> 당신이 매일 짜증 내는 그 목록이, 사실은 <b>시장 검증이 이미 끝난 콘텐츠 기획서</b>예요.</p>
+        <p>잇몸치료 설득 · 신경치료 설득 · 비용 설명 · 임플란트 선택 — 이 4개는 전국 모든 치과에서 매일 수만 번 반복돼요. 이걸 <u>한 번만 잘 만들어서(영상·카드·챗봇) 시스템이 대신 설명하게</u> 하면: ①당신 짜증 소멸 ②환자 이해도 상승 ③다른 치과에 팔 수 있는 제품. <b>2-2부의 벌통 1호가 정확히 여기예요.</b> 그리고 이미 짓고 있잖아요 — 내원원칙 마스터, 임상위키, 리콜 프로그램. <mark>당신의 짜증 목록 = 당신의 제품 로드맵.</mark></p>
+        <div class="co">
+          <div class="co-t">🧲 덤: "직원만 잘 움직여주면 귀찮은 거 거의 없다"</div>
+          <p style="margin:.3em 0 0">이 문장도 지문이에요. 당신은 이미 <b>위임과 시스템으로 귀찮음을 지우는 데 성공한 경험</b>이 있어요. 그 성공 공식(사람+시스템에 반복을 넘긴다)을 설명·설득 영역으로 <u>한 칸만 확장</u>하면 돼요. 새로운 능력이 필요한 게 아니라, 이미 증명한 능력의 복사예요.</p>
+        </div>
+      </div>
+    </details>
+  </section>
+
+  <!-- S4 -->
+  <section class="card" id="s4">
+    <details class="sec">
+      <summary><span class="sec-num">04</span> 부러움 감식 — 돈·외모·커뮤니티·무한시간의 공통분모</summary>
+      <div class="sec-body">
+        <div class="you">🗣️ 당신: <b>"질투 부러움은 오로지 돈과 외모. 그리고 커뮤니티. 그리고 아무 때나 자유롭게 쓸 수 있는 무한한 시간. 객관적으로 별거 아니더라도 내가 가질 수 없으면 그저 부러움."</b></div>
+        <p>네 가지가 달라 보이지만, 화학 분석하면 <b>같은 원소</b>가 나와요:</p>
+        <div class="tbl">
+          <table>
+            <thead><tr><th>부러운 것</th><th>정체</th></tr></thead>
+            <tbody>
+              <tr><td>💰 돈</td><td>경제적 <b>선택권</b> — 뭐든 살 수 있는 상태</td></tr>
+              <tr><td>✨ 외모</td><td>사회적 <b>선택권</b> — 어디서든 환영받는 상태</td></tr>
+              <tr><td>👥 커뮤니티</td><td>관계적 <b>선택권</b> — 언제든 부를 사람이 있는 상태</td></tr>
+              <tr><td>⏳ 무한한 시간</td><td>가장 순수한 <b>선택권</b> — 뭐든 할 수 있는 상태</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>공통분모 = <mark>선택권(optionality), 즉 "잠긴 문이 없는 상태"</mark>. 그리고 결정적 한 방 — "객관적으로 별거 아니어도 <u>내가 가질 수 없으면</u> 부러움"이라 했죠? 그건 물건이 아니라 <b>'잠김' 그 자체</b>가 싫다는 뜻이에요. 당신의 진짜 갈망은 특정한 무엇이 아니라 <u>모든 문이 열려 있는 상태</u>예요.</p>
+        <div class="co magic">
+          <div class="co-t">🪞 아이러니 하나</div>
+          <p style="margin:.3em 0 0">4부에서 "뭘 하고 싶은지 모르겠다(=다 열려 있다)"를 <b>결핍</b>처럼 느꼈는데, 부러움 분석은 정확히 그 <b>'열림'을 갈망</b>한다고 나왔어요. 당신은 이미 자신이 부러워하는 상태의 일부(선택지가 열린 삶)를 살고 있어요. 그러니 목표는 특정 문 하나가 아니라 — <mark>열쇠 다발(= 2-2부의 복리 자산)</mark>을 만드는 거예요. 두 편이 여기서 딱 만나요.</p>
+        </div>
+      </div>
+    </details>
+  </section>
+
+  <!-- S5 knot -->
+  <section class="card" id="s5">
+    <details class="sec" open>
+      <summary><span class="sec-num">05</span> 지문 5가닥 → 매듭 1개</summary>
+      <div class="sec-body">
+        <div class="you">🗣️ 당신: <b>"사람을 유도하고 교육하고 세뇌하고 하네싱하는 것, 습관 형성, 환경 조성, 동선 배치… 육아, 교육학, 가치관 형성, 청소년심리학, 만화란… 너무 많다."</b> · <b>"모든 지식은 눈과 귀와 직관으로 훨씬 쉽게 전달될 수 있는데, 직관적으로 전달 안 되는 것들이 모두 다 거슬린다."</b></div>
+        <p class="lead">"너무 많다"고 했죠? 아니에요. 감식 결과 — <b>전부 한 가닥</b>이에요.</p>
+
+        <div class="knot">
+          <svg viewBox="0 0 620 240" xmlns="http://www.w3.org/2000/svg" aria-label="5가닥이 한 매듭으로">
+            <path d="M10,30 C160,30 220,110 320,118" fill="none" stroke="#5B3A8C" stroke-width="4" opacity=".85"/>
+            <path d="M10,72 C160,72 230,112 320,118" fill="none" stroke="#B8451F" stroke-width="4" opacity=".85"/>
+            <path d="M10,118 C160,118 240,118 320,118" fill="none" stroke="#1D4ED8" stroke-width="4" opacity=".85"/>
+            <path d="M10,164 C160,164 230,124 320,118" fill="none" stroke="#3E7C43" stroke-width="4" opacity=".85"/>
+            <path d="M10,206 C160,206 220,126 320,118" fill="none" stroke="#B8860B" stroke-width="4" opacity=".85"/>
+            <circle cx="330" cy="118" r="13" fill="#1D4ED8"/>
+            <path d="M343,118 L610,118" stroke="#1D4ED8" stroke-width="8" stroke-linecap="round"/>
+            <text x="14" y="22" font-size="13" font-weight="700" fill="#5B3A8C">① 심리 유도·습관·환경·동선</text>
+            <text x="14" y="64" font-size="13" font-weight="700" fill="#B8451F">② 지식의 직관적 전달·만화</text>
+            <text x="14" y="110" font-size="13" font-weight="700" fill="#1D4ED8">③ 게임 설계·즉시 피드백</text>
+            <text x="14" y="156" font-size="13" font-weight="700" fill="#3E7C43">④ 교육·육아·후배·가치관</text>
+            <text x="14" y="198" font-size="13" font-weight="700" fill="#B8860B">⑤ 진료 설득·설명의 반복</text>
+            <text x="475" y="102" font-size="14" font-weight="800" fill="#1D4ED8" text-anchor="middle">구조 설계자</text>
+          </svg>
+          <div class="cap">다섯 관심사는 산만한 게 아니라, 한 매듭의 다섯 가닥이에요.</div>
+        </div>
+
+        <p style="text-align:center; font-size:1.12em; font-weight:800; letter-spacing:-0.02em; margin:20px 0"><mark>"사람이 저절로 움직이고, 저절로 이해하게<br>만드는 구조를 설계하는 사람"</mark></p>
+
+        <p>이게 지어낸 말이 아니라 <b>직업으로 존재하는 크래프트</b>예요:</p>
+        <div class="theory">
+          <div class="th">선택 설계 (choice architecture) <span class="who">탈러 & 선스타인 『넛지』 2008 · 노벨경제학상 2017</span> <span class="grade">🟢 A · 노벨상 검증</span></div>
+          <div class="td">선택지를 <b>어떻게 배치하느냐</b>가 사람들의 결정을 바꿔요(기본값·순서·프레임). 당신이 말한 "별생각 없는 중간 평균의 사람들을 유도"가 학문 이름으로는 이거예요. 한 줄 윤리 기준까지 있어요: <mark>상대의 이익 방향 + 투명하면 '설계', 내 이익 방향 + 은폐면 '조종'.</mark> 당신의 리콜 프로그램(환자가 제때 와서 건강해지고 치과도 버는 것)은 정확히 전자예요. '세뇌'라는 단어를 쓸 필요가 없어요 — 이미 윤리적인 쪽을 하고 있으니까.</div>
+        </div>
+        <div class="theory">
+          <div class="th">인지부하 · 이중부호화 <span class="who">스웰러 1988 · 파이비오 1971</span> <span class="grade">🟢 A · 교육심리 표준</span></div>
+          <div class="td">"지식이 직관적으로 전달 안 돼서 거슬린다"는 당신 짜증 — 학문적으로 정확해요. 작업기억은 좁고(인지부하), <b>글+그림을 함께</b> 쓰면 기억 회로가 2배로 열려요(이중부호화). 당신이 만화·시각화에 끌리는 건 취향이 아니라 <u>이 원리를 몸으로 아는 것</u>이에요.</div>
+        </div>
+
+        <div class="co gold">
+          <div class="co-t">🫆 결정적 증거 — 당신이 이미 만든 것들</div>
+          <p style="margin:.3em 0 0">"자아 없삼"이라는 선언과 달리, 행동 기록은 일관돼요: <b>리콜 프로그램</b>(=환자 행동 설계) · <b>임상위키·내원원칙</b>(=지식의 직관적 전달) · <b>진행 대시보드</b>(=팀의 정보 동선 설계) · 그리고 지금 이 순간에도 <b>"읽는 맛 나게, 시각적으로 확 느껴지게"</b>를 요구하는 것. <mark>당신은 이 정체성을 '가질지 말지' 고민하는 게 아니라, 이미 수년째 실행 중이에요.</mark> 선언만 안 했을 뿐.</p>
+        </div>
+      </div>
+    </details>
+  </section>
+
+  <!-- S6 -->
+  <section class="card" id="s6">
+    <details class="sec">
+      <summary><span class="sec-num">06</span> 게임을 계속하고 싶은 이유 — 그대로 일에 이식하기</summary>
+      <div class="sec-body">
+        <div class="you">🗣️ 당신: <b>"엄청 잘 설계해놓은 게임들 — 도파민을 그때그때 만들어주고, 눈앞의 것들을 바로바로 결과물로 보여주고, 창조적으로 만들어나가는 느낌 (기획자의 의도대로라기보다 자율성이 있는 무언가)."</b></div>
+        <p>이 한 문장에 심리학 교과서 두 챕터가 그대로 들어 있어요:</p>
+        <div class="theory">
+          <div class="th">자기결정이론 (SDT) <span class="who">데시 & 라이언 1985</span> <span class="grade">🟢 A · 동기심리 표준</span></div>
+          <div class="td">인간 동기의 3연료 = <b>자율성 · 유능감 · 관계성</b>. 당신이 "기획자 의도 말고 자율성"이라 한 건 자율성, "바로바로 결과물"은 유능감 피드백. <mark>당신의 동기 엔진은 고장 난 게 아니라, 연료 규격이 명확한 거예요.</mark> 참고로 "AI가 한 번에 안 만들어질 때 젤 짜증"도 같은 원리 — 유능감 피드백이 끊길 때의 정상 반응이에요.</div>
+        </div>
+        <div class="theory">
+          <div class="th">몰입 (flow) <span class="who">칙센트미하이 1990</span> <span class="grade">🟢 A</span></div>
+          <div class="td">몰입의 3조건 = <b>명확한 목표 + 즉시 피드백 + 난이도-실력 균형</b>. 잘 만든 게임이 이 3개를 인공적으로 공급하는 기계예요. 반대로 당신의 귀찮은 일들(반복 설명·행정)은 3개 다 없죠 — 목표 모호, 피드백 느림, 난이도 지루.</div>
+        </div>
+        <div class="co green">
+          <div class="co-t">💊 처방 — 일을 게임 루프로 개조</div>
+          <p style="margin:.3em 0 0">①<b>즉시 보이는 결과물</b>: 뭘 하든 그날 눈에 보이는 v0.1로 끝내기(HTML 한 장, 카드 한 장 — 오늘 우리가 하는 것처럼). ②<b>자율성</b>: 방법은 항상 내 방식대로(이미 그러고 있음). ③<b>창조 느낌</b>: 소비(쇼츠)가 아니라 생산(만들기)에서 도파민 얻기. <mark>사실 당신이 Claude Code로 노는 방식이 이미 게임이에요</mark> — 그 감각을 진료 시스템 만들기에 그대로 이식하면 돼요.</p>
+        </div>
+      </div>
+    </details>
+  </section>
+
+  <!-- S7 detour -->
+  <section class="card" id="s7">
+    <details class="sec">
+      <summary><span class="sec-num">07</span> 🎢 허락된 일탈 — 디즈니랜드는 세상에서 가장 '설계된' 곳</summary>
+      <div class="sec-body">
+        <p class="lead">약속한 대로 조끔 샛길로 가요. 당신 관심(동선·환경·유도)이 <b>직업급 크래프트</b>라는 증거를, 전혀 다른 세계에서.</p>
+        <p>디즈니랜드의 별명은 "지구에서 가장 행복한 곳"이죠. 그런데 이매지니어(Imagineer)들의 관점에선 — <mark>지구에서 가장 정밀하게 설계된 곳</mark>이에요:</p>
+        <p>• <b>강제 원근법</b>: 성의 위층 벽돌을 점점 작게 쌓아 실제보다 훨씬 높아 보이게. 감동도 설계돼요.<br>
+        • <b>스멜리처(Smellitizer)</b>: 메인스트리트에 팝콘·바닐라 냄새를 기계로 분사 — 후각으로 기분을 조종.<br>
+        • <b>대기줄 심리 설계</b>: 예상 대기시간을 일부러 부풀려 표시 → 실제론 더 빨리 타게 되고 → 사람들은 "운이 좋았다"고 느껴요. <u>기대 관리 = 만족 설계.</u><br>
+        • <b>쓰레기통 30보 규칙</b>: 월트 디즈니가 직접 팝콘을 먹으며 걸어보고 "사람이 쓰레기를 들고 걷는 한계 = 약 30보"를 측정 → 30보마다 쓰레기통 배치. 그래서 디즈니랜드는 깨끗해요. <b>도덕 교육이 아니라 동선 설계로.</b></p>
+        <div class="co magic">
+          <div class="co-t">🧲 샛길에서 주워온 통찰 — 그리고 본길로 복귀</div>
+          <p style="margin:.3em 0 0">행복·청결·감동 같은 '마음의 일'도 <b>환경과 동선으로 설계 가능</b>하고, 그걸 직업으로 하는 사람들이 수천 명 있어요. 당신이 "습관·환경·동선 배치"에 끌리는 건 잡학이 아니라 이 크래프트의 재능이에요. 그리고 본길로: <mark>치과는 당신의 디즈니랜드가 될 수 있어요.</mark> 환자의 불안 동선, 설명의 순서, 대기실 경험, 리콜의 타이밍 — 전부 이매지니어링 대상이에요. 쓰레기통 30보 규칙의 치과 버전을 만드는 사람, 아직 거의 없어요.</p>
+        </div>
+      </div>
+    </details>
+  </section>
+
+  <!-- S8 interrogation -->
+  <section class="card" id="s8">
+    <details class="sec" open>
+      <summary><span class="sec-num">08</span> 🔦 심문실 — 20문 (4-3부의 원료)</summary>
+      <div class="sec-body">
+        <p class="lead">요청대로 심문 많이 준비했어요. 규칙은 하나 — <b>한 줄씩, 지저분하게, 오타 그대로</b> 답하세요. 아까처럼요. 그 덤프를 나한테 던지면 그게 <mark>4-3부</mark>가 돼요. 20개 다 할 필요 없어요, <u>15개면 충분.</u></p>
+
+        <div class="room rA">
+          <div class="rh"><span class="tag">ROOM A</span> 모델 고르기 — 누구의 욕망을 빌릴까</div>
+          <div class="q"><span class="qn">Q1.</span> 부러운 사람 <b>구체적 실명 3명</b> (아는 사람 말고, 멀리 있는 사람): <span class="blank"></span> <span class="blank"></span> <span class="blank"></span></div>
+          <div class="q"><span class="qn">Q2.</span> 그 3명의 공통점을 <b>한 단어</b>로: <span class="blank"></span></div>
+          <div class="q"><span class="qn">Q3.</span> 돈·외모 빼고, 그들에게서 부러운 <b>세 번째 것</b>은? <span class="blank"></span></div>
+        </div>
+
+        <div class="room rB">
+          <div class="rh"><span class="tag">ROOM B</span> 결정 죽이기 — 결정 피로 회수</div>
+          <div class="q"><span class="qn">Q4.</span> 매주 반복되는 저관심 결정 3개 (예: 저녁 메뉴): <span class="blank"></span></div>
+          <div class="q"><span class="qn">Q5.</span> 그중 1개를 규칙으로 죽인다면: "매주 <span class="blank"></span>는 무조건 <span class="blank"></span>"</div>
+          <div class="q"><span class="qn">Q6.</span> 홈 IoT 첫 씬을 만든다면: "집 도착 → <span class="blank"></span>"</div>
+        </div>
+
+        <div class="room rC">
+          <div class="rh"><span class="tag">ROOM C</span> 반복 → 제품 — 벌통 1호 후보</div>
+          <div class="q"><span class="qn">Q7.</span> 이번 주 <b>3번 이상 반복한</b> 환자 설명 하나: <span class="blank"></span></div>
+          <div class="q"><span class="qn">Q8.</span> 그게 영상/카드 1장이 된다면 제목: "<span class="blank"></span>"</div>
+          <div class="q"><span class="qn">Q9.</span> 그걸 시스템이 대신하면 하루 몇 분 아껴지나: <span class="blank"></span>분</div>
+        </div>
+
+        <div class="room rD">
+          <div class="rh"><span class="tag">ROOM D</span> 부러움 → 열쇠 — 잠긴 문의 정체</div>
+          <div class="q"><span class="qn">Q10.</span> 최근에 "쉽게 못 가져서" 부러웠던 것 1개: <span class="blank"></span></div>
+          <div class="q"><span class="qn">Q11.</span> 그게 생기면 <b>그걸로 뭘 할</b> 건가? (이게 진짜 욕망): <span class="blank"></span></div>
+          <div class="q"><span class="qn">Q12.</span> 무한한 시간이 생기면 <b>첫 한 달</b>에 구체적으로 뭐 하나: <span class="blank"></span></div>
+        </div>
+
+        <div class="room rE">
+          <div class="rh"><span class="tag">ROOM E</span> 게임 루프 — 몰입의 재료 찾기</div>
+          <div class="q"><span class="qn">Q13.</span> 최근 시간이 순삭됐던 순간 1개: <span class="blank"></span></div>
+          <div class="q"><span class="qn">Q14.</span> 그때 '바로 눈에 보인 결과물'은 뭐였나: <span class="blank"></span></div>
+          <div class="q"><span class="qn">Q15.</span> 내 일에서 그런 즉시-피드백을 만들 수 있는 지점 1개: <span class="blank"></span></div>
+        </div>
+
+        <div class="room rF">
+          <div class="rh"><span class="tag">ROOM F</span> ⭐ 지문 검증 — 가장 중요한 방</div>
+          <div class="q"><span class="qn">Q16.</span> 이 문장을 <b>네 단어로 고쳐 쓰기</b>: "나는 [<span class="blank"></span>]이 저절로 [<span class="blank"></span>]하게 만드는 [<span class="blank"></span>]를 설계하는 사람이다"</div>
+          <div class="q"><span class="qn">Q17.</span> 이 문장이 80% 맞다면, <b>어긋나는 20%</b>는 어디인가: <span class="blank"></span></div>
+          <div class="q"><span class="qn">Q18.</span> 이 정체성으로 <b>이미 만든 것</b> 3개 (힌트: 리콜·위키·HTML…): <span class="blank"></span></div>
+          <div class="q"><span class="qn">Q19.</span> 이 정체성으로 <b>아직 안 만든 것</b> 중 제일 가슴 뛰는 것 1개: <span class="blank"></span></div>
+          <div class="q"><span class="qn">Q20.</span> 그걸 만들면 <b>제일 먼저 좋아할 사람 1명</b>은 누구: <span class="blank"></span></div>
+        </div>
+
+        <div class="co gold">
+          <div class="co-t">📮 4-3부 만드는 법</div>
+          <p style="margin:.3em 0 0">답을 채팅에 <b>아무렇게나 던지세요</b> (문장 안 다듬어도 됨, 아까 그 스타일이 최고의 원료였어요). 특히 <mark>ROOM F의 Q16</mark>은 꼭 — 그 한 문장이 당신의 북극성 초안이 되고, 4-3부는 그걸 검증·반박·정련하는 편이 될 거예요.</p>
+        </div>
+      </div>
+    </details>
+  </section>
+
+  <div class="finale">
+    <div class="rune">🫆✨</div>
+    <p class="big">"독특한 자아는 없삼"이라고 쓴 그 글이,<br>지금까지 본 것 중 가장 <u>독특한 자아</u>였어요.</p>
+    <p style="color:var(--fg-soft); margin-top:18px">자아는 선언에 없어요. <b>짜증과 부러움과 몰입</b>에 찍혀 있어요.<br>당신의 지문: <mark>사람이 저절로 움직이고 저절로 이해하게 만드는 구조의 설계자.</mark><br>이제 심문실 20문에 답하고 — 4-3부에서 만나요.</p>
+  </div>
+
+  <div class="foot">
+    프리렌으로 배우는 AI 시대 · 4-2부 — "자아가 없다"는 사람의 지문<br>
+    지라르 미메시스 🟢 · 결정피로 🟡 · 넛지 🟢 · 인지부하 🟢 · SDT 🟢 · 몰입 🟢 · 디즈니 이매지니어링 🎢
+  </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>실행 편 — 다짐은 30년 실패, 충동은 팍팍 되는 사람</title>
+<style>
+:root{
+  --bg:#FBFAF7; --bg-soft:#F4F1EA; --fg:#1F1F1F; --fg-soft:#3A3A3A;
+  --muted:#6E6E6E; --rule:#E8E3D6; --accent:#1D4ED8; --warm:#B8451F;
+  --magic:#5B3A8C; --magic-bg:#F1ECF7; --gold:#B8860B; --green:#3E7C43; --red:#B02A1F; --teal:#0E7C86;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#1A1816; --bg-soft:#252220; --fg:#E8E4DC; --fg-soft:#C7C2B8;
+    --muted:#9A968D; --rule:#36322C; --accent:#7AB0FF; --warm:#E89464;
+    --magic:#C9A9F0; --magic-bg:#2A2333; --gold:#E0B84C; --green:#7FB985; --red:#F08A7E; --teal:#4FC3CE;
+  }
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; background:var(--bg); color:var(--fg);
+  font-family:"Pretendard","Pretendard Variable",-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Segoe UI","Malgun Gothic",sans-serif;
+  font-size:17px; line-height:1.85; letter-spacing:-0.011em; -webkit-font-smoothing:antialiased;
+}
+@media (min-width:700px){ body{font-size:18px} }
+.wrap{max-width:680px; margin:0 auto; padding:0 22px 90px}
+
+.hero{padding:56px 0 30px; text-align:center; border-bottom:1px solid var(--rule)}
+.hero .kicker{font-size:.82em; letter-spacing:.14em; color:var(--muted); text-transform:uppercase; margin-bottom:16px}
+.hero .rune{font-size:2.2em; line-height:1; margin-bottom:14px}
+.hero h1{font-size:1.72em; line-height:1.32; letter-spacing:-0.03em; font-weight:800; margin:.1em 0 .35em}
+@media (min-width:700px){ .hero h1{font-size:2.05em} }
+.hero .sub{color:var(--fg-soft); font-size:1.05em; font-style:italic; max-width:31em; margin:0 auto}
+.hero .meta{margin-top:20px; font-size:.8em; color:var(--muted)}
+
+.counts{display:flex; justify-content:center; gap:8px; flex-wrap:wrap; margin:22px 0 4px}
+.counts .b{padding:6px 13px; border-radius:999px; background:var(--bg-soft); border:1px solid var(--rule); font-size:.82em; font-weight:700}
+.counts .b .n{color:var(--accent)}
+
+b{color:var(--warm); font-weight:700}
+u{text-decoration:none; background:linear-gradient(180deg,transparent 62%,rgba(29,78,216,.16) 62%); padding:0 2px}
+mark{background:rgba(255,214,64,.42); padding:1px 5px; border-radius:4px; font-weight:600; color:inherit}
+@media (prefers-color-scheme: dark){ mark{background:rgba(226,180,60,.28)} }
+
+.pull{margin:32px 0; padding:6px 0 6px 22px; border-left:3px solid var(--accent);
+  font-size:1.15em; line-height:1.6; font-weight:600; letter-spacing:-0.02em}
+.pull small{display:block; margin-top:8px; font-size:.6em; font-weight:500; color:var(--muted); font-style:normal}
+
+section.card{border-top:1px solid var(--rule); padding-top:14px; margin-top:8px}
+details.sec{margin:0}
+details.sec>summary{
+  list-style:none; cursor:pointer; padding:20px 0 16px;
+  font-size:1.18em; font-weight:800; letter-spacing:-0.028em; line-height:1.4;
+  display:flex; gap:12px; align-items:baseline;
+}
+details.sec>summary::-webkit-details-marker{display:none}
+.sec-num{flex:0 0 auto; font-size:.62em; font-weight:800; color:var(--accent)}
+.sec-body{padding-bottom:14px}
+.sec-body>p:first-child{margin-top:0}
+
+p{margin:.9em 0}
+h3{font-size:1.03em; font-weight:800; letter-spacing:-0.02em; margin:1.4em 0 .5em}
+.lead{font-size:1.05em; color:var(--fg-soft)}
+
+.co{margin:18px 0; padding:16px 18px; border-radius:12px; border-left:3px solid var(--accent);
+  background:linear-gradient(100deg, rgba(29,78,216,.07), transparent 70%); font-size:.98em}
+.co.magic{border-left-color:var(--magic); background:linear-gradient(100deg,var(--magic-bg),transparent 70%)}
+.co.gold{border-left-color:var(--gold); background:linear-gradient(100deg,rgba(184,134,11,.10),transparent 70%)}
+.co.green{border-left-color:var(--green); background:linear-gradient(100deg,rgba(62,124,67,.10),transparent 70%)}
+.co.red{border-left-color:var(--red); background:linear-gradient(100deg,rgba(176,42,31,.09),transparent 70%)}
+.co.teal{border-left-color:var(--teal); background:linear-gradient(100deg,rgba(14,124,134,.1),transparent 70%)}
+.co .co-t{font-weight:800; margin-bottom:4px; letter-spacing:-0.02em}
+.co.magic .co-t{color:var(--magic)} .co.gold .co-t{color:var(--gold)} .co.green .co-t{color:var(--green)} .co.red .co-t{color:var(--red)} .co.teal .co-t{color:var(--teal)}
+
+.yourwords{margin:16px 0; padding:15px 17px; border-radius:12px; background:var(--magic-bg); border:1px dashed var(--magic); font-size:.97em; line-height:1.75}
+.yourwords .yl{font-size:.72em; font-weight:800; letter-spacing:.08em; color:var(--magic); text-transform:uppercase; margin-bottom:5px}
+
+.chips{display:flex; flex-wrap:wrap; gap:8px; margin:24px 0 8px}
+.chip{font-size:.85em; font-weight:600; text-decoration:none; color:var(--fg-soft);
+  padding:7px 13px; border:1px solid var(--rule); border-radius:999px; background:var(--bg-soft)}
+.chip:hover{border-color:var(--accent); color:var(--accent)}
+
+.tbl{overflow-x:auto; margin:18px 0}
+table{border-collapse:collapse; width:100%; font-size:.9em}
+th,td{text-align:left; padding:10px 12px; border-bottom:1px solid var(--rule); vertical-align:top}
+th{font-weight:800; font-size:.84em; color:var(--muted)}
+th.no{color:var(--red)} th.ok{color:var(--green)}
+td:first-child{font-weight:700; color:var(--fg-soft)}
+
+.recipe{margin:16px 0; padding:15px 17px; border-radius:12px; background:var(--bg-soft); border:1px solid var(--rule)}
+.recipe .rt{font-size:.72em; font-weight:800; letter-spacing:.06em; color:var(--teal); text-transform:uppercase; margin-bottom:6px}
+.recipe .line{font-size:1.02em; line-height:1.7}
+.recipe .line b{color:var(--warm)}
+.recipe .an{color:var(--teal); font-weight:700}
+.recipe .be{color:var(--accent); font-weight:700}
+.recipe .ce{color:var(--gold); font-weight:700}
+
+.step{padding:13px 0; border-bottom:1px dashed var(--rule)}
+.step:last-child{border-bottom:none}
+.step .sh{font-weight:800; letter-spacing:-0.02em}
+.step .sh .num{color:var(--accent)}
+.step .sd{font-size:.93em; color:var(--fg-soft); margin-top:2px}
+
+.finale{margin-top:44px; padding:34px 0 0; border-top:2px solid var(--fg); text-align:center}
+.finale .rune{font-size:1.7em}
+.finale .big{font-size:1.24em; font-weight:800; letter-spacing:-0.03em; line-height:1.55; margin:.4em 0}
+.foot{margin-top:44px; padding-top:18px; border-top:1px solid var(--rule); font-size:.78em; color:var(--muted); text-align:center}
+.srcline{font-size:.82em; color:var(--muted)} .srcline a{color:var(--accent); text-decoration:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <div class="kicker">프리렌으로 배우는 AI 시대 · 실행 편</div>
+    <div class="rune">⚡</div>
+    <h1>다짐은 30년 다 실패,<br>충동은 팍팍 되는 사람</h1>
+    <p class="sub">"평생 아무것도 못 이뤘다"고 했지만 — 당신은 <u>실행력이 없는 게 아니라, 남의 실행법을 30년 빌려 쓴</u> 거예요. 당신 엔진은 따로 있어요.</p>
+    <div class="meta">이번 편은 위로가 아니라 진단이에요. 당신 스스로 증거를 다 줬어요</div>
+  </header>
+
+  <div class="counts">
+    <span class="b">실패한 방식 <span class="n">다짐형</span></span>
+    <span class="b">되는 방식 <span class="n">충동형</span></span>
+    <span class="b">전환 기술 <span class="n">4</span></span>
+    <span class="b">오늘 실험 <span class="n">1</span></span>
+  </div>
+
+  <div class="co gold" style="margin-top:26px">
+    <div class="co-t">🎯 30초 요약 — 뒤집히는 진단</div>
+    <p style="margin:.4em 0 0">"운동·식단·정리·일찍자기·독서 다 30년 실패, 근데 영상 편집·여행 예약·이직·결제 같은 건 <b>팍팍 해버린다</b>" — 이 두 문장이 답이에요. 당신은 <mark>의지박약이 아니라, '다짐→반복' 방식과 안 맞는 뇌</mark>예요. 대신 <b>'지금 당장 해버리는' 충동 실행 엔진</b>이 강력하죠. 그동안 실패한 이유는 게을러서가 아니라 — <u>당신에게 없는 엔진(꾸준함)으로만 시동을 걸어서</u>예요. 해법: 목표를 전부 <b>충동형이 삼킬 수 있는 형태</b>로 바꾸는 것. 꾸준함을 이기려 하지 말고 <mark>우회</mark>해요.</p>
+  </div>
+
+  <nav class="chips">
+    <a class="chip" href="#s1">🔍 두 문장의 진단</a>
+    <a class="chip" href="#s2">🧠 왜 다짐이 실패하나</a>
+    <a class="chip" href="#s3">⚡ 충동 엔진 이용법</a>
+    <a class="chip" href="#s4">🔧 4가지 전환 기술</a>
+    <a class="chip" href="#s5">🎯 오늘의 실험</a>
+  </nav>
+
+  <div class="pull">"당신은 실행력이 없는 게 아니다. <u>꾸준함</u>이라는, 당신에게 없는 연료로만 시동을 걸었을 뿐이다."<small>엔진은 멀쩡해요. 연료를 잘못 넣은 거예요.</small></div>
+
+  <!-- S1 -->
+  <section class="card" id="s1">
+    <details class="sec" open>
+      <summary><span class="sec-num">01</span> 🔍 당신이 준 두 문장 = 완벽한 진단</summary>
+      <div class="sec-body">
+        <div class="yourwords">
+          <div class="yl">당신의 자백 — 나란히 놓으면</div>
+          <b>❌ 안 되는 것:</b> "자기관리·운동·식단·씻기·정리·꾸준히 뭐 하기·일기·독서·쇼츠 끊기·일찍 자기… 30년간 단 한 시간도 성공한 적 없음. 다짐하고 때 되면 하기 싫고 안 함."<br><br>
+          <b>✅ 되는 것:</b> "그때그때 '이거 해야지' 하는 행동력은 있어서 — 영상 만들고 편집하고, 여행 예약 해버리고, 이직 해버리고, 결제 해버리고. 이런 <u>'해버리는' 건 팍팍 함.</u>"
+        </div>
+        <p class="lead">대부분은 "안 되는 것"만 보고 "난 의지박약"이라 결론내요. 근데 <b>"되는 것" 목록이 결정적 증거예요.</b> 두 목록의 차이를 뜯어보면 — 당신 뇌의 사용설명서가 나와요:</p>
+        <div class="tbl">
+          <table>
+            <thead><tr><th>축</th><th class="no">❌ 실패한 것들</th><th class="ok">✅ 팍팍 되는 것들</th></tr></thead>
+            <tbody>
+              <tr><td>시간 구조</td><td><b>매일 반복</b> (꾸준함)</td><td><b>한 방에 끝</b> (단발)</td></tr>
+              <tr><td>보상 타이밍</td><td>먼 미래 (건강·성장)</td><td>즉시 (결제·예약 완료!)</td></tr>
+              <tr><td>완료감</td><td>끝이 없음 (평생 해야)</td><td>딱 끝남 (해버림)</td></tr>
+              <tr><td>감정</td><td>의무·죄책감</td><td>충동·설렘</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p><mark>패턴이 명확해요: 당신은 '반복·의무·먼 보상'에 약하고, '단발·충동·즉시완료'에 강해요.</mark> 이건 성격 결함이 아니라 <b>엔진 타입</b>이에요. 스포츠카한테 "왜 짐을 많이 못 실어?"라고 탓하는 격이죠 — 스포츠카는 짐차가 아니라 <u>속도</u>를 위한 거예요.</p>
+      </div>
+    </details>
+  </section>
+
+  <!-- S2 -->
+  <section class="card" id="s2">
+    <details class="sec" open>
+      <summary><span class="sec-num">02</span> 🧠 왜 다짐은 과학적으로 실패하게 돼 있나</summary>
+      <div class="sec-body">
+        <p class="lead">당신만 그런 게 아니에요. 행동과학자 <b>BJ 포그</b>(스탠퍼드)의 공식이 왜 다짐이 무너지는지 정확히 설명해요 🟢.</p>
+        <div class="co teal">
+          <div class="co-t">📐 행동 = 동기 × 능력 × 계기 (B=MAP)</div>
+          <p style="margin:.3em 0 0">행동은 이 셋이 <b>동시에</b> 충분할 때만 발화해요. 그런데 <mark>'다짐'은 오직 '동기'에만 기대요.</mark> 문제는 — 동기는 <u>파도처럼 오르내려요.</u> 다짐한 순간엔 동기가 높지만, "때 되면 하기 싫다"고 당신이 말한 그 순간엔 동기가 바닥이죠. <b>동기에만 의존한 계획은 동기가 빠지는 날 100% 무너져요.</b> 30년간 당신이 겪은 게 정확히 이거예요 — 당신 잘못이 아니라 설계 결함.</p>
+        </div>
+        <p>포그의 해법은 반대예요: <b>동기(의지)를 믿지 말고, '능력(쉬움)'과 '계기(트리거)'를 조작하라.</b> 즉 — 하기 <u>싫은 날에도 할 수 있을 만큼 잘게</u> 쪼개고, <u>이미 하는 것에 얹어라.</u> 이게 사사키(자유 편)의 환경설계랑 같은 뿌리예요.</p>
+        <div class="co red">
+          <div class="co-t">⚡ 그래서 30년의 진실</div>
+          <p style="margin:.3em 0 0">"30년간 하나도 못 이뤘다"는 <mark>실행력 부족이 아니라, '동기 의존 설계'를 30년 반복한 것</mark>이에요. 같은 고장난 방법을 30번 다르게 다짐한 거죠. <b>당신을 바꿀 필요가 없어요. 방법을 바꾸면 돼요.</b></p>
+        </div>
+      </div>
+    </details>
+  </section>
+
+  <!-- S3 -->
+  <section class="card" id="s3">
+    <details class="sec" open>
+      <summary><span class="sec-num">03</span> ⚡ 당신의 '충동 실행 엔진'을 무기로</summary>
+      <div class="sec-body">
+        <p class="lead">여기가 핵심 전환이에요. 대부분의 자기계발은 "충동을 억누르고 꾸준함을 길러라"고 해요. <b>당신한텐 정반대로 가야 해요</b> — 없는 꾸준함을 기르려 30년 실패했으니, <mark>이미 강력한 충동 엔진을 '올라타는' 쪽</mark>으로.</p>
+        <h3>충동 엔진의 특징 = 그대로 활용 전략</h3>
+        <div class="tbl">
+          <table>
+            <thead><tr><th>충동 엔진은</th><th>그러니 이렇게</th></tr></thead>
+            <tbody>
+              <tr><td>단발성을 좋아함</td><td>목표를 <b>'매일'이 아니라 '한 번 해버리는 것'</b>으로 쪼개기</td></tr>
+              <tr><td>즉시 완료감을 원함</td><td>오늘 <b>끝이 보이는 크기</b>로만 (30분 안에 done)</td></tr>
+              <tr><td>결제·예약처럼 '되돌리기 귀찮은' 걸 잘함</td><td>먼저 <b>돈·약속을 걸어</b> 빠져나갈 구멍 막기</td></tr>
+              <tr><td>새롭고 자극적인 걸 좋아함</td><td>같은 일도 <b>매번 새 포맷·새 도전</b>으로 포장</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="co green">
+          <div class="co-t">🔑 발상 전환</div>
+          <p style="margin:.3em 0 0">"운동을 습관으로 만들자"(다짐형, 30년 실패) ❌ → <mark>"이번 주 클라이밍 클래스 결제해버리자"</mark>(충동형, 팍팍 됨) ⭕. 꾸준한 운동 습관 대신 — <b>충동으로 '결제해버리는' 단발 이벤트를 계속 던지는 것</b>이 당신에겐 더 잘 굴러가요. 건강도 '습관'이 아니라 '해버리는 이벤트의 연속'으로 만들면 돼요.</p>
+        </div>
+      </div>
+    </details>
+  </section>
+
+  <!-- S4 -->
+  <section class="card" id="s4">
+    <details class="sec" open>
+      <summary><span class="sec-num">04</span> 🔧 4가지 전환 기술 — 다짐형 목표를 충동형으로</summary>
+      <div class="sec-body">
+        <p class="lead">당신의 실패 목록을 하나씩 <b>충동 엔진이 삼킬 수 있는 형태</b>로 바꿔볼게요. 원리는 4개.</p>
+
+        <h3>① 결제·예약으로 '못 무르게' 만들기 (당신 최강기)</h3>
+        <p>당신은 "결제해버리기·예약해버리기"를 제일 잘해요. 그럼 <mark>모든 목표의 앞단을 '결제'로</mark> 만들어요. 운동=PT 10회 결제, 독서=북클럽 결제(날짜 박힘), 정리=정리컨설턴트 예약. <b>돈과 약속이 걸리면 충동이 알아서 실행</b>해요. 의지 0으로도.</p>
+
+        <h3>② 매일 → 단발 이벤트로 쪼개기</h3>
+        <p>"매일 일기"(실패) → <b>"이번 주말에 한 달치 회고 몰아쓰기 이벤트"</b>. "매일 운동"(실패) → <b>"토요일 원데이 클래스 하나 지르기"</b>. 꾸준함을 <u>단발의 반복</u >으로 치환. 각 단발은 당신이 팍팍 하는 거니까.</p>
+
+        <h3>③ 이미 팍팍 하는 것에 '얹기' (포그의 앵커)</h3>
+        <p>당신이 이미 하는 강한 행동(영상 편집·콘텐츠 만들기) 뒤에 새 목표를 붙여요. <b>"편집 끝나면 → 스쿼트 10개"</b>가 아니라, 더 당신답게: <b>"운동하는 걸 콘텐츠로 만들어버리기"</b>. 그럼 운동이 '의무'가 아니라 '콘텐츠 소재'(당신이 팍팍 하는 것)가 돼요.</p>
+
+        <h3>④ 게임화 — 자유 2-2부의 3조건 붙이기</h3>
+        <p>당신은 성과·인정·축적 없으면 못 견디죠. 그럼 목표에 그걸 붙여요: <b>운동 기록을 남에게 보여주거나(인정), 앱으로 진행바 채우거나(성과), 라이브러리로 쌓기(축적)</b>. 심심한 '건강 관리'를 <mark>진행도 보이는 게임</mark>으로. 안 그러면 당신 뇌는 무조건 노잼 처리해요.</p>
+
+        <div class="recipe">
+          <div class="rt">🧪 조립 예시 — 포그의 레시피 형식</div>
+          <div class="line"><span class="an">[앵커: 이미 하는 것]</span> 아침에 커피를 내린 <b>후에</b> → <span class="be">[아주 작게]</span> 스트레칭 딱 <b>1개</b> → <span class="ce">[즉시 축하]</span> "됐다!" 하고 <b>스스로 칭찬</b>.</div>
+          <p style="margin:.6em 0 0; font-size:.9em; color:var(--fg-soft)">포그의 핵심: 작게(하기 싫은 날도 가능) + 앵커(계기) + <b>즉시 축하가 뇌에 습관을 새김</b>. "1개"가 우스워 보여도 — 30년 0개보다 무한대 큼. 그리고 대개 1개 하면 더 하게 됨(시동만 걸면 됨).</p>
+        </div>
+        <div class="srcline">🟢 — <a href="https://www.bjfogg.com/">BJ Fogg, Tiny Habits</a> · B=MAP 행동모델</div>
+      </div>
+    </details>
+  </section>
+
+  <!-- S5 -->
+  <section class="card" id="s5">
+    <details class="sec" open>
+      <summary><span class="sec-num">05</span> 🎯 오늘의 실험 — 딱 하나, 충동으로</summary>
+      <div class="sec-body">
+        <p class="lead">이 편 전체를 잊어도 돼요. <b>오늘, 딱 하나만.</b> 당신이 제일 잘하는 방식으로 — 다짐 말고, <mark>지금 이 순간 '해버리기'</mark>로.</p>
+        <div class="step"><div class="sh"><span class="num">1.</span> 지금 30초 안에, 목표 하나를 '결제/예약'해버리기</div><div class="sd">운동이든 뭐든 — 며칠 뒤 <b>못 무르는 약속</b> 하나 지르기. 고민하면 다짐형으로 빠져요. 당신 최강기(해버리기)를 지금 쓰기.</div></div>
+        <div class="step"><div class="sh"><span class="num">2.</span> 그걸 '콘텐츠'로 만들 거라 정하기</div><div class="sd">그 경험을 카드·영상·글로 남기기로. 그럼 자유 2-2부 3조건(재미·인정·축적)이 붙어서 당신 뇌가 노잼 처리를 안 함.</div></div>
+        <div class="step"><div class="sh"><span class="num">3.</span> 끝나면 크게 "됐다" 하고 넘어가기</div><div class="sd">포그의 축하. 완벽 아니어도 <b>'했다'는 사실 하나만</b> 뇌에 각인. 30년 만에 처음으로, 다짐이 아니라 실행으로 시작한 거예요.</div></div>
+        <div class="co magic">
+          <div class="co-t">🕊️ 마지막으로 — 죄책감 내려놓기</div>
+          <p style="margin:.3em 0 0">30년간 실패한 건 당신이 나약해서가 아니에요. <b>세상이 "꾸준함이 답"이라고만 가르쳐서, 당신에게 없는 도구를 30년 쥐고 있었던 것</b>뿐이에요. 이제 도구를 바꿨어요. <mark>충동은 당신의 결함이 아니라, 30년간 낭비된 당신의 초능력이에요.</mark> 그걸 이제 원하는 방향으로 겨누기만 하면 돼요.</p>
+        </div>
+      </div>
+    </details>
+  </section>
+
+  <div class="finale">
+    <div class="rune">⚡🎯</div>
+    <p class="big">당신은 게을렀던 게 아니에요.<br><u>스포츠카한테 30년간<br>짐을 실으라고 한 것</u>뿐이에요.</p>
+    <p style="color:var(--fg-soft); margin-top:18px">꾸준함을 이기려 하지 마세요. 우회하세요.<br>목표를 '해버리는 것'으로 바꾸고, 콘텐츠로 얹고, 게임으로 만들면 —<br><b>30년 안 되던 게, 당신 방식으론 팍팍 돼요.</b></p>
+  </div>
+
+  <div class="foot">
+    프리렌으로 배우는 AI 시대 · 실행 편 — 다짐형 vs 충동형<br>
+    B=MAP(BJ Fogg) · 동기 의존의 함정 · 충동 엔진 활용 4기술 · Tiny Habits 레시피
+  </div>
+
+</div>
+</body>
+</html>

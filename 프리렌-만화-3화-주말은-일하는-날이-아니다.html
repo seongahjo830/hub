@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>만화 3화 — 주말은 일하는 날이 아니다</title>
+<style>
+:root{
+  --bg:#FBF7EE; --panel:#FFFDF7; --ink:#2A2620; --ink-soft:#5A5348; --muted:#8A8170;
+  --line:#D8CDB8; --accent:#1D4ED8; --warm:#C2571F; --magic:#6A4A9C; --gold:#B8860B; --green:#3E7C43; --red:#B83232;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#17150F; --panel:#211E17; --ink:#EDE7D8; --ink-soft:#C9C2B2; --muted:#98917F;
+    --line:#39342A; --accent:#7AB0FF; --warm:#E8925C; --magic:#C6A6F0; --gold:#E0B84C; --green:#7FB985; --red:#F08A7E;
+  }
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font-family:"Pretendard","Apple SD Gothic Neo","Malgun Gothic",sans-serif;line-height:1.7;-webkit-font-smoothing:antialiased;}
+.wrap{max-width:560px;margin:0 auto;padding:0 16px 80px}
+
+.cover{text-align:center;padding:44px 0 24px}
+.cover .ep{font-size:.78em;letter-spacing:.2em;color:var(--muted);font-weight:700}
+.cover h1{font-size:1.85em;font-weight:800;letter-spacing:-0.03em;margin:.3em 0 .2em;line-height:1.25}
+.cover .sub{color:var(--ink-soft);font-size:.98em;font-style:italic}
+
+.panel{background:var(--panel);border:2px solid var(--ink);border-radius:14px;margin:16px 0;overflow:hidden;box-shadow:3px 3px 0 var(--line)}
+.panel .art{display:block;width:100%;height:auto;background:var(--panel)}
+.panel .cap{padding:12px 16px;border-top:2px dashed var(--line);font-size:.94em;color:var(--ink-soft)}
+.panel .cap b{color:var(--warm)}
+.pnum{font-size:.72em;font-weight:800;color:var(--muted);padding:8px 14px 0}
+
+.beat{text-align:center;font-size:1.15em;font-weight:800;letter-spacing:-0.02em;margin:20px 0 6px;color:var(--ink)}
+.beat.big{font-size:1.38em;line-height:1.4}
+.beat .hi{background:linear-gradient(180deg,transparent 58%,rgba(255,214,64,.5) 58%);padding:0 3px}
+
+.note{background:var(--panel);border:2px solid var(--line);border-radius:14px;padding:16px 18px;margin:18px 0;font-size:.97em}
+.note .nt{font-weight:800;letter-spacing:-0.02em;margin-bottom:5px;display:flex;gap:7px;align-items:center}
+.note.blue .nt{color:var(--accent)} .note.blue{border-color:var(--accent)}
+.note.warm .nt{color:var(--warm)} .note.warm{border-color:var(--warm)}
+.note.green .nt{color:var(--green)} .note.green{border-color:var(--green)}
+b{color:var(--warm)} mark{background:rgba(255,214,64,.5);padding:1px 4px;border-radius:4px;font-weight:700}
+@media (prefers-color-scheme: dark){ mark{background:rgba(226,180,60,.3)} }
+u{text-decoration:none;background:linear-gradient(180deg,transparent 60%,rgba(29,78,216,.2) 60%)}
+
+/* week strip */
+.week{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;margin:16px 0}
+.week .d{border:2px solid var(--line);border-radius:9px;padding:8px 3px;text-align:center;font-size:.72em;font-weight:700}
+.week .d .dn{color:var(--muted);font-size:.85em}
+.week .d .di{font-size:1.35em;margin:3px 0 1px}
+.week .d.work{border-color:var(--accent)} .week .d.work .lbl{color:var(--accent)}
+.week .d.play{border-color:var(--green)} .week .d.play .lbl{color:var(--green)}
+.week .d.rest{border-color:var(--muted)} .week .d.rest .lbl{color:var(--muted)}
+
+.finale{margin-top:34px;padding:24px 18px;border:2px solid var(--ink);border-radius:14px;text-align:center;box-shadow:3px 3px 0 var(--line);background:var(--panel)}
+.finale .big{font-size:1.26em;font-weight:800;letter-spacing:-0.03em;line-height:1.5}
+.foot{margin-top:30px;text-align:center;font-size:.76em;color:var(--muted)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="cover">
+    <div class="ep">프리렌으로 배우는 AI 시대 · 만화 3화</div>
+    <h1>주말은 일하는<br>날이 아니다</h1>
+    <div class="sub">"주말에 일해야지" 하면 쉰 것도 일한 것도 아닌 최악이 된다. 페른이 딱 걸린 함정.</div>
+  </div>
+
+  <!-- P1 -->
+  <div class="panel">
+    <div class="pnum">① 페른의 찜찜한 주말</div>
+    <svg class="art" viewBox="0 0 520 240" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="페른이 노트북 앞에서 이도저도 못하고 찜찜해한다">
+      <rect width="520" height="240" fill="var(--panel)"/>
+      <line x1="0" y1="200" x2="520" y2="200" stroke="var(--line)" stroke-width="2"/>
+      <!-- desk -->
+      <rect x="120" y="150" width="180" height="50" fill="var(--line)" opacity=".4"/>
+      <rect x="170" y="120" width="80" height="52" rx="5" fill="none" stroke="var(--ink)" stroke-width="2.5"/>
+      <!-- Fern half-hearted -->
+      <g transform="translate(175,60)">
+        <rect x="-28" y="60" width="64" height="52" rx="16" fill="#6A4A9C"/>
+        <circle cx="4" cy="38" r="26" fill="#F2D9C0"/>
+        <path d="M-20,32 Q4,-4 30,32 Q30,46 24,50 L-14,50 Q-20,46 -20,32Z" fill="#4B3570"/>
+        <path d="M-6,40 l6,0 M12,40 l6,0" stroke="#2A2620" stroke-width="2.5" stroke-linecap="round"/>
+        <path d="M-2,50 Q4,47 12,50" stroke="#B06A5A" stroke-width="2" fill="none"/>
+      </g>
+      <!-- two thought clouds tug -->
+      <g>
+        <ellipse cx="380" cy="70" rx="92" ry="40" fill="var(--panel)" stroke="#B83232" stroke-width="2.5"/>
+        <text x="380" y="66" text-anchor="middle" font-size="12.5" font-weight="800" fill="#B83232">일 해야 하는데…</text>
+        <text x="380" y="86" text-anchor="middle" font-size="11" fill="#8A8170">(부담)</text>
+        <ellipse cx="390" cy="150" rx="86" ry="36" fill="var(--panel)" stroke="#3E7C43" stroke-width="2.5"/>
+        <text x="390" y="147" text-anchor="middle" font-size="12.5" font-weight="800" fill="#3E7C43">쉬고 싶은데…</text>
+        <text x="390" y="166" text-anchor="middle" font-size="11" fill="#8A8170">(죄책감)</text>
+      </g>
+    </svg>
+    <div class="cap"><b>페른:</b> "주말에 '이거 해야지' 하면 부담돼서 — <b>쉰 것도, 일한 것도 아닌</b> 찜찜한 한 시간이 돼요. 근데 꽉 채우면 월요일이 지옥이라 안 쉰 느낌이고…"</div>
+  </div>
+
+  <div class="beat">프리렌이 한숨을 쉬며 말했다.</div>
+
+  <!-- P2 -->
+  <div class="panel">
+    <div class="pnum">② 프리렌의 정정</div>
+    <svg class="art" viewBox="0 0 520 230" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="프리렌이 손을 저으며 정정한다">
+      <rect width="520" height="230" fill="var(--panel)"/>
+      <line x1="0" y1="195" x2="520" y2="195" stroke="var(--line)" stroke-width="2"/>
+      <g transform="translate(378,64)">
+        <rect x="-36" y="60" width="72" height="62" rx="18" fill="#5E8C6A"/>
+        <circle cx="0" cy="34" r="29" fill="#F2D9C0"/>
+        <path d="M-31,28 Q-39,108 -25,136 L-13,136 Q-21,72 -17,42 Z" fill="#EFEAD8"/>
+        <path d="M31,28 Q39,108 25,136 L13,136 Q21,72 17,42 Z" fill="#EFEAD8"/>
+        <path d="M-30,26 Q0,-16 30,26 Q24,18 0,16 Q-24,18 -30,26Z" fill="#EFEAD8"/>
+        <circle cx="-10" cy="34" r="3.2" fill="#2A2620"/><circle cx="11" cy="34" r="3.2" fill="#2A2620"/>
+      </g>
+      <g>
+        <path d="M300,110 L332,102 L324,124 Z" fill="var(--panel)" stroke="var(--ink)" stroke-width="2.5"/>
+        <rect x="20" y="42" width="302" height="104" rx="16" fill="var(--panel)" stroke="var(--ink)" stroke-width="2.5"/>
+        <text x="40" y="76" font-size="14.5" font-weight="800" fill="var(--ink)">내가 틀렸어. 미안.</text>
+        <text x="40" y="100" font-size="14.5" font-weight="800" fill="var(--warm)">주말은 일하는 날이 아니야.</text>
+        <text x="40" y="126" font-size="13" fill="var(--ink-soft)">네가 원한 건 '이벤트'였잖아.</text>
+      </g>
+    </svg>
+    <div class="cap"><b>프리렌:</b> "지난번 '주말에 일 덩어리'는 잘못된 조언이었어. 너에게 주말은 <mark>유일한 회복 + 유일한 이벤트</mark> 시간이야. 거기에 일을 넣으면 둘 다 죽어."</div>
+  </div>
+
+  <div class="note warm">
+    <div class="nt">⚠️ 왜 '주말 작업'이 최악인가</div>
+    작업을 주말에 두면 — ①<b>주중 내내</b> "주말에 해야 하는데" 부담이 깔림 ②막상 하면 쉰 것도 일한 것도 아닌 <u>회색 시간</u> ③꽉 채우면 월요일 방전. <mark>주말은 당신 to자유(여행·새 경험)의 유일한 무대인데, 거기에 일을 올리면 자유까지 잃어요.</mark>
+  </div>
+
+  <!-- P3 : reassign -->
+  <div class="panel">
+    <div class="pnum">③ 그럼 일 덩어리는 어디로?</div>
+    <svg class="art" viewBox="0 0 520 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="일 블록을 주말에서 평일 쪽으로 옮긴다">
+      <rect width="520" height="220" fill="var(--panel)"/>
+      <!-- weekend box (play) -->
+      <g transform="translate(360,50)">
+        <rect x="0" y="0" width="140" height="120" rx="12" fill="#3E7C43" opacity=".14" stroke="#3E7C43" stroke-width="2.5"/>
+        <text x="70" y="30" text-anchor="middle" font-size="13" font-weight="800" fill="#3E7C43">주말</text>
+        <text x="70" y="66" text-anchor="middle" font-size="26">🎢</text>
+        <text x="70" y="94" text-anchor="middle" font-size="12.5" font-weight="800" fill="var(--ink)">이벤트·회복만</text>
+      </g>
+      <!-- arrow work leaving -->
+      <g transform="translate(150,80)">
+        <rect x="-4" y="0" width="90" height="46" rx="9" fill="#1D4ED8" opacity=".7"/>
+        <text x="41" y="29" text-anchor="middle" font-size="12.5" font-weight="800" fill="#fff">일 블록</text>
+      </g>
+      <path d="M120,150 Q90,120 108,96" fill="none" stroke="#1D4ED8" stroke-width="2.5" marker-end="url(#a)"/>
+      <defs><marker id="a" markerWidth="10" markerHeight="10" refX="7" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6" fill="none" stroke="#1D4ED8" stroke-width="1.8"/></marker></defs>
+      <text x="120" y="180" text-anchor="middle" font-size="12" fill="var(--ink-soft)">평일 저녁 1~2회로</text>
+    </svg>
+    <div class="cap"><b>프리렌:</b> "일은 <mark>평일 저녁 '한 번'으로</mark> 옮겨. 매일 말고, <u>잘 잔 날 딱 하루</u> 골라서 짧은 블록. 주말은 통째로 비워둬 — 그게 네 연료를 채우니까."</div>
+  </div>
+
+  <!-- P4 : new week map -->
+  <div class="panel">
+    <div class="pnum">④ 새 일주일 지도</div>
+    <svg class="art" viewBox="0 0 520 150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="일주일 배치도">
+      <rect width="520" height="150" fill="var(--panel)"/>
+      <text x="260" y="28" text-anchor="middle" font-size="13" font-weight="800" fill="var(--ink)">일은 평일 1회 · 주말은 이벤트</text>
+    </svg>
+    <div style="padding:0 14px 8px">
+      <div class="week">
+        <div class="d rest"><div class="dn">월</div><div class="di">😌</div><div class="lbl">회복</div></div>
+        <div class="d work"><div class="dn">화</div><div class="di">🛠️</div><div class="lbl">일 1회</div></div>
+        <div class="d rest"><div class="dn">수</div><div class="di">🎧</div><div class="lbl">입력</div></div>
+        <div class="d rest"><div class="dn">목</div><div class="di">😌</div><div class="lbl">회복</div></div>
+        <div class="d rest"><div class="dn">금</div><div class="di">🎧</div><div class="lbl">입력</div></div>
+        <div class="d play"><div class="dn">토</div><div class="di">🎢</div><div class="lbl">이벤트</div></div>
+        <div class="d play"><div class="dn">일</div><div class="di">🛋️</div><div class="lbl">푹 쉼</div></div>
+      </div>
+    </div>
+    <div class="cap"><b>프리렌:</b> "일은 화요일 저녁 한 번(잘 잔 날로 바꿔도 돼). 이동 시간엔 귀로 입력만. <mark>토요일은 이벤트, 일요일은 아무것도 안 하는 날.</mark> 이러면 월요일이 안 빡세."</div>
+  </div>
+
+  <div class="note green">
+    <div class="nt">🎢 주말 = "이벤트스러운 것"이 있어야 한다</div>
+    당신이 딱 짚었어요 — 주말엔 <b>이벤트감이 확실히 있어야</b> 쉰 느낌이 나요. 무계획으로 늘어지면 그것도 찜찜하죠. 그래서 주말은 <u>'일 블록'이 아니라 '이벤트 블록'</u>을 예약: 당일치기 나들이, 새로운 카페·전시, 클래스 하나, 좋아하는 사람 만나기. <mark>충동형답게 '이벤트를 결제해버리기'</mark> — 이게 자유 2부의 to루프(경험→기록)와도 맞물려요.
+  </div>
+
+  <!-- P5 : the trick -->
+  <div class="panel">
+    <div class="pnum">⑤ 부담을 없애는 진짜 비밀</div>
+    <svg class="art" viewBox="0 0 520 180" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="일과 놀이가 하나로 합쳐지는 그림">
+      <rect width="520" height="180" fill="var(--panel)"/>
+      <circle cx="175" cy="90" r="52" fill="#1D4ED8" opacity=".16" stroke="#1D4ED8" stroke-width="2"/>
+      <text x="175" y="86" text-anchor="middle" font-size="13" font-weight="800" fill="#1D4ED8">이벤트</text>
+      <text x="175" y="104" text-anchor="middle" font-size="11" fill="#8A8170">(여행·경험)</text>
+      <circle cx="345" cy="90" r="52" fill="#C2571F" opacity=".16" stroke="#C2571F" stroke-width="2"/>
+      <text x="345" y="86" text-anchor="middle" font-size="13" font-weight="800" fill="#C2571F">기록</text>
+      <text x="345" y="104" text-anchor="middle" font-size="11" fill="#8A8170">(콘텐츠)</text>
+      <circle cx="260" cy="90" r="20" fill="var(--gold)"/>
+      <text x="260" y="95" text-anchor="middle" font-size="11" font-weight="800" fill="#2A2620">둘다</text>
+    </svg>
+    <div class="cap"><b>프리렌:</b> "가장 좋은 건 — 주말 이벤트 <u>자체를 가볍게 기록</u>하는 거야. 그럼 노는 게 곧 콘텐츠 씨앗이 돼. <mark>일과 놀이가 안 싸우고 하나가 되지.</mark> 단, 기록은 '해야 할 일'이 아니라 사진 몇 장·메모면 충분."</div>
+  </div>
+
+  <!-- P6 -->
+  <div class="panel">
+    <div class="pnum">⑥ 페른, 편안해지다</div>
+    <svg class="art" viewBox="0 0 520 210" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="페른이 홀가분하게 웃는다">
+      <rect width="520" height="210" fill="var(--panel)"/>
+      <line x1="0" y1="185" x2="520" y2="185" stroke="var(--line)" stroke-width="2"/>
+      <g transform="translate(230,50)">
+        <rect x="-30" y="66" width="70" height="58" rx="18" fill="#6A4A9C"/>
+        <circle cx="5" cy="38" r="27" fill="#F2D9C0"/>
+        <path d="M-22,32 Q5,-6 32,32 Q32,46 26,50 L-16,50 Q-22,46 -22,32Z" fill="#4B3570"/>
+        <path d="M-6,36 Q-2,32 2,36 M10,36 Q14,32 18,36" stroke="#2A2620" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+        <path d="M-5,46 Q5,55 15,46" stroke="#B06A5A" stroke-width="2.5" fill="none"/>
+        <g stroke="#B8860B" stroke-width="2.5" stroke-linecap="round"><line x1="40" y1="8" x2="50" y2="-2"/><line x1="-32" y1="8" x2="-42" y2="-2"/></g>
+      </g>
+    </svg>
+    <div class="cap"><b>페른:</b> "주말에 죄책감 안 가져도 되는 거였네요… <mark>노는 게 제 일이 될 수도 있고요.</mark>" <b>프리렌:</b> "쉬는 게 게으른 게 아니야. 그게 다음 주를 사는 힘이야."</div>
+  </div>
+
+  <div class="finale">
+    <div class="big">주말에 일을 넣지 마.<br><span style="color:var(--green)">이벤트</span>를 넣어.<br><br>일은 평일 저녁 한 번으로,<br>주말은 통째로 너를 위해.<br><span style="color:var(--gold)">노는 걸 가볍게 남기면 — 그게 곧 콘텐츠야.</span></div>
+  </div>
+
+  <div class="foot">프리렌으로 배우는 AI 시대 · 만화 3화 — 주말은 일하는 날이 아니다<br>일=평일 1회 · 주말=이벤트+회복 · 노는 것의 기록 = 콘텐츠 씨앗</div>
+
+</div>
+</body>
+</html>

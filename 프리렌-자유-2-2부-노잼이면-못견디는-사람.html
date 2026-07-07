@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>자유 2-2부 — '노잼이면 못 견디는 사람'의 조건</title>
+<style>
+:root{
+  --bg:#FBFAF7; --bg-soft:#F4F1EA; --fg:#1F1F1F; --fg-soft:#3A3A3A;
+  --muted:#6E6E6E; --rule:#E8E3D6; --accent:#1D4ED8; --warm:#B8451F;
+  --magic:#5B3A8C; --magic-bg:#F1ECF7; --gold:#B8860B; --green:#3E7C43; --red:#B02A1F; --teal:#0E7C86;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#1A1816; --bg-soft:#252220; --fg:#E8E4DC; --fg-soft:#C7C2B8;
+    --muted:#9A968D; --rule:#36322C; --accent:#7AB0FF; --warm:#E89464;
+    --magic:#C9A9F0; --magic-bg:#2A2333; --gold:#E0B84C; --green:#7FB985; --red:#F08A7E; --teal:#4FC3CE;
+  }
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; background:var(--bg); color:var(--fg);
+  font-family:"Pretendard","Pretendard Variable",-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Segoe UI","Malgun Gothic",sans-serif;
+  font-size:17px; line-height:1.85; letter-spacing:-0.011em; -webkit-font-smoothing:antialiased;
+}
+@media (min-width:700px){ body{font-size:18px} }
+.wrap{max-width:680px; margin:0 auto; padding:0 22px 90px}
+
+.hero{padding:56px 0 30px; text-align:center; border-bottom:1px solid var(--rule)}
+.hero .kicker{font-size:.82em; letter-spacing:.14em; color:var(--muted); text-transform:uppercase; margin-bottom:16px}
+.hero .rune{font-size:2.2em; line-height:1; margin-bottom:14px}
+.hero h1{font-size:1.8em; line-height:1.32; letter-spacing:-0.03em; font-weight:800; margin:.1em 0 .35em}
+@media (min-width:700px){ .hero h1{font-size:2.15em} }
+.hero .sub{color:var(--fg-soft); font-size:1.05em; font-style:italic; max-width:31em; margin:0 auto}
+.hero .meta{margin-top:20px; font-size:.8em; color:var(--muted)}
+
+.counts{display:flex; justify-content:center; gap:8px; flex-wrap:wrap; margin:22px 0 4px}
+.counts .b{padding:6px 13px; border-radius:999px; background:var(--bg-soft); border:1px solid var(--rule); font-size:.82em; font-weight:700}
+.counts .b .n{color:var(--accent)}
+
+b{color:var(--warm); font-weight:700}
+u{text-decoration:none; background:linear-gradient(180deg,transparent 62%,rgba(29,78,216,.16) 62%); padding:0 2px}
+mark{background:rgba(255,214,64,.42); padding:1px 5px; border-radius:4px; font-weight:600; color:inherit}
+@media (prefers-color-scheme: dark){ mark{background:rgba(226,180,60,.28)} }
+
+.pull{margin:32px 0; padding:6px 0 6px 22px; border-left:3px solid var(--accent);
+  font-size:1.15em; line-height:1.6; font-weight:600; letter-spacing:-0.02em}
+.pull small{display:block; margin-top:8px; font-size:.6em; font-weight:500; color:var(--muted); font-style:normal}
+
+section.card{border-top:1px solid var(--rule); padding-top:14px; margin-top:8px}
+details.sec{margin:0}
+details.sec>summary{
+  list-style:none; cursor:pointer; padding:20px 0 16px;
+  font-size:1.2em; font-weight:800; letter-spacing:-0.028em; line-height:1.4;
+  display:flex; gap:12px; align-items:baseline;
+}
+details.sec>summary::-webkit-details-marker{display:none}
+.sec-num{flex:0 0 auto; font-size:.62em; font-weight:800; color:var(--accent)}
+.sec-body{padding-bottom:14px}
+.sec-body>p:first-child{margin-top:0}
+
+p{margin:.9em 0}
+h3{font-size:1.03em; font-weight:800; letter-spacing:-0.02em; margin:1.4em 0 .5em}
+.lead{font-size:1.05em; color:var(--fg-soft)}
+
+.co{margin:18px 0; padding:16px 18px; border-radius:12px; border-left:3px solid var(--accent);
+  background:linear-gradient(100deg, rgba(29,78,216,.07), transparent 70%); font-size:.98em}
+.co.magic{border-left-color:var(--magic); background:linear-gradient(100deg,var(--magic-bg),transparent 70%)}
+.co.gold{border-left-color:var(--gold); background:linear-gradient(100deg,rgba(184,134,11,.10),transparent 70%)}
+.co.green{border-left-color:var(--green); background:linear-gradient(100deg,rgba(62,124,67,.10),transparent 70%)}
+.co.red{border-left-color:var(--red); background:linear-gradient(100deg,rgba(176,42,31,.09),transparent 70%)}
+.co.teal{border-left-color:var(--teal); background:linear-gradient(100deg,rgba(14,124,134,.1),transparent 70%)}
+.co .co-t{font-weight:800; margin-bottom:4px; letter-spacing:-0.02em}
+.co.magic .co-t{color:var(--magic)} .co.gold .co-t{color:var(--gold)} .co.green .co-t{color:var(--green)} .co.red .co-t{color:var(--red)} .co.teal .co-t{color:var(--teal)}
+
+.yourwords{margin:16px 0; padding:15px 17px; border-radius:12px; background:var(--magic-bg); border:1px dashed var(--magic); font-size:.97em; line-height:1.75}
+.yourwords .yl{font-size:.72em; font-weight:800; letter-spacing:.08em; color:var(--magic); text-transform:uppercase; margin-bottom:5px}
+
+.chips{display:flex; flex-wrap:wrap; gap:8px; margin:24px 0 8px}
+.chip{font-size:.85em; font-weight:600; text-decoration:none; color:var(--fg-soft);
+  padding:7px 13px; border:1px solid var(--rule); border-radius:999px; background:var(--bg-soft)}
+.chip:hover{border-color:var(--accent); color:var(--accent)}
+
+.tbl{overflow-x:auto; margin:18px 0}
+table{border-collapse:collapse; width:100%; font-size:.9em}
+th,td{text-align:left; padding:10px 12px; border-bottom:1px solid var(--rule); vertical-align:top}
+th{font-weight:800; font-size:.84em; color:var(--muted)}
+th.no{color:var(--red)} th.ok{color:var(--green)}
+td:first-child{font-weight:700; color:var(--fg-soft)}
+
+.formula{margin:20px 0; padding:18px; border-radius:14px; background:var(--bg-soft); border:1px solid var(--rule); text-align:center}
+.formula .f{font-size:1.05em; font-weight:800; letter-spacing:-0.02em; line-height:1.9}
+.formula .plus{color:var(--muted); margin:0 4px}
+.formula .term{padding:3px 10px; border-radius:8px; background:var(--bg); border:1px solid var(--rule); display:inline-block; margin:3px}
+
+.step{padding:13px 0; border-bottom:1px dashed var(--rule)}
+.step:last-child{border-bottom:none}
+.step .sh{font-weight:800; letter-spacing:-0.02em}
+.step .sh .num{color:var(--accent)}
+.step .sd{font-size:.93em; color:var(--fg-soft); margin-top:2px}
+
+.finale{margin-top:44px; padding:34px 0 0; border-top:2px solid var(--fg); text-align:center}
+.finale .rune{font-size:1.7em}
+.finale .big{font-size:1.24em; font-weight:800; letter-spacing:-0.03em; line-height:1.55; margin:.4em 0}
+.foot{margin-top:44px; padding-top:18px; border-top:1px solid var(--rule); font-size:.78em; color:var(--muted); text-align:center}
+.srcline{font-size:.82em; color:var(--muted)} .srcline a{color:var(--accent); text-decoration:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <div class="kicker">프리렌으로 배우는 AI 시대 · 자유 2-2부</div>
+    <div class="rune">🎰</div>
+    <h1>"노잼이면 못 견디는<br>사람"의 진짜 조건</h1>
+    <p class="sub">아까 "답 있네"는 반쪽이었어요. 방금 당신이 붙인 나머지 반쪽 — <u>성과·인정·축적이 없으면 죽어도 못 한다</u> — 이게 사실 방향을 좁혀주는 필터예요.</p>
+    <div class="meta">결함이 아니라 사양서(spec)입니다. 정확히 뜯어볼게요</div>
+  </header>
+
+  <div class="counts">
+    <span class="b">숨은 조건 <span class="n">3</span></span>
+    <span class="b">함정 <span class="n">2</span></span>
+    <span class="b">필터 <span class="n">완성</span></span>
+    <span class="b">경로 <span class="n">1</span></span>
+  </div>
+
+  <div class="co gold" style="margin-top:26px">
+    <div class="co-t">🎯 30초 요약</div>
+    <p style="margin:.4em 0 0">당신의 진짜 조건이 이제 다 나왔어요: 재미만으론 안 되고 <b>①남들이 "우와" 하는 인정 ②노력이 헛되지 않은 성과 ③나만의 것이 쌓이는 축적</b>, 이 셋이 <u>동시에</u> 있어야 견뎌요. 이건 까다로운 게 아니라 <mark>당신이 어떤 종류의 창작자인지를 정확히 알려주는 사양서</mark>예요. 단, 함정 두 개가 껴 있어요 — <b>"조회수·즉각 도파민"에 성과를 걸면 100% 무너져요</b>(그건 당신도 통제 못 하고, 남이 정하는 거라). 이 편은 그 셋을 <u>당신이 통제 가능한 형태</u>로 다시 정의해요.</p>
+  </div>
+
+  <nav class="chips">
+    <a class="chip" href="#s1">🗣️ 나머지 반쪽</a>
+    <a class="chip" href="#s2">⚗️ 세 조건 = 사양서</a>
+    <a class="chip" href="#s3">🎰 함정: 조회수 도파민</a>
+    <a class="chip" href="#s4">🎯 통제 가능한 성과로</a>
+    <a class="chip" href="#s5">⚙️ 그래서 뭘</a>
+  </nav>
+
+  <div class="pull">"당신이 원하는 건 '재미'가 아니었다. <u>노력이 인정받고 쌓이는</u> 재미였다."<small>이 둘은 완전히 다른 종(種)이에요.</small></div>
+
+  <!-- S1 -->
+  <section class="card" id="s1">
+    <details class="sec" open>
+      <summary><span class="sec-num">01</span> 🗣️ 아까 빠졌던 '나머지 반쪽'</summary>
+      <div class="sec-body">
+        <div class="yourwords">
+          <div class="yl">당신이 방금 붙인 조건</div>
+          "조회수 안 나오거나, 도파민 안 터지거나, 성과라고 느낄 수 없거나, 남들이 봤을 때 '우와' 하는 느낌 안 나면 <b>아무 의미 없음. 혼자 개뻘짓하는 느낌</b>이라 노잼임. 그리고 장기적으로 쌓이고 <b>나만의 것이 만들어진단 느낌</b>이 무조건 같이 있어야 함. 그리고 겁내 많음(요구가)."
+        </div>
+        <p class="lead">이거 <b>엄청 솔직하고 엄청 중요한 자백</b>이에요. 자유 2부에서 제가 "루프 있네, 준비됐네" 했을 때 — 그건 당신 조건의 절반만 본 거였어요. 나머지 절반이 이거예요. <mark>당신은 '재미있는 일'을 원하는 게 아니라, '인정·성과·축적이 붙은 재미'를 원해요.</mark> 이걸 빼먹으면 어떤 조언도 당신한텐 노잼이 돼요.</p>
+      </div>
+    </details>
+  </section>
+
+  <!-- S2 -->
+  <section class="card" id="s2">
+    <details class="sec" open>
+      <summary><span class="sec-num">02</span> ⚗️ 세 조건은 결함이 아니라 '사양서'다</summary>
+      <div class="sec-body">
+        <p class="lead">당신은 이걸 "그래서 답이 없다"의 근거로 말했지만 — 정반대예요. <b>이 셋은 당신이 뭘 하면 안 되는지를 정확히 걸러주는 필터</b>예요. 순수한 재미(축적 안 됨)나 순수한 노동(재미 없음)을 <u>자동으로 탈락</u>시켜요.</p>
+        <div class="formula">
+          <div class="f">당신이 견딜 수 있는 일 =<br>
+          <span class="term">🎉 재미</span><span class="plus">×</span><span class="term">👏 인정("우와")</span><span class="plus">×</span><span class="term">📈 성과</span><span class="plus">×</span><span class="term">🧱 축적(나만의 것)</span></div>
+        </div>
+        <p>곱하기(×)인 게 핵심이에요 — <b>하나라도 0이면 전체가 0.</b> 그래서 여행만(축적 0)도, 진료만(재미 0)도, 조회수 안 나오는 콘텐츠(인정 0)도 다 노잼인 거예요. 수학적으로 당신이 왜 못 견뎠는지 설명돼요.</p>
+        <div class="co teal">
+          <div class="co-t">🔑 그런데 이 사양서, 사실 '창작자 + 게이머'의 표준 사양</div>
+          <p style="margin:.3em 0 0">4-2부에서 당신이 "잘 설계된 게임 — 도파민 즉시 + 결과 바로 보임 + 창조적으로 쌓임"에 끌린다 했죠? <mark>이 게임 사양이랑 지금 세 조건이 똑같아요.</mark> 즉 당신은 자기 일을 <b>"진행도가 보이고, 인정받고, 캐릭터가 성장하는 게임"</b>으로 만들어야 견디는 사람이에요. 랜덤한 취향이 아니라 <u>일관된 하나의 성격</u>이에요.</p>
+        </div>
+      </div>
+    </details>
+  </section>
+
+  <!-- S3 -->
+  <section class="card" id="s3">
+    <details class="sec" open>
+      <summary><span class="sec-num">03</span> 🎰 함정 — '조회수·즉각 도파민'에 성과를 걸면 반드시 무너진다</summary>
+      <div class="sec-body">
+        <p class="lead">여기가 이 편에서 제일 중요해요. 세 조건은 맞는데, <b>당신이 그걸 '조회수·즉각 반응'으로 측정하려는 순간 파멸이에요.</b> 왜냐면:</p>
+        <div class="tbl">
+          <table>
+            <thead><tr><th>측정 방식</th><th class="no">조회수·즉각 도파민 (함정)</th><th class="ok">통제 가능한 성과 (해법)</th></tr></thead>
+            <tbody>
+              <tr><td>누가 정하나</td><td>알고리즘·군중 (내 통제 밖)</td><td>내가 정한 기준·소수의 진짜 반응</td></tr>
+              <tr><td>타이밍</td><td>즉각 안 터지면 좌절</td><td>쌓이면서 늦게 터짐(복리)</td></tr>
+              <tr><td>결과</td><td>초반 무반응 = 100% (다 그럼) → 포기</td><td>1명이라도 "우와" = 신호 → 지속</td></tr>
+              <tr><td>심리</td><td>슬롯머신(간헐 보상) = 중독+탈진</td><td>게임 진행바 = 꾸준한 성취</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="co red">
+          <div class="co-t">⚡ 냉정한 사실 (2-3부·5부 정신)</div>
+          <p style="margin:.3em 0 0"><b>모든 창작자의 초반은 조회수 0이에요.</b> 하루키도, 오클리도, 유튜버 누구도. 조회수를 성과 기준으로 삼으면 — <mark>당신은 무조건 초반에 "노잼, 뻘짓"이라 느끼고 그만둬요</mark>(당신이 콘텐츠 해보고 "즉각적인 걸로는 부족"이라 한 게 정확히 이거). 그래서 당신 성격("성과 없으면 못 견딤")과 "조회수"는 <u>같이 두면 서로를 죽이는 조합</u>이에요. 하나를 바꿔야 해요 — 성격은 못 바꾸니 <b>측정 기준을 바꿔요.</b></p>
+        </div>
+      </div>
+    </details>
+  </section>
+
+  <!-- S4 -->
+  <section class="card" id="s4">
+    <details class="sec" open>
+      <summary><span class="sec-num">04</span> 🎯 세 조건을 '통제 가능한 형태'로 다시 정의</summary>
+      <div class="sec-body">
+        <p class="lead">성격을 바꾸라는 게 아니에요. <b>같은 욕구(인정·성과·축적)를 당신이 이길 수 있는 게임으로 재설정</b>하는 거예요.</p>
+        <h3>👏 인정 → "1,000명의 진짜 팬"으로</h3>
+        <p>케빈 켈리의 유명한 법칙 🟢: <mark>수백만 대충 팔로워가 아니라, 당신을 진짜 좋아하는 1,000명만 있으면</mark> 창작으로 먹고살 수 있어요(1인당 연 $100 = 연 1억). 핵심은 — <b>"우와"를 대중(조회수)이 아니라 딱 맞는 소수에게서 받는 것.</b> 넓고 얕은 인정은 알고리즘 도박이지만, 좁고 깊은 인정은 당신이 만들 수 있어요. 후배·환자·동료 중 <u>당신 것을 진짜 원하는 사람</u>부터.</p>
+        <h3>📈 성과 → "숫자" 말고 "반응 1건"으로</h3>
+        <p>조회수 1만이 아니라 — <b>"이거 덕분에 이해됐어요" 댓글 하나, 후배가 실제로 써먹은 것 하나.</b> 통제 가능하고, 즉각적이고, 진짜예요. 미야모토가 "플레이어가 스스로 발견하는 순간"을 성과로 삼았듯.</p>
+        <h3>🧱 축적 → "공개 콘텐츠" 말고 "자산 라이브러리"로</h3>
+        <p>당신이 겁내 중시하는 "나만의 것이 쌓이는 느낌" — 이건 조회수랑 무관하게 <b>무조건 쌓여요.</b> 만든 설명 카드, 프로토콜, 글이 하나씩 늘어나는 것 자체가 축적. <mark>조회수는 0이어도 라이브러리는 100% 자라요.</mark> 축적을 조회수에서 떼어내면, 이 조건은 항상 충족돼요.</p>
+        <div class="co green">
+          <div class="co-t">✅ 재정의 결과</div>
+          <p style="margin:.3em 0 0">인정 = 소수의 진짜 반응 · 성과 = 반응 1건 · 축적 = 라이브러리 성장. <mark>셋 다 당신이 통제 가능하고, 즉각 확인되고, 조회수 도박에서 벗어나요.</mark> 성격(못 견딤)은 그대로 두고, 성격이 이길 수 있는 판으로 옮긴 거예요.</p>
+        </div>
+        <div class="srcline">🟢 — <a href="https://kk.org/thetechnium/1000-true-fans/">Kevin Kelly, 1000 True Fans</a></div>
+      </div>
+    </details>
+  </section>
+
+  <!-- S5 -->
+  <section class="card" id="s5">
+    <details class="sec">
+      <summary><span class="sec-num">05</span> ⚙️ 그래서 첫 콘텐츠는 이렇게 (여행 아님, 이게 먼저)</summary>
+      <div class="sec-body">
+        <p class="lead">냉정하게 — 지금 여행 콘텐츠는 세 조건을 다 못 채워요(시간 없고, 초반 조회수 0이라 인정·성과도 0). <b>당신의 세 조건을 지금 당장 다 채우는 건 딱 하나예요:</b> 이미 매일 하는, 이미 잘하는, 반응이 즉각 오는 것 — <mark>진료 지식/후배 교육 콘텐츠.</mark></p>
+        <div class="tbl">
+          <table>
+            <thead><tr><th>조건</th><th>여행 콘텐츠 (지금)</th><th>진료 지식 콘텐츠</th></tr></thead>
+            <tbody>
+              <tr><td>🎉 재미</td><td>높음</td><td>중(설계는 재밌음)</td></tr>
+              <tr><td>👏 인정</td><td>조회수 0 (군중)</td><td><b>후배·환자가 즉시 "우와"</b></td></tr>
+              <tr><td>📈 성과</td><td>즉각 0</td><td><b>"이해됐어요" 즉시 옴</b></td></tr>
+              <tr><td>🧱 축적</td><td>느림</td><td><b>내 전문성 라이브러리로 쌓임</b></td></tr>
+              <tr><td>⏳ 시간</td><td>없음</td><td><b>이미 하는 일에 얹기</b></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="step"><div class="sh"><span class="num">1.</span> 다음에 후배/환자에게 설명할 것 하나를 '작품'으로</div><div class="sd">어차피 설명할 거, 이번엔 <b>카드 1장·그림 1개로 만들어서</b> 보여주기. 만드는 건 당신이 좋아하는 '설계'.</div></div>
+        <div class="step"><div class="sh"><span class="num">2.</span> 그 자리에서 반응 1건 수집 (인정·성과 즉시 충족)</div><div class="sd">"오 이해 잘 되네요" 한 마디 = 조회수 1만보다 확실한 성과. 게임의 즉각 피드백.</div></div>
+        <div class="step"><div class="sh"><span class="num">3.</span> 폴더에 저장 → 라이브러리 1개 (축적 충족)</div><div class="sd">이게 10개, 50개 쌓이면 = 나만의 것 + 나중에 제품·B2B·유튜브의 재료. <mark>조회수 0이어도 자산은 100% 쌓임.</mark></div></div>
+        <div class="co magic">
+          <div class="co-t">🕊️ 그리고 여행은?</div>
+          <p style="margin:.3em 0 0">여행 콘텐츠를 버리라는 게 아니에요. 순서예요 — <b>먼저 진료 콘텐츠로 "만들고→인정받고→쌓이는" 근육과 시스템을 만들면</b>, 그게 시간·경로(자유 3부)를 열어줘요. 그 자유로 여행을 다니고, <u>그때 만든 여행 콘텐츠는 이미 팬(1,000명)이 있어서</u> 조회수 0의 지옥을 안 겪어요. <mark>여행 콘텐츠는 목적지가 아니라, 자유를 얻은 뒤의 보상이에요.</mark></p>
+        </div>
+      </div>
+    </details>
+  </section>
+
+  <div class="finale">
+    <div class="rune">🎰🎯</div>
+    <p class="big">당신은 까다로운 게 아니었어요.<br><u>성과·인정·축적이 붙어야만<br>움직이는 엔진</u>일 뿐이에요.</p>
+    <p style="color:var(--fg-soft); margin-top:18px">그 엔진을 '조회수'라는 도박판에 올리면 반드시 꺼져요.<br>소수의 진짜 반응 · 즉각의 "이해됐어요" · 자라는 라이브러리 —<br><b>이 판으로 옮기면, 그 까다로움이 당신의 연료가 돼요.</b></p>
+  </div>
+
+  <div class="foot">
+    프리렌으로 배우는 AI 시대 · 자유 2-2부 — '노잼이면 못 견디는 사람'의 조건<br>
+    재미×인정×성과×축적 사양서 · 조회수 함정 · 1000 True Fans(Kevin Kelly) · 통제 가능한 성과로 재정의
+  </div>
+
+</div>
+</body>
+</html>

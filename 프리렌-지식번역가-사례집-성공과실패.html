@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>지식 번역가 사례집 — 성공과 실패, 그리고 너</title>
+<style>
+:root{
+  --bg:#FBFAF7; --bg-soft:#F4F1EA; --fg:#1F1F1F; --fg-soft:#3A3A3A; --muted:#6E6E6E; --rule:#E8E3D6;
+  --accent:#1D4ED8; --warm:#B8451F; --magic:#5B3A8C; --magic-bg:#F1ECF7; --gold:#B8860B; --green:#2F7A3E; --red:#B02A1F; --teal:#0E7C86;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#1A1816; --bg-soft:#252220; --fg:#E8E4DC; --fg-soft:#C7C2B8; --muted:#9A968D; --rule:#36322C;
+    --accent:#7AB0FF; --warm:#E89464; --magic:#C9A9F0; --magic-bg:#2A2333; --gold:#E0B84C; --green:#7FB985; --red:#F08A7E; --teal:#4FC3CE;
+  }
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--fg);
+  font-family:"Pretendard","Apple SD Gothic Neo","Malgun Gothic",sans-serif;font-size:17px;line-height:1.85;letter-spacing:-0.011em;-webkit-font-smoothing:antialiased;}
+@media (min-width:700px){ body{font-size:18px} }
+.wrap{max-width:680px;margin:0 auto;padding:0 22px 90px}
+
+.hero{padding:56px 0 30px;text-align:center;border-bottom:1px solid var(--rule)}
+.hero .kicker{font-size:.82em;letter-spacing:.14em;color:var(--muted);text-transform:uppercase;margin-bottom:16px}
+.hero .rune{font-size:2.2em;line-height:1;margin-bottom:14px}
+.hero h1{font-size:1.72em;line-height:1.32;letter-spacing:-0.03em;font-weight:800;margin:.1em 0 .35em}
+@media (min-width:700px){ .hero h1{font-size:2.05em} }
+.hero .sub{color:var(--fg-soft);font-size:1.05em;font-style:italic;max-width:31em;margin:0 auto}
+.hero .meta{margin-top:20px;font-size:.8em;color:var(--muted)}
+
+.counts{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin:22px 0 4px}
+.counts .b{padding:6px 13px;border-radius:999px;background:var(--bg-soft);border:1px solid var(--rule);font-size:.82em;font-weight:700}
+.counts .b .n{color:var(--accent)}
+
+b{color:var(--warm);font-weight:700}
+u{text-decoration:none;background:linear-gradient(180deg,transparent 62%,rgba(29,78,216,.16) 62%);padding:0 2px}
+mark{background:rgba(255,214,64,.42);padding:1px 5px;border-radius:4px;font-weight:600}
+@media (prefers-color-scheme: dark){ mark{background:rgba(226,180,60,.28)} }
+
+.pull{margin:32px 0;padding:6px 0 6px 22px;border-left:3px solid var(--accent);font-size:1.16em;line-height:1.6;font-weight:600;letter-spacing:-0.02em}
+.pull small{display:block;margin-top:8px;font-size:.6em;font-weight:500;color:var(--muted);font-style:normal}
+
+section.card{border-top:1px solid var(--rule);padding-top:14px;margin-top:8px}
+details.sec{margin:0}
+details.sec>summary{list-style:none;cursor:pointer;padding:20px 0 16px;font-size:1.2em;font-weight:800;letter-spacing:-0.028em;line-height:1.4;display:flex;gap:12px;align-items:baseline;}
+details.sec>summary::-webkit-details-marker{display:none}
+.sec-num{flex:0 0 auto;font-size:.62em;font-weight:800;color:var(--accent)}
+.sec-body{padding-bottom:14px}
+.sec-body>p:first-child{margin-top:0}
+p{margin:.9em 0}
+h3{font-size:1.04em;font-weight:800;letter-spacing:-0.02em;margin:1.4em 0 .5em}
+.lead{font-size:1.05em;color:var(--fg-soft)}
+
+.co{margin:18px 0;padding:16px 18px;border-radius:12px;border-left:3px solid var(--accent);background:linear-gradient(100deg,rgba(29,78,216,.07),transparent 70%);font-size:.98em}
+.co.magic{border-left-color:var(--magic);background:linear-gradient(100deg,var(--magic-bg),transparent 70%)}
+.co.gold{border-left-color:var(--gold);background:linear-gradient(100deg,rgba(184,134,11,.1),transparent 70%)}
+.co.green{border-left-color:var(--green);background:linear-gradient(100deg,rgba(47,122,62,.12),transparent 70%)}
+.co.red{border-left-color:var(--red);background:linear-gradient(100deg,rgba(176,42,31,.09),transparent 70%)}
+.co.teal{border-left-color:var(--teal);background:linear-gradient(100deg,rgba(14,124,134,.1),transparent 70%)}
+.co .co-t{font-weight:800;margin-bottom:4px;letter-spacing:-0.02em}
+.co.magic .co-t{color:var(--magic)} .co.gold .co-t{color:var(--gold)} .co.green .co-t{color:var(--green)} .co.red .co-t{color:var(--red)} .co.teal .co-t{color:var(--teal)}
+
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:24px 0 8px}
+.chip{font-size:.85em;font-weight:600;text-decoration:none;color:var(--fg-soft);padding:7px 13px;border:1px solid var(--rule);border-radius:999px;background:var(--bg-soft)}
+.chip:hover{border-color:var(--accent);color:var(--accent)}
+
+/* case card */
+.case{margin:16px 0;padding:16px 18px;border:1px solid var(--rule);border-radius:14px;background:var(--bg-soft)}
+.case .ch{display:flex;gap:8px;align-items:baseline;flex-wrap:wrap;margin-bottom:2px}
+.case .ch .nm{font-size:1.1em;font-weight:800;letter-spacing:-0.02em}
+.case .ch .badge{font-size:.68em;font-weight:800;padding:2px 8px;border-radius:999px;color:#fff}
+.case .ch .win{background:var(--green)} .case .ch .lose{background:var(--red)}
+.case .ch .who{font-size:.78em;color:var(--muted);font-weight:600}
+.case .body{font-size:.95em;margin-top:6px}
+.case .metric{font-weight:800;color:var(--accent)}
+.case .trick{margin-top:8px;padding:9px 12px;border-radius:9px;background:var(--bg);border-left:3px solid var(--gold);font-size:.9em}
+.case .trick b{color:var(--gold)}
+.case .src{font-size:.78em;color:var(--muted);margin-top:6px}
+.case .src a{color:var(--accent);text-decoration:none}
+
+.tbl{overflow-x:auto;margin:18px 0}
+table{border-collapse:collapse;width:100%;font-size:.9em}
+th,td{text-align:left;padding:9px 11px;border-bottom:1px solid var(--rule);vertical-align:top}
+th{font-weight:800;font-size:.83em;color:var(--muted)}
+td:first-child{font-weight:700;color:var(--fg-soft)}
+
+.step{padding:13px 0;border-bottom:1px dashed var(--rule)}
+.step:last-child{border-bottom:none}
+.step .sh{font-weight:800;letter-spacing:-0.02em}
+.step .sh .num{color:var(--accent)}
+.step .sd{font-size:.93em;color:var(--fg-soft);margin-top:2px}
+
+.finale{margin-top:44px;padding:34px 0 0;border-top:2px solid var(--fg);text-align:center}
+.finale .rune{font-size:1.7em}
+.finale .big{font-size:1.24em;font-weight:800;letter-spacing:-0.03em;line-height:1.55;margin:.4em 0}
+.foot{margin-top:44px;padding-top:18px;border-top:1px solid var(--rule);font-size:.78em;color:var(--muted);text-align:center}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <div class="kicker">프리렌으로 배우는 AI 시대 · 지식 번역가 사례집</div>
+    <div class="rune">📚➡️🎤</div>
+    <h1>널린 지식을<br>이야기로 바꿔<br>돈 번 사람들</h1>
+    <p class="sub">"정보는 세상에 널렸다. 그걸 <u>엮고·나누고·재밌게 풀어내는 것</u>이 재능이다" — 당신 가설을 실제 성공·실패 사례로 검증해요.</p>
+    <div class="meta">전부 실제 인물·실제 숫자. 마지막엔 완전 다른 분야 + 당신 적용까지</div>
+  </header>
+
+  <div class="counts">
+    <span class="b">성공 사례 <span class="n">5</span></span>
+    <span class="b">실패·경고 <span class="n">3</span></span>
+    <span class="b">다른 분야 <span class="n">2</span></span>
+    <span class="b">공통 공식 <span class="n">1</span></span>
+    <span class="b">당신 로드맵 <span class="n">1</span></span>
+  </div>
+
+  <div class="co gold" style="margin-top:26px">
+    <div class="co-t">🎯 결론부터 (당신 가설은 '맞다', 근데 조건이 있다)</div>
+    <p style="margin:.4em 0 0">널린 지식을 이야기로 바꿔 돈 번 사람들, <b>실제로 수두룩해요.</b> 의사가 유튜브로 연 60억(알리 압달), 교수가 팟캐스트로 세계 3위(허버먼), 금융 칼럼니스트가 <mark>19개 짧은 이야기로 책 400만 부</mark>(모건 하우절). 공식은 똑같아요: <b>전문 지식 × 이야기 번역 × 신뢰.</b> 근데 <u>실패 사례</u>도 봐야 해요 — 60%가 6개월 안에 접고, 잘 나가다 <mark>'사람(신뢰)'을 잃어 무너진 케이스</mark>(본아페티)가 당신에게 진짜 교훈이에요.</p>
+  </div>
+
+  <nav class="chips">
+    <a class="chip" href="#win">🏆 성공 5</a>
+    <a class="chip" href="#lose">💀 실패·경고 3</a>
+    <a class="chip" href="#formula">⚗️ 공통 공식</a>
+    <a class="chip" href="#far">🛸 완전 다른 분야</a>
+    <a class="chip" href="#you">🎯 당신 로드맵</a>
+  </nav>
+
+  <div class="pull">"세상은 정답으로 넘쳐난다. 부족한 건 <u>그 정답을 사람 마음에 꽂아 넣는 번역가</u>다."<small>— 이게 AI 시대에 값이 오르는 유일한 희소성</small></div>
+
+  <!-- WIN -->
+  <section class="card" id="win">
+    <details class="sec" open>
+      <summary><span class="sec-num">01</span> 🏆 성공 사례 5 — "지식 번역가"로 제국을 지음</summary>
+      <div class="sec-body">
+
+        <div class="case">
+          <div class="ch"><span class="nm">알리 압달</span><span class="badge win">SUCCESS</span><span class="who">케임브리지 의사 → 유튜브</span></div>
+          <div class="body">병원 근무 의사가 <b>공부법·생산성</b> 같은 널린 주제를 정리해 유튜브 시작. 지금 구독자 <span class="metric">600만+</span>, 2021년 매출 약 <span class="metric">450만 달러(≈60억)</span>. 임상은 2020년에 아예 접음.</div>
+          <div class="trick"><b>핵심기술:</b> 무료 영상으로 <u>신뢰</u> 쌓고 → 유료 강의(유튜버 아카데미·생산성 랩)로 전환. "무료가 미끼, 강의가 낚싯바늘." 15개 수입원.</div>
+          <div class="src">🟢 <a href="https://aliabdaal.com/about/">aliabdaal.com</a></div>
+        </div>
+
+        <div class="case">
+          <div class="ch"><span class="nm">모건 하우절</span><span class="badge win">SUCCESS</span><span class="who">금융 칼럼니스트 → 작가</span></div>
+          <div class="body">금융은 원래 수학·스프레드시트의 영역. 근데 그는 <mark>"사람은 식탁에서·회의실에서 감정으로 돈 결정을 한다"</mark>며 <b>19개의 짧은 이야기</b>로 『돈의 심리학』을 씀 → <span class="metric">전 세계 400만 부+</span>. 새 이론 0개, <u>있는 지식을 이야기로 번역만</u> 함.</div>
+          <div class="trick"><b>핵심기술:</b> 복잡한 개념 → <u>짧고 손에 잡히는 서사</u>. "6백만 달러 청소부" 같은 실화 하나로 원리 하나를 각인.</div>
+          <div class="src">🟢 <a href="https://tim.blog/2022/03/01/morgan-housel-the-psychology-of-money/">Tim Ferriss 인터뷰</a></div>
+        </div>
+
+        <div class="case">
+          <div class="ch"><span class="nm">앤드루 허버먼</span><span class="badge win">SUCCESS</span><span class="who">스탠퍼드 신경과학 교수 → 팟캐스트</span></div>
+          <div class="body">교수가 <b>수면·도파민·집중</b> 같은 이미 논문에 다 있는 걸, 대중 언어로 풀어 팟캐스트 시작(2021). 2년 만에 미국 <span class="metric">팟캐스트 3위</span>, 유튜브 <span class="metric">750만</span>. 유료 멤버십 수익 일부는 <u>연구에 50만 달러+ 기부.</u></div>
+          <div class="trick"><b>핵심기술:</b> "권위(교수) + 무료 고밀도 정보 + 실행 가능한 프로토콜." 신뢰의 갑옷을 입고 시작.</div>
+          <div class="src">🟢 <a href="https://en.wikipedia.org/wiki/Andrew_Huberman">Wikipedia</a> · ⚠️ 뒤에 '경고'에서 다시 등장</div>
+        </div>
+
+        <div class="case">
+          <div class="ch"><span class="nm">닥터프렌즈</span><span class="badge win">SUCCESS</span><span class="who">🇰🇷 전문의 3명 → 유튜브</span></div>
+          <div class="body">정신과·내과·이비인후과 <b>전문의 3명</b>이 "의학을 쉽고 재미있게"로 2018년 시작. <mark>6개월 준비</mark> 후 주 3회 꾸준. 구독자 10만 시점에 한 달 수익 <span class="metric">355만 원</span>을 기부할 정도로 안정. 지금 대형 채널.</div>
+          <div class="trick"><b>핵심기술:</b> ①전문성 ②<u>주 3회 '꾸준함'</u>(닥터프렌즈 본인들이 1위 비결로 꼽음) ③3인 케미로 '재미'. 당신 도메인(의료)의 한국 실증.</div>
+          <div class="src">🟢 <a href="https://medigatenews.com/news/34042063">메디게이트뉴스</a></div>
+        </div>
+
+        <div class="case">
+          <div class="ch"><span class="nm">제임스 클리어</span><span class="badge win">SUCCESS</span><span class="who">무명 블로거 → 『아주 작은 습관』</span></div>
+          <div class="body">습관 연구는 이미 학계에 널림. 그는 <b>올림픽 선수·CEO·과학자 일화</b>로 그걸 포장해 <span class="metric">2,000만 부+</span>. 매주 뉴스레터로 신뢰 적립 후 책으로 폭발.</div>
+          <div class="trick"><b>핵심기술:</b> "연구 1개 = 이야기 1개." 원리마다 반드시 <u>기억에 남는 실화</u>를 붙임(→ 우리 시리즈가 계속 쓴 그 방식).</div>
+          <div class="src">🟢 널리 알려진 사실</div>
+        </div>
+
+      </div>
+    </details>
+  </section>
+
+  <!-- LOSE -->
+  <section class="card" id="lose">
+    <details class="sec" open>
+      <summary><span class="sec-num">02</span> 💀 실패·경고 3 — 여기서 진짜 배운다</summary>
+      <div class="sec-body">
+        <p class="lead">성공만 보면 생존자 편향(5부). <b>같은 게임에서 죽은 사례</b>가 당신을 살려요.</p>
+
+        <div class="case">
+          <div class="ch"><span class="nm">신규 크리에이터 60%</span><span class="badge lose">FAIL</span><span class="who">통계</span></div>
+          <div class="body">2023 조사: <mark>새 크리에이터의 60%가 6개월 안에 포스팅을 멈춤.</mark> 79%가 번아웃 경험. 이유: 성장 안 나옴·수익 압박·자기 의심·<u>매번 새 아이디어 쥐어짜는 피로.</u></div>
+          <div class="trick"><b>교훈:</b> 조회수(즉각 보상)를 기준 삼으면 초반 무반응 구간에서 다 죽음(← 당신 자유 2-2부의 '조회수 함정'과 정확히 일치). <u>'꾸준함'이 아니라 '시스템'으로 버텨야.</u></div>
+          <div class="src">🟢 CreatorIQ 2023</div>
+        </div>
+
+        <div class="case">
+          <div class="ch"><span class="nm">본아페티 (Bon Appétit)</span><span class="badge lose">COLLAPSE</span><span class="who">요리 미디어 · 구독 600만</span></div>
+          <div class="body">요리 지식을 <b>'인물 중심 예능'</b>으로 풀어 유튜브 대박(영상당 100~300만 뷰). 근데 2020년 <mark>인종별 출연료 차별</mark>이 터짐 → 유색인종 출연진은 무보수였음이 폭로 → 스타들 이탈 → 채널 붕괴.</div>
+          <div class="trick"><b>교훈:</b> 콘텐츠 힘이 <u>'사람(출연자 신뢰)'</u>에서 나올수록, 그 사람을 잘못 대하면 한 방에 무너짐. <mark>지식 번역가 사업의 자산은 콘텐츠가 아니라 '신뢰'</mark> — 그게 깨지면 끝.</div>
+          <div class="src">🟢 <a href="https://www.popmatters.com/bon-appetit-you-tube-dramaturgy">PopMatters</a></div>
+        </div>
+
+        <div class="case">
+          <div class="ch"><span class="nm">허버먼 (같은 인물, 다른 면)</span><span class="badge lose">경고</span><span class="who">신뢰 리스크</span></div>
+          <div class="body">성공의 상징이지만 — 이후 <b>"과학을 과장한다"·개인사 논란</b> 등으로 신뢰에 흠집. 지식 번역가는 <mark>'확신에 찬 단순화'로 뜨지만, 바로 그 단순화가 나중에 부메랑</mark>이 됨(5부 검증 편의 그 함정).</div>
+          <div class="trick"><b>교훈:</b> 재미를 위해 <u>정확도를 팔면</u> 단기엔 뜨고 장기엔 신뢰를 잃음. 특히 <b>의료</b>는 치명적. "재밌되 틀리지 않기"가 생명선.</div>
+          <div class="src">🟡 다수 언론 보도</div>
+        </div>
+
+      </div>
+    </details>
+  </section>
+
+  <!-- FORMULA -->
+  <section class="card" id="formula">
+    <details class="sec" open>
+      <summary><span class="sec-num">03</span> ⚗️ 성공·실패를 가른 공통 공식</summary>
+      <div class="sec-body">
+        <div class="tbl">
+          <table>
+            <thead><tr><th>변수</th><th>있으면 (성공)</th><th>없으면 (실패)</th></tr></thead>
+            <tbody>
+              <tr><td>① 전문 신뢰</td><td>의사·교수·전문의 = 갑옷</td><td>아무나 = 신뢰 0에서 시작</td></tr>
+              <tr><td>② 이야기 번역</td><td>실화·비유로 꽂음</td><td>정보 나열 = 노잼</td></tr>
+              <tr><td>③ 꾸준함/시스템</td><td>주3회·뉴스레터로 적립</td><td>6개월 안에 번아웃 (60%)</td></tr>
+              <tr><td>④ 신뢰 관리</td><td>사람·정확도 지킴</td><td>한 방에 붕괴 (본아페티)</td></tr>
+              <tr><td>⑤ 과금 경로</td><td>강의·책·멤버십</td><td>조회수만 = 수익 0</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="co magic">
+          <div class="co-t">🧬 한 줄 공식</div>
+          <p style="margin:.3em 0 0"><b>돈 = (전문 신뢰 × 이야기 번역) ^ 시간</b>, 단 <u>신뢰를 깨면 전부 0으로 리셋.</u> 당신은 ①전문 신뢰(치과의사)와 ②이야기 번역 재능을 <mark>이미 둘 다 가졌어요</mark> — 성공 사례들이 몇 년 걸려 얻은 걸. 남은 건 ③꾸준함(→ 당신은 '충동+장전'으로 우회) ④신뢰 안 깨기 ⑤과금 경로예요.</p>
+        </div>
+      </div>
+    </details>
+  </section>
+
+  <!-- FAR -->
+  <section class="card" id="far">
+    <details class="sec" open>
+      <summary><span class="sec-num">04</span> 🛸 완전 다른 분야에서 — 사고 확장</summary>
+      <div class="sec-body">
+        <p class="lead">"지식 번역가" 모델이 미디어에만 있는 게 아니에요. 전혀 다른 판에서도 똑같이 작동해요. 여기서 <b>당신만의 변형</b> 아이디어가 튀어나올 수 있어요.</p>
+
+        <h3>🏛️ 박물관 도슨트 — 같은 유물, 설명이 값을 만든다</h3>
+        <p>같은 그림 앞에서, 도슨트가 <mark>이야기를 붙이면</mark> 관람객이 30초→10분을 머물러요. 유물(정보)은 공짜인데 <b>'해설'이 티켓값</b>이 돼요. → 당신 버전: 같은 엑스레이·같은 진단, <u>'해설의 질'이 곧 진료 가치이자 상품.</u></p>
+
+        <h3>🍳 백종원 — 레시피는 공짜, '안심시키는 번역'이 제국</h3>
+        <p>레시피는 검색하면 널렸어요. 백종원의 힘은 <mark>"이거 못해도 돼요, 대충 해도 맛있어요"라는 심리적 번역</mark>. 정보가 아니라 <b>'할 수 있겠다는 느낌'</b>을 팔아요. → 당신 버전: 환자·후배에게 "이거 무섭지 않아요"를 번역해주는 것.</p>
+
+        <h3>🔧 이케아 설명서 — 세상에서 가장 잘 팔린 '번역'</h3>
+        <p>가구 조립이라는 복잡한 지식을 <b>글자 0개, 그림만으로</b> 전 세계가 따라 하게 만든 번역의 걸작. → 당신 버전: 임플란트 관리·잇몸 관리를 <u>말 없는 그림 시퀀스</u>로(미야모토 1-1 + 이케아).</p>
+
+        <div class="co teal">
+          <div class="co-t">🛸 세 개의 공통 DNA (미디어 밖에서도 동일)</div>
+          <p style="margin:.3em 0 0">도슨트·백종원·이케아 — 전부 <mark>"정보 자체는 공짜, 그걸 '이해·안심·따라하기'로 번역한 것이 상품"</mark>이에요. 즉 지식 번역가 모델은 유튜브가 아니어도 돼요. <b>진료실·카드·교구·강의·컨설팅·인증제도</b> 어디서든 성립해요. 당신이 미디어 노출을 싫어해도(4-2부) — <u>번역가는 카메라 없이도 할 수 있어요.</u></p>
+        </div>
+      </div>
+    </details>
+  </section>
+
+  <!-- YOU -->
+  <section class="card" id="you">
+    <details class="sec" open>
+      <summary><span class="sec-num">05</span> 🎯 그래서 당신은 — "아 이렇게 하면 되겠다"</summary>
+      <div class="sec-body">
+        <p class="lead">당신 재료를 사례 공식에 그대로 꽂으면 경로가 보여요. <b>당신은 성공 사례들이 부러워하는 출발선</b>(전문 신뢰 + 번역 재능)에 이미 서 있어요.</p>
+        <div class="step"><div class="sh"><span class="num">1.</span> 포지션 = "치과 지식 번역가" (남들 없는 교집합)</div><div class="sd">치과의사(신뢰) × 이야기 번역(재능) × AI·시스템(도구). 이 셋 다인 사람 거의 없음 = 희소성(만화 1화). <b>"임상 근거를 개꿀잼으로 옮기는 치과의사."</b></div></div>
+        <div class="step"><div class="sh"><span class="num">2.</span> 첫 제품 = 조회수 아닌 '반응'으로 (실패 회피)</div><div class="sd">유튜브 대신 — <mark>후배·환자에게 바로 쓰는 설명 카드·짧은 만화 1개</mark>부터. 즉각 "우와" 나오는 판(자유 2-2부). 조회수 함정 회피.</div></div>
+        <div class="step"><div class="sh"><span class="num">3.</span> 꾸준함은 '충동+장전'으로 우회 (당신 방식)</div><div class="sd">닥터프렌즈식 '주3회'는 당신 J형 알레르기라 독. 대신 이동 중 씨앗 모으고(장전), 꽂히면 폭주(4화). 시스템이 꾸준함을 대신함.</div></div>
+        <div class="step"><div class="sh"><span class="num">4.</span> 신뢰 사수 = 재밌되 틀리지 않기 (붕괴 회피)</div><div class="sd">허버먼·본아페티 교훈. 특히 의료는 <b>정확도 = 생명선</b>. 어그로는 도입부만, 본문은 정확(당신 볼트의 직관각인 트리거 그대로).</div></div>
+        <div class="step"><div class="sh"><span class="num">5.</span> 과금 경로 = 축적된 라이브러리에서 (돈)</div><div class="sd">카드가 50개 쌓이면 → 환자 교육 키트·후배 커리큘럼·다른 치과 B2B·크몽 상품. <mark>콘텐츠가 자산이 되어 판매로.</mark> (당신이 이미 만든 크몽 위키 상품이 이 계보!)</div></div>
+        <div class="co green">
+          <div class="co-t">🌱 오늘의 영감 한 방</div>
+          <p style="margin:.3em 0 0">알리 압달·하우절·클리어가 몇 년 걸려 얻은 <b>"전문 신뢰 + 이야기 재능"을 당신은 이미 갖고 시작</b>해요. 그들이 부러워할 위치예요. <mark>딱 하나만 하면 돼요 — 오늘 반복 설명 하나를 '개꿀잼 카드 한 장'으로 만들어 한 사람에게 보여주기.</mark> 그게 당신 제국의 1페이지예요.</p>
+        </div>
+      </div>
+    </details>
+  </section>
+
+  <div class="finale">
+    <div class="rune">📚➡️💰</div>
+    <p class="big">정보는 널렸어요. 그래서 <u>안</u> 희소해요.<br>희소한 건 —<br><span style="color:var(--gold)">그걸 사람 마음에 꽂는 번역가.</span><br><br>넌 이미 그 둘(전문성 + 번역 재능)을 가졌어.<br>남은 건 오늘 카드 한 장.</p>
+  </div>
+
+  <div class="foot">
+    프리렌으로 배우는 AI 시대 · 지식 번역가 사례집<br>
+    압달 · 하우절 · 허버먼 · 닥터프렌즈 · 클리어 (성공) / 크리에이터 60% · 본아페티 · 허버먼 (경고) / 도슨트 · 백종원 · 이케아 (확장)
+  </div>
+
+</div>
+</body>
+</html>

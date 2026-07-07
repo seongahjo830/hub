@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>개그만화 — 종이 한 장으로 사람을 살린 의사</title>
+<style>
+:root{
+  --bg:#FFF8E8; --panel:#FFFEFA; --ink:#241F18; --ink-soft:#574F42; --muted:#8A8170;
+  --line:#E4D6B4; --accent:#2563EB; --warm:#E24A17; --magic:#7C3AED; --gold:#E0A80B; --green:#2F9E44; --red:#E5322B; --pink:#EC4899; --teal:#0E9AA5;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#16130C; --panel:#211D14; --ink:#F2ECDA; --ink-soft:#CFC6B2; --muted:#9A9074;
+    --line:#3A3220; --accent:#7AB0FF; --warm:#FF9152; --magic:#C6A6F0; --gold:#F0C64C; --green:#7FD98A; --red:#FF7A6E; --pink:#FF8AC4; --teal:#4FD0DB;
+  }
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font-family:"Pretendard","Apple SD Gothic Neo","Malgun Gothic",sans-serif;line-height:1.62;-webkit-font-smoothing:antialiased;}
+.wrap{max-width:560px;margin:0 auto;padding:0 15px 80px}
+
+.cover{text-align:center;padding:40px 0 18px}
+.cover .ep{display:inline-block;font-size:.74em;letter-spacing:.1em;color:#fff;background:var(--red);padding:4px 12px;border-radius:999px;font-weight:800;transform:rotate(-2deg)}
+.cover h1{font-size:1.85em;font-weight:900;letter-spacing:-0.03em;margin:.35em 0 .1em;line-height:1.16}
+.cover h1 .z{color:var(--warm)}
+.cover .sub{color:var(--ink-soft);font-size:.95em;font-weight:600}
+
+.strip{background:var(--panel);border:3px solid var(--ink);border-radius:16px;margin:16px 0;overflow:hidden;box-shadow:4px 4px 0 var(--ink)}
+.strip .hd{display:flex;align-items:center;gap:8px;padding:9px 14px;background:var(--ink);color:var(--bg)}
+.strip .hd .no{font-weight:900;font-size:.9em;background:var(--gold);color:var(--ink);width:24px;height:24px;border-radius:7px;display:flex;align-items:center;justify-content:center;flex:0 0 auto}
+.strip .hd .ti{font-weight:800;font-size:.92em;letter-spacing:-0.02em}
+.strip .art{display:block;width:100%;height:auto;background:var(--panel)}
+.strip .cap{padding:11px 15px;border-top:2px dashed var(--line);font-size:.92em;color:var(--ink-soft)}
+.strip .cap b{color:var(--warm)} .strip .cap .g{color:var(--teal);font-weight:800} .strip .cap .f{color:var(--green);font-weight:800}
+
+.sfx{text-align:center;font-size:1.5em;font-weight:900;color:var(--warm);letter-spacing:-0.02em;margin:12px 0 2px;transform:rotate(-1.5deg)}
+.sfx.big{font-size:1.85em;color:var(--red)}
+
+.fact{background:var(--panel);border:3px solid var(--teal);border-radius:14px;padding:13px 16px;margin:14px 0;font-size:.93em}
+.fact .ft{font-weight:900;color:var(--teal);margin-bottom:4px;font-size:.88em;display:flex;gap:6px;align-items:center}
+.fact b{color:var(--warm)} .fact mark{background:#FFE168;padding:1px 5px;border-radius:5px;font-weight:800;color:#241F18}
+
+.steps{background:var(--panel);border:3px solid var(--ink);border-radius:16px;padding:6px 0;margin:16px 0;box-shadow:4px 4px 0 var(--gold)}
+.steps .sh2{text-align:center;font-weight:900;padding:10px 0 6px;font-size:1.02em}
+.st{display:flex;gap:11px;padding:11px 15px;border-top:2px dashed var(--line);align-items:flex-start}
+.st .n{flex:0 0 auto;width:26px;height:26px;border-radius:8px;background:var(--accent);color:#fff;font-weight:900;font-size:.85em;display:flex;align-items:center;justify-content:center}
+.st .tx{font-size:.92em}
+.st .tx b{color:var(--warm)} .st .tx .em{color:var(--red);font-weight:800}
+
+b{color:var(--warm)} mark{background:#FFE168;padding:1px 5px;border-radius:5px;font-weight:800;color:#241F18}
+u{text-decoration:none;background:linear-gradient(180deg,transparent 58%,rgba(37,99,235,.25) 58%);font-weight:700}
+
+.ba{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0}
+.ba .c{border:3px solid;border-radius:14px;padding:12px 13px;font-size:.9em}
+.ba .c.b{border-color:var(--red)} .ba .c.a{border-color:var(--green)}
+.ba .c .h{font-weight:900;font-size:.82em;margin-bottom:5px}
+.ba .c.b .h{color:var(--red)} .ba .c.a .h{color:var(--green)}
+.ba .big{font-size:1.5em;font-weight:900}
+
+.finale{margin-top:26px;padding:22px 18px;border:3px solid var(--ink);border-radius:16px;text-align:center;box-shadow:4px 4px 0 var(--pink);background:var(--panel)}
+.finale .big{font-size:1.22em;font-weight:900;letter-spacing:-0.03em;line-height:1.5}
+.foot{margin-top:24px;text-align:center;font-size:.75em;color:var(--muted)}
+.foot a{color:var(--accent);text-decoration:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="cover">
+    <span class="ep">프리렌 개그극장 · 실화 특집</span>
+    <h1>종이 한 장으로<br><span class="z">사람을 살린</span> 의사 ㄷㄷ</h1>
+    <div class="sub">아툴 가완디 실화 · "천재 의사 대신 '안 틀리는 시스템'을 만든 남자" (+ 너도 만들 수 있음)</div>
+  </div>
+
+  <!-- P1 problem -->
+  <div class="strip">
+    <div class="hd"><span class="no">1</span><span class="ti">문제: 똑똑한데 자꾸 죽음</span></div>
+    <svg class="art" viewBox="0 0 520 215" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="수술실에서 의사가 뭔가 빠뜨려 당황한다">
+      <rect width="520" height="215" fill="#dbeef0"/>
+      <rect x="0" y="150" width="520" height="65" fill="#c3e0e3"/>
+      <!-- operating table -->
+      <rect x="150" y="135" width="220" height="22" rx="6" fill="#9fc4c8"/>
+      <rect x="175" y="120" width="170" height="18" rx="8" fill="#eee"/>
+      <!-- surgeon panicking -->
+      <g transform="translate(150,55)">
+        <rect x="-30" y="60" width="66" height="55" rx="14" fill="#3aa6a0"/>
+        <circle cx="3" cy="34" r="26" fill="#F6DCC2"/>
+        <rect x="-24" y="30" width="54" height="18" rx="7" fill="#cfece9"/>
+        <!-- panic eyes -->
+        <circle cx="-8" cy="24" r="7" fill="#fff" stroke="#241F18" stroke-width="2"/><circle cx="-8" cy="24" r="3" fill="#241F18"/>
+        <circle cx="14" cy="24" r="7" fill="#fff" stroke="#241F18" stroke-width="2"/><circle cx="14" cy="24" r="3" fill="#241F18"/>
+        <path d="M30,18 q5,7 0,13" stroke="#7AB0FF" stroke-width="3" fill="none"/>
+      </g>
+      <g><rect x="215" y="14" width="290" height="48" rx="12" fill="#fff" stroke="#241F18" stroke-width="2.5"/>
+        <text x="360" y="35" text-anchor="middle" font-size="13" font-weight="800" fill="#241F18">어… 거즈 몇 개 넣었더라?</text>
+        <text x="360" y="53" text-anchor="middle" font-size="11.5" fill="#8A8170">항생제는 줬나…? 혈액형 맞나…?</text></g>
+    </svg>
+    <div class="cap">병원은 첨단, 의사는 천재. 근데 수술이 <b>너무 복잡해져서</b>(약·장비·인원 폭증) 똑똑한 의사도 <mark>뻔한 걸 빠뜨려</mark> 사람이 죽음. <b>실력 부족이 아니라 인간 기억의 한계.</b></div>
+  </div>
+
+  <div class="fact">
+    <div class="ft">🧠 진짜 원인</div>
+    수술 한 건에 챙길 게 <b>수십 가지.</b> 아무리 천재라도 매번 100% 기억은 불가능. 근데 아무도 이걸 <mark>'시스템 문제'로 안 보고 '정신 똑바로 차려'로만 넘김.</mark> ← 여기서 30년이 흘러감.
+  </div>
+
+  <!-- P2 flip -->
+  <div class="strip">
+    <div class="hd"><span class="no">2</span><span class="ti">가완디의 질문 뒤집기</span></div>
+    <svg class="art" viewBox="0 0 520 195" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="질문을 뒤집는 순간">
+      <rect width="520" height="195" fill="var(--panel)"/>
+      <g transform="translate(90,45)">
+        <rect x="-4" y="0" width="180" height="46" rx="10" fill="#E5322B" opacity=".16" stroke="#E5322B" stroke-width="2"/>
+        <text x="86" y="22" text-anchor="middle" font-size="12" font-weight="800" fill="#E5322B">❌ "의사를 더 훈련시키자"</text>
+        <text x="86" y="38" text-anchor="middle" font-size="10.5" fill="#8A8170">30년째 실패</text>
+      </g>
+      <text x="255" y="72" text-anchor="middle" font-size="22" font-weight="900" fill="var(--muted)">↓</text>
+      <g transform="translate(75,100)">
+        <rect x="-4" y="0" width="360" height="56" rx="10" fill="#2F9E44" opacity=".16" stroke="#2F9E44" stroke-width="2.5"/>
+        <text x="176" y="24" text-anchor="middle" font-size="13" font-weight="900" fill="#2F9E44">⭕ "천재가 아니어도</text>
+        <text x="176" y="44" text-anchor="middle" font-size="13" font-weight="900" fill="#2F9E44">안 틀리게 하려면?"</text>
+      </g>
+    </svg>
+    <div class="cap"><span class="g">가완디:</span> "사람을 고치려 하지 말고, <mark>시스템을 고치자.</mark>" 이 한 끗 차이가 전부였음. '더 잘하기'를 버리고 <b>'안 틀리게 만들기'</b>로 방향을 틀었음.</div>
+  </div>
+
+  <!-- P3 airplane -->
+  <div class="strip">
+    <div class="hd"><span class="no">3</span><span class="ti">비행기에서 답을 훔치다 ✈️</span></div>
+    <svg class="art" viewBox="0 0 520 195" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="비행기 조종사가 체크리스트를 읽는다">
+      <rect width="520" height="195" fill="#cfe3f5"/>
+      <!-- clouds -->
+      <ellipse cx="80" cy="50" rx="40" ry="18" fill="#fff" opacity=".8"/>
+      <ellipse cx="430" cy="40" rx="46" ry="20" fill="#fff" opacity=".8"/>
+      <!-- plane -->
+      <g transform="translate(260,110)">
+        <ellipse cx="0" cy="0" rx="90" ry="26" fill="#dfe9f2" stroke="#241F18" stroke-width="2.5"/>
+        <path d="M-30,-8 L-70,-40 L-40,-8 Z" fill="#b9cfe0" stroke="#241F18" stroke-width="2"/>
+        <circle cx="-40" cy="0" r="5" fill="#8fb4d6"/><circle cx="-15" cy="0" r="5" fill="#8fb4d6"/><circle cx="10" cy="0" r="5" fill="#8fb4d6"/>
+        <path d="M55,0 L90,-12 L90,12 Z" fill="#b9cfe0" stroke="#241F18" stroke-width="2"/>
+      </g>
+      <g><rect x="150" y="145" width="290" height="38" rx="11" fill="#fff" stroke="#241F18" stroke-width="2.5"/>
+        <text x="295" y="169" text-anchor="middle" font-size="12.5" font-weight="800" fill="#241F18">기장도 매번 체크리스트 읽는데?</text></g>
+    </svg>
+    <div class="cap"><span class="g">가완디:</span> "의학 안에서 답 안 찾음. <mark>비행기 조종사</mark>가 이륙 전 매번 — 베테랑이어도 — 체크리스트 읽는 거 보고 '이거다!' + <b>건설(고층빌딩 공정표)</b>에서도 훔쳐옴. <b>먼 분야에서 검증된 도구 빌리기</b>(← 나침반 6거장 공통기술!).</div>
+  </div>
+
+  <div class="sfx">근데 여기서 다들 실수함</div>
+
+  <!-- P4 dont build alone + cut -->
+  <div class="strip">
+    <div class="hd"><span class="no">4</span><span class="ti">혼자 만들면 아무도 안 씀</span></div>
+    <svg class="art" viewBox="0 0 520 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="여러 직군이 둘러앉아 같이 만든다">
+      <rect width="520" height="200" fill="var(--panel)"/>
+      <!-- round table with diverse people -->
+      <ellipse cx="260" cy="120" rx="130" ry="48" fill="#EADFC0" stroke="#241F18" stroke-width="2.5"/>
+      <g font-size="26" text-anchor="middle">
+        <text x="150" y="95">👨‍⚕️</text><text x="215" y="80">👩‍⚕️</text><text x="290" y="78">🧑‍⚕️</text>
+        <text x="365" y="92">🧑‍🔧</text><text x="330" y="150">🙋</text><text x="190" y="152">📋</text>
+      </g>
+      <text x="260" y="30" text-anchor="middle" font-size="13" font-weight="800" fill="var(--ink)">외과의·마취과·간호사·감염전문가·엔지니어·환자대표</text>
+    </svg>
+    <div class="cap"><span class="g">가완디:</span> "체크리스트를 <b>실제 쓸 사람들이 안 만들면</b> 현장에서 씹힘." 그래서 WHO에 <mark>온갖 직군 다 모아서</mark> 같이 제작. "간호사가 의사에게 확인 요청" 같은 항목은 <u>간호사가 있어야 나오는 거임.</u></div>
+  </div>
+
+  <div class="fact">
+    <div class="ft">✂️ 설계의 진짜 기술 = 덜어내기</div>
+    체크할 게 <b>100개면 아무도 안 씀.</b> 그래서 <mark>"치명적인데 자주 빠뜨리는 것"만</mark> 남기고 다 버림 → 최종 <b>딱 19개 항목·2분.</b> 그리고 <b>3개 관문에만</b> 배치: ①마취 전 ②칼 대기 전 ③환자 나가기 전. <u>다 넣는 게 아니라 버리는 게 핵심.</u>
+  </div>
+
+  <!-- P5 pilot + numbers -->
+  <div class="strip">
+    <div class="hd"><span class="no">5</span><span class="ti">깜짝 실험: 8개국 8000명</span></div>
+    <svg class="art" viewBox="0 0 520 175" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="세계 8개국에서 실험">
+      <rect width="520" height="175" fill="#e8f0e5"/>
+      <text x="260" y="30" text-anchor="middle" font-size="13" font-weight="800" fill="var(--ink)">선진국 + 개도국 섞어서 (어디서나 되나 보려고)</text>
+      <g font-size="22" text-anchor="middle">
+        <text x="80" y="80">🇨🇦</text><text x="150" y="80">🇮🇳</text><text x="220" y="80">🇯🇴</text><text x="290" y="80">🇳🇿</text>
+        <text x="360" y="80">🇵🇭</text><text x="430" y="80">🇹🇿</text><text x="150" y="120">🇬🇧</text><text x="360" y="120">🇺🇸</text>
+      </g>
+      <text x="260" y="155" text-anchor="middle" font-size="15" font-weight="900" fill="var(--teal)">환자 ~8,000명 · 도입 前後 비교</text>
+    </svg>
+    <div class="cap"><span class="g">가완디:</span> "전 세계에 강요 안 함. 먼저 <mark>8개국·환자 약 8천 명</mark>에게만 시범. 종이 한 장 넣기 전 vs 후를 <b>숫자로 비교.</b>" <u>주장 말고 증거부터.</u> (= 너의 검증 정신)</div>
+  </div>
+
+  <div class="sfx big">결과가 ㅗ ㅏ…</div>
+
+  <!-- RESULT -->
+  <div class="ba">
+    <div class="c b"><div class="h">😰 도입 前</div>주요 합병증 <span class="big">11%</span><br>수술 후 사망 <b>1.5%</b></div>
+    <div class="c a"><div class="h">🎉 도입 後</div>합병증 <span class="big" style="color:var(--green)">7%</span> (⅓↓)<br>사망 <b>0.8%</b> (40%↓)</div>
+  </div>
+
+  <div class="fact">
+    <div class="ft">💥 종이 한 장 = 목숨</div>
+    비싼 장비도, 신약도 아님. <mark>2분짜리 종이 한 장</mark>으로 합병증 3분의 1, 사망 40% 감소. 지금 이 체크리스트, <b>전 세계 수술실 표준</b>이 됨. 노벨상급 발견이 <u>펜과 종이</u>에서 나옴.
+  </div>
+
+  <!-- P6 adoption -->
+  <div class="strip">
+    <div class="hd"><span class="no">6</span><span class="ti">숨은 마지막 단계: '쓰게' 만들기</span></div>
+    <svg class="art" viewBox="0 0 520 175" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="체크리스트를 소리내어 함께 읽는다">
+      <rect width="520" height="175" fill="var(--panel)"/>
+      <g transform="translate(120,60)"><circle cx="0" cy="0" r="22" fill="#3aa6a0"/><circle cx="0" cy="-14" r="13" fill="#F6DCC2"/></g>
+      <g transform="translate(180,66)"><circle cx="0" cy="0" r="22" fill="#e07b39"/><circle cx="0" cy="-14" r="13" fill="#F6DCC2"/></g>
+      <rect x="240" y="34" width="180" height="70" rx="10" fill="#fff" stroke="#241F18" stroke-width="2.5"/>
+      <text x="330" y="60" text-anchor="middle" font-size="12" font-weight="800" fill="#241F18">✓ 환자 이름?</text>
+      <text x="330" y="80" text-anchor="middle" font-size="12" font-weight="800" fill="#241F18">✓ 항생제?</text>
+      <text x="330" y="100" text-anchor="middle" font-size="11" fill="#8A8170">— 소리 내어 같이 읽기</text>
+    </svg>
+    <div class="cap"><span class="g">가완디:</span> "좋은 도구도 <b>안 쓰면 꽝.</b> 그래서 ①<b>2분 이내</b>(부담 0) ②<b>기존 수술 흐름</b>에 끼우고 ③<mark>소리 내어 같이 읽기</mark>(팀 전체 참여·위계 무력화) ④책·강연으로 <u>'왜 필요한지' 이야기까지 퍼뜨림.</u>" ← 만들고 끝이 아니라 '채택'까지 설계.</div>
+  </div>
+
+  <!-- 6 steps recap -->
+  <div class="steps">
+    <div class="sh2">🏗️ 가완디 6단계 = 너의 리콜 시스템 설명서</div>
+    <div class="st"><span class="n">1</span><span class="tx"><b>구조로 재정의</b> — "직원이 리콜 빠뜨림 = 개인 탓" ❌ → <span class="em">시스템 부재</span> ⭕</span></div>
+    <div class="st"><span class="n">2</span><span class="tx"><b>타 분야 훔치기</b> — 항공 체크리스트·넷플릭스 구독 리텐션에서 빌려오기</span></div>
+    <div class="st"><span class="n">3</span><span class="tx"><b>전원 소집</b> — 실장·데스크·위생사랑 같이 초안(그들이 쓸 거니까)</span></div>
+    <div class="st"><span class="n">4</span><span class="tx"><b>덜어내기</b> — "치명적인데 자주 빠뜨리는 것"만 → <span class="em">5~7항목·관문 3개</span></span></div>
+    <div class="st"><span class="n">5</span><span class="tx"><b>작게 검증</b> — 한 달·한 팀에만 시범 → 리콜률 前後 숫자 비교</span></div>
+    <div class="st"><span class="n">6</span><span class="tx"><b>채택 설계</b> — 진료 흐름에 끼우고·짧게·소리내어·"왜"를 공유</span></div>
+  </div>
+
+  <div class="finale">
+    <div class="big">현직 의사가, 현장의 반복 실수를,<br><span style="color:var(--teal)">종이 한 장 시스템</span>으로,<br>데이터로 증명해 세계 표준으로.<br><br><span style="color:var(--warm)">…'수술'을 '치과 리콜'로 바꾸면?<br>그거 너잖아. 시작만 하면 됨. 😏</span></div>
+  </div>
+
+  <div class="foot">
+    프리렌 개그극장 · 실화 특집 — 아툴 가완디 『체크리스트 선언』<br>
+    합병증 11→7% · 사망 40%↓ · 8개국 8000명 · <a href="https://www.nejm.org/doi/full/10.1056/NEJMsa0810119">NEJM(2009)</a> · <a href="https://news.harvard.edu/gazette/story/2009/01/surgical-safety-checklist-drops-deaths-and-complications-by-more-than-one-third/">Harvard</a>
+  </div>
+
+</div>
+</body>
+</html>

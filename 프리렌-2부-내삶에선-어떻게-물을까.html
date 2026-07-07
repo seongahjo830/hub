@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2부 — 내 삶에선, 뭘 물어야 하지?</title>
+<style>
+:root{
+  --bg:#FBFAF7; --bg-soft:#F4F1EA; --fg:#1F1F1F; --fg-soft:#3A3A3A;
+  --muted:#6E6E6E; --rule:#E8E3D6; --accent:#1D4ED8; --warm:#B8451F;
+  --magic:#5B3A8C; --magic-bg:#F1ECF7; --gold:#B8860B;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#1A1816; --bg-soft:#252220; --fg:#E8E4DC; --fg-soft:#C7C2B8;
+    --muted:#9A968D; --rule:#36322C; --accent:#7AB0FF; --warm:#E89464;
+    --magic:#C9A9F0; --magic-bg:#2A2333; --gold:#E0B84C;
+  }
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; background:var(--bg); color:var(--fg);
+  font-family:"Pretendard","Pretendard Variable",-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Segoe UI","Malgun Gothic",sans-serif;
+  font-size:17px; line-height:1.85; letter-spacing:-0.011em;
+  -webkit-font-smoothing:antialiased;
+}
+@media (min-width:700px){ body{font-size:18px} }
+.wrap{max-width:680px; margin:0 auto; padding:0 22px 90px}
+
+.hero{padding:60px 0 30px; text-align:center; border-bottom:1px solid var(--rule)}
+.hero .kicker{font-size:.82em; letter-spacing:.14em; color:var(--muted); text-transform:uppercase; margin-bottom:16px}
+.hero .rune{font-size:2.2em; line-height:1; margin-bottom:14px}
+.hero h1{font-size:1.95em; line-height:1.3; letter-spacing:-0.03em; font-weight:800; margin:.1em 0 .35em}
+@media (min-width:700px){ .hero h1{font-size:2.35em} }
+.hero .sub{color:var(--fg-soft); font-size:1.05em; font-style:italic; max-width:30em; margin:0 auto}
+.hero .meta{margin-top:20px; font-size:.8em; color:var(--muted)}
+
+.pull{margin:40px 0; padding:6px 0 6px 22px; border-left:3px solid var(--accent);
+  font-size:1.2em; line-height:1.6; font-weight:600; letter-spacing:-0.02em; color:var(--fg)}
+.pull small{display:block; margin-top:8px; font-size:.6em; font-weight:500; color:var(--muted); font-style:normal}
+
+b{color:var(--warm); font-weight:700}
+u{text-decoration:none; background:linear-gradient(180deg,transparent 62%,rgba(29,78,216,.16) 62%); padding:0 2px}
+mark{background:rgba(255,214,64,.42); padding:1px 5px; border-radius:4px; font-weight:600; color:inherit}
+@media (prefers-color-scheme: dark){ mark{background:rgba(226,180,60,.28)} }
+.key{color:var(--accent); font-weight:700}
+
+section.card{border-top:1px solid var(--rule); padding-top:14px; margin-top:8px}
+details.sec{margin:0}
+details.sec>summary{
+  list-style:none; cursor:pointer; padding:20px 0 18px;
+  font-size:1.28em; font-weight:800; letter-spacing:-0.028em; line-height:1.35;
+  display:flex; gap:14px; align-items:baseline;
+}
+details.sec>summary::-webkit-details-marker{display:none}
+.sec-num{flex:0 0 auto; font-size:.62em; font-weight:800; color:var(--accent)}
+.sec-body{padding-bottom:14px}
+.sec-body>p:first-child{margin-top:0}
+
+p{margin:.9em 0}
+h3{font-size:1.06em; font-weight:800; letter-spacing:-0.02em; margin:1.5em 0 .5em}
+.lead{font-size:1.06em; color:var(--fg-soft)}
+
+.co{margin:18px 0; padding:16px 18px; border-radius:12px; border-left:3px solid var(--accent);
+  background:linear-gradient(100deg, rgba(29,78,216,.07), transparent 70%); font-size:.98em}
+.co.magic{border-left-color:var(--magic); background:linear-gradient(100deg,var(--magic-bg),transparent 70%)}
+.co.warm{border-left-color:var(--warm); background:linear-gradient(100deg,rgba(184,69,31,.09),transparent 70%)}
+.co.gold{border-left-color:var(--gold); background:linear-gradient(100deg,rgba(184,134,11,.10),transparent 70%)}
+.co .co-t{font-weight:800; margin-bottom:4px; letter-spacing:-0.02em}
+.co.magic .co-t{color:var(--magic)}
+.co.gold .co-t{color:var(--gold)}
+
+.chips{display:flex; flex-wrap:wrap; gap:8px; margin:26px 0 8px}
+.chip{font-size:.85em; font-weight:600; text-decoration:none; color:var(--fg-soft);
+  padding:7px 13px; border:1px solid var(--rule); border-radius:999px; background:var(--bg-soft)}
+.chip:hover{border-color:var(--accent); color:var(--accent)}
+
+/* AI prompt box */
+.ask{margin:14px 0; padding:14px 16px; border-radius:10px; background:var(--bg-soft);
+  border:1px dashed var(--rule); font-size:.95em}
+.ask .ask-t{font-size:.72em; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); font-weight:700; margin-bottom:6px; display:flex; align-items:center; gap:6px}
+.ask .q{color:var(--fg); font-style:italic}
+.ask .q::before{content:"“"} .ask .q::after{content:"”"}
+
+/* Horizon timeline */
+.hz{margin:8px 0; border:1px solid var(--rule); border-radius:14px; overflow:hidden}
+.hz>summary{list-style:none; cursor:pointer; padding:16px 18px; display:flex; align-items:center; gap:14px}
+.hz>summary::-webkit-details-marker{display:none}
+.hz .yr{flex:0 0 auto; width:56px; height:56px; border-radius:12px; background:var(--bg-soft);
+  display:flex; flex-direction:column; align-items:center; justify-content:center; border:1px solid var(--rule)}
+.hz .yr b{font-size:1.35em; color:var(--accent); line-height:1; font-weight:800}
+.hz .yr span{font-size:.62em; color:var(--muted); margin-top:2px}
+.hz .hz-h{font-weight:800; letter-spacing:-0.02em; font-size:1.05em}
+.hz .hz-s{font-size:.85em; color:var(--muted); margin-top:1px}
+.hz-body{padding:2px 18px 18px}
+.hz[data-t="10"] .yr b{color:var(--magic)}
+.hz[data-t="10"] .yr{border-color:var(--magic)}
+.hz[data-t="1"] .yr b{color:var(--warm)}
+
+.finale{margin-top:44px; padding:34px 0 0; border-top:2px solid var(--fg); text-align:center}
+.finale .rune{font-size:1.7em}
+.finale .big{font-size:1.3em; font-weight:800; letter-spacing:-0.03em; line-height:1.5; margin:.4em 0}
+.foot{margin-top:44px; padding-top:18px; border-top:1px solid var(--rule); font-size:.8em; color:var(--muted); text-align:center}
+
+.mini{display:grid; grid-template-columns:1fr; gap:10px; margin:18px 0}
+.mini .m{padding:12px 14px; border-radius:10px; background:var(--bg-soft); border:1px solid var(--rule)}
+.mini .m b{color:var(--accent)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <div class="kicker">프리렌으로 배우는 AI 시대 · 2부 — 내 삶편</div>
+    <div class="rune">🧭</div>
+    <h1>내 삶에선,<br>뭘 물어야 하지?</h1>
+    <p class="sub">1년·3년·5년·7년·10년 뒤에 아쉽지 않으려면 — 지금 어떤 질문을 품고 살아야 할까.</p>
+    <div class="meta">1부는 "AI에게 어떻게 물을까", 2부는 "내 인생에게 어떻게 물을까"</div>
+  </header>
+
+  <div class="co magic" style="margin-top:34px">
+    <div class="co-t">🎯 이 글의 한 줄</div>
+    <p style="margin:.4em 0 0"><b>AI는 방법은 주지만 목적지는 못 정해요.</b> "아쉽지 않게 살고 싶다"는 건 결국 <mark>목적력의 문제</mark>예요. 그래서 이 2부는 답을 주지 않아요 — 대신 <u>미래의 내가 지금의 나에게 던지는 질문 목록</u>을 줘요. 좋은 질문을 품고 있으면, 길은 그 질문을 따라 저절로 생겨요.</p>
+  </div>
+
+  <div class="pull">"여행의 목적지는 언제나 제자가 정한다."<small>1부의 마지막 문장. 2부는 여기서 시작해요.</small></div>
+
+  <!-- 마스터 질문 -->
+  <section class="card">
+    <details class="sec" open>
+      <summary><span class="sec-num">◆</span> 딱 하나의 마스터 질문</summary>
+      <div class="sec-body">
+        <p class="lead">복잡할 땐 질문 하나로 줄여요. 제프 베조스가 아마존을 시작할 때 쓴 <b>'후회 최소화'</b> 방법이에요.</p>
+        <div class="co gold">
+          <div class="co-t">⭐ 후회 최소화 질문</div>
+          <p style="margin:.3em 0 0; font-size:1.1em"><mark>"80살의 내가 지금 이 순간을 돌아본다면, <u>했으면 후회 안 했을 단 하나</u>는 뭘까?"</mark></p>
+        </div>
+        <p>이 질문의 힘은 — <b>실패에 대한 두려움</b>은 나이 들면 대부분 잊혀요. 하지만 <b>안 해본 것에 대한 아쉬움</b>은 평생 남아요. 그래서 후회는 '실패'가 아니라 <u>'시도 안 함'</u>에서 나와요. 아래 시간표는 이 질문을 1년 단위로 잘게 쪼갠 거예요.</p>
+      </div>
+    </details>
+  </section>
+
+  <nav class="chips">
+    <a class="chip" href="#h10">🔮 10년</a>
+    <a class="chip" href="#h7">🌱 7년</a>
+    <a class="chip" href="#h5">🧭 5년</a>
+    <a class="chip" href="#h3">📐 3년</a>
+    <a class="chip" href="#h1">🔥 1년</a>
+    <a class="chip" href="#hnow">👣 이번 주</a>
+  </nav>
+
+  <!-- 시간표 -->
+  <section class="card" id="hz">
+    <details class="sec" open>
+      <summary><span class="sec-num">◆</span> 뒤에서 앞으로 — 역순 시간표</summary>
+      <div class="sec-body">
+        <p>보통 "1년 뒤 → 10년 뒤" 순서로 계획해요. 그런데 아쉬움을 없애려면 <b>반대로</b> 가야 해요. <mark>먼 미래(정체성)를 먼저 정하고, 거기서 거꾸로 오늘까지 끌고 내려와요.</mark> 프리렌이 여행의 목적지를 먼저 알기에 매일의 마법을 고르는 것처럼요.</p>
+
+        <!-- 10년 -->
+        <details class="hz" id="h10" data-t="10" open>
+          <summary><div class="yr"><b>10</b><span>년 뒤</span></div><div><div class="hz-h">🔮 나는 '어떤 사람'으로 불릴까</div><div class="hz-s">정체성 · 북극성 · 안 하면 평생 아쉬울 단 하나</div></div></summary>
+          <div class="hz-body">
+            <p>10년은 <b>기술·직업</b>이 아니라 <b>정체성</b>을 정하는 자리예요. "무슨 일을 하지"가 아니라 <u>"사람들이 나를 뭐라고 부르지"</u>를 정해요. 치과의사? 후배들을 키운 사람? 뭔가를 만든 사람? 이건 남이 못 정해줘요.</p>
+            <div class="ask"><div class="ask-t">🧙 나 자신에게</div><span class="q">10년 뒤, 누군가 나를 한 문장으로 소개한다면 어떤 문장이었으면 좋겠나? 그 문장에 지금 없는 단어는 뭐지?</span></div>
+            <div class="ask"><div class="ask-t">🤖 AI에게</div><span class="q">내가 되고 싶은 10년 뒤 모습은 이거야. 거기 도달한 사람들의 공통 경로 3가지와, 대부분이 놓쳐서 후회하는 지점을 반대 관점에서 짚어줘.</span></div>
+          </div>
+        </details>
+
+        <!-- 7년 -->
+        <details class="hz" id="h7" data-t="7">
+          <summary><div class="yr"><b>7</b><span>년 뒤</span></div><div><div class="hz-h">🌱 복리가 터지는 씨앗</div><div class="hz-s">지금 심어야 7년 뒤 저절로 자라는 것</div></div></summary>
+          <div class="hz-body">
+            <p>7년은 <b>복리(compound)</b>가 눈에 보이기 시작하는 지점이에요. 지식·평판·자산·관계 — 오늘 심으면 <mark>7년 뒤엔 내 노력과 상관없이 스스로 굴러가는 것</mark>들이 있어요. 반대로 지금 안 심으면 7년 뒤엔 '이거 그때 시작했어야 했는데'가 돼요.</p>
+            <div class="ask"><div class="ask-t">🧙 나 자신에게</div><span class="q">지금 시작하면 7년 뒤 '나 대신 일해주는 자산'이 될 씨앗은 뭘까? (쌓이는 지식? 콘텐츠? 사람? 시스템?)</span></div>
+            <div class="ask"><div class="ask-t">🤖 AI에게</div><span class="q">이 분야에서 '초기엔 티 안 나다가 5~7년 뒤 복리로 터지는' 자산 유형을 예시와 함께 정리해줘. 내 상황에 맞는 순위도.</span></div>
+          </div>
+        </details>
+
+        <!-- 5년 -->
+        <details class="hz" id="h5" data-t="5">
+          <summary><div class="yr"><b>5</b><span>년 뒤</span></div><div><div class="hz-h">🧭 버릴 것을 정하는 자리</div><div class="hz-s">여전히 중요할 일 vs 지금만 급한 일</div></div></summary>
+          <div class="hz-body">
+            <p>5년은 <b>선택과 포기</b>의 자리예요. 아쉬움의 진짜 원인은 시간 부족이 아니라 <u>다 하려다 아무것도 깊이 못 한 것</u>이에요. 그래서 5년 질문은 더하기가 아니라 빼기예요.</p>
+            <div class="ask"><div class="ask-t">🧙 나 자신에게</div><span class="q">지금 하는 일 중 '5년 뒤엔 안 중요할 텐데 지금 시간을 잡아먹는 것'은 뭐지? 그걸 오늘 줄이면 뭐가 생기나?</span></div>
+            <div class="ask"><div class="ask-t">🤖 AI에게</div><span class="q">내가 벌인 일들이 이거야. 5년 관점에서 '핵심(지켜야 할 2개)'과 '노이즈(버려도 될 것)'로 냉정하게 분류하고 근거를 대줘.</span></div>
+          </div>
+        </details>
+
+        <!-- 3년 -->
+        <details class="hz" id="h3" data-t="3">
+          <summary><div class="yr"><b>3</b><span>년 뒤</span></div><div><div class="hz-h">📐 '증거'로 남길 산출물</div><div class="hz-s">측정 가능한 결과물 하나</div></div></summary>
+          <div class="hz-body">
+            <p>3년은 <b>측정 가능</b>해야 하는 자리예요. 꿈이 아니라 <mark>손에 잡히는 증거</mark> — 완성된 제품 하나, 출시된 서비스, 세상에 나간 무언가. "열심히 살았다"는 증거가 안 돼요. 3년 뒤 <u>남에게 보여줄 수 있는 것</u>이 증거예요.</p>
+            <div class="ask"><div class="ask-t">🧙 나 자신에게</div><span class="q">3년 뒤 누가 "그동안 뭐 했어?"라고 물으면, 말 대신 '이거요' 하고 보여줄 산출물 하나는 뭐지?</span></div>
+            <div class="ask"><div class="ask-t">🤖 AI에게</div><span class="q">이 목표를 '3년 뒤 존재하는 구체적 산출물'로 정의하고, 완료 기준(DoD)을 숫자로 만들어줘. 12분기로 쪼갠 로드맵도.</span></div>
+          </div>
+        </details>
+
+        <!-- 1년 -->
+        <details class="hz" id="h1" data-t="1">
+          <summary><div class="yr"><b>1</b><span>년 뒤</span></div><div><div class="hz-h">🔥 안 하면 가장 아쉬울 것</div><div class="hz-s">이번 분기에 시작할 첫 조각</div></div></summary>
+          <div class="hz-body">
+            <p>1년은 <b>시작</b>의 자리예요. 완성이 아니라 <u>착수</u>. 1년 뒤 이맘때 가장 아쉬울 건 '완성 못 한 것'이 아니라 <mark>'시작조차 안 한 것'</mark>이에요. 그러니 질문은 딱 하나 — 뭘 <b>이번 주에</b> 첫 삽 뜨지?</p>
+            <div class="ask"><div class="ask-t">🧙 나 자신에게</div><span class="q">1년 뒤 오늘, "그때 시작만 했어도…" 하고 후회할 게 뭘까? 그 첫 조각을 이번 분기 안에 넣으려면 이번 주에 뭘 하지?</span></div>
+            <div class="ask"><div class="ask-t">🤖 AI에게</div><span class="q">이 큰 목표를 '이번 주에 끝낼 수 있는 가장 작은 v0.1'로 잘라줘. 부끄러워도 세상에 내놓을 수 있는 최소 크기로.</span></div>
+          </div>
+        </details>
+
+        <!-- 이번주 -->
+        <details class="hz" id="hnow" data-t="1">
+          <summary><div class="yr"><b>今</b><span>이번 주</span></div><div><div class="hz-h">👣 가장 작은 다음 한 걸음</div><div class="hz-s">10년짜리 여행의 첫 발자국</div></div></summary>
+          <div class="hz-body">
+            <p>10년 정체성 → 1년 착수까지 내려왔으면, 마지막은 <b>딱 한 걸음</b>이에요. 프리렌의 천 년 여행도 결국 오늘 한 발자국의 반복이었어요. <mark>완벽한 계획보다 오늘의 작은 실행 하나가 아쉬움을 지워요.</mark></p>
+            <div class="mini">
+              <div class="m"><b>정하기:</b> 위 10년 질문에 한 문장으로 답 적어두기 (완벽하지 않아도 됨)</div>
+              <div class="m"><b>버리기:</b> 5년 관점에서 안 중요한 일 하나, 이번 주에 손 떼기</div>
+              <div class="m"><b>심기:</b> 7년 복리 씨앗 하나에 30분만 투자</div>
+              <div class="m"><b>시작하기:</b> 1년 목표의 v0.1을 오늘 착수 — 아무리 작아도</div>
+            </div>
+          </div>
+        </details>
+
+      </div>
+    </details>
+  </section>
+
+  <!-- 5력을 인생 질문으로 -->
+  <section class="card">
+    <details class="sec">
+      <summary><span class="sec-num">◆</span> 1부의 5력을 '인생 질문'으로 번역</summary>
+      <div class="sec-body">
+        <p>1부의 다섯 힘은 공부만이 아니라 삶에도 그대로 써요.</p>
+        <div class="mini">
+          <div class="m"><b>질문력</b> — 남이 정해준 목표 말고, 내가 진짜 원하는 걸 스스로 물었나?</div>
+          <div class="m"><b>연결력</b> — 내가 가진 서로 다른 것들(직업·취미·관심)을 아무도 안 한 방식으로 이었나?</div>
+          <div class="m"><b>검증력</b> — "이 길이 맞다"는 믿음에 근거가 있나, 아니면 남 말이었나?</div>
+          <div class="m"><b>맥락력</b> — 지금의 내 나이·상황에 맞는 선택인가, 남의 시간표를 따라가나?</div>
+          <div class="m"><b>목적력</b> — 이걸 왜 하지? 끝에 누구에게 닿나?</div>
+        </div>
+        <div class="co warm">
+          <div class="co-t">⚠️ 딱 하나 조심</div>
+          <p style="margin:.3em 0 0">AI에게 인생을 <b>대신 결정</b>하게 하지 마세요. AI는 경로·리스크·선택지를 넓혀주는 <u>프리렌</u>일 뿐, <mark>목적지는 당신이 정해야</mark> 아쉬움이 안 남아요. AI가 "이렇게 사세요" 하면 그건 이미 당신 인생이 아니에요.</p>
+        </div>
+      </div>
+    </details>
+  </section>
+
+  <div class="finale">
+    <div class="rune">🧭✨</div>
+    <p class="big">아쉬움은 '실패'에서 오지 않아요.<br>언제나 <u>'안 해본 것'</u>에서 와요.</p>
+    <p style="color:var(--fg-soft); margin-top:18px">그러니 오늘 던질 질문은 딱 하나면 돼요 —<br><b>"10년 뒤의 내가, 지금 나에게 뭐라고 할까?"</b><br>그 답을 향해 오늘 한 걸음.</p>
+  </div>
+
+  <div class="foot">
+    프리렌으로 배우는 AI 시대 · 2부 내 삶편<br>
+    후회 최소화 × 역순 시간표 · 개인 성찰 정리
+  </div>
+
+</div>
+</body>
+</html>

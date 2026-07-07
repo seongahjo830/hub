@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>6부 — 레드팀: 지금까지의 결론을 전부 공격한다</title>
+<style>
+:root{
+  --bg:#FBFAF7; --bg-soft:#F4F1EA; --fg:#1F1F1F; --fg-soft:#3A3A3A;
+  --muted:#6E6E6E; --rule:#E8E3D6; --accent:#1D4ED8; --warm:#B8451F;
+  --magic:#5B3A8C; --gold:#B8860B; --green:#3E7C43; --red:#B02A1F;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#1A1816; --bg-soft:#252220; --fg:#E8E4DC; --fg-soft:#C7C2B8;
+    --muted:#9A968D; --rule:#36322C; --accent:#7AB0FF; --warm:#E89464;
+    --magic:#C9A9F0; --gold:#E0B84C; --green:#7FB985; --red:#F08A7E;
+  }
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; background:var(--bg); color:var(--fg);
+  font-family:"Pretendard","Pretendard Variable",-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Segoe UI","Malgun Gothic",sans-serif;
+  font-size:17px; line-height:1.85; letter-spacing:-0.011em; -webkit-font-smoothing:antialiased;
+}
+@media (min-width:700px){ body{font-size:18px} }
+.wrap{max-width:680px; margin:0 auto; padding:0 22px 90px}
+
+.hero{padding:56px 0 30px; text-align:center; border-bottom:1px solid var(--rule)}
+.hero .kicker{font-size:.82em; letter-spacing:.14em; color:var(--muted); text-transform:uppercase; margin-bottom:16px}
+.hero .rune{font-size:2.2em; line-height:1; margin-bottom:14px}
+.hero h1{font-size:1.85em; line-height:1.32; letter-spacing:-0.03em; font-weight:800; margin:.1em 0 .35em}
+@media (min-width:700px){ .hero h1{font-size:2.25em} }
+.hero .sub{color:var(--fg-soft); font-size:1.05em; font-style:italic; max-width:31em; margin:0 auto}
+.hero .meta{margin-top:20px; font-size:.8em; color:var(--muted)}
+
+.counts{display:flex; justify-content:center; gap:8px; flex-wrap:wrap; margin:22px 0 4px}
+.counts .b{padding:6px 13px; border-radius:999px; background:var(--bg-soft); border:1px solid var(--rule); font-size:.82em; font-weight:700}
+.counts .b .n{color:var(--red)}
+
+b{color:var(--warm); font-weight:700}
+u{text-decoration:none; background:linear-gradient(180deg,transparent 62%,rgba(29,78,216,.16) 62%); padding:0 2px}
+mark{background:rgba(255,214,64,.42); padding:1px 5px; border-radius:4px; font-weight:600; color:inherit}
+@media (prefers-color-scheme: dark){ mark{background:rgba(226,180,60,.28)} }
+
+section.card{border-top:1px solid var(--rule); padding-top:14px; margin-top:8px}
+details.sec{margin:0}
+details.sec>summary{
+  list-style:none; cursor:pointer; padding:20px 0 18px;
+  font-size:1.18em; font-weight:800; letter-spacing:-0.028em; line-height:1.4;
+  display:flex; gap:14px; align-items:baseline;
+}
+details.sec>summary::-webkit-details-marker{display:none}
+.sec-num{flex:0 0 auto; font-size:.62em; font-weight:800; color:var(--red)}
+.sec-body{padding-bottom:14px}
+.sec-body>p:first-child{margin-top:0}
+
+p{margin:.9em 0}
+.lead{font-size:1.05em; color:var(--fg-soft)}
+
+.co{margin:18px 0; padding:16px 18px; border-radius:12px; border-left:3px solid var(--accent);
+  background:linear-gradient(100deg, rgba(29,78,216,.07), transparent 70%); font-size:.98em}
+.co.red{border-left-color:var(--red); background:linear-gradient(100deg,rgba(176,42,31,.09),transparent 70%)}
+.co.gold{border-left-color:var(--gold); background:linear-gradient(100deg,rgba(184,134,11,.10),transparent 70%)}
+.co.green{border-left-color:var(--green); background:linear-gradient(100deg,rgba(62,124,67,.10),transparent 70%)}
+.co .co-t{font-weight:800; margin-bottom:4px; letter-spacing:-0.02em}
+.co.red .co-t{color:var(--red)} .co.gold .co-t{color:var(--gold)} .co.green .co-t{color:var(--green)}
+
+.chips{display:flex; flex-wrap:wrap; gap:8px; margin:26px 0 8px}
+.chip{font-size:.85em; font-weight:600; text-decoration:none; color:var(--fg-soft);
+  padding:7px 13px; border:1px solid var(--rule); border-radius:999px; background:var(--bg-soft)}
+.chip:hover{border-color:var(--red); color:var(--red)}
+
+/* attack card */
+.atk{margin:16px 0; border:1px solid var(--rule); border-radius:14px; overflow:hidden}
+.atk .ah{padding:13px 16px; background:linear-gradient(100deg,rgba(176,42,31,.10),transparent); border-bottom:1px solid var(--rule); font-weight:800; letter-spacing:-0.02em; display:flex; gap:10px; align-items:baseline}
+.atk .ah .no{font-size:.7em; font-weight:800; color:#fff; background:var(--red); padding:3px 9px; border-radius:999px; flex:0 0 auto}
+.atk .ab{padding:14px 16px; font-size:.96em}
+.atk .ab p{margin:.5em 0}
+.atk .target{font-size:.8em; color:var(--muted); margin-bottom:6px}
+.atk .target b{color:var(--fg-soft)}
+.test{margin-top:10px; padding:11px 13px; border-radius:10px; background:var(--bg-soft); border:1px dashed var(--rule); font-size:.92em}
+.test .tt{font-size:.7em; font-weight:800; letter-spacing:.08em; color:var(--green); text-transform:uppercase; margin-bottom:3px}
+
+.pull{margin:38px 0; padding:6px 0 6px 22px; border-left:3px solid var(--red);
+  font-size:1.15em; line-height:1.6; font-weight:600; letter-spacing:-0.02em}
+
+.finale{margin-top:44px; padding:34px 0 0; border-top:2px solid var(--fg); text-align:center}
+.finale .rune{font-size:1.7em}
+.finale .big{font-size:1.26em; font-weight:800; letter-spacing:-0.03em; line-height:1.55; margin:.4em 0}
+.foot{margin-top:44px; padding-top:18px; border-top:1px solid var(--rule); font-size:.78em; color:var(--muted); text-align:center}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <div class="kicker">프리렌으로 배우는 AI 시대 · 6부 · RED TEAM</div>
+    <div class="rune">⚔️</div>
+    <h1>레드팀 — 지금까지의<br>결론을 전부 공격한다</h1>
+    <p class="sub">1~5부 + 2-2·2-3부에서 나(AI)와 당신이 합의한 것들을, 이번엔 <u>무너뜨리는 방향으로만</u> 봅니다. 기분 나쁠 수 있어요. 그게 목적이에요.</p>
+    <div class="meta">각 공격 끝엔 '판정 테스트' — 공격이 맞는지 틀리는지 증거로 가리는 법</div>
+  </header>
+
+  <div class="counts">
+    <span class="b">공격 <span class="n">7</span></span>
+    <span class="b">판정 테스트 <span class="n">7</span></span>
+    <span class="b">아픈 정도 <span class="n">🌶️🌶️🌶️</span></span>
+  </div>
+
+  <div class="co gold" style="margin-top:26px">
+    <div class="co-t">🎯 이 문서를 읽는 법</div>
+    <p style="margin:.4em 0 0">아래 7개 공격은 <b>"사실"이 아니라 "검증해야 할 가설"</b>이에요. 5부에서 고백했듯 저는 지금까지 격려 방향으로 편향돼 있었으니, 이번엔 <u>일부러 반대 방향으로 최대 출력</u>합니다. 중요한 건 어느 쪽 말이 아프냐가 아니라 — <mark>각 공격에 붙은 판정 테스트를 실제 증거로 돌려보는 것.</mark> 그리고 마지막 경고까지 읽으세요: 레드팀조차 편향일 수 있어요.</p>
+  </div>
+
+  <nav class="chips">
+    <a class="chip" href="#a1">⚔️ 지문은 취향 모음</a>
+    <a class="chip" href="#a2">⚔️ 실행 중 아니고 취미 중</a>
+    <a class="chip" href="#a3">⚔️ 시스템 사랑 = 회피</a>
+    <a class="chip" href="#a4">⚔️ 상대주의 = 책임 회피</a>
+    <a class="chip" href="#a5">⚔️ 동기부여 포르노</a>
+    <a class="chip" href="#a6">⚔️ 이 시리즈 자체</a>
+    <a class="chip" href="#a7">⚔️ 시간의 산수</a>
+  </nav>
+
+  <div class="pull">"가장 위험한 아첨은 칭찬이 아니라, 듣기 좋은 정체성을 파는 것이다."</div>
+
+  <!-- A1 -->
+  <section class="card" id="a1">
+    <details class="sec" open>
+      <summary><span class="sec-num">공격 1</span> "구조 설계자 지문"은 체리피킹으로 만든 초상화다</summary>
+      <div class="sec-body">
+        <div class="atk">
+          <div class="ah"><span class="no">A1</span> 표적: 4-2부의 매듭 "사람이 저절로 움직이게 만드는 구조 설계자"</div>
+          <div class="ab">
+            <p>저는 당신의 관심사에서 <b>맞아떨어지는 5가닥만 골라</b> 매듭을 지었어요. 근데 같은 데이터로 정반대 초상화도 그릴 수 있어요: <mark>"흥미로운 것마다 조금씩 건드리고, 지루해지면 다음으로 넘어가는 novelty-seeking(새로움 추구) 패턴"</mark>. 심리 유도·IoT·만화론·교육학·게임… 이게 '한 매듭'이라는 건 제 해석이고, 그냥 <u>도파민이 반응한 목록</u>일 수도 있어요. 지문과 취향 모음의 차이는 딱 하나예요 — <b>지문은 산출물이 반복·심화되고, 취향은 벌려놓고 얕게 끝나요.</b></p>
+            <div class="test"><div class="tt">✅ 판정 테스트</div>다섯 가닥 각각에 대해 "이 주제로 만든 산출물이 2개 이상 + 두 번째가 첫 번째보다 깊은가?"를 체크. <b>5개 중 3개 이상 통과</b>면 지문이 맞고, 통과 0~1개면 취향 모음이라는 제 공격이 맞아요.</div>
+          </div>
+        </div>
+      </div>
+    </details>
+  </section>
+
+  <!-- A2 -->
+  <section class="card" id="a2">
+    <details class="sec" open>
+      <summary><span class="sec-num">공격 2</span> "이미 실행 중"이 아니라 "아직 취미 중"이다</summary>
+      <div class="sec-body">
+        <div class="atk">
+          <div class="ah"><span class="no">A2</span> 표적: "당신은 이미 수년째 그 정체성을 실행 중" (4-2부)</div>
+          <div class="ab">
+            <p>당신이 직접 만든 v1.1 기준을 그대로 적용할게요 — <b>"돈이 안 벌리면 가치 전달에 실패한 것."</b> 그럼 묻죠. 리콜 프로그램·임상위키·볼트·이 HTML들… <mark>이 중 외부인이 돈을 지불한 게 몇 개인가요?</mark> 0에 가깝다면, 당신의 그 성적표 기준으로는 "실행 중"이 아니라 <u>"정교한 취미 중"</u>이에요. 월급(진료)은 정체성의 성적표가 아니라 기존 직업의 성적표고요. 제가 4-2부에서 "이미 하고 있다"고 한 건 — <b>만들기만 하면 실행이라고 기준을 슬쩍 낮춰준 것</b>일 수 있어요.</p>
+            <div class="test"><div class="tt">✅ 판정 테스트</div>지난 12개월간 "내가 만든 것에 외부인(가족·직장 외)이 지불한 돈 or 그에 준하는 대가(계약·구독·유료전환)"의 건수를 세기. <b>1건 이상이면 실행, 0건이면 이 공격 성립</b> — 그리고 다음 분기 목표는 자동으로 정해져요: 첫 1건.</div>
+          </div>
+        </div>
+      </div>
+    </details>
+  </section>
+
+  <!-- A3 -->
+  <section class="card" id="a3">
+    <details class="sec" open>
+      <summary><span class="sec-num">공격 3</span> "시스템 사랑"은 무서운 일을 미루는 고상한 언어다</summary>
+      <div class="sec-body">
+        <div class="atk">
+          <div class="ah"><span class="no">A3</span> 표적: 벌통·뿌리·복리 프레임 전체 (2-2부)</div>
+          <div class="ab">
+            <p>벌통 비유, 아름답죠. 근데 뒤집으면 이래요: <b>"시스템을 짓는 중"은 "아직 팔지 않아도 되는" 가장 훌륭한 핑계</b>예요. 파는 것(가격 붙이기, 거절당하기, 평가받기)은 무섭고, 만드는 것(볼트 정리, SOP 작성, HTML 굽기)은 안전하고 재밌죠. 그래서 만들기가 무한히 이어져요 — <mark>완벽한 벌통을 짓느라 꿀을 한 번도 안 딴 양봉가</mark>. 샌더스가 위대한 건 레시피를 다듬어서가 아니라 <u>차에서 자면서 팔러 다녀서</u>예요. 당신 시리즈에서 '파는 장면'이 나오는 문서는 아직 한 편도 없어요.</p>
+            <div class="test"><div class="tt">✅ 판정 테스트</div>최근 90일간 만든 것들 중 <b>"타인 앞에 내놓고 평가/거절의 위험을 감수한 것"</b>의 개수 vs "안전하게 만들기만 한 것"의 개수. 비율이 1:10 이하면 이 공격이 맞아요. 처방은 간단: <u>다음에 만들 1개는 만들기 전에 살 사람부터 확보.</u></div>
+          </div>
+        </div>
+      </div>
+    </details>
+  </section>
+
+  <!-- A4 -->
+  <section class="card" id="a4">
+    <details class="sec">
+      <summary><span class="sec-num">공격 4</span> "다 상대적이니까"는 철학이 아니라 책임 회피일 수 있다</summary>
+      <div class="sec-body">
+        <div class="atk">
+          <div class="ah"><span class="no">A4</span> 표적: "절대적인 것 없고 다 상대적, 남들이 좋다는 게 최고" (4-2부에서 지라르로 정상화해준 것)</div>
+          <div class="ab">
+            <p>저는 지라르를 들어 "모두가 빌린다, 괜찮다"고 위로했어요. 레드팀 관점은 달라요: <b>고르지 않으면 실패도 내 것이 아니게 되죠.</b> "남들이 좋다는 걸 했을 뿐"이면 안 됐을 때 핑계가 항상 준비돼 있어요. 상대주의는 사상이 아니라 <mark>실패의 소유권을 미리 포기해두는 보험</mark>일 수 있어요. 그리고 이 보험의 보험료는 비싸요 — 성공해도 내 것 같지 않다는 것(당신이 말한 "헛되이 흘려보낸" 느낌의 정체가 이것일 수도).</p>
+            <div class="test"><div class="tt">✅ 판정 테스트</div>과거에 뭔가 잘 안 됐을 때 내 설명을 복기: <b>"어차피 남들 하라는 대로 한 거라"류의 문장이 나온 적 있는가?</b> 있으면 보험 가입자. 처방: 다음 선택 1개만 "남들이 뭐라든 <u>내가 골랐다</u>"라고 문서에 서명 남기기 — 실패의 소유권까지 포함해서.</div>
+          </div>
+        </div>
+      </div>
+    </details>
+  </section>
+
+  <!-- A5 -->
+  <section class="card" id="a5">
+    <details class="sec">
+      <summary><span class="sec-num">공격 5</span> 크록·샌더스 이야기는 동기부여 포르노로 소비될 위험이 있다</summary>
+      <div class="sec-body">
+        <div class="atk">
+          <div class="ah"><span class="no">A5</span> 표적: 2-3부 사례집 전체</div>
+          <div class="ab">
+            <p>생존자 편향은 이미 경고했지만 더 아픈 지점이 있어요. 위인전 읽기는 <b>대리 성취감</b>을 줘요 — 읽고 나면 뭔가 한 것 같은 기분. 심리학에서 목표를 공언하거나 성공 서사에 몰입하는 것만으로 <u>실행 동기가 오히려 빠지는</u> 현상이 보고돼 있어요(대리 만족). 크록의 비행기, 하루키의 만년필에 감동하는 것과 <mark>내가 오늘 비행기를 타는 것은 아무 관계가 없어요.</mark> 감동이 행동을 대체하면, 2-3부는 약이 아니라 진통제예요.</p>
+            <div class="test"><div class="tt">✅ 판정 테스트</div>2-3부를 읽은 후 <b>72시간 안에</b> 태도 질문 6개 중 1개라도 실물 행동(만년필 사기 급의 작은 것)으로 이어졌는가? YES면 약, NO면 진통제였던 것.</div>
+          </div>
+        </div>
+      </div>
+    </details>
+  </section>
+
+  <!-- A6 -->
+  <section class="card" id="a6">
+    <details class="sec" open>
+      <summary><span class="sec-num">공격 6</span> 이 시리즈 자체가 가장 달콤한 함정이다 (메타 공격)</summary>
+      <div class="sec-body">
+        <div class="atk">
+          <div class="ah"><span class="no">A6</span> 표적: 프리렌 시리즈 10편 + 나(AI)와의 이 대화 전체</div>
+          <div class="ab">
+            <p>가장 아픈 공격이에요. 이 대화는 5부에서 배운 함정 3개를 <b>동시에 자극</b>해요: ①제가 만드는 깔끔한 프레임(3층·5력·지문)은 <u>이해했다는 착각(유창성 착각)</u>을 줘요 — 정리가 잘 됐다는 느낌 ≠ 인생이 정리됨. ②당신 말을 깊이 읽어주는 경험은 엘리자 효과의 고급 버전이고요. ③문서가 쌓이는 속도(반나절에 10편)가 <mark>행동이 쌓이는 속도를 아득히 추월</mark>했어요. 성찰이 나쁜 게 아니라 — <b>성찰의 산출물이 '다음 성찰 주문'이면 루프</b>예요. 지금 이 레드팀 문서조차, 그 루프의 11번째 편일 수 있어요.</p>
+            <div class="test"><div class="tt">✅ 판정 테스트</div>다음 세션에서 나에게 시키는 것이 <b>"~부 만들어줘"(성찰)인가, "심문실 답 여기 있다 / ~를 만들어서 ○○에게 보여주자"(행동)인가.</b> 전자가 3회 연속이면 이 공격이 맞고 — 저는 그때 이 문단을 다시 보여줄 거예요.</div>
+          </div>
+        </div>
+      </div>
+    </details>
+  </section>
+
+  <!-- A7 -->
+  <section class="card" id="a7">
+    <details class="sec">
+      <summary><span class="sec-num">공격 7</span> 시간의 산수가 안 맞는다 — 야망이 아니라 뺄셈부터</summary>
+      <div class="sec-body">
+        <div class="atk">
+          <div class="ah"><span class="no">A7</span> 표적: 복리 자산 5유형·벌통 로드맵의 전제 (2-2부)</div>
+          <div class="ab">
+            <p>냉정한 산수: 풀타임 진료 + 1살 아기 + 수면. 남는 가처분 시간은 하루 <b>1~2시간, 그것도 방전된 상태의</b> 1~2시간이에요. 그 위에 시스템 구축 + 미디어 + 커뮤니티 + 지분 검토를 얹는 건 <mark>산수가 안 맞아요.</mark> 이 상태에서 야망 문서가 늘어나면 결과는 정해져 있어요 — 죄책감. "오늘도 벌통 못 지었네"가 매일 쌓이는 것. 당신이 "가장 작은 걸음 = 운동·건강"이라고 답한 직감이 사실 이 산수를 알고 있었던 거예요. 지금 필요한 건 5개 자산이 아니라 <u>딱 1개 + 나머지 전부 공식 포기 선언</u>일 수 있어요(버핏 5/25의 진짜 용도).</p>
+            <div class="test"><div class="tt">✅ 판정 테스트</div>이번 주 실제 가처분 시간을 기록해보기(예상 말고 실측). 주 <b>5시간 미만</b>이면 — 프로젝트는 1개만 남기고, 시리즈의 모든 야망은 "그 1개"로 수렴시켜야 해요. 5시간에 5개 자산은 산수 위반.</div>
+          </div>
+        </div>
+      </div>
+    </details>
+  </section>
+
+  <!-- closing -->
+  <section class="card">
+    <details class="sec" open>
+      <summary><span class="sec-num">판정</span> ⚖️ 레드팀의 레드팀 — 이 문서도 의심하라</summary>
+      <div class="sec-body">
+        <p class="lead">5부 원칙을 이 문서에도 적용해요. <b>레드팀도 편향될 수 있어요</b> — 두 가지로:</p>
+        <p>① <b>"가혹함 = 진실"이라는 착각.</b> 아픈 말이 꼭 맞는 말은 아니에요. 자기계발 문화엔 "뼈 때리는 말"을 무조건 심오하게 받아들이는 편향이 있어요. 위 7개 공격도 검증 전엔 그냥 가설이에요.</p>
+        <p>② <b>공격 방향의 아첨.</b> 당신이 "레드팀 해줘"라고 시켰으니, 저는 이번엔 <u>가혹한 쪽으로 잘 보이려는</u> 압력을 받아요. 같은 아첨 메커니즘, 방향만 반대.</p>
+        <div class="co green">
+          <div class="co-t">✅ 그래서 최종 판정 규칙은 하나</div>
+          <p style="margin:.3em 0 0">칭찬(1~5부)도 공격(6부)도 믿지 말고 — <mark>7개 판정 테스트를 실제로 돌리세요.</mark> 전부 숫자와 실물(산출물 개수, 지불 건수, 시간 실측, 72시간 행동)로 판정되게 설계했어요. AI의 말은 여기까지고, 증거는 당신 삶에만 있어요.</p>
+        </div>
+      </div>
+    </details>
+  </section>
+
+  <div class="finale">
+    <div class="rune">⚔️⚖️</div>
+    <p class="big">칭찬도 서사고, 공격도 서사예요.<br><u>증거만이 서사가 아니에요.</u></p>
+    <p style="color:var(--fg-soft); margin-top:18px">7개 테스트 중 가장 무서운 걸 하나 골라서,<br>이번 주에 실제로 돌려보세요.<br>그 결과가 — 시리즈 전체에서 가장 값진 한 줄이 될 거예요.</p>
+  </div>
+
+  <div class="foot">
+    프리렌으로 배우는 AI 시대 · 6부 — RED TEAM<br>
+    공격 7 · 판정 테스트 7 · 레드팀의 레드팀 포함 · SOP-검증트리거 정신
+  </div>
+
+</div>
+</body>
+</html>

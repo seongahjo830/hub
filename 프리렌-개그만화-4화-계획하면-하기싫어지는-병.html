@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>개그만화 4화 — 계획하면 하기 싫어지는 병</title>
+<style>
+:root{
+  --bg:#FFF8E8; --panel:#FFFEFA; --ink:#241F18; --ink-soft:#574F42; --muted:#8A8170;
+  --line:#E4D6B4; --accent:#2563EB; --warm:#E24A17; --magic:#7C3AED; --gold:#E0A80B; --green:#2F9E44; --red:#E5322B; --pink:#EC4899;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#16130C; --panel:#211D14; --ink:#F2ECDA; --ink-soft:#CFC6B2; --muted:#9A9074;
+    --line:#3A3220; --accent:#7AB0FF; --warm:#FF9152; --magic:#C6A6F0; --gold:#F0C64C; --green:#7FD98A; --red:#FF7A6E; --pink:#FF8AC4;
+  }
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font-family:"Pretendard","Apple SD Gothic Neo","Malgun Gothic",sans-serif;line-height:1.65;-webkit-font-smoothing:antialiased;}
+.wrap{max-width:560px;margin:0 auto;padding:0 15px 80px}
+
+.cover{text-align:center;padding:40px 0 18px}
+.cover .ep{display:inline-block;font-size:.74em;letter-spacing:.12em;color:#fff;background:var(--pink);padding:4px 12px;border-radius:999px;font-weight:800;transform:rotate(-2deg)}
+.cover h1{font-size:1.95em;font-weight:900;letter-spacing:-0.03em;margin:.35em 0 .15em;line-height:1.15}
+.cover h1 .z{color:var(--warm)}
+.cover .sub{color:var(--ink-soft);font-size:.96em;font-weight:600}
+
+.strip{background:var(--panel);border:3px solid var(--ink);border-radius:16px;margin:18px 0;overflow:hidden;box-shadow:4px 4px 0 var(--ink)}
+.strip .hd{display:flex;align-items:center;gap:8px;padding:9px 14px;background:var(--ink);color:var(--bg)}
+.strip .hd .no{font-weight:900;font-size:.9em;background:var(--gold);color:var(--ink);width:24px;height:24px;border-radius:7px;display:flex;align-items:center;justify-content:center}
+.strip .hd .ti{font-weight:800;font-size:.95em;letter-spacing:-0.02em}
+.strip .art{display:block;width:100%;height:auto;background:var(--panel)}
+.strip .cap{padding:11px 15px;border-top:2px dashed var(--line);font-size:.93em;color:var(--ink-soft)}
+.strip .cap b{color:var(--warm)} .strip .cap .p{color:var(--magic);font-weight:800}
+
+.sfx{text-align:center;font-size:1.5em;font-weight:900;color:var(--warm);letter-spacing:-0.02em;margin:14px 0 2px;transform:rotate(-1.5deg)}
+.sfx.big{font-size:1.85em;color:var(--red)}
+.beat{text-align:center;font-size:1.06em;font-weight:800;margin:16px 0 4px;color:var(--ink)}
+.beat .hi{background:linear-gradient(180deg,transparent 55%,#FFE168 55%);padding:0 4px}
+
+.punch{background:var(--panel);border:3px dashed var(--pink);border-radius:16px;padding:15px 17px;margin:18px 0;font-size:.98em;font-weight:600}
+.punch .pt{font-weight:900;color:var(--pink);margin-bottom:4px;font-size:.9em}
+.tip{background:var(--panel);border:3px solid var(--green);border-radius:16px;padding:15px 17px;margin:18px 0;font-size:.96em}
+.tip .tt{font-weight:900;color:var(--green);margin-bottom:5px;font-size:.92em}
+b{color:var(--warm)} mark{background:#FFE168;padding:1px 5px;border-radius:5px;font-weight:800;color:#241F18}
+u{text-decoration:none;background:linear-gradient(180deg,transparent 58%,rgba(37,99,235,.25) 58%);font-weight:700}
+
+.finale{margin-top:30px;padding:22px 18px;border:3px solid var(--ink);border-radius:16px;text-align:center;box-shadow:4px 4px 0 var(--pink);background:var(--panel)}
+.finale .big{font-size:1.24em;font-weight:900;letter-spacing:-0.03em;line-height:1.5}
+.foot{margin-top:26px;text-align:center;font-size:.75em;color:var(--muted)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="cover">
+    <span class="ep">프리렌 개그극장 · 4화</span>
+    <h1>계획하면 <span class="z">하기 싫어지는</span> 병 ㅋㅋ</h1>
+    <div class="sub">"주말 3시에 하자" → 그 순간 하기 싫어짐. 새벽 2시엔 갑자기 빡 꽂힘. 뭐지 이 몸?</div>
+  </div>
+
+  <div class="beat">지난 화, 프리렌이 "주말에 하라"고 했는데…</div>
+
+  <!-- P1 -->
+  <div class="strip">
+    <div class="hd"><span class="no">1</span><span class="ti">또 틀린 프리렌</span></div>
+    <svg class="art" viewBox="0 0 520 210" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="페른이 계획표 보고 정색한다">
+      <rect width="520" height="210" fill="var(--panel)"/>
+      <line x1="0" y1="178" x2="520" y2="178" stroke="var(--line)" stroke-width="2"/>
+      <!-- planner -->
+      <g transform="translate(90,52)">
+        <rect x="-40" y="0" width="120" height="120" rx="8" fill="#fff" stroke="#241F18" stroke-width="2.5"/>
+        <text x="20" y="26" text-anchor="middle" font-size="12" font-weight="800" fill="#241F18">주말 계획</text>
+        <line x1="-28" y1="40" x2="68" y2="40" stroke="#ccc" stroke-width="1.5"/>
+        <text x="-24" y="58" font-size="11" fill="#2563EB">▢ 3시 작업 시작</text>
+        <text x="-24" y="78" font-size="11" fill="#2563EB">▢ 6시까지</text>
+        <text x="-24" y="98" font-size="11" fill="#2563EB">▢ 뿌듯하기</text>
+      </g>
+      <!-- Fern disgusted -->
+      <g transform="translate(340,60)">
+        <rect x="-30" y="62" width="66" height="52" rx="15" fill="#7C3AED"/>
+        <circle cx="3" cy="36" r="26" fill="#F6DCC2"/>
+        <path d="M-21,30 Q3,-6 30,30 Q30,44 24,48 L-15,48 Q-21,44 -21,30Z" fill="#5127A3"/>
+        <!-- dead fish eyes + -_- -->
+        <path d="M-10,35 l9,0 M11,35 l9,0" stroke="#241F18" stroke-width="3" stroke-linecap="round"/>
+        <path d="M-6,49 l16,0" stroke="#B06A5A" stroke-width="2.5" stroke-linecap="round"/>
+        <!-- small cloud -->
+        <text x="34" y="20" font-size="16" fill="#8A8170">…하기 싫다</text>
+      </g>
+    </svg>
+    <div class="cap"><b>프리렌:</b> "주말 3시에 3시간 하기로 하자~" <span class="p">페른:</span> "(정색) …그렇게 정하는 순간, <mark>이미 하기 싫어졌는데요.</mark>" <b>프리렌:</b> "엥 왜?!"</div>
+  </div>
+
+  <!-- P2 -->
+  <div class="strip">
+    <div class="hd"><span class="no">2</span><span class="ti">근데 새벽 2시엔…</span></div>
+    <svg class="art" viewBox="0 0 520 210" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="새벽에 갑자기 눈 번쩍 뜨고 미친듯이 작업">
+      <rect width="520" height="210" fill="#1a1830"/>
+      <!-- moon -->
+      <circle cx="70" cy="45" r="24" fill="#F0E68C"/>
+      <text x="440" y="40" font-size="16" fill="#fff" opacity=".6">새벽 2:14 AM</text>
+      <!-- Fern FIRED UP at desk -->
+      <g transform="translate(250,55)">
+        <rect x="-32" y="66" width="70" height="56" rx="15" fill="#7C3AED"/>
+        <circle cx="3" cy="36" r="27" fill="#F6DCC2"/>
+        <path d="M-22,30 Q3,-10 30,30 Q30,44 24,48 L-15,48 Q-22,44 -22,30Z" fill="#5127A3"/>
+        <!-- fire eyes -->
+        <circle cx="-8" cy="34" r="5" fill="#E5322B"/><circle cx="14" cy="34" r="5" fill="#E5322B"/>
+        <circle cx="-8" cy="34" r="2" fill="#F0C64C"/><circle cx="14" cy="34" r="2" fill="#F0C64C"/>
+        <path d="M-8,46 Q3,56 15,46 Q9,52 3,52 Q-3,52 -8,46Z" fill="#241F18"/>
+        <!-- sparks -->
+        <g stroke="#F0C64C" stroke-width="2.5" stroke-linecap="round"><line x1="42" y1="4" x2="56" y2="-8"/><line x1="-36" y1="4" x2="-50" y2="-8"/></g>
+      </g>
+      <!-- keyboard smash motion -->
+      <text x="380" y="150" font-size="26" font-weight="900" fill="#F0C64C" transform="rotate(-6 380 150)">타다다닥!!</text>
+    </svg>
+    <div class="cap">근데 <b>아무도 안 시켰는데</b> 새벽 2시에 갑자기 눈 번쩍 → <mark>미친 듯이 영상 편집·기획 3시간 풀가동.</mark> 피곤했는데도 빡 꽂히면 멈춤 불가. <span class="p">페른:</span> "이게 저예요… 계획하면 안 되고, 꽂히면 폭주하는 몸."</div>
+  </div>
+
+  <div class="sfx big">진단명: J형 알레르기 ㅋㅋ</div>
+
+  <!-- P3 -->
+  <div class="strip">
+    <div class="hd"><span class="no">3</span><span class="ti">프리렌의 깨달음</span></div>
+    <svg class="art" viewBox="0 0 520 205" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="프리렌이 무릎을 탁 친다">
+      <rect width="520" height="205" fill="var(--panel)"/>
+      <line x1="0" y1="172" x2="520" y2="172" stroke="var(--line)" stroke-width="2"/>
+      <g transform="translate(360,58)">
+        <rect x="-32" y="60" width="70" height="56" rx="16" fill="#3E8A5A"/>
+        <circle cx="0" cy="34" r="28" fill="#F6DCC2"/>
+        <path d="M-29,28 Q-35,100 -23,126 L-13,126 Q-19,66 -16,42 Z" fill="#F0EAD8"/>
+        <path d="M29,28 Q35,100 23,126 L13,126 Q19,66 16,42 Z" fill="#F0EAD8"/>
+        <path d="M-28,26 Q0,-15 29,26 Q23,18 0,16 Q-23,18 -28,26Z" fill="#F0EAD8"/>
+        <!-- ! eyes -->
+        <circle cx="-9" cy="32" r="3.5" fill="#241F18"/><circle cx="11" cy="32" r="3.5" fill="#241F18"/>
+        <text x="34" y="10" font-size="24" font-weight="900" fill="#E0A80B">!!</text>
+      </g>
+      <g><path d="M300,100 L332,92 L324,114 Z" fill="var(--panel)" stroke="var(--ink)" stroke-width="2.5"/>
+        <rect x="22" y="40" width="300" height="96" rx="16" fill="var(--panel)" stroke="var(--ink)" stroke-width="2.5"/>
+        <text x="40" y="72" font-size="14" font-weight="800" fill="var(--ink)">아! 너한테 필요한 건</text>
+        <text x="40" y="96" font-size="15.5" font-weight="900" fill="var(--warm)">'계획'이 아니라 '장전'이구나!</text>
+        <text x="40" y="120" font-size="12.5" fill="var(--ink-soft)">언제 쏠지 말고, 총알만 준비</text></g>
+    </svg>
+    <div class="cap"><b>프리렌:</b> "알았다! 너는 <u>'언제 할지' 정하면 죽는</u> 타입이야. 그럼 반대로 — <mark>꽂혔을 때 0초 만에 시작할 수 있게 '준비'만 해두면</mark> 되겠네!" <span class="p">페른:</span> "오…?"</div>
+  </div>
+
+  <div class="tip">
+    <div class="tt">🔫 핵심 = 계획(J) ❌ → 장전(裝塡) ⭕</div>
+    당신 뇌는 "3시에 하자" 하면 반항해요. 근데 <b>빡 꽂히는 순간</b>은 통제 못 하죠. 그럼 그 순간을 노려요 — <mark>꽂혔을 때 '어 뭐부터 하지' 없이 바로 폭주할 수 있게, 재료·환경만 미리 깔아두기.</mark> 시간은 안 정함. <u>총은 안 겨누고, 총알만 장전.</u>
+  </div>
+
+  <!-- P4 -->
+  <div class="strip">
+    <div class="hd"><span class="no">4</span><span class="ti">장전하는 법 (실전)</span></div>
+    <svg class="art" viewBox="0 0 520 180" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="총알 세 개 장전 재료 도구 씨앗">
+      <rect width="520" height="180" fill="var(--panel)"/>
+      <text x="260" y="30" text-anchor="middle" font-size="13" font-weight="800" fill="var(--ink)">꽂히기 전에 깔아둘 3가지</text>
+      <g transform="translate(90,60)">
+        <rect x="0" y="0" width="110" height="90" rx="12" fill="#2563EB" opacity=".14" stroke="#2563EB" stroke-width="2"/>
+        <text x="55" y="36" text-anchor="middle" font-size="24">🎬</text>
+        <text x="55" y="62" text-anchor="middle" font-size="12" font-weight="800" fill="#2563EB">재료</text>
+        <text x="55" y="80" text-anchor="middle" font-size="10.5" fill="#8A8170">찍은 영상·메모</text>
+      </g>
+      <g transform="translate(205,60)">
+        <rect x="0" y="0" width="110" height="90" rx="12" fill="#E24A17" opacity=".14" stroke="#E24A17" stroke-width="2"/>
+        <text x="55" y="36" text-anchor="middle" font-size="24">🛠️</text>
+        <text x="55" y="62" text-anchor="middle" font-size="12" font-weight="800" fill="#E24A17">도구</text>
+        <text x="55" y="80" text-anchor="middle" font-size="10.5" fill="#8A8170">앱 열어둠·템플릿</text>
+      </g>
+      <g transform="translate(320,60)">
+        <rect x="0" y="0" width="110" height="90" rx="12" fill="#2F9E44" opacity=".14" stroke="#2F9E44" stroke-width="2"/>
+        <text x="55" y="36" text-anchor="middle" font-size="24">📝</text>
+        <text x="55" y="62" text-anchor="middle" font-size="12" font-weight="800" fill="#2F9E44">할 거 1줄</text>
+        <text x="55" y="80" text-anchor="middle" font-size="10.5" fill="#8A8170">"다음엔 이거"</text>
+      </g>
+    </svg>
+    <div class="cap">꽂혔을 때 <b>"뭐부터 하지"에서 김 빠지면 끝.</b> 그러니 미리: ①<b>재료</b>(이동 중 찍은 영상·음성메모) ②<b>도구</b>(편집앱·템플릿 열어둠) ③<b>할 거 한 줄</b>("다음엔 이거 만들기"). <mark>꽂히면 → 0초 시작 → 폭주.</mark></div>
+  </div>
+
+  <!-- P5 -->
+  <div class="strip">
+    <div class="hd"><span class="no">5</span><span class="ti">폭주를 안 놓치는 법</span></div>
+    <svg class="art" viewBox="0 0 520 175" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="파도가 올 때 서핑보드로 올라탄다">
+      <rect width="520" height="175" fill="var(--panel)"/>
+      <!-- wave -->
+      <path d="M0,120 Q130,60 260,110 T520,100 L520,175 L0,175 Z" fill="#2563EB" opacity=".3"/>
+      <path d="M0,120 Q130,60 260,110 T520,100" fill="none" stroke="#2563EB" stroke-width="2.5"/>
+      <!-- surfer Fern -->
+      <g transform="translate(230,66)">
+        <ellipse cx="0" cy="42" rx="42" ry="8" fill="#241F18" opacity=".3"/>
+        <rect x="-24" y="4" width="48" height="34" rx="10" fill="#7C3AED"/>
+        <circle cx="0" cy="-12" r="18" fill="#F6DCC2"/>
+        <path d="M-14,-16 Q0,-38 14,-16 Q14,-6 10,-4 L-10,-4 Q-14,-6 -14,-16Z" fill="#5127A3"/>
+        <path d="M-6,-14 Q-2,-18 2,-14 M6,-14 Q10,-18 14,-14" stroke="#241F18" stroke-width="2" fill="none" stroke-linecap="round"/>
+      </g>
+      <text x="400" y="50" font-size="15" font-weight="900" fill="#2563EB" transform="rotate(-8 400 50)">간다아앗!</text>
+    </svg>
+    <div class="cap">'빡 꽂힘'은 <b>파도</b>야. 언제 올지 못 정해. 근데 오면 <mark>딴 거 다 제치고 올라타.</mark> 자다 깼어도, 원래 딴 계획 있었어도 — <u>꽂힘이 왔으면 그게 1순위.</u> 장전만 돼 있으면 파도 놓칠 일 없음. <span class="p">페른:</span> "죄책감 없이 폭주해도 되는 거였어…!"</div>
+  </div>
+
+  <div class="finale">
+    <div class="big">넌 계획으로 안 움직여.<br><span style="color:var(--pink)">파도로 움직여.</span><br><br>언제 칠지 정하지 말고,<br>파도 오면 바로 타게 —<br><span style="color:var(--gold)">보드만 미리 챙겨둬. 🏄</span></div>
+  </div>
+
+  <div class="foot">프리렌 개그극장 4화 · 계획(J) ❌ 장전(P) ⭕ · 꽂힘=파도, 준비=서핑보드</div>
+
+</div>
+
+<!-- ====== BONUS: 정보를 이야기로 ====== -->
+<div class="wrap" style="margin-top:20px">
+  <div class="cover" style="padding:26px 0 14px">
+    <span class="ep" style="background:var(--accent)">보너스 극장 🎁</span>
+    <h1 style="font-size:1.6em">"정보를 이야기로"에<br><span class="z">꽂힌 이유</span></h1>
+    <div class="sub">네가 방금 "이거 좋다"고 한 그 문장 — 사실 네 재능 알람이 울린 거야</div>
+  </div>
+
+  <div class="punch">
+    <div class="pt">📡 재능 감지 알람 삐뽀삐뽀</div>
+    네가 <b>"정보를 이야기로 바꾸는 거 좋은데?"</b> 하고 반응한 거 — 그냥 지나가지 마. <mark>남들 다 지나친 문장에 네 눈이 멈췄다는 건, 거기 네 재능이 있다는 신호야</mark>(시버스: "너에게 당연/끌리는 게 남에겐 놀라움"). 그리고 웃긴 거 알려줄까?
+  </div>
+
+  <div class="strip">
+    <div class="hd"><span class="no">★</span><span class="ti">지금 이 만화가 바로 그거임 ㅋㅋ</span></div>
+    <svg class="art" viewBox="0 0 520 175" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="딱딱한 정보가 만화로 변신">
+      <rect width="520" height="175" fill="var(--panel)"/>
+      <!-- boring doc -->
+      <g transform="translate(95,50)">
+        <rect x="-38" y="0" width="100" height="90" rx="6" fill="#eee" stroke="#8A8170" stroke-width="2"/>
+        <line x1="-26" y1="18" x2="50" y2="18" stroke="#bbb" stroke-width="3"/>
+        <line x1="-26" y1="32" x2="50" y2="32" stroke="#bbb" stroke-width="3"/>
+        <line x1="-26" y1="46" x2="40" y2="46" stroke="#bbb" stroke-width="3"/>
+        <line x1="-26" y1="60" x2="50" y2="60" stroke="#bbb" stroke-width="3"/>
+        <text x="12" y="112" text-anchor="middle" font-size="11" fill="#8A8170">지루한 정보 😴</text>
+      </g>
+      <text x="255" y="98" text-anchor="middle" font-size="28" font-weight="900" fill="var(--pink)">→</text>
+      <!-- comic pow -->
+      <g transform="translate(400,80)">
+        <polygon points="0,-40 12,-14 40,-14 18,4 26,32 0,16 -26,32 -18,4 -40,-14 -12,-14" fill="#FFE168" stroke="#241F18" stroke-width="2.5"/>
+        <text x="0" y="6" text-anchor="middle" font-size="15" font-weight="900" fill="#E24A17">빵!ㅋㅋ</text>
+      </g>
+    </svg>
+    <div class="cap">"거장 6명"이라는 <b>딱딱한 정보</b>를, 방금 <mark>멱살잡기·빡침·파도타기 개그로 바꿔서</mark> 네가 낄낄대며 읽었잖아. <span class="p">이게 바로 '정보를 이야기로'</b>야.</span> 라이언 홀리데이가 먹고사는 그 기술.</div>
+  </div>
+
+  <div class="tip">
+    <div class="tt">💎 그래서 네 무기 조합이 보임</div>
+    ① 넌 <b>정보를 이야기로 바꾸는 것</b>에 눈이 멈춤(재능 신호) ② 넌 <b>치과 전문 정보</b>를 가짐(재료 무한) ③ 넌 <b>충동으로 저질러버리는</b> 실행 엔진이 있음. <mark>= "치과 지식을 개꿀잼 이야기로 바꾸는 사람"</mark> — 이거 하는 치과의사, 거의 없음. <u>희소성(만화 1화) + 재능(홀리데이) + 실행(파도타기)이 여기서 만남.</u>
+  </div>
+
+  <div class="finale">
+    <div class="big">"오 이거 좋다"는<br><span style="color:var(--accent)">그냥 감상이 아니야.</span><br><br>네 재능이 손 든 거야. 🙋<br><span style="color:var(--gold)">딱딱한 걸 개꿀잼으로 바꾸는 것 —<br>그게 네가 이미 잘하는 거잖아.</span></div>
+  </div>
+
+  <div class="foot">보너스 극장 · "정보를 이야기로"(라이언 홀리데이) = 네 재능 알람<br>희소성 × 전문지식 × 충동실행 = 치과 지식 개꿀잼 번역가</div>
+</div>
+
+</body>
+</html>

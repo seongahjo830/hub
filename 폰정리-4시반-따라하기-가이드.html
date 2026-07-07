@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>폰 정리 따라하기 — 4시반 폰에서 체크하며</title>
+<style>
+:root{
+  --bg:#FFF8E8; --panel:#FFFEFA; --ink:#241F18; --ink-soft:#574F42; --muted:#8A8170;
+  --line:#E4D6B4; --accent:#2563EB; --warm:#E24A17; --magic:#7C3AED; --gold:#E0A80B; --green:#2F9E44; --red:#E5322B; --pink:#EC4899;
+}
+@media (prefers-color-scheme: dark){
+  :root{--bg:#16130C;--panel:#211D14;--ink:#F2ECDA;--ink-soft:#CFC6B2;--muted:#9A9074;--line:#3A3220;--accent:#7AB0FF;--warm:#FF9152;--magic:#C6A6F0;--gold:#F0C64C;--green:#7FD98A;--red:#FF7A6E;--pink:#FF8AC4;}
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:"Pretendard","Apple SD Gothic Neo","Malgun Gothic",sans-serif;line-height:1.66;-webkit-font-smoothing:antialiased}
+.wrap{max-width:600px;margin:0 auto;padding:0 15px 90px}
+.cover{text-align:center;padding:36px 0 12px}
+.cover .ep{display:inline-block;font-size:.74em;letter-spacing:.1em;color:#fff;background:var(--pink);padding:4px 12px;border-radius:999px;font-weight:800;transform:rotate(-2deg)}
+.cover h1{font-size:1.7em;font-weight:900;letter-spacing:-0.03em;margin:.3em 0 .1em;line-height:1.2}
+.cover .sub{color:var(--ink-soft);font-size:.94em;font-weight:600}
+.intro{background:var(--panel);border:2px dashed var(--pink);border-radius:14px;padding:14px 16px;margin:16px 0;font-size:.94em}
+.intro b{color:var(--warm)}
+h2{font-size:1.06em;font-weight:900;margin:24px 0 8px;letter-spacing:-0.02em}
+.prog{position:sticky;top:0;z-index:5;background:var(--bg);padding:8px 0;border-bottom:2px solid var(--line)}
+.prog .bar{height:12px;border-radius:7px;background:var(--line);overflow:hidden}
+.prog .fill{height:100%;width:0;background:var(--green);border-radius:7px;transition:width .3s}
+.prog .txt{text-align:center;font-size:.82em;font-weight:800;color:var(--green);margin-top:4px}
+.chk{display:flex;gap:11px;padding:12px 14px;margin:9px 0;background:var(--panel);border:2px solid var(--ink);border-radius:12px;box-shadow:3px 3px 0 var(--line);cursor:pointer;user-select:none;align-items:flex-start}
+.chk input{width:22px;height:22px;flex:0 0 auto;margin-top:2px;accent-color:var(--green);cursor:pointer}
+.chk .t{font-weight:800;letter-spacing:-0.01em}
+.chk .d{font-size:.88em;color:var(--ink-soft);margin-top:3px;font-weight:400}
+.chk .d b{color:var(--warm)} .chk .d code{background:var(--bg);border:1px solid var(--line);border-radius:4px;padding:0 5px;font-size:.92em}
+.chk.done{opacity:.5} .chk.done .t{text-decoration:line-through}
+.tag{display:inline-block;font-size:.66em;font-weight:800;padding:2px 7px;border-radius:999px;margin-right:5px;vertical-align:middle}
+.tg-inst{background:rgba(47,158,68,.16);color:var(--green)} .tg-del{background:rgba(229,50,43,.16);color:var(--red)}
+.tg-set{background:rgba(37,99,235,.14);color:var(--accent)} .tg-home{background:rgba(124,58,237,.14);color:var(--magic)}
+mark{background:#FFE168;padding:1px 5px;border-radius:5px;font-weight:800;color:#241F18}
+.wall{background:var(--panel);border:2px solid var(--line);border-radius:12px;padding:14px 16px;margin:12px 0;font-size:.92em}
+.wall b{color:var(--warm)}
+.done-all{margin-top:24px;padding:22px;border:3px solid var(--ink);border-radius:16px;text-align:center;box-shadow:4px 4px 0 var(--pink);background:var(--panel);font-size:1.1em;font-weight:900;line-height:1.5;display:none}
+.foot{margin-top:22px;text-align:center;font-size:.75em;color:var(--muted)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="cover">
+    <span class="ep">넛지 시스템 · 폰 꾸미기+정리</span>
+    <h1>폰 정리 따라하기 📱✨</h1>
+    <div class="sub">4시반에 폰에서 체크하며 하나씩 — 다 끝나면 폰이 내 편이 됨</div>
+  </div>
+
+  <div class="intro">
+    <b>규칙 딱 2개만 기억해:</b> ①하게 만들 건 <mark>엄지 닿는 곳</mark>에 ②유혹은 <mark>20초 멀리</mark>(폴더 깊이). 나머진 그냥 체크 따라오면 돼~ 갤폴드니까 <b>펼친 화면 기준</b>으로 배치하면 됨! 순서대로 안 해도 되고, 하는 김에 몰아서 해버리면 개이득 ㅋㅋ
+  </div>
+
+  <div class="prog"><div class="bar"><div class="fill" id="f"></div></div><div class="txt" id="p">0 / 0 완료</div></div>
+
+  <h2>🗑️ 1. 먼저 비우기 (유배·삭제)</h2>
+  <div class="chk"><input type="checkbox"><div><div class="t"><span class="tag tg-del">삭제</span>배달앱 지우기</div><div class="d">로그아웃 말고 <b>삭제</b>. 재설치 5분이 최고의 방어벽. 먹고 싶을 때 그 5분에 정신 차림 ㅋㅋ</div></div></div>
+  <div class="chk"><input type="checkbox"><div><div class="t"><span class="tag tg-del">유배</span>유튜브·인스타·쇼츠앱을 2페이지 폴더로</div><div class="d">지우진 말고(필요하니까) <b>2번째 페이지 폴더 속</b>으로. 홈에서 안 보이게 = 검색해야 나오게. 사이클 탈 때만 꺼내 씀🚴</div></div></div>
+  <div class="chk"><input type="checkbox"><div><div class="t"><span class="tag tg-del">정리</span>안 쓰는 앱 쭉 밀어서 삭제/폴더</div><div class="d">홈이 번잡하면 뇌도 번잡. 6개월 이상 안 연 거 과감히 정리~ '하는 김에' 몰아서!</div></div></div>
+
+  <h2>📥 2. 깔아야 할 앱 (넛지 무기)</h2>
+  <div class="chk"><input type="checkbox"><div><div class="t"><span class="tag tg-inst">설치</span>MacroDroid</div><div class="d">위치 알람의 핵심(헬스장 도착 셀카 조르기). 무료. 설치 후 <b>위치 "항상 허용" + 배터리 최적화 예외</b>까지 꼭!(갤폴드는 절전 빡세서 필수)</div></div></div>
+  <div class="chk"><input type="checkbox"><div><div class="t"><span class="tag tg-inst">확인</span>구글 캘린더 · SmartThings · 디스코드</div><div class="d">캘린더=파이프라인 알림, SmartThings=집 IoT, 디스코드=넛지봇+인증샷. 밀리의서재는 이미 있지?📚</div></div></div>
+
+  <h2>🏠 3. 홈 화면 1페이지 (골든존)</h2>
+  <div class="chk"><input type="checkbox"><div><div class="t"><span class="tag tg-home">배치</span>앱 6개만 남기기</div><div class="d">밀리 · 디스코드 · 음성메모 · 카메라 · 캘린더 · SmartThings. <b>엄지 닿는 하단</b>엔 밀리+음성메모(제일 자주 씀)</div></div></div>
+  <div class="chk"><input type="checkbox"><div><div class="t"><span class="tag tg-home">위젯</span>파이프라인 캘린더 위젯 올리기</div><div class="d">오늘 일정(콤보·카페인·문통과·착지)이 홈에 딱. 안 열어도 보이게~</div></div></div>
+  <div class="chk"><input type="checkbox"><div><div class="t"><span class="tag tg-home">위젯</span>발리 D-day 카운트다운 위젯</div><div class="d">"D-42 🌴" 매일 보이게. 카운트다운 위젯앱(무료) 아무거나. 이게 은근 제일 강한 동기부여ㅋㅋ✈️</div></div></div>
+  <div class="chk"><input type="checkbox"><div><div class="t"><span class="tag tg-home">위젯</span>🎤 음성메모 '원터치' 위젯 (홈+잠금화면)</div><div class="d">걷다가 꽂힌 아이디어 = <b>주말 폭주의 총알(장전)</b>. 잠금 안 풀고 한 번에 녹음되게 위젯 배치. 삼성 '음성 녹음' 위젯 or 홈에 바로녹음 바로가기. <mark>걸으면서 "이거 만들래" 툭 던지면 씨앗함에 쌓임</mark></div></div></div>
+
+  <h2>🎨 4. 배경화면 + 잠금화면</h2>
+  <div class="wall"><b>🖼️ 배경화면:</b> 취향껏 예쁜 걸로! 근데 <mark>홈 배경은 좀 심심한 걸로</mark> 하는 게 포인트 — 배경이 화려하면 폰 켤 때마다 딴 데 눈 가서 늘어짐. 차분한 단색/그라데이션 추천. (내가 만들어둔 크림톤/네이비 월페이퍼 파일도 있으니 원하면 그거 스샷해서 써도 됨)</div>
+  <div class="chk"><input type="checkbox"><div><div class="t"><span class="tag tg-set">잠금</span>잠금화면 '연락처 정보'에 한 줄</div><div class="d">설정→잠금화면→연락처 정보(또는 잠금화면 문구)에 <mark>"문만 통과 · 리셋은 지금"</mark> 넣기. 하루 수십 번 보는 공짜 광고판</div></div></div>
+  <div class="chk"><input type="checkbox"><div><div class="t"><span class="tag tg-set">배경</span>차분한 배경 1장 적용</div><div class="d">번잡한 배경 → 심플한 걸로 교체. 시각 노이즈 ↓ = 집중 ↑</div></div></div>
+
+  <h2>⚙️ 5. 설정 (자동화 스위치)</h2>
+  <div class="chk"><input type="checkbox"><div><div class="t"><span class="tag tg-set">루틴</span>밤 10시 자동 흑백 + 방해금지</div><div class="d">설정→모드 및 루틴→루틴 추가: 22:00 → 화면 회색조+방해금지. <b>흑백 쇼츠는 노잼</b>이라 손이 저절로 떨어짐🖤</div></div></div>
+  <div class="chk"><input type="checkbox"><div><div class="t"><span class="tag tg-set">루틴</span>출근 자동재생: 버즈 꽂으면 밀리</div><div class="d">모드 및 루틴→ 조건 "블루투스 버즈 연결 + 06:50~09:30" → 밀리 열기. 이어폰 꽂는 순간 = 재생 버튼🎧</div></div></div>
+  <div class="chk"><input type="checkbox"><div><div class="t"><span class="tag tg-set">위치</span>위치 정확도 '고정밀' ON</div><div class="d">설정→위치→Google 위치 정확도 ON. 지오펜스(헬스장 알람)가 잘 잡히게</div></div></div>
+  <div class="chk"><input type="checkbox"><div><div class="t"><span class="tag tg-set">알림</span>넛지봇 채널 알림 켜기</div><div class="d">디스코드에서 넛지봇/파이프라인 채널만 알림 ON, 나머지 시끄러운 건 OFF. 중요한 것만 울리게</div></div></div>
+  <div class="chk"><input type="checkbox"><div><div class="t"><span class="tag tg-set">제한</span>디지털 웰빙 → 쇼츠앱 하루 타이머</div><div class="d">설정→디지털 웰빙→앱 타이머로 유튜브/인스타 <mark>하루 30분 제한</mark>. 넘으면 자동 잠김(20초 마찰 + 상한). 끊는 게 아니라 상한만</div></div></div>
+  <div class="chk"><input type="checkbox"><div><div class="t"><span class="tag tg-set">빠른</span>카메라 = 잠금화면에서 바로 (인증샷 대비)</div><div class="d">헬스장 셀카 마찰 0화. 잠금화면 하단 카메라 바로가기 or 전원 두 번=카메라 ON. 도착하면 툭 찍어 <b>이 텔레그램 봇 채팅</b>이나 #항아리로</div></div></div>
+  <div class="chk"><input type="checkbox"><div><div class="t"><span class="tag tg-set">알림</span>🔔 디스코드 #클로드알림 채널 = 알림 ON + 즐겨찾기</div><div class="d">이제 모든 넛지(아침·카페인·문통과·착지)가 <b>메모짱 서버 #클로드알림</b>으로 와! 채널 알림 켜고 즐겨찾기. <mark>이 채널이 당신의 관제탑</mark> (헬스장 셀카 인증도 여기로)</div></div></div>
+  <div class="chk"><input type="checkbox"><div><div class="t"><span class="tag tg-set">피드</span>유튜브앱 시청기록 일시중지 (폰용 Unhook)</div><div class="d">유튜브앱→설정→시청기록 관리→<b>시청기록 일시중지</b> → 홈 피드 추천이 싹 사라짐! 검색은 그대로 됨</div></div></div>
+  <div class="chk"><input type="checkbox"><div><div class="t"><span class="tag tg-set">조련</span>🧲 알고리즘 조련 1주 작전 (인스타·유튜브)</div><div class="d">이번 주 동안 <b>발리·운동·인테리어·요리 콘텐츠에만</b> 좋아요/시청, 낭비 콘텐츠엔 '관심 없음' → 릴스 피드가 <mark>내가 설계한 세뇌 방송국</mark>으로 변신 (S26 보너스)</div></div></div>
+  <div class="chk"><input type="checkbox"><div><div class="t"><span class="tag tg-home">몰입큐</span>🌪️ '몰입 큐' 메모 만들어 고정</div><div class="d">삼성 노트(or 킵)에 <b>"몰입 큐"</b> 노트 하나: 하고 싶은 코딩·집 프로젝트·아이디어 쭉 적고 <b>홈 위젯/즐겨찾기 고정</b>. <mark>심심하면 간식 말고 여기 열기</mark> — 규칙의 실체가 생김</div></div></div>
+
+  <h2>🤖 6. MacroDroid 매크로 (핵심 자동화)</h2>
+  <div class="chk"><input type="checkbox"><div><div class="t"><span class="tag tg-set">매크로</span>헬스장 조르기 (두정역 지오펜스)</div><div class="d">별도 가이드 그대로: 트리거 <b>두정역 진입 + 퇴근시간</b> → 큐티 알림 + [📸 인증샷] 버튼. <b>이게 제일 중요!</b></div></div></div>
+  <div class="chk"><input type="checkbox"><div><div class="t"><span class="tag tg-set">매크로</span>버즈 꽂으면 밀리 자동재생</div><div class="d">트리거 "블루투스 버즈 연결 + 06:50~09:30" → 밀리 열기(+재생). 이어폰=재생버튼🎧</div></div></div>
+  <div class="chk"><input type="checkbox"><div><div class="t"><span class="tag tg-set">매크로</span>밤 10시 흑백 (모드 및 루틴으로 해도 됨)</div><div class="d">22:00 → 회색조+방해금지. 둘 중 편한 앱으로</div></div></div>
+  <div class="chk"><input type="checkbox"><div><div class="t"><span class="tag tg-set">매크로</span>집 Wi-Fi 연결(귀가)→ "심심하면 몰입 큐" 알림</div><div class="d">집 오면 IoT 씬 + 넛지 한 줄. 여유되면</div></div></div>
+
+  <h2>🎧 6-2. 이어폰 꽂으면 = 바로 들을거리 (핵심!)</h2>
+  <div class="wall"><b>원리:</b> 집에선 이어폰 안 쓰니까 → <mark>이어폰 꽂는 순간 = 나가는 순간</mark>. 그래서 "이어폰 연결"만 트리거로 잡으면 됨. 시간대로 뭘 틀지 자동 분기!</div>
+  <div class="chk"><input type="checkbox"><div><div class="t"><span class="tag tg-set">루틴</span>이어폰 연결 → 아침(7:00~7:40)이면 밀리 오디오북 재생</div><div class="d">모드 및 루틴: 조건 <b>"블루투스 오디오 기기 연결 + 07:00~07:40"</b> → 밀리 열기. 진짜 <b>재생 버튼</b>까지 자동으로 누르려면 MacroDroid: "이어폰 연결 → 밀리 열기 → 3초 대기 → 미디어 재생". 출근길=지식 주입🎧</div></div></div>
+  <div class="chk"><input type="checkbox"><div><div class="t"><span class="tag tg-set">루틴</span>이어폰 연결 → 그 외 시간이면 팟캐스트/뮤직 재생</div><div class="d">조건 "이어폰 연결 + 위 시간대 아님" → 유튜브뮤직/팟캐스트 열기. <b>언제 꽂아도 뭔가는 나오게</b>. 방전 시간대(저녁)엔 가벼운 걸로</div></div></div>
+  <div class="wall"><b>🎙️ 들을거리 추천 리스트</b> (밀리·유튜브·팟캐스트에서 골라 담아두기):<br>
+    <b>· 세뇌+학습(아침):</b> 아주 작은 습관의 힘 → 도둑맞은 집중력 → 넛지 → 우리는 왜 잠을 자야 할까 → 돈의 심리학 → 하루키 달리기<br>
+    <b>· 팟캐스트:</b> 후버먼 랩(건강·도파민·수면), 지식/경제 채널(조승연·지식플레이 등)<br>
+    <b>· 가벼운 저녁:</b> 좋아하는 애니송·시티팝 플레이리스트(단, 운동 전용 리스트와는 분리)<br>
+    <b>· 🍱 별미(내 콘텐츠):</b> <mark>NotebookLM에 프리렌 시리즈·넛지 문서 넣어 '오디오 개요' 생성</mark> → 내 생각이 팟캐스트처럼 나옴. 맥미니가 주기적으로 만들어두면 출근길에 '나만의 방송' 청취(별미로 가끔)</div>
+
+  <h2>🛒 7. 쇼핑 (기차에서 주문해버리기 — 당신 최강기)</h2>
+  <div class="chk"><input type="checkbox"><div><div class="t"><span class="tag tg-inst">주문</span>스마트홈 세트 (~11만원)</div><div class="d">스마트플러그 3 + 도어센서 1 + 스마트전구 2. 귀가 자동화(불·에어컨·TV)+밤 디밍의 몸체</div></div></div>
+  <div class="chk"><input type="checkbox"><div><div class="t"><span class="tag tg-inst">주문</span>주간 영양제 디스펜서 + 유리 항아리 + 자석 트래커 (~3만원)</div><div class="d">디스펜서=커피 옆 / 항아리=발리 용돈 게이지(현관) / 자석=주간 콤보 진행바</div></div></div>
+  <div class="chk"><input type="checkbox"><div><div class="t"><span class="tag tg-inst">주문</span>요가매트 1장 추가 + 폰 거치대(사이클용)</div><div class="d">매트 2장(TV앞+침대옆). 거치대는 "폰은 안장에서만"의 하드웨어</div></div></div>
+  <div class="chk"><input type="checkbox"><div><div class="t"><span class="tag tg-set">신청</span>커뮤니티센터/헬스장 운동세트 사물함 (있으면)</div><div class="d">장비 상주 = 맨몸 출입. 마찰 0화</div></div></div>
+
+  <h2>📚 8. 기차 2시간 알차게 (지금 당장)</h2>
+  <div class="chk"><input type="checkbox"><div><div class="t"><span class="tag tg-set">다운</span>밀리 오디오북 오프라인 저장</div><div class="d">기차·지하철 신호 약할 때 대비 <b>미리 다운</b>. 추천 순서: 아주 작은 습관의 힘 → 도둑맞은 집중력 → 넛지 → 하루키 달리기 → 돈의 심리학</div></div></div>
+  <div class="chk"><input type="checkbox"><div><div class="t"><span class="tag tg-set">임포트</span>구글 캘린더에 '파이프라인' 일정 넣기</div><div class="d">PC에서 만든 파이프라인.ics 임포트(캘린더→가져오기). 아침콤보·카페인·문통과·착지·화요뽑기가 폰 캘린더 알림으로</div></div></div>
+  <div class="chk"><input type="checkbox"><div><div class="t"><span class="tag tg-set">설정</span>SmartThings 씬 만들기 (기기 오면)</div><div class="d">"집 도착" 씬(조명+에어컨) / "밤" 씬(디밍). 스마트기기 배송 후</div></div></div>
+
+  <h2>💬 9. 디스코드 정리 + 웹후크 (자동알림 개통)</h2>
+  <div class="chk"><input type="checkbox"><div><div class="t"><span class="tag tg-del">정리</span>안 쓰는 채널 삭제</div><div class="d">수다수집·친구·비서·세뇌(실험 끝) 지우고 <b>#넛지봇 · #출퇴근큐 · #착지 · #항아리</b>만</div></div></div>
+  <div class="chk"><input type="checkbox"><div><div class="t"><span class="tag tg-set">개통</span>#넛지봇 웹후크 만들어서 URL 복사 → 나에게 전달</div><div class="d">폰 디스코드에서도 됨: 채널 → 편집 → 연동 → 웹후크 → URL 복사. 이거 하나면 <mark>아침·카페인·헬스장·착지 알림이 전부 자동으로 폰에</mark>! (PC로 나한테 붙여주면 개통)</div></div></div>
+
+  <div class="done-all" id="doneAll">🎉 폰 개조 완료!!<br>이제 폰이 너 편이야 😎<br>셀카 찍어서 자랑하자 📸</div>
+
+  <div class="foot">넛지 시스템 · 폰 정리 가이드 · 체크는 이 브라우저에 자동 저장됨<br>규칙: 하게 만들 건 엄지 닿는 곳 / 유혹은 20초 멀리</div>
+</div>
+<script>
+(function(){
+  const KEY='phoneorg-v1';
+  const boxes=[...document.querySelectorAll('.chk input')];
+  const saved=JSON.parse(localStorage.getItem(KEY)||'[]');
+  boxes.forEach((b,i)=>{ if(saved[i]){b.checked=true;b.closest('.chk').classList.add('done');}
+    b.addEventListener('change',()=>{ b.closest('.chk').classList.toggle('done',b.checked);
+      localStorage.setItem(KEY,JSON.stringify(boxes.map(x=>x.checked))); upd(); }); });
+  function upd(){ const d=boxes.filter(x=>x.checked).length;
+    document.getElementById('f').style.width=(d/boxes.length*100)+'%';
+    document.getElementById('p').textContent=d+' / '+boxes.length+' 완료';
+    document.getElementById('doneAll').style.display = (d===boxes.length)?'block':'none'; }
+  upd();
+})();
+</script>
+</body>
+</html>

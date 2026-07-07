@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2-3부 — 몰랐거나, 빌렸거나, 늦었는데 이긴 사람들</title>
+<style>
+:root{
+  --bg:#FBFAF7; --bg-soft:#F4F1EA; --fg:#1F1F1F; --fg-soft:#3A3A3A;
+  --muted:#6E6E6E; --rule:#E8E3D6; --accent:#1D4ED8; --warm:#B8451F;
+  --magic:#5B3A8C; --magic-bg:#F1ECF7; --gold:#B8860B; --green:#3E7C43; --red:#B02A1F; --honey:#C98A1B;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#1A1816; --bg-soft:#252220; --fg:#E8E4DC; --fg-soft:#C7C2B8;
+    --muted:#9A968D; --rule:#36322C; --accent:#7AB0FF; --warm:#E89464;
+    --magic:#C9A9F0; --magic-bg:#2A2333; --gold:#E0B84C; --green:#7FB985; --red:#F08A7E; --honey:#E0AC4C;
+  }
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; background:var(--bg); color:var(--fg);
+  font-family:"Pretendard","Pretendard Variable",-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Segoe UI","Malgun Gothic",sans-serif;
+  font-size:17px; line-height:1.85; letter-spacing:-0.011em; -webkit-font-smoothing:antialiased;
+}
+@media (min-width:700px){ body{font-size:18px} }
+.wrap{max-width:680px; margin:0 auto; padding:0 22px 90px}
+
+.hero{padding:56px 0 30px; text-align:center; border-bottom:1px solid var(--rule)}
+.hero .kicker{font-size:.82em; letter-spacing:.14em; color:var(--muted); text-transform:uppercase; margin-bottom:16px}
+.hero .rune{font-size:2.2em; line-height:1; margin-bottom:14px}
+.hero h1{font-size:1.85em; line-height:1.32; letter-spacing:-0.03em; font-weight:800; margin:.1em 0 .35em}
+@media (min-width:700px){ .hero h1{font-size:2.25em} }
+.hero .sub{color:var(--fg-soft); font-size:1.05em; font-style:italic; max-width:31em; margin:0 auto}
+.hero .meta{margin-top:20px; font-size:.8em; color:var(--muted)}
+
+.counts{display:flex; justify-content:center; gap:8px; flex-wrap:wrap; margin:22px 0 4px}
+.counts .b{padding:6px 13px; border-radius:999px; background:var(--bg-soft); border:1px solid var(--rule); font-size:.82em; font-weight:700}
+.counts .b .n{color:var(--accent)}
+
+.pull{margin:38px 0; padding:6px 0 6px 22px; border-left:3px solid var(--accent);
+  font-size:1.18em; line-height:1.6; font-weight:600; letter-spacing:-0.02em}
+.pull small{display:block; margin-top:8px; font-size:.62em; font-weight:500; color:var(--muted); font-style:normal}
+
+b{color:var(--warm); font-weight:700}
+u{text-decoration:none; background:linear-gradient(180deg,transparent 62%,rgba(29,78,216,.16) 62%); padding:0 2px}
+mark{background:rgba(255,214,64,.42); padding:1px 5px; border-radius:4px; font-weight:600; color:inherit}
+@media (prefers-color-scheme: dark){ mark{background:rgba(226,180,60,.28)} }
+
+section.card{border-top:1px solid var(--rule); padding-top:14px; margin-top:8px}
+details.sec{margin:0}
+details.sec>summary{
+  list-style:none; cursor:pointer; padding:20px 0 18px;
+  font-size:1.22em; font-weight:800; letter-spacing:-0.028em; line-height:1.4;
+  display:flex; gap:14px; align-items:baseline;
+}
+details.sec>summary::-webkit-details-marker{display:none}
+.sec-num{flex:0 0 auto; font-size:.62em; font-weight:800; color:var(--accent)}
+.age{margin-left:auto; align-self:center; flex:0 0 auto; font-size:.6em; font-weight:800; color:#fff; background:var(--warm); padding:4px 11px; border-radius:999px; white-space:nowrap}
+.sec-body{padding-bottom:14px}
+.sec-body>p:first-child{margin-top:0}
+
+p{margin:.9em 0}
+h3{font-size:1.03em; font-weight:800; letter-spacing:-0.02em; margin:1.4em 0 .5em}
+.lead{font-size:1.05em; color:var(--fg-soft)}
+
+.co{margin:18px 0; padding:16px 18px; border-radius:12px; border-left:3px solid var(--accent);
+  background:linear-gradient(100deg, rgba(29,78,216,.07), transparent 70%); font-size:.98em}
+.co.magic{border-left-color:var(--magic); background:linear-gradient(100deg,var(--magic-bg),transparent 70%)}
+.co.warm{border-left-color:var(--warm); background:linear-gradient(100deg,rgba(184,69,31,.09),transparent 70%)}
+.co.gold{border-left-color:var(--gold); background:linear-gradient(100deg,rgba(184,134,11,.10),transparent 70%)}
+.co.red{border-left-color:var(--red); background:linear-gradient(100deg,rgba(176,42,31,.09),transparent 70%)}
+.co.green{border-left-color:var(--green); background:linear-gradient(100deg,rgba(62,124,67,.10),transparent 70%)}
+.co .co-t{font-weight:800; margin-bottom:4px; letter-spacing:-0.02em}
+.co.magic .co-t{color:var(--magic)} .co.gold .co-t{color:var(--gold)}
+.co.red .co-t{color:var(--red)} .co.green .co-t{color:var(--green)}
+
+.chips{display:flex; flex-wrap:wrap; gap:8px; margin:26px 0 8px}
+.chip{font-size:.85em; font-weight:600; text-decoration:none; color:var(--fg-soft);
+  padding:7px 13px; border:1px solid var(--rule); border-radius:999px; background:var(--bg-soft)}
+.chip:hover{border-color:var(--accent); color:var(--accent)}
+
+/* moment box — the turning point */
+.moment{margin:18px 0; padding:16px 18px; border-radius:12px; background:var(--magic-bg); border:1px dashed var(--magic)}
+.moment .mt{font-size:.72em; font-weight:800; letter-spacing:.1em; color:var(--magic); text-transform:uppercase; margin-bottom:4px}
+.moment p{margin:.3em 0}
+
+/* attitude question */
+.att{margin:18px 0 6px; padding:15px 17px; border-radius:12px; border:2px solid var(--gold); font-size:.97em}
+.att .at{font-size:.72em; font-weight:800; letter-spacing:.08em; color:var(--gold); text-transform:uppercase; margin-bottom:3px}
+.att p{margin:.2em 0; font-weight:600}
+
+/* timeline */
+.tl{margin:22px 0; padding:20px 12px 14px; border:1px solid var(--rule); border-radius:14px; background:var(--bg-soft)}
+.tl svg{width:100%; height:auto; display:block}
+.tl .cap{text-align:center; font-size:.85em; color:var(--muted); margin-top:8px}
+
+.finale{margin-top:44px; padding:34px 0 0; border-top:2px solid var(--fg); text-align:center}
+.finale .rune{font-size:1.7em}
+.finale .big{font-size:1.28em; font-weight:800; letter-spacing:-0.03em; line-height:1.55; margin:.4em 0}
+.foot{margin-top:44px; padding-top:18px; border-top:1px solid var(--rule); font-size:.78em; color:var(--muted); text-align:center}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <div class="kicker">프리렌으로 배우는 AI 시대 · 2-3부</div>
+    <div class="rune">🌗</div>
+    <h1>몰랐거나, 빌렸거나,<br>늦었는데 — 이긴 사람들</h1>
+    <p class="sub">"자기만의 불타는 꿈"이 없던 일곱 명의 인생 전반전. 그리고 그들이 실제로 이긴 방식의 해부.</p>
+    <div class="meta">각 이야기 끝마다 💭 태도 질문 1개 — 읽고 끝이 아니라 자기 점검용</div>
+  </header>
+
+  <div class="counts">
+    <span class="b">인물 <span class="n">7</span></span>
+    <span class="b">최고 전환 나이 <span class="n">62</span></span>
+    <span class="b">태도 질문 <span class="n">6</span></span>
+    <span class="b">공통 무늬 <span class="n">4</span></span>
+    <span class="b">정직 경고 <span class="n">3</span></span>
+  </div>
+
+  <div class="co gold" style="margin-top:26px">
+    <div class="co-t">🎯 30초 요약</div>
+    <p style="margin:.4em 0 0">일곱 명 전원이 인생 전반전엔 <b>"뭘 하고 싶은지 몰랐거나, 남의 것을 빌렸거나, 남들 기준 한참 늦었어요."</b> 이긴 방식도 놀랍게 겹쳐요: ①<mark>버려진 시간이 사실 재료 창고였고</mark> ②전환의 계기는 계획이 아니라 <u>지나가다 잡은 사소한 순간</u>이었으며 ③잡은 뒤엔 전원이 <b>열정이 아니라 시스템과 축적</b>으로 이겼어요. 단, 생존자 편향 경고 포함 — 맨 아래 정직 박스까지 읽어야 완성.</p>
+  </div>
+
+  <nav class="chips">
+    <a class="chip" href="#tl">📊 전환 나이 지도</a>
+    <a class="chip" href="#kroc">🍔 크록 52</a>
+    <a class="chip" href="#sanders">🍗 샌더스 62</a>
+    <a class="chip" href="#walton">🛒 월튼 44</a>
+    <a class="chip" href="#murakami">⚾ 하루키 29</a>
+    <a class="chip" href="#child">🍳 차일드 49</a>
+    <a class="chip" href="#wang">👰 왕 40</a>
+    <a class="chip" href="#adams">📊 애덤스</a>
+    <a class="chip" href="#pattern">🧩 공통 무늬</a>
+    <a class="chip" href="#honest">⚖️ 정직 박스</a>
+  </nav>
+
+  <!-- timeline -->
+  <div class="tl" id="tl">
+    <svg viewBox="0 0 640 150" xmlns="http://www.w3.org/2000/svg" aria-label="전환 나이 타임라인">
+      <line x1="30" y1="95" x2="620" y2="95" stroke="#B8B2A4" stroke-width="2"/>
+      <!-- ticks: age 25..65 mapped: x = 30 + (age-25)*14.75 -->
+      <g font-size="11" fill="#8A857A" text-anchor="middle">
+        <text x="30" y="118">25세</text><text x="177" y="118">35세</text>
+        <text x="325" y="118">45세</text><text x="472" y="118">55세</text><text x="620" y="118">65세</text>
+      </g>
+      <!-- YOU marker ~34 -->
+      <g text-anchor="middle">
+        <line x1="163" y1="60" x2="163" y2="95" stroke="#1D4ED8" stroke-width="2.5" stroke-dasharray="4 3"/>
+        <text x="163" y="50" font-size="13" font-weight="800" fill="#1D4ED8">👉 지금의 당신</text>
+      </g>
+      <!-- people dots -->
+      <g text-anchor="middle" font-size="12" font-weight="700">
+        <circle cx="89" cy="95" r="7" fill="#5B3A8C"/><text x="89" y="80" fill="#5B3A8C">하루키 29</text>
+        <circle cx="251" cy="95" r="7" fill="#3E7C43"/><text x="251" y="80" fill="#3E7C43">왕 40</text>
+        <circle cx="310" cy="95" r="7" fill="#C98A1B"/><text x="310" y="140" fill="#C98A1B">월튼 44</text>
+        <circle cx="384" cy="95" r="7" fill="#B02A1F"/><text x="384" y="80" fill="#B02A1F">차일드 49</text>
+        <circle cx="428" cy="95" r="7" fill="#B8451F"/><text x="428" y="140" fill="#B8451F">크록 52</text>
+        <circle cx="576" cy="95" r="7" fill="#B8860B"/><text x="576" y="80" fill="#B8860B">샌더스 62</text>
+      </g>
+    </svg>
+    <div class="cap">인생이 뒤집힌 나이. <b>당신은 아직 이 줄의 거의 맨 앞</b>에 서 있어요.</div>
+  </div>
+
+  <!-- KROC -->
+  <section class="card" id="kroc">
+    <details class="sec" open>
+      <summary><span class="sec-num">01</span> 레이 크록 — 믹서기 영업사원의 마지막 출장 <span class="age">전환 52세</span></summary>
+      <div class="sec-body">
+        <p class="lead">52세의 크록은 자랑할 게 없었어요. 종이컵 17년, 밀크셰이크 믹서기 영업으로 전국을 돌던 세일즈맨. 당뇨에 관절염 초기, 담낭과 갑상선 대부분을 떼어낸 몸. 자기 아이디어로 성공해 본 적, 한 번도 없음.</p>
+        <div class="moment">
+          <div class="mt">⚡ 전환의 순간 — 이상한 주문서 한 장</div>
+          <p>1954년, 주문서를 보다가 멈칫해요. 캘리포니아 샌버나디노의 <b>조그만 햄버거 가게 하나가 믹서기를 8대</b> 주문한 거예요. 보통 가게는 1대면 충분한데. "뭐 하는 가게길래?" — <mark>그는 직접 비행기를 타고 보러 갔어요.</mark> 거기서 맥도날드 형제의 '스피디 서비스 시스템'을 봤죠: 조립 라인처럼 30초 만에 나오는 15센트 햄버거. 형제는 이 보물을 전국화할 생각이 <u>전혀 없었어요.</u> 크록이 빌렸죠.</p>
+        </div>
+        <p>이후는 아는 대로예요 — 프랜차이즈화, 그리고 참모 해리 소너본의 한 마디("당신은 햄버거 사업이 아니라 <b>부동산 사업</b>을 하는 겁니다")로 시스템 위에 시스템을 얹어 세계 최대 외식 제국. 자서전 제목이 상징적이에요: <i>Grinding It Out</i>(갈아서 버텨내기).</p>
+        <div class="co red">
+          <div class="co-t">⚖️ 단, 떳떳함의 반례이기도</div>
+          <p style="margin:.3em 0 0">크록은 나중에 맥도날드 형제를 압박해 헐값에 지분을 사들이고, 구두로 약속한 로열티를 안 줬다는 게 정설이에요. <b>"빌리기"는 떳떳할 수 있지만, 크록의 마무리는 아니었어요.</b> 당신이 말한 "떳떳하고 자랑스러운 방식" 조건이 왜 필요한지 보여주는 반면교사 — 빌리되, 월튼처럼 빌리세요(아래).</p>
+        </div>
+        <div class="att"><div class="at">💭 태도 질문 1</div><p>믹서기 8대 주문서 = 크록의 인생을 바꾼 '이상 신호'. 요즘 당신 일상에서 "어? 이거 왜 이러지?" 하고 지나친 이상 신호가 하나 있다면 — 뭐였나요? (직접 보러 갈 만큼 궁금한 것)</p></div>
+      </div>
+    </details>
+  </section>
+
+  <!-- SANDERS -->
+  <section class="card" id="sanders">
+    <details class="sec">
+      <summary><span class="sec-num">02</span> 커널 샌더스 — 62세, 월 105달러 연금과 레시피 하나 <span class="age">전환 62세</span></summary>
+      <div class="sec-body">
+        <p class="lead">샌더스의 이력서는 실패 백과사전이에요. 6살에 아버지를 잃고 동생들 밥을 지었고 — 농장 일꾼, 전차 차장, 쿠바 주둔 군인, 철도 화부, 통신 강의로 변호사 공부(법정에서 자기 의뢰인과 주먹다짐해서 커리어 종료), 보험 영업, 페리보트, 타이어 영업, 주유소. <b>40세에야</b> 켄터키 코빈의 주유소 한켠에서 여행자들에게 밥을 팔기 시작했고, 거기서 수년에 걸쳐 <u>허브·향신료 11가지 배합과 압력솥 조리법</u>을 다듬었어요.</p>
+        <div class="moment">
+          <div class="mt">⚡ 전환의 순간 — 고속도로가 그를 비껴갔다</div>
+          <p>1950년대 초, 새 고속도로가 그의 식당을 <b>우회</b>하도록 놓였어요. 손님 끊김 → 식당 경매 처분 → 빚 정리하고 나니 남은 건 <mark>월 105달러 사회보장 연금과 레시피 하나.</mark> 62세. 보통은 여기서 끝이죠. 그는 차에 압력솥과 양념통을 싣고 전국 식당을 돌며 제안해요: "내 레시피로 치킨을 팔고, 한 마리당 얼마씩 주시오." <u>차에서 자면서요.</u> (전설로는 1,009번 거절당했다는데 — 이 숫자는 검증 안 된 신화예요. 🟡 다만 수백 곳을 돌며 잤다는 건 사실.)</p>
+        </div>
+        <p>여기서 통찰 포인트 — 그가 판 건 치킨이 아니라 <b>레시피(=문서화된 시스템)</b>예요. 자기가 요리하러 다닌 게 아니라, <mark>남이 자기 없이 만들 수 있게 표준을 팔았어요.</mark> 벌통의 순수 원형. 73세에 회사를 200만 달러에 팔고도 브랜드의 얼굴로 남았고 — 매각 후 그레이비 맛이 변하자 "벽지 풀 같다"고 공개 저격한 것도 유명해요(품질 기준을 끝까지 못 놓은 사람).</p>
+        <div class="att"><div class="at">💭 태도 질문 2</div><p>샌더스의 유일한 자산 = 수년간 다듬은 레시피 문서. 당신이 지금까지 다듬어온 것 중 "종이에 적혀 있어서 남이 나 없이 쓸 수 있는 것"은 몇 개인가요? (머릿속에만 있으면 자산이 아니라 기억이에요)</p></div>
+      </div>
+    </details>
+  </section>
+
+  <!-- WALTON -->
+  <section class="card" id="walton">
+    <details class="sec">
+      <summary><span class="sec-num">03</span> 샘 월튼 — "베꼈다"고 자서전에 쓴 세계 1위 부자 <span class="age">전환 44세</span></summary>
+      <div class="sec-body">
+        <p class="lead">월튼의 자서전 『Made in America』에 이 문장이 그대로 있어요: <mark>"내가 한 거의 모든 것은 다른 누군가를 베낀 것이다."</mark> 부끄러운 고백이 아니라 <b>자랑</b>으로요. 그는 경쟁사 매장에서 줄자로 진열대 간격을 재고, 녹음기에 아이디어를 녹음하다 쫓겨난 적도 있어요. 창고형 할인점 아이디어는 솔 프라이스(프라이스클럽)에게서 "누구보다 많이 빌렸다"고 본인이 밝혔죠.</p>
+        <div class="moment">
+          <div class="mt">⚡ 전환의 순간 — 32세에 가게를 통째로 빼앗기다</div>
+          <p>첫 가게(벤 프랭클린 잡화점 프랜차이즈)를 아칸소 뉴포트에서 5년 만에 지역 1등으로 키웠는데 — <b>건물주가 재계약을 거부해요. 아들에게 주려고.</b> 32세에 맨손으로 쫓겨나 벤턴빌이란 시골로 이주. 거기서 다시 쌓아서 <u>44세에 1호 월마트</u>를 열어요. 그리고 베끼기+실행을 30년 반복해 미국 1위 부자가 되고도 낡은 픽업트럭을 몰았죠.</p>
+        </div>
+        <p>크록과의 결정적 차이 — 월튼의 베끼기는 <b>공개적이고 떳떳했어요.</b> 아이디어를 빌리되 사람을 속이지 않았고, 빌린 걸 인정했고, 실행과 축적은 온전히 자기 것이었죠. <mark>"남의 목표를 빌린다"의 모범 사용법이 이거예요</mark> — 숨기지 말고, 인정하고, 실행으로 자기 것 만들기.</p>
+        <div class="att"><div class="at">💭 태도 질문 3</div><p>당신이 지금 "베끼고 싶은" 사람·시스템·사업 딱 하나는? 그리고 그걸 베낀다고 공개적으로 말할 수 있나요? (말할 수 있으면 월튼식 = 떳떳, 숨겨야 하면 다시 생각)</p></div>
+      </div>
+    </details>
+  </section>
+
+  <!-- MURAKAMI -->
+  <section class="card" id="murakami">
+    <details class="sec">
+      <summary><span class="sec-num">04</span> 무라카미 하루키 — 1978년 4월, 야구장의 2루타 <span class="age">전환 29세</span></summary>
+      <div class="sec-body">
+        <p class="lead">29세의 하루키는 문학 청년이 아니었어요. 도쿄에서 아내와 재즈 카페 '피터캣'을 운영하며 빚 갚고 설거지하던 자영업자. 소설을 쓰겠다는 계획은 인생에 <b>한 번도 없었어요.</b></p>
+        <div class="moment">
+          <div class="mt">⚡ 전환의 순간 — 본인이 직접 쓴, 가장 이상한 창업기</div>
+          <p>1978년 4월 1일 오후, 진구 구장 외야 잔디에서 맥주를 마시며 야쿠르트 스왈로즈 개막전을 보던 중 — 1번 타자 데이브 힐튼이 <b>2루타</b>를 치는 순간, 아무 맥락 없이 이 생각이 떨어졌대요: <mark>"그래, 나도 소설을 쓸 수 있을지 모른다."</mark> 그날 밤 만년필과 원고지를 사서, 가게 문 닫은 새벽 1시부터 부엌 식탁에서 썼어요. 그렇게 나온 『바람의 노래를 들어라』로 신인상 수상. 본인 표현으로는 "하늘에서 뭔가가 천천히 내려왔고, 나는 그걸 받았다."</p>
+        </div>
+        <p>낭만적으로 들리지만 뒷면이 진짜예요. 그 '계시' 이후 하루키를 만든 건 계시가 아니라 <b>지구상에서 가장 지루한 루틴</b>이에요: 새벽 4시 기상 → 5~6시간 집필 → 매일 10km 달리기 → 밤 9시 취침. 30년+. 그의 책 『달리기를 말할 때 내가 하고 싶은 이야기』의 요지: <mark>"반복 그 자체가 중요한 것이 된다."</mark> 재능이 아니라 축적이 자기 정체라고, 본인이 제일 강하게 주장하는 작가예요.</p>
+        <div class="att"><div class="at">💭 태도 질문 4</div><p>하루키의 2루타 = 준비 없이 온 신호를 "받은" 것. 근데 그는 그날 밤 바로 만년필을 샀어요. 당신이 최근 "오 이거…" 하고 스쳐간 순간에, 그날 밤 만년필을 샀나요 — 아니면 다음 날 잊었나요?</p></div>
+      </div>
+    </details>
+  </section>
+
+  <!-- CHILD -->
+  <section class="card" id="child">
+    <details class="sec">
+      <summary><span class="sec-num">05</span> 줄리아 차일드 — 스파이 기관 직원, 49세에 데뷔 <span class="age">전환 49세</span></summary>
+      <div class="sec-body">
+        <p class="lead">차일드의 30대 초반 직업은 요리사가 아니라 <b>미국 첩보기관 OSS(CIA 전신) 직원</b>이었어요. 상어 퇴치제 연구 문서를 다루던 키 188cm의 여성. 본인 말: <mark>"서른두 살까지 나는 요리를 한 게 아니라, 그냥 먹기만 했다."</mark></p>
+        <div class="moment">
+          <div class="mt">⚡ 전환의 순간 — 생선 한 접시</div>
+          <p>36세, 남편을 따라 파리로 이주. 도착 첫날 루앙의 식당에서 <b>가자미 뫼니에르</b>(버터에 구운 생선) 한 접시를 먹고 — 본인 표현으로 "계시(revelation)"를 받아요. 37세에 르 꼬르동 블루에 등록(동기들은 전부 참전 군인 출신 남자). 그리고 여기부터가 핵심 — 프랑스 요리를 미국 가정용으로 번역하는 책을 <u>10년 동안</u> 공저로 씁니다. 대형 출판사에서 퇴짜도 맞아요. 『Mastering the Art of French Cooking』이 나온 건 <b>49세.</b> TV 데뷔는 50세.</p>
+        </div>
+        <p>당신과의 연결이 하나 있어요 — 차일드가 한 일의 본질은 요리가 아니라 <mark>"전문 지식(프랑스 요리)을 일반인의 눈높이로 직관적으로 번역한 것"</mark>이에요. 계량 애매한 프랑스 레시피를 미국 부엌에서 실패 없이 재현되도록 표준화·문서화. 4-2부에서 나온 당신의 지문 두 번째 가닥("지식의 직관적 전달")과 같은 크래프트죠. 이 크래프트만으로 역사에 남았어요.</p>
+        <div class="att"><div class="at">💭 태도 질문 5</div><p>차일드의 10년 = 책 한 권. 지루하죠. 당신이 "10년 걸려도 한 권으로 남기고 싶은 것"이 있다면 제목이 뭘까요? (임시 제목이라도)</p></div>
+      </div>
+    </details>
+  </section>
+
+  <!-- WANG -->
+  <section class="card" id="wang">
+    <details class="sec">
+      <summary><span class="sec-num">06</span> 베라 왕 — 두 번 떨어지고, 세 번째 방에서 <span class="age">전환 40세</span></summary>
+      <div class="sec-body">
+        <p class="lead">베라 왕의 전반전은 <b>1등 문턱에서 두 번 미끄러진 기록</b>이에요. 꿈 1: 피겨스케이팅 올림픽 — 1968년 미국 대표 선발에서 탈락, 은퇴. 꿈 2: 보그(Vogue) 편집장 — 23세에 최연소 시니어 패션 에디터가 되어 <u>17년을 바쳤는데</u>, 편집장 자리는 안나 윈투어에게. 38세에 퇴사.</p>
+        <div class="moment">
+          <div class="mt">⚡ 전환의 순간 — 짜증나는 쇼핑</div>
+          <p>39세에 결혼 준비를 하는데, <b>마음에 드는 웨딩드레스가 세상에 없는 거예요.</b> 나이 든 신부에게 어울리는 세련된 드레스가 시장에 없다는 것 — 남들은 그냥 투덜대고 말 불편을, 그는 직접 디자인해서 입었고, <mark>40세에 아버지 투자를 받아 브라이덜 살롱을 열어요.</mark> 지금은 '웨딩드레스 = 베라 왕'이 됐죠.</p>
+        </div>
+        <p>주목할 것 — 스케이팅도 보그도 '실패'가 아니었어요. <b>스케이팅이 준 것: 몸의 라인과 움직임에 대한 감각. 보그 17년이 준 것: 패션 안목과 업계 네트워크.</b> 두 번의 좌절이 그대로 재능 스택이 됐고, 세 번째 방(브라이덜)에서 그 스택을 가진 사람은 그밖에 없었어요. 그리고 계기는 거창한 비전이 아니라 <u>본인의 짜증</u>이었죠 — 4-2부에서 당신의 짜증 목록을 감식한 이유가 이거예요.</p>
+        <div class="att"><div class="at">💭 태도 질문 6</div><p>당신이 소비자로서 최근 "왜 이런 게 없지?" 하고 짜증 낸 것 하나는? (베라 왕은 그 짜증을 40세에 회사로 만들었어요)</p></div>
+      </div>
+    </details>
+  </section>
+
+  <!-- ADAMS -->
+  <section class="card" id="adams">
+    <details class="sec">
+      <summary><span class="sec-num">07</span> 스콧 애덤스 — "난 아무것도 1등이 아니다"를 무기로 <span class="age">병행 32세~</span></summary>
+      <div class="sec-body">
+        <p class="lead">애덤스는 통신회사 퍼시픽벨의 칸막이 사무실 직원이었어요. 그전에 은행원, 그리고 <b>실패 컬렉션</b>: 레스토랑 2개, 발명품들, 사업 시도 다수 — 다 망함. 그림 실력은 미술 전공자 발끝, 유머는 코미디언 발끝, 경영 지식은 MBA 평균 수준(버클리 야간 MBA).</p>
+        <div class="moment">
+          <div class="mt">⚡ 전환의 방식 — 계시가 아니라 '조합'과 '새벽 4시'</div>
+          <p>그의 승부수는 자각이었어요: <mark>"나는 그림 상위 25%, 유머 상위 25%, 회사생활 경험 상위 25%다. 셋 다인 사람은 거의 없다."</mark> 그 교집합이 '딜버트'(칸막이 직장인의 부조리를 그리는 만화)예요. 회사를 그만두지도 않았어요 — <u>출근 전 새벽 4~5시에 그렸죠.</u> 몇 년을. 이게 그의 유명한 교리 두 개: <b>재능 스택</b>(1등 하나 말고 25% 여러 개의 조합) + <b>"목표는 패자의 것, 시스템이 승자의 것"</b>(목표: '만화가로 성공' ❌ / 시스템: '매일 새벽 그린다' ⭕).</p>
+        </div>
+        <div class="co red">
+          <div class="co-t">⚖️ 인물 주의</div>
+          <p style="margin:.3em 0 0">애덤스는 2023년 인종 관련 발언으로 신문들이 딜버트 연재를 내렸을 만큼 논란이 큰 인물이에요. 여기서 빌리는 건 <b>그의 커리어 전략 두 개뿐</b> — 인물 전체에 대한 보증이 아니에요. (아이디어는 사람과 분리해서 빌릴 수 있어요 — 그것도 '떳떳한 빌리기'의 기술.)</p>
+        </div>
+      </div>
+    </details>
+  </section>
+
+  <!-- PATTERN -->
+  <section class="card" id="pattern">
+    <details class="sec" open>
+      <summary><span class="sec-num">08</span> 🧩 일곱 명의 공통 무늬 4개</summary>
+      <div class="sec-body">
+        <h3>① "버려진 시간"은 없었다 — 전부 재료 창고였다</h3>
+        <p>크록의 영업 30년 → 프랜차이즈 세일즈의 신. 차일드의 첩보기관 문서 훈련 → 레시피의 집요한 표준화. 왕의 스케이팅+보그 17년 → 브라이덜의 유일무이한 스택. <mark>방황처럼 보인 전반전이 전부 후반전의 부품이었어요.</mark> 단, 조건이 하나 — <b>그 시간에 뭔가를 '쌓고' 있었을 것.</b> 그냥 흘려보낸 게 아니라. (당신의 "축적된 삶" 갈망과 정확히 만나는 지점)</p>
+
+        <h3>② 계기는 전부 '사소하고 우연'했다 — 근데 우연이 아니다</h3>
+        <p>주문서 한 장, 2루타 하나, 생선 한 접시, 드레스 쇼핑 짜증. 계획된 게 하나도 없죠. 이거 심리학에 이름이 있어요 — 스탠퍼드 크럼볼츠의 <b>'계획된 우연(planned happenstance)'</b> 이론 🟢: 커리어의 결정적 사건은 대부분 우연인데, 그 우연을 기회로 바꾸는 사람들의 공통 자질이 있대요 — <u>호기심·끈기·유연성·낙관·위험감수.</u> 크록이 특별한 건 8대 주문을 받아서가 아니라, <mark>비행기를 타고 보러 갔다는 것.</mark> 우연은 공평하게 내리고, 잡는 손만 달라요.</p>
+
+        <h3>③ 이긴 건 전원 '시스템·문서·축적' — 열정이 아니라</h3>
+        <p>크록=운영 매뉴얼, 샌더스=레시피 문서, 월튼=베끼고 개선하는 루틴, 하루키=새벽 4시 30년, 애덤스=매일 새벽 그리기, 차일드=10년 표준화. <b>일곱 명 중 "불타는 열정으로 시작한 사람"은 0명, "지루한 반복 시스템으로 이긴 사람"은 7명.</b> 2-2부의 벌통·뿌리가 관념이 아니라 이 사람들의 실제 이력서예요.</p>
+
+        <h3>④ 늦음의 재정의 — 그들은 늦게 시작한 게 아니라, 길게 준비된 것</h3>
+        <p>"62세에 시작했으니 나도 천천히 하자"로 읽으면 <b>오독</b>이에요. 샌더스는 62세에 시작한 게 아니라 <u>40세부터 22년 다듬은 레시피를 62세에 팔기 시작한</u> 거예요. 옳은 독법: <mark>"지금부터 쌓는 것이 몇 살에 터지든, 쌓는 행위는 오늘 시작돼야 한다."</mark> 타임라인에서 당신 위치(맨 앞줄)의 의미는 '여유'가 아니라 '복리 기간이 제일 긺'이에요.</p>
+      </div>
+    </details>
+  </section>
+
+  <!-- HONEST -->
+  <section class="card" id="honest">
+    <details class="sec" open>
+      <summary><span class="sec-num">09</span> ⚖️ 정직 박스 — 5부 정신으로 이 문서를 자가 감사</summary>
+      <div class="sec-body">
+        <p><b>경고 1 · 생존자 편향 🔴</b> — 크록처럼 남의 매장을 보러 간 영업사원, 샌더스처럼 차에서 잔 노인은 수만 명이었고 <u>대부분 실패했어요.</u> 실패자는 자서전을 안 써요. 이 일곱 명은 "이 방식이면 성공한다"의 증거가 아니라 <mark>"이 상태(모름·빌림·늦음)에서도 성공이 가능하다"의 증거</mark>일 뿐이에요. 가능성의 증거로만 쓰세요.</p>
+        <p><b>경고 2 · 이야기의 매끈함 🟡</b> — "2루타 순간 계시" 같은 전환 장면은 본인들이 사후에 다듬은 서사예요. 실제 인생은 훨씬 지저분했을 거예요. 전환의 '순간'보다 그 뒤의 '지루한 10년'이 진짜 인과예요.</p>
+        <p><b>경고 3 · 시대 보정 🟡</b> — 크록·월튼·샌더스의 시대는 프랜차이즈·유통이라는 파도 초입이었어요. 같은 전략도 파도가 없으면 안 터져요. 지금의 파도가 뭔지(AI?)는 당신이 판단할 몫.</p>
+      </div>
+    </details>
+  </section>
+
+  <div class="finale">
+    <div class="rune">🌗⚾</div>
+    <p class="big">일곱 명 중 누구도<br>"자기만의 꿈"으로 시작하지 않았어요.<br><u>전원이 축적으로 끝냈을 뿐.</u></p>
+    <p style="color:var(--fg-soft); margin-top:18px">우연은 모두에게 내려요 — 주문서로, 2루타로, 짜증나는 쇼핑으로.<br>차이는 딱 하나: <b>그날 밤 만년필을 사러 가느냐.</b></p>
+  </div>
+
+  <div class="foot">
+    프리렌으로 배우는 AI 시대 · 2-3부 — 몰랐거나, 빌렸거나, 늦었는데 이긴 사람들<br>
+    크록·샌더스·월튼·하루키·차일드·왕·애덤스 · 계획된 우연(Krumboltz) · 생존자 편향 경고 포함
+  </div>
+
+</div>
+</body>
+</html>

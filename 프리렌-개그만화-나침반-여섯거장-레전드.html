@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>개그만화 — 여섯 거장 레전드썰</title>
+<style>
+:root{
+  --bg:#FFF8E8; --panel:#FFFEFA; --ink:#241F18; --ink-soft:#574F42; --muted:#8A8170;
+  --line:#E4D6B4; --accent:#2563EB; --warm:#E24A17; --magic:#7C3AED; --gold:#E0A80B; --green:#2F9E44; --red:#E5322B; --pink:#EC4899;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#16130C; --panel:#211D14; --ink:#F2ECDA; --ink-soft:#CFC6B2; --muted:#9A9074;
+    --line:#3A3220; --accent:#7AB0FF; --warm:#FF9152; --magic:#C6A6F0; --gold:#F0C64C; --green:#7FD98A; --red:#FF7A6E; --pink:#FF8AC4;
+  }
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font-family:"Pretendard","Apple SD Gothic Neo","Malgun Gothic",sans-serif;line-height:1.65;-webkit-font-smoothing:antialiased;}
+.wrap{max-width:560px;margin:0 auto;padding:0 15px 80px}
+
+.cover{text-align:center;padding:40px 0 18px}
+.cover .ep{display:inline-block;font-size:.74em;letter-spacing:.12em;color:#fff;background:var(--pink);padding:4px 12px;border-radius:999px;font-weight:800;transform:rotate(-2deg)}
+.cover h1{font-size:2em;font-weight:900;letter-spacing:-0.03em;margin:.35em 0 .15em;line-height:1.15}
+.cover h1 .z{color:var(--warm)}
+.cover .sub{color:var(--ink-soft);font-size:.96em;font-weight:600}
+
+.strip{background:var(--panel);border:3px solid var(--ink);border-radius:16px;margin:18px 0;overflow:hidden;box-shadow:4px 4px 0 var(--ink)}
+.strip .hd{display:flex;align-items:center;gap:8px;padding:9px 14px;background:var(--ink);color:var(--bg)}
+.strip .hd .no{font-weight:900;font-size:.9em;background:var(--gold);color:var(--ink);width:24px;height:24px;border-radius:7px;display:flex;align-items:center;justify-content:center}
+.strip .hd .ti{font-weight:800;font-size:.95em;letter-spacing:-0.02em}
+.strip .art{display:block;width:100%;height:auto;background:var(--panel)}
+.strip .cap{padding:11px 15px;border-top:2px dashed var(--line);font-size:.93em;color:var(--ink-soft)}
+.strip .cap b{color:var(--warm)} .strip .cap .p{color:var(--magic);font-weight:800}
+
+.sfx{text-align:center;font-size:1.5em;font-weight:900;color:var(--warm);letter-spacing:-0.02em;margin:14px 0 2px;transform:rotate(-1.5deg)}
+.sfx.big{font-size:1.9em;color:var(--red)}
+.beat{text-align:center;font-size:1.08em;font-weight:800;margin:16px 0 4px;color:var(--ink)}
+.beat .hi{background:linear-gradient(180deg,transparent 55%,#FFE168 55%);padding:0 4px}
+
+.punch{background:var(--panel);border:3px dashed var(--pink);border-radius:16px;padding:15px 17px;margin:18px 0;font-size:.98em;font-weight:600}
+.punch .pt{font-weight:900;color:var(--pink);margin-bottom:4px;font-size:.9em}
+b{color:var(--warm)} mark{background:#FFE168;padding:1px 5px;border-radius:5px;font-weight:800;color:#241F18}
+u{text-decoration:none;background:linear-gradient(180deg,transparent 58%,rgba(37,99,235,.25) 58%);font-weight:700}
+
+.finale{margin-top:30px;padding:22px 18px;border:3px solid var(--ink);border-radius:16px;text-align:center;box-shadow:4px 4px 0 var(--pink);background:var(--panel)}
+.finale .big{font-size:1.24em;font-weight:900;letter-spacing:-0.03em;line-height:1.5}
+.foot{margin-top:26px;text-align:center;font-size:.75em;color:var(--muted)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="cover">
+    <span class="ep">프리렌 개그극장 · 특별편</span>
+    <h1>여섯 거장 <span class="z">레전드썰</span> ㅋㅋ</h1>
+    <div class="sub">"천재라서 성공한 거 아님?" → 알고 보니 다 개판이었던 사람들 手記</div>
+  </div>
+
+  <div class="beat">페른이 프리렌을 붙잡고 물었다…</div>
+
+  <!-- intro -->
+  <div class="strip">
+    <div class="hd"><span class="no">0</span><span class="ti">발단</span></div>
+    <svg class="art" viewBox="0 0 520 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="페른이 프리렌 멱살 잡고 흔든다">
+      <rect width="520" height="220" fill="var(--panel)"/>
+      <line x1="0" y1="186" x2="520" y2="186" stroke="var(--line)" stroke-width="2"/>
+      <!-- Fern shaking Frieren -->
+      <g transform="translate(140,60)">
+        <rect x="-28" y="66" width="62" height="52" rx="15" fill="#7C3AED"/>
+        <circle cx="3" cy="38" r="26" fill="#F6DCC2"/>
+        <path d="M-21,32 Q3,-5 30,32 Q30,46 24,50 L-15,50 Q-21,46 -21,32Z" fill="#5127A3"/>
+        <!-- angry eyes -->
+        <path d="M-9,34 l8,4 M13,38 l8,-4" stroke="#241F18" stroke-width="3" stroke-linecap="round"/>
+        <ellipse cx="4" cy="49" rx="8" ry="6" fill="#241F18"/>
+        <!-- motion lines -->
+        <path d="M40,20 l14,-6 M42,34 l16,-2" stroke="var(--ink)" stroke-width="2.5" stroke-linecap="round"/>
+      </g>
+      <!-- Frieren rattled -->
+      <g transform="translate(320,64)">
+        <rect x="-30" y="66" width="66" height="52" rx="16" fill="#3E8A5A"/>
+        <circle cx="2" cy="38" r="27" fill="#F6DCC2"/>
+        <path d="M-28,30 Q-34,90 -22,118 L-12,118 Q-18,66 -16,42 Z" fill="#F0EAD8"/>
+        <path d="M30,30 Q36,90 24,118 L14,118 Q20,66 18,42 Z" fill="#F0EAD8"/>
+        <path d="M-27,26 Q2,-14 30,26 Q24,18 2,16 Q-22,18 -27,26Z" fill="#F0EAD8"/>
+        <!-- @_@ dizzy -->
+        <text x="-9" y="42" font-size="15" font-weight="900" fill="#241F18">@</text>
+        <text x="9" y="42" font-size="15" font-weight="900" fill="#241F18">@</text>
+      </g>
+      <!-- bubble -->
+      <g>
+        <rect x="200" y="18" width="230" height="46" rx="12" fill="var(--panel)" stroke="var(--ink)" stroke-width="2.5"/>
+        <text x="315" y="47" text-anchor="middle" font-size="14.5" font-weight="800" fill="var(--ink)">저는 천재가 아니라구요오오</text>
+      </g>
+    </svg>
+    <div class="cap"><span class="p">페른:</span> "성공한 사람들은 다 천재잖아요! 전 글렀어요!!" <b>프리렌:</b> "(흔들흔들) 야… 걔네 <mark>대부분 인생 개판이었어…</mark> 놔봐…"</div>
+  </div>
+
+  <div class="sfx">두구두구두구…</div>
+
+  <!-- 1 KROC -->
+  <div class="strip">
+    <div class="hd"><span class="no">1</span><span class="ti">🍔 레이 크록 — 52세 믹서기 아저씨</span></div>
+    <svg class="art" viewBox="0 0 520 210" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="크록이 믹서기 8대 주문서 보고 눈 튀어나온다">
+      <rect width="520" height="210" fill="var(--panel)"/>
+      <!-- salesman with shocked face -->
+      <g transform="translate(130,60)">
+        <rect x="-30" y="62" width="66" height="56" rx="14" fill="#B5651D"/>
+        <circle cx="3" cy="34" r="26" fill="#F6DCC2"/>
+        <path d="M-20,22 Q3,4 26,22" stroke="#7A5230" stroke-width="8" fill="none" stroke-linecap="round"/>
+        <!-- popping eyes -->
+        <circle cx="-8" cy="34" r="9" fill="#fff" stroke="#241F18" stroke-width="2"/><circle cx="-8" cy="34" r="3.5" fill="#241F18"/>
+        <circle cx="14" cy="34" r="9" fill="#fff" stroke="#241F18" stroke-width="2"/><circle cx="14" cy="34" r="3.5" fill="#241F18"/>
+        <ellipse cx="3" cy="50" rx="7" ry="9" fill="#241F18"/>
+      </g>
+      <!-- order paper -->
+      <g transform="translate(300,50)">
+        <rect x="0" y="0" width="150" height="120" rx="8" fill="#fff" stroke="#241F18" stroke-width="2.5"/>
+        <text x="75" y="34" text-anchor="middle" font-size="13" font-weight="800" fill="#241F18">주문서</text>
+        <text x="75" y="70" text-anchor="middle" font-size="30" font-weight="900" fill="#E5322B">믹서기 8대</text>
+        <text x="75" y="100" text-anchor="middle" font-size="12" fill="#8A8170">햄버거집 한 곳이…?!</text>
+      </g>
+    </svg>
+    <div class="cap"><b>52세까지</b> 믹서기 팔던 아저씨. 근데 주문서에 <mark>"햄버거집 하나가 믹서기 8대 주문"</mark> → "미친 거 아냐?" 하고 <u>비행기 타고 직접 감</u> → 그게 맥도날드였음. <span class="p">페른:</span> "궁금해서 가본 게 제국의 시작…?!"</div>
+  </div>
+
+  <!-- 2 SANDERS -->
+  <div class="strip">
+    <div class="hd"><span class="no">2</span><span class="ti">🍗 커널 샌더스 — 62세 파산 할배</span></div>
+    <svg class="art" viewBox="0 0 520 210" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="샌더스 할아버지가 차에 압력솥 싣고 다닌다">
+      <rect width="520" height="210" fill="var(--panel)"/>
+      <line x1="0" y1="176" x2="520" y2="176" stroke="var(--line)" stroke-width="2"/>
+      <!-- old car -->
+      <g transform="translate(120,110)">
+        <rect x="-70" y="0" width="150" height="40" rx="10" fill="#4A6FA5"/>
+        <rect x="-40" y="-26" width="80" height="30" rx="8" fill="#6C8FC4"/>
+        <circle cx="-40" cy="44" r="16" fill="#241F18"/><circle cx="45" cy="44" r="16" fill="#241F18"/>
+        <!-- pressure cookers on roof -->
+        <rect x="-30" y="-42" width="20" height="18" rx="3" fill="#B0B0B0" stroke="#241F18" stroke-width="1.5"/>
+        <rect x="0" y="-42" width="20" height="18" rx="3" fill="#B0B0B0" stroke="#241F18" stroke-width="1.5"/>
+      </g>
+      <!-- old man face + speech -->
+      <g transform="translate(360,72)">
+        <circle cx="0" cy="10" r="30" fill="#F6DCC2"/>
+        <path d="M-24,4 Q0,-6 24,4" stroke="#EDEDED" stroke-width="7" fill="none" stroke-linecap="round"/>
+        <path d="M-16,22 Q0,40 16,22 Q10,34 0,34 Q-10,34 -16,22Z" fill="#EDEDED"/>
+        <circle cx="-10" cy="10" r="2.6" fill="#241F18"/><circle cx="10" cy="10" r="2.6" fill="#241F18"/>
+      </g>
+      <g><rect x="230" y="16" width="270" height="40" rx="11" fill="var(--panel)" stroke="var(--ink)" stroke-width="2.5"/>
+        <text x="365" y="42" text-anchor="middle" font-size="13.5" font-weight="800" fill="var(--ink)">치킨 레시피 안 살래요…?</text></g>
+    </svg>
+    <div class="cap">62세에 파산. 남은 건 <b>월 105달러 연금 + 치킨 레시피 하나.</b> 보통 여기서 인생 접는데 — 이 할배 <mark>차에 압력솥 싣고 전국 식당 순회하며 "레시피 사세요"</mark> 영업. 차에서 잠까지 잠. <span class="p">페른:</span> "62세 스타트업…레전드다 진짜 ㅋㅋㅋ"</div>
+  </div>
+
+  <div class="sfx big">잠깐, 더 웃긴 게 남음</div>
+
+  <!-- 3 MURAKAMI -->
+  <div class="strip">
+    <div class="hd"><span class="no">3</span><span class="ti">⚾ 무라카미 하루키 — 야구 보다 각성</span></div>
+    <svg class="art" viewBox="0 0 520 215" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="야구장에서 맥주 마시다 번쩍 깨달음">
+      <rect width="520" height="215" fill="var(--panel)"/>
+      <!-- stadium bg -->
+      <rect x="0" y="150" width="520" height="65" fill="#3E8A5A" opacity=".3"/>
+      <!-- guy with beer -->
+      <g transform="translate(150,70)">
+        <rect x="-28" y="62" width="60" height="52" rx="14" fill="#555"/>
+        <circle cx="2" cy="36" r="25" fill="#F6DCC2"/>
+        <path d="M-20,28 Q2,10 24,28" stroke="#2A2A2A" stroke-width="7" fill="none" stroke-linecap="round"/>
+        <circle cx="-7" cy="36" r="2.6" fill="#241F18"/><circle cx="11" cy="36" r="2.6" fill="#241F18"/>
+        <ellipse cx="2" cy="48" rx="5" ry="6" fill="#241F18"/>
+        <!-- beer -->
+        <rect x="26" y="40" width="16" height="24" rx="3" fill="#F0B429"/>
+      </g>
+      <!-- lightning bulb -->
+      <g transform="translate(330,60)">
+        <polygon points="0,-30 12,-6 4,-6 10,16 -14,-4 -4,-4 -10,-20" fill="#F0C64C" stroke="#E0A80B" stroke-width="2"/>
+      </g>
+      <g><rect x="230" y="18" width="270" height="44" rx="11" fill="var(--panel)" stroke="var(--ink)" stroke-width="2.5"/>
+        <text x="365" y="40" text-anchor="middle" font-size="13" font-weight="800" fill="var(--ink)">"어? 나 소설 쓸 수 있을 듯"</text>
+        <text x="365" y="56" text-anchor="middle" font-size="11" fill="#8A8170">— 2루타 보다가 갑자기</text></g>
+    </svg>
+    <div class="cap">29세 재즈바 사장. 어느 날 <b>야구장에서 맥주 마시다가</b> 타자가 2루타 치는 순간 — <mark>"오 나 소설 쓸 수 있을 것 같은데?"</mark> 뜬금 각성. 그날 밤 만년필 사서 씀. <span class="p">페른:</span> "계획성 0인데 노벨상 후보?! 사기캐잖아요!!"</div>
+  </div>
+
+  <!-- 4 WANG -->
+  <div class="strip">
+    <div class="hd"><span class="no">4</span><span class="ti">👰 베라 왕 — 40세, 빡쳐서 창업</span></div>
+    <svg class="art" viewBox="0 0 520 210" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="마음에 드는 웨딩드레스가 없어서 화난다">
+      <rect width="520" height="210" fill="var(--panel)"/>
+      <!-- angry bride-to-be -->
+      <g transform="translate(140,66)">
+        <rect x="-30" y="64" width="66" height="54" rx="15" fill="#C2410C"/>
+        <circle cx="3" cy="36" r="26" fill="#F6DCC2"/>
+        <path d="M-22,26 Q3,-8 28,26 Q28,42 22,46 L-16,46 Q-22,42 -22,26Z" fill="#2A2A2A"/>
+        <path d="M-11,32 l9,3 M13,35 l9,-3" stroke="#241F18" stroke-width="3" stroke-linecap="round"/>
+        <path d="M-8,48 Q3,42 14,48" stroke="#E5322B" stroke-width="3" fill="none"/>
+        <!-- steam -->
+        <path d="M-24,14 q-4,-10 2,-16 M28,14 q4,-10 -2,-16" stroke="#E5322B" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      </g>
+      <!-- dress rack with X -->
+      <g transform="translate(340,60)">
+        <rect x="-40" y="0" width="120" height="110" rx="8" fill="none" stroke="#241F18" stroke-width="2"/>
+        <path d="M0,20 l30,80 l-30,0 Z" fill="#ddd" stroke="#241F18" stroke-width="1.5"/>
+        <line x1="-30" y1="10" x2="72" y2="100" stroke="#E5322B" stroke-width="5"/>
+        <line x1="72" y1="10" x2="-30" y2="100" stroke="#E5322B" stroke-width="5"/>
+      </g>
+    </svg>
+    <div class="cap">올림픽 탈락 + 보그 편집장 탈락(17년 다님). 39세 결혼 준비하는데 <b>맘에 드는 웨딩드레스가 세상에 없음</b> → 빡침 → <mark>"내가 만들고 만다"</mark> → 40세에 창업 → 지금 <u>웨딩드레스=베라 왕.</u> <span class="p">페른:</span> "빡쳐서 만든 게 세계 1위…?!"</div>
+  </div>
+
+  <!-- 5 SIVERS -->
+  <div class="strip">
+    <div class="hd"><span class="no">5</span><span class="ti">💿 데릭 시버스 — 실수로 대박 난 사람</span></div>
+    <svg class="art" viewBox="0 0 520 205" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="자기 CD 팔려다 회사가 됨">
+      <rect width="520" height="205" fill="var(--panel)"/>
+      <!-- guitar guy -->
+      <g transform="translate(130,62)">
+        <rect x="-28" y="62" width="60" height="52" rx="14" fill="#0E7C86"/>
+        <circle cx="2" cy="36" r="25" fill="#F6DCC2"/>
+        <path d="M-20,28 Q2,12 22,28" stroke="#3A2A1A" stroke-width="7" fill="none" stroke-linecap="round"/>
+        <path d="M-8,34 Q-4,30 0,34 M8,34 Q12,30 16,34" stroke="#241F18" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+        <path d="M-5,44 Q3,50 12,44" stroke="#B06A5A" stroke-width="2.5" fill="none"/>
+      </g>
+      <!-- money explosion -->
+      <g transform="translate(350,80)">
+        <text x="0" y="0" font-size="26">💿</text>
+        <text x="40" y="-20" font-size="20">💸</text><text x="60" y="10" font-size="20">💸</text><text x="30" y="30" font-size="18">💸</text>
+        <text x="0" y="52" text-anchor="middle" font-size="13" font-weight="900" fill="#2F9E44">$2200만</text>
+      </g>
+      <g><rect x="215" y="14" width="285" height="40" rx="11" fill="var(--panel)" stroke="var(--ink)" stroke-width="2.5"/>
+        <text x="357" y="40" text-anchor="middle" font-size="13" font-weight="800" fill="var(--ink)">난 그냥 내 CD 팔려던 건데…</text></g>
+    </svg>
+    <div class="cap">기타리스트가 <b>자기 CD 팔려고</b> 결제 페이지 하나 만듦. 친구들이 "나도 껴줘" → 얼떨결에 회사됨 → <mark>2200만 달러에 매각 → 전액 기부</mark>. 명언: <u>"'와 대박!' 아니면 그냥 노(No)."</u> <span class="p">페른:</span> "의도 안 했는데 성공한 케이스 실화냐구요"</div>
+  </div>
+
+  <!-- 6 OAKLEY -->
+  <div class="strip">
+    <div class="hd"><span class="no">6</span><span class="ti">🧠 바버라 오클리 — 수학 0점의 반란</span></div>
+    <svg class="art" viewBox="0 0 520 205" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="수학 빵점 시험지가 400만 강의로">
+      <rect width="520" height="205" fill="var(--panel)"/>
+      <!-- test paper F -->
+      <g transform="translate(110,55)">
+        <rect x="-40" y="0" width="110" height="120" rx="6" fill="#fff" stroke="#241F18" stroke-width="2.5" transform="rotate(-6)"/>
+        <text x="20" y="60" text-anchor="middle" font-size="52" font-weight="900" fill="#E5322B" transform="rotate(-6)">F</text>
+        <text x="15" y="100" text-anchor="middle" font-size="12" fill="#8A8170" transform="rotate(-6)">수학·과학</text>
+      </g>
+      <!-- arrow -->
+      <text x="245" y="110" text-anchor="middle" font-size="26" font-weight="900" fill="var(--muted)">→</text>
+      <!-- crowd -->
+      <g transform="translate(340,70)">
+        <text x="0" y="0" font-size="20">🧑‍🎓🧑‍🎓🧑‍🎓</text>
+        <text x="30" y="30" text-anchor="middle" font-size="14" font-weight="900" fill="#2F9E44">400만 수강</text>
+      </g>
+    </svg>
+    <div class="cap">초·중·고 수학 <b>줄줄이 낙제.</b> "난 수학 뇌 아냐" 확신. 근데 26세에 <mark>"어? 뇌 바꿔볼까?"</mark> → 공대 교수됨 → <u>"수포자가 어떻게 바뀌나"를 강의로</u> → 400만 명 수강 (지구 최대급). <span class="p">페른:</span> "약점을 팔아서 세계 1위… 반칙 아녜요?!"</div>
+  </div>
+
+  <div class="sfx">그래서 결론은…</div>
+
+  <div class="punch">
+    <div class="pt">💥 6명 공통점 (충격)</div>
+    천재 <b>0명.</b> 대신 전원: ①남의 거 <mark>부끄럼 없이 베낌</mark> ②<mark>짜증·빡침·약점</mark>에서 시작 ③계획 없이 <mark>"어 이거다" 하고 저질러버림</mark> ④그 뒤에 <mark>미친 듯이 반복</mark>. …어? <b>이거 완전 너(페른)잖아?</b>
+  </div>
+
+  <!-- ending -->
+  <div class="strip">
+    <div class="hd"><span class="no">7</span><span class="ti">🎬 결말</span></div>
+    <svg class="art" viewBox="0 0 520 195" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="페른이 눈 반짝이며 각성한다">
+      <rect width="520" height="195" fill="var(--panel)"/>
+      <line x1="0" y1="170" x2="520" y2="170" stroke="var(--line)" stroke-width="2"/>
+      <g transform="translate(250,50)">
+        <rect x="-30" y="62" width="66" height="52" rx="15" fill="#7C3AED"/>
+        <circle cx="3" cy="36" r="27" fill="#F6DCC2"/>
+        <path d="M-22,30 Q3,-8 30,30 Q30,44 24,48 L-15,48 Q-22,44 -22,30Z" fill="#5127A3"/>
+        <!-- sparkle eyes -->
+        <path d="M-6,36 l-4,-4 m4,4 l4,-4 m-4,4 l0,6" stroke="#E0A80B" stroke-width="2" stroke-linecap="round"/>
+        <path d="M12,36 l-4,-4 m4,4 l4,-4 m-4,4 l0,6" stroke="#E0A80B" stroke-width="2" stroke-linecap="round"/>
+        <path d="M-6,48 Q3,58 14,48" stroke="#B06A5A" stroke-width="3" fill="none"/>
+        <g stroke="#E0A80B" stroke-width="2.5" stroke-linecap="round"><line x1="42" y1="6" x2="54" y2="-6"/><line x1="-34" y1="6" x2="-46" y2="-6"/><line x1="45" y1="40" x2="58" y2="42"/></g>
+      </g>
+    </svg>
+    <div class="cap"><span class="p">페른:</span> "그럼… <mark>저 빡쳐서 저질러버리는 거 잘하는데</mark>… 저도 되는 거예요?!" <b>프리렌:</b> "이제 알았네. …근데 멱살은 놔줄래?"</div>
+  </div>
+
+  <div class="finale">
+    <div class="big">천재는 없었다.<br>다들 <span style="color:var(--pink)">빡치고, 베끼고, 저지르고,<br>존나 반복</span>했을 뿐.<br><br>그거… 너도 할 수 있잖아? 😏</div>
+  </div>
+
+  <div class="foot">프리렌 개그극장 · 여섯 거장 레전드썰 · 원작: 나침반 심층편<br>크록·샌더스·하루키·왕·시버스·오클리 (전원 실화)</div>
+
+</div>
+</body>
+</html>

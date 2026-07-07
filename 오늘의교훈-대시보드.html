@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>오늘의 교훈 — 내 리스트</title>
+<style>
+:root{--bg:#FBF7EE;--panel:#FFFDF7;--ink:#2A2620;--soft:#5A5348;--muted:#8A8170;--line:#E4D6B4;--accent:#1D4ED8;--warm:#C2571F;--gold:#B8860B;--green:#3E7C43;--pink:#C2337E}
+@media(prefers-color-scheme:dark){:root{--bg:#17150F;--panel:#211E17;--ink:#EDE7D8;--soft:#C9C2B2;--muted:#98917F;--line:#39342A;--accent:#7AB0FF;--warm:#E8925C;--gold:#E0B84C;--green:#7FB985;--pink:#F08AC0}}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:"Pretendard","Apple SD Gothic Neo","Malgun Gothic",sans-serif;line-height:1.6;padding-bottom:60px}
+.wrap{max-width:680px;margin:0 auto;padding:0 16px}
+.top{display:flex;align-items:center;gap:10px;padding:18px 0;border-bottom:1px solid var(--line)}
+.top a{color:var(--accent);text-decoration:none;font-weight:700;font-size:.9em}
+.hero{text-align:center;padding:26px 0 18px}
+.hero h1{font-size:1.7em;font-weight:900;letter-spacing:-0.03em}
+.hero .sub{color:var(--soft);font-size:.9em;margin-top:4px}
+.stat{text-align:center;margin:8px 0 18px;font-size:.85em;color:var(--muted)}
+.stat b{color:var(--accent)}
+.lesson{background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:14px 16px;margin:10px 0}
+.lesson .meta{font-size:.75em;color:var(--muted);display:flex;justify-content:space-between;margin-bottom:6px}
+.lesson .val{font-weight:800}
+.lesson .val.hi{color:var(--pink)} .lesson .val.mid{color:var(--gold)} .lesson .val.lo{color:var(--muted)}
+.lesson .txt{font-size:.98em;white-space:pre-wrap}
+.lesson .txt::before{content:"💡 ";}
+.lesson img{max-width:100%;border-radius:8px;margin-top:8px}
+.empty{text-align:center;color:var(--muted);padding:40px 20px;font-size:.92em;line-height:1.8}
+.empty .big{font-size:2em}
+.foot{margin-top:36px;padding-top:16px;border-top:1px solid var(--line);text-align:center;font-size:.76em;color:var(--muted)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top"><a href="./index.html">← 프리렌 대시보드</a></div>
+  <div class="hero">
+    <h1>💡 오늘의 교훈</h1>
+    <div class="sub">디스코드 #오늘의교훈에 적으면 여기 쌓여요</div>
+  </div>
+  <div class="stat" id="stat">불러오는 중…</div>
+  <div id="list"></div>
+  <div class="foot">입력=디스코드 · 저장=옵시디언 볼트 · 원본 교훈은 볼트에 개별 노트로도 있음</div>
+</div>
+<script>
+fetch('./lessons.json?t=' + Date.now())
+  .then(r => r.ok ? r.json() : [])
+  .then(arr => {
+    if (!arr || !arr.length) {
+      document.getElementById('stat').textContent = '';
+      document.getElementById('list').innerHTML =
+        '<div class="empty"><div class="big">🌱</div>아직 교훈이 없어요.<br>디스코드 #오늘의교훈 채널에 첫 교훈을 적어보세요!<br><span style="font-size:.85em">교훈 + 그걸 얻은 맥락(코믹하든 일기든)을 같이 쓰면 돼요.</span></div>';
+      return;
+    }
+    arr.sort((a,b) => (b.date||'').localeCompare(a.date||''));
+    document.getElementById('stat').innerHTML = '총 <b>' + arr.length + '</b>개의 교훈';
+    document.getElementById('list').innerHTML = arr.map(function(x){
+      var v = x.value || 0;
+      var cls = v >= 7 ? 'hi' : (v >= 4 ? 'mid' : 'lo');
+      var stars = v ? '★'.repeat(Math.min(5, Math.ceil(v/2))) : '';
+      var img = x.photo ? '<img src="' + x.photo + '" loading="lazy">' : '';
+      return '<div class="lesson"><div class="meta"><span>' + (x.date||'') +
+        '</span><span class="val ' + cls + '">' + stars + '</span></div><div class="txt">' +
+        (x.text||'').replace(/</g,'&lt;') + '</div>' + img + '</div>';
+    }).join('');
+  })
+  .catch(function(){
+    document.getElementById('stat').textContent = '';
+    document.getElementById('list').innerHTML = '<div class="empty">데이터를 불러올 수 없어요 (lessons.json)</div>';
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2-4부 — 살아보니, 이렇더라</title>
+<style>
+:root{
+  --bg:#FBFAF7; --bg-soft:#F4F1EA; --fg:#1F1F1F; --fg-soft:#3A3A3A;
+  --muted:#6E6E6E; --rule:#E8E3D6; --accent:#1D4ED8; --warm:#B8451F;
+  --magic:#5B3A8C; --magic-bg:#F1ECF7; --gold:#B8860B; --green:#3E7C43; --red:#B02A1F;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#1A1816; --bg-soft:#252220; --fg:#E8E4DC; --fg-soft:#C7C2B8;
+    --muted:#9A968D; --rule:#36322C; --accent:#7AB0FF; --warm:#E89464;
+    --magic:#C9A9F0; --magic-bg:#2A2333; --gold:#E0B84C; --green:#7FB985; --red:#F08A7E;
+  }
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; background:var(--bg); color:var(--fg);
+  font-family:"Pretendard","Pretendard Variable",-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Segoe UI","Malgun Gothic",sans-serif;
+  font-size:17px; line-height:1.85; letter-spacing:-0.011em; -webkit-font-smoothing:antialiased;
+}
+@media (min-width:700px){ body{font-size:18px} }
+.wrap{max-width:680px; margin:0 auto; padding:0 22px 90px}
+
+.hero{padding:56px 0 30px; text-align:center; border-bottom:1px solid var(--rule)}
+.hero .kicker{font-size:.82em; letter-spacing:.14em; color:var(--muted); text-transform:uppercase; margin-bottom:16px}
+.hero .rune{font-size:2.2em; line-height:1; margin-bottom:14px}
+.hero h1{font-size:1.85em; line-height:1.32; letter-spacing:-0.03em; font-weight:800; margin:.1em 0 .35em}
+@media (min-width:700px){ .hero h1{font-size:2.25em} }
+.hero .sub{color:var(--fg-soft); font-size:1.05em; font-style:italic; max-width:31em; margin:0 auto}
+.hero .meta{margin-top:20px; font-size:.8em; color:var(--muted)}
+
+.counts{display:flex; justify-content:center; gap:8px; flex-wrap:wrap; margin:22px 0 4px}
+.counts .b{padding:6px 13px; border-radius:999px; background:var(--bg-soft); border:1px solid var(--rule); font-size:.82em; font-weight:700}
+.counts .b .n{color:var(--accent)}
+
+.pull{margin:38px 0; padding:6px 0 6px 22px; border-left:3px solid var(--accent);
+  font-size:1.18em; line-height:1.6; font-weight:600; letter-spacing:-0.02em}
+.pull small{display:block; margin-top:8px; font-size:.62em; font-weight:500; color:var(--muted); font-style:normal}
+
+b{color:var(--warm); font-weight:700}
+u{text-decoration:none; background:linear-gradient(180deg,transparent 62%,rgba(29,78,216,.16) 62%); padding:0 2px}
+mark{background:rgba(255,214,64,.42); padding:1px 5px; border-radius:4px; font-weight:600; color:inherit}
+@media (prefers-color-scheme: dark){ mark{background:rgba(226,180,60,.28)} }
+
+section.card{border-top:1px solid var(--rule); padding-top:14px; margin-top:8px}
+details.sec{margin:0}
+details.sec>summary{
+  list-style:none; cursor:pointer; padding:20px 0 18px;
+  font-size:1.2em; font-weight:800; letter-spacing:-0.028em; line-height:1.4;
+  display:flex; gap:14px; align-items:baseline;
+}
+details.sec>summary::-webkit-details-marker{display:none}
+.sec-num{flex:0 0 auto; font-size:.62em; font-weight:800; color:var(--accent)}
+.age{margin-left:auto; align-self:center; flex:0 0 auto; font-size:.6em; font-weight:800; color:#fff; background:var(--magic); padding:4px 11px; border-radius:999px; white-space:nowrap}
+.sec-body{padding-bottom:14px}
+.sec-body>p:first-child{margin-top:0}
+
+p{margin:.9em 0}
+h3{font-size:1.03em; font-weight:800; letter-spacing:-0.02em; margin:1.4em 0 .5em}
+.lead{font-size:1.05em; color:var(--fg-soft)}
+
+.co{margin:18px 0; padding:16px 18px; border-radius:12px; border-left:3px solid var(--accent);
+  background:linear-gradient(100deg, rgba(29,78,216,.07), transparent 70%); font-size:.98em}
+.co.magic{border-left-color:var(--magic); background:linear-gradient(100deg,var(--magic-bg),transparent 70%)}
+.co.warm{border-left-color:var(--warm); background:linear-gradient(100deg,rgba(184,69,31,.09),transparent 70%)}
+.co.gold{border-left-color:var(--gold); background:linear-gradient(100deg,rgba(184,134,11,.10),transparent 70%)}
+.co.red{border-left-color:var(--red); background:linear-gradient(100deg,rgba(176,42,31,.09),transparent 70%)}
+.co.green{border-left-color:var(--green); background:linear-gradient(100deg,rgba(62,124,67,.10),transparent 70%)}
+.co .co-t{font-weight:800; margin-bottom:4px; letter-spacing:-0.02em}
+.co.magic .co-t{color:var(--magic)} .co.gold .co-t{color:var(--gold)}
+.co.red .co-t{color:var(--red)} .co.green .co-t{color:var(--green)}
+
+.chips{display:flex; flex-wrap:wrap; gap:8px; margin:26px 0 8px}
+.chip{font-size:.85em; font-weight:600; text-decoration:none; color:var(--fg-soft);
+  padding:7px 13px; border:1px solid var(--rule); border-radius:999px; background:var(--bg-soft)}
+.chip:hover{border-color:var(--accent); color:var(--accent)}
+
+/* voice quote — the elder speaking */
+.voice{margin:16px 0; padding:16px 18px; border-radius:12px; background:var(--bg-soft); border:1px solid var(--rule); font-size:1.02em; font-style:italic; line-height:1.75}
+.voice .who{display:block; margin-top:8px; font-size:.78em; font-style:normal; color:var(--muted); font-weight:700}
+
+.att{margin:18px 0 6px; padding:15px 17px; border-radius:12px; border:2px solid var(--gold); font-size:.97em}
+.att .at{font-size:.72em; font-weight:800; letter-spacing:.08em; color:var(--gold); text-transform:uppercase; margin-bottom:3px}
+.att p{margin:.2em 0; font-weight:600}
+
+.tbl{overflow-x:auto; margin:18px 0}
+table{border-collapse:collapse; width:100%; font-size:.9em}
+th,td{text-align:left; padding:10px 12px; border-bottom:1px solid var(--rule); vertical-align:top}
+th{font-weight:800; font-size:.84em; color:var(--muted)}
+
+.finale{margin-top:44px; padding:34px 0 0; border-top:2px solid var(--fg); text-align:center}
+.finale .rune{font-size:1.7em}
+.finale .big{font-size:1.26em; font-weight:800; letter-spacing:-0.03em; line-height:1.55; margin:.4em 0}
+.foot{margin-top:44px; padding-top:18px; border-top:1px solid var(--rule); font-size:.78em; color:var(--muted); text-align:center}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <div class="kicker">프리렌으로 배우는 AI 시대 · 2-4부</div>
+    <div class="rune">🌅</div>
+    <h1>살아보니, 이렇더라</h1>
+    <p class="sub">이론도 사례도 아닌 — 인생 후반전과 마지막 병상에서 <u>실제로 뒤돌아본 사람들</u>의 기록만 모았어요.</p>
+    <div class="meta">호스피스 병상 · 1,000명 노인 인터뷰 · 97세 철학자 · 인생의 오후를 쓴 사람들</div>
+  </header>
+
+  <div class="counts">
+    <span class="b">증언 출처 <span class="n">6</span></span>
+    <span class="b">최고령 <span class="n">97세</span></span>
+    <span class="b">인터뷰 표본 <span class="n">1,000+</span></span>
+    <span class="b">태도 질문 <span class="n">4</span></span>
+  </div>
+
+  <div class="co gold" style="margin-top:26px">
+    <div class="co-t">🎯 30초 요약 — 그리고 하나의 불편한 충돌</div>
+    <p style="margin:.4em 0 0">뒤돌아본 사람들의 증언은 놀랍게 겹쳐요: ①죽기 전 후회 1위 = <mark>"남의 기대대로 살았던 것"</mark> — 당신의 "남의 목표가 최고" 전략과 정면충돌해요(아래에서 해소). ②"돈 더 벌 걸"이라고 말한 노인은 거의 0명 — 단, <u>"떳떳하지 못했던 것"은 후회함.</u> ③인생의 오후(40~)는 오전과 다른 규칙으로 뛰며, 후반전의 무기는 <b>가르침</b>. ④걱정으로 보낸 시간이 최대 낭비.</p>
+  </div>
+
+  <nav class="chips">
+    <a class="chip" href="#ware">🛏️ 호스피스 5가지</a>
+    <a class="chip" href="#pillemer">👴 1,000명 인터뷰</a>
+    <a class="chip" href="#jung">🌗 인생의 오후</a>
+    <a class="chip" href="#brooks">📈 두 번째 곡선</a>
+    <a class="chip" href="#kim">🇰🇷 97세 철학자</a>
+    <a class="chip" href="#pattern">🧩 겹치는 증언</a>
+  </nav>
+
+  <!-- WARE -->
+  <section class="card" id="ware">
+    <details class="sec" open>
+      <summary><span class="sec-num">01</span> 브로니 웨어 — 죽기 전 몇 주의 사람들이 말한 것 <span class="age">호스피스 간호</span></summary>
+      <div class="sec-body">
+        <p class="lead">호주의 완화의료 간호사 브로니 웨어는 수년간 <b>생의 마지막 몇 주</b>를 보내는 환자들을 돌보며 그들이 반복해서 말하는 후회를 기록했어요(『내가 원하는 삶을 살았더라면』, 2012). 표본은 작지만, 이만큼 마지막 지점에서 수집된 데이터는 드물어요. 🟡 (일화 기반 — 대신 아래 필레머의 대규모 연구와 교차 검증됨)</p>
+        <div class="voice">"다른 사람들이 내게 기대한 삶이 아니라, <b>나 자신에게 진실한 삶</b>을 살 용기를 냈더라면." <span class="who">— 후회 1위. 웨어: "가장 흔했고, 예외가 거의 없었다"</span></div>
+        <p>나머지: ②그렇게까지 일만 하지 않았더라면(특히 남성 전원) ③감정을 표현할 용기를 냈더라면 ④친구들과 연락을 놓지 않았더라면 ⑤<u>나를 더 행복하게 해줬더라면</u>(행복이 '선택'이었음을 마지막에야 깨달음).</p>
+        <div class="co red">
+          <div class="co-t">⚡ 당신과의 정면충돌 — 그리고 해소</div>
+          <p style="margin:.3em 0 0">당신은 "남의 목표를 빌리는 게 최고"라 했고, 저는 지라르로 "모두가 빌린다"고 받았죠. 근데 병상의 증언 1위는 정확히 그 전략의 청구서예요. 모순일까요? 아니요 — <mark>빌려도 되는 것과 안 되는 것이 다른 거예요.</mark> <b>방법·목표·시스템은 빌려도 돼요</b>(크록·월튼이 증명). 하지만 <u>"이 삶이 좋은 삶인지 판정하는 기준"까지 남의 것으로 살면</u> — 그게 병상에서 터지는 후회예요. 6부 공격 4(책임 회피)와 같은 지점이죠. 결론: <mark>목표는 빌리되, 서명은 내 손으로.</mark> "남들이 좋다는 것 중에서 <u>내가 골랐다</u>"는 한 줄이 후회 1위를 막아요.</p>
+        </div>
+        <div class="att"><div class="at">💭 태도 질문 1</div><p>지금 하는 것들 중 "남들이 기대해서"가 아니라 "내가 골랐다"고 서명할 수 있는 건 몇 개인가요?</p></div>
+      </div>
+    </details>
+  </section>
+
+  <!-- PILLEMER -->
+  <section class="card" id="pillemer">
+    <details class="sec" open>
+      <summary><span class="sec-num">02</span> 칼 필레머 — 65세 이상 1,000명+에게 물었다 <span class="age">코넬대 프로젝트</span></summary>
+      <div class="sec-body">
+        <p class="lead">코넬대 노년학자 필레머는 "미국에서 가장 현명한 사람들"이라며 <b>65세 이상 1,000명 이상을 체계적으로 인터뷰</b>했어요(레거시 프로젝트 → 『내가 알고 있는 걸 당신도 알게 된다면』, 2011). 🟢 웨어보다 표본이 크고 방법론이 있어요. 핵심 발견들:</p>
+        <div class="voice">"인생은 짧다. 정말로, 정말로 짧다." <span class="who">— 거의 전원이 가장 먼저, 가장 강하게 한 말. 우울한 뜻이 아니라 "그러니 지금 해라"의 뜻으로</span></div>
+        <p>• <b>"돈을 더 벌었어야 했다"고 답한 노인은 사실상 없었어요.</b> 대신 "좋아하지도 않는 일을 월급 때문에 계속한 세월"을 후회했죠. — 돈이 안 중요하다는 게 아니라, <mark>돈만 남고 일의 의미가 없던 시간을 후회</mark>한다는 것. 당신의 v1.1("떳떳한 돈")과 정확히 맞아요.<br>
+        • <b>"걱정은 인생의 도둑"</b> — 일어나지도 않을 일을 걱정하며 보낸 시간을 최대 낭비로 꼽았어요.<br>
+        • 배우자·관계에 대해: "결혼은 비슷한 가치관과 <u>매일의 작은 친절</u>"이 반세기 산 사람들의 결론.</p>
+        <div class="att"><div class="at">💭 태도 질문 2</div><p>최근 한 달, 걱정에 쓴 시간과 만들기에 쓴 시간 — 어느 쪽이 길었나요? (노인 1,000명의 채점 기준으로)</p></div>
+      </div>
+    </details>
+  </section>
+
+  <!-- JUNG -->
+  <section class="card" id="jung">
+    <details class="sec">
+      <summary><span class="sec-num">03</span> 칼 융 — "인생의 오후는 오전의 프로그램으로 살 수 없다" <span class="age">58세 저술</span></summary>
+      <div class="sec-body">
+        <p class="lead">융이 58세에 쓴 『인생의 단계』의 유명한 문장 🟢:</p>
+        <div class="voice">"우리는 인생의 오후를, 아침의 프로그램에 따라 살 수 없다. 아침에 위대했던 것이 저녁엔 작아지고, 아침에 진실이었던 것이 저녁엔 거짓이 되기 때문이다." <span class="who">— C.G. Jung, The Stages of Life (1933)</span></div>
+        <p>융의 구분: <b>오전(청년기)</b>의 과제는 확장 — 자리 잡기, 성취, 인정, 남들의 게임에서 이기기. <b>오후(대략 40 전후~)</b>의 과제는 의미 — 내 기준 세우기, 내면, 물려주기. 그리고 핵심 통찰: <mark>오후로 넘어가는 길목의 방향 상실은 고장이 아니라 정상 신호</mark>라는 것. 오전의 목표(남의 기준으로 잘하기)가 수명을 다해가는 소리예요.</p>
+        <p>당신의 "뭘 하고 싶은지 모르겠다 + 남의 목표로 여기까지 왔다"는 융의 지도에선 정확히 <u>오전이 성공적으로 끝나가는 사람의 위치</u>예요. 오전 프로그램(시험·면허·취직·인정)은 당신이 이미 다 이겼잖아요. 지금 필요한 건 더 나은 오전이 아니라 — <b>오후의 프로그램.</b></p>
+        <div class="att"><div class="at">💭 태도 질문 3</div><p>지금 하는 고민들 중 "오전의 문제(남 기준으로 더 잘하기)"와 "오후의 문제(내 기준 만들기)"를 나눈다면 — 몇 대 몇인가요?</p></div>
+      </div>
+    </details>
+  </section>
+
+  <!-- BROOKS x2 -->
+  <section class="card" id="brooks">
+    <details class="sec">
+      <summary><span class="sec-num">04</span> 두 명의 브룩스 — 후반전의 무기는 '가르침'이다 <span class="age">50대 저술</span></summary>
+      <div class="sec-body">
+        <p class="lead">50대에 자기 커리어의 내리막을 정면으로 연구한 두 사람이 같은 결론에 도착해요.</p>
+        <p><b>아서 브룩스 『From Strength to Strength』(2022, 57세)</b> 🟢 — 하버드 교수가 된 그의 출발점: 비행기에서 "차라리 죽는 게 낫다"고 속삭이는 노인을 들었는데, 알고 보니 한때 세계적 영웅이던 인물. 그의 연구 결론: <mark>유동지능(빠른 문제해결·창의 돌파)은 30대 후반~40대부터 내려가지만, 결정지능(종합·패턴·설명·가르침)은 40~60대에 오히려 올라가요.</mark> 그래서 후반전 전략은 "첫 곡선(내가 해내기)에 매달리기"가 아니라 <b>"두 번째 곡선(가르치고 종합하기)으로 갈아타기"</b>. 바흐가 작곡 전성기가 지나자 교육자로 전환해 『푸가의 기법』을 남긴 것처럼요.</p>
+        <div class="co green">
+          <div class="co-t">🎯 당신에게 이게 왜 대박인가</div>
+          <p style="margin:.3em 0 0">당신의 "후배 교육·커리큘럼·설명 시스템" 갈래는 — 남들이 50대에 절벽에서 발견하는 두 번째 곡선을 <mark>30대에 미리 타는 것</mark>이에요. 유동지능이 아직 있을 때 결정지능 자산(가르침의 시스템)을 지어두면, 두 곡선을 다 먹어요.</p>
+        </div>
+        <p><b>데이비드 브룩스 『두 번째 산』(2019, 58세)</b> 🟢 — 첫 번째 산(성공·돈·평판)을 오른 사람들이 정상에서 발견하는 것: <u>"이게 다야?"</u> 진짜 만족은 두 번째 산 — 자기보다 큰 것(사람·공동체·소명)에 헌신할 때 왔다는 것. 당신의 부러움 목록(돈+커뮤니티)이 사실 두 산을 다 가리키고 있었어요.</p>
+      </div>
+    </details>
+  </section>
+
+  <!-- KIM -->
+  <section class="card" id="kim">
+    <details class="sec" open>
+      <summary><span class="sec-num">05</span> 김형석 — 백 년을 실제로 살아본 사람 <span class="age">97세 저술</span></summary>
+      <div class="sec-body">
+        <p class="lead">이론이 아니라 진짜 표본이에요. 김형석 교수(1920년생, 연세대 철학)는 <b>97세에</b> 『백년을 살아보니』(2016)를 썼어요. 🟢 한국에서, 한국식 인생을 100년 산 사람의 실측 데이터:</p>
+        <div class="voice">"살아보니 인생의 황금기는 <b>60에서 75세</b>였다. 그때가 가장 행복했고 생산적이었다." <span class="who">— 사회가 '은퇴'라 부르는 구간이 실측으론 절정이었다는 증언</span></div>
+        <p>그의 다른 실측들: • <b>"재산은 자기 인격 수준만큼만 가지는 게 좋다"</b> — 그릇보다 큰 돈은 오히려 해가 되더라는 것(당신의 '떳떳한 돈'과 공명). • 행복의 정체는 쾌락이 아니라 <u>"성장하고 있다는 느낌과 일"</u>이었다는 것 — 그가 90대에도 강연과 집필을 계속한 이유. • 50대의 자신에게 해주고 싶은 말로 "아직 아무것도 늦지 않았다"를 꼽아요.</p>
+        <p>2-3부 타임라인(전환 최고령 62세)에 이 증언을 얹으면 이렇게 돼요: <mark>62세 샌더스의 창업은 '기적'이 아니라, 황금기(60~75) 초입의 지극히 정상적인 사건</mark>이었던 거예요. 당신 나이에서 보면 — 황금기까지 아직 <b>25년 이상의 준비 기간</b>이 남은 거고요.</p>
+        <div class="att"><div class="at">💭 태도 질문 4</div><p>황금기가 정말 60~75라면 — 지금의 당신은 "늦었을까 봐 초조한 사람"인가요, "본편 시작 전에 장비를 모으는 사람"인가요? 그 프레임 하나로 오늘 기분이 어떻게 달라지나요?</p></div>
+      </div>
+    </details>
+  </section>
+
+  <!-- PATTERN -->
+  <section class="card" id="pattern">
+    <details class="sec" open>
+      <summary><span class="sec-num">06</span> 🧩 겹치는 증언 4개 + 정직 박스</summary>
+      <div class="sec-body">
+        <div class="tbl">
+          <table>
+            <thead><tr><th>겹치는 증언</th><th>말한 사람</th><th>당신 시리즈와의 연결</th></tr></thead>
+            <tbody>
+              <tr><td><b>후회 1위 = 남의 기준으로 산 것</b></td><td>웨어·융·브룩스</td><td>목표는 빌리되 <u>서명은 내 손</u> (6부 공격4의 해독제)</td></tr>
+              <tr><td><b>"돈 더 벌 걸"은 없음, "떳떳하지 못한 시간"은 후회</b></td><td>필레머·김형석</td><td>v1.1 성적표층의 '떳떳한' 조건이 노인들 실측과 일치</td></tr>
+              <tr><td><b>후반전 무기는 가르침·종합</b></td><td>아서 브룩스·바흐·김형석</td><td>후배 교육 = 두 번째 곡선 조기 탑승</td></tr>
+              <tr><td><b>걱정·초조가 최대 낭비, 시간은 짧지만 늦지 않음</b></td><td>필레머·김형석</td><td>"아쉽지 않게"의 적은 늦음이 아니라 <u>걱정으로 새는 오늘</u></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="co red">
+          <div class="co-t">⚖️ 정직 박스 (5부 정신)</div>
+          <p style="margin:.3em 0 0">①<b>회고 편향</b> — 노인의 기억도 편집돼요. "일만 한 걸 후회한다"는 사람도 그 시절로 돌아가면 또 일했을 수 있어요. ②<b>표본 편향</b> — 인터뷰에 응한 노인은 건강하고 성찰적인 생존자들이에요. ③<b>웨어는 일화 기반</b> 🟡 — 다만 필레머의 대규모 연구와 방향이 일치해서 신뢰도가 올라가요. ④이 증언들은 "어떻게 살라"의 정답이 아니라 <u>"마지막에 뭐가 남고 뭐가 안 남더라"의 관측</u>으로만 쓰세요.</p>
+        </div>
+      </div>
+    </details>
+  </section>
+
+  <div class="finale">
+    <div class="rune">🌅🧭</div>
+    <p class="big">마지막까지 가본 사람들의 결론은<br>이상하게 단순해요 —<br><u>내가 골랐다고 서명할 수 있는 삶,<br>떳떳한 돈, 가르침, 그리고 덜 걱정하기.</u></p>
+    <p style="color:var(--fg-soft); margin-top:18px">그리고 97년을 산 사람의 마지막 선물 같은 한 줄:<br><b>"황금기는 60부터더라. 아직 아무것도 늦지 않았다."</b></p>
+  </div>
+
+  <div class="foot">
+    프리렌으로 배우는 AI 시대 · 2-4부 — 살아보니, 이렇더라<br>
+    브로니 웨어(2012) · 필레머 코넬 레거시(2011) · 융(1933) · A.브룩스(2022) · D.브룩스(2019) · 김형석(2016)
+  </div>
+
+</div>
+</body>
+</html>

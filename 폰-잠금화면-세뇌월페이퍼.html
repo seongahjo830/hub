@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>잠금화면 월페이퍼 — 폰에서 열고 스크린샷</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#111;display:flex;flex-direction:column;align-items:center;gap:24px;padding:24px;font-family:"Pretendard","Apple SD Gothic Neo",sans-serif}
+.hint{color:#888;font-size:13px;text-align:center;max-width:420px;line-height:1.6}
+.wall{width:360px;height:780px;border-radius:28px;overflow:hidden;position:relative;flex-shrink:0}
+/* ── 버전 1: 딥네이비 미니멀 ── */
+.w1{background:linear-gradient(170deg,#0e1420 0%,#131c2e 45%,#1a2740 100%)}
+.w1 .stars{position:absolute;inset:0}
+.w1 .stars i{position:absolute;background:#7A9CC8;border-radius:50%;opacity:.5}
+.w1 .zone{position:absolute;left:0;right:0;top:56%;padding:0 34px;text-align:center}
+.w1 .line1{color:#E8DFA8;font-size:15px;letter-spacing:.28em;font-weight:600;margin-bottom:18px}
+.w1 .main{color:#F2EFE4;font-size:27px;font-weight:800;line-height:1.65;letter-spacing:-0.01em}
+.w1 .main b{color:#F0C64C;font-weight:800}
+.w1 .sub{margin-top:22px;color:#8FA6C4;font-size:13.5px;line-height:1.9}
+/* ── 버전 2: 크림 종이 ── */
+.w2{background:linear-gradient(175deg,#FBF6EA 0%,#F4EBD8 100%)}
+.w2 .zone{position:absolute;left:0;right:0;top:54%;padding:0 34px;text-align:center}
+.w2 .line1{color:#B8860B;font-size:14px;letter-spacing:.3em;font-weight:700;margin-bottom:16px}
+.w2 .main{color:#2A2620;font-size:26px;font-weight:800;line-height:1.7}
+.w2 .main b{color:#B8451F}
+.w2 .sub{margin-top:20px;color:#8A8170;font-size:13px;line-height:1.9}
+.w2 .frieren{position:absolute;top:14%;left:50%;transform:translateX(-50%)}
+</style>
+</head>
+<body>
+<p class="hint">📱 폰에서 이 파일을 열고 → 마음에 드는 쪽을 전체화면 스크린샷 → 잠금화면 배경으로 설정.<br>(시계·알림은 위쪽 빈 공간에 뜨도록 문구를 아래쪽에 배치했어요)</p>
+
+<!-- V1 -->
+<div class="wall w1">
+  <div class="stars">
+    <i style="left:12%;top:8%;width:2px;height:2px"></i><i style="left:78%;top:6%;width:3px;height:3px"></i>
+    <i style="left:55%;top:13%;width:2px;height:2px"></i><i style="left:30%;top:19%;width:2px;height:2px"></i>
+    <i style="left:88%;top:24%;width:2px;height:2px"></i><i style="left:8%;top:30%;width:3px;height:3px"></i>
+    <i style="left:65%;top:34%;width:2px;height:2px"></i><i style="left:42%;top:27%;width:2px;height:2px"></i>
+  </div>
+  <div class="zone">
+    <div class="line1">1 · 2 · 3 · 5 · 7</div>
+    <div class="main">문만 통과.<br>리셋은 <b>지금</b>.<br>심심하면 <b>몰입 큐</b>.</div>
+    <div class="sub">붕괴만 안 하면 이긴다<br>시스템은 나를 기다린다 ✈️</div>
+  </div>
+</div>
+
+<!-- V2 -->
+<div class="wall w2">
+  <svg class="frieren" width="120" height="120" viewBox="0 0 120 120" aria-label="프리렌">
+    <circle cx="60" cy="52" r="26" fill="#F2D9C0"/>
+    <path d="M34,46 Q28,110 40,118 L48,118 Q42,64 46,52 Z" fill="#E8E0CC"/>
+    <path d="M86,46 Q92,110 80,118 L72,118 Q78,64 74,52 Z" fill="#E8E0CC"/>
+    <path d="M36,44 Q60,10 84,44 Q78,36 60,34 Q42,36 36,44Z" fill="#E8E0CC"/>
+    <circle cx="52" cy="52" r="2.6" fill="#2A2620"/><circle cx="69" cy="52" r="2.6" fill="#2A2620"/>
+    <path d="M54,62 Q60,66 67,62" stroke="#B06A5A" stroke-width="2" fill="none" stroke-linecap="round"/>
+  </svg>
+  <div class="zone">
+    <div class="line1">벌통 · 뿌리 · 성적표</div>
+    <div class="main">나는 <b>만드는 사람</b>이다.<br>축적해서, 떳떳하게 판다.</div>
+    <div class="sub">어쩌다 보니 하게 되는 집에서 산다<br>과자는 음식이 아니라 공장 제품 🫙</div>
+  </div>
+</div>
+
+</body>
+</html>

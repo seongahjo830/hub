@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>나침반 — 누구를 모델로 잡을까</title>
+<style>
+:root{
+  --bg:#FBFAF7; --bg-soft:#F4F1EA; --fg:#1F1F1F; --fg-soft:#3A3A3A;
+  --muted:#6E6E6E; --rule:#E8E3D6; --accent:#1D4ED8; --warm:#B8451F;
+  --magic:#5B3A8C; --magic-bg:#F1ECF7; --gold:#B8860B; --green:#3E7C43; --red:#B02A1F;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#1A1816; --bg-soft:#252220; --fg:#E8E4DC; --fg-soft:#C7C2B8;
+    --muted:#9A968D; --rule:#36322C; --accent:#7AB0FF; --warm:#E89464;
+    --magic:#C9A9F0; --magic-bg:#2A2333; --gold:#E0B84C; --green:#7FB985; --red:#F08A7E;
+  }
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; background:var(--bg); color:var(--fg);
+  font-family:"Pretendard","Pretendard Variable",-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Segoe UI","Malgun Gothic",sans-serif;
+  font-size:17px; line-height:1.85; letter-spacing:-0.011em; -webkit-font-smoothing:antialiased;
+}
+@media (min-width:700px){ body{font-size:18px} }
+.wrap{max-width:680px; margin:0 auto; padding:0 22px 90px}
+
+.hero{padding:56px 0 30px; text-align:center; border-bottom:1px solid var(--rule)}
+.hero .kicker{font-size:.82em; letter-spacing:.14em; color:var(--muted); text-transform:uppercase; margin-bottom:16px}
+.hero .rune{font-size:2.2em; line-height:1; margin-bottom:14px}
+.hero h1{font-size:1.85em; line-height:1.32; letter-spacing:-0.03em; font-weight:800; margin:.1em 0 .35em}
+@media (min-width:700px){ .hero h1{font-size:2.25em} }
+.hero .sub{color:var(--fg-soft); font-size:1.05em; font-style:italic; max-width:31em; margin:0 auto}
+.hero .meta{margin-top:20px; font-size:.8em; color:var(--muted)}
+
+.counts{display:flex; justify-content:center; gap:8px; flex-wrap:wrap; margin:22px 0 4px}
+.counts .b{padding:6px 13px; border-radius:999px; background:var(--bg-soft); border:1px solid var(--rule); font-size:.82em; font-weight:700}
+.counts .b .n{color:var(--accent)}
+
+b{color:var(--warm); font-weight:700}
+u{text-decoration:none; background:linear-gradient(180deg,transparent 62%,rgba(29,78,216,.16) 62%); padding:0 2px}
+mark{background:rgba(255,214,64,.42); padding:1px 5px; border-radius:4px; font-weight:600; color:inherit}
+@media (prefers-color-scheme: dark){ mark{background:rgba(226,180,60,.28)} }
+
+.co{margin:18px 0; padding:16px 18px; border-radius:12px; border-left:3px solid var(--accent);
+  background:linear-gradient(100deg, rgba(29,78,216,.07), transparent 70%); font-size:.98em}
+.co.magic{border-left-color:var(--magic); background:linear-gradient(100deg,var(--magic-bg),transparent 70%)}
+.co.red{border-left-color:var(--red); background:linear-gradient(100deg,rgba(176,42,31,.09),transparent 70%)}
+.co.gold{border-left-color:var(--gold); background:linear-gradient(100deg,rgba(184,134,11,.10),transparent 70%)}
+.co.green{border-left-color:var(--green); background:linear-gradient(100deg,rgba(62,124,67,.10),transparent 70%)}
+.co .co-t{font-weight:800; margin-bottom:4px; letter-spacing:-0.02em}
+.co.magic .co-t{color:var(--magic)} .co.red .co-t{color:var(--red)} .co.gold .co-t{color:var(--gold)} .co.green .co-t{color:var(--green)}
+
+.chips{display:flex; flex-wrap:wrap; gap:8px; margin:24px 0 8px}
+.chip{font-size:.85em; font-weight:600; text-decoration:none; color:var(--fg-soft);
+  padding:7px 13px; border:1px solid var(--rule); border-radius:999px; background:var(--bg-soft)}
+.chip:hover{border-color:var(--accent); color:var(--accent)}
+
+/* model card */
+.model{margin:20px 0; border:1px solid var(--rule); border-radius:16px; overflow:hidden; background:var(--bg-soft)}
+.model .top{padding:16px 18px 12px; border-bottom:1px solid var(--rule)}
+.model .name{font-size:1.2em; font-weight:800; letter-spacing:-0.02em}
+.model .one{font-size:.85em; color:var(--muted); font-weight:600; margin-top:2px}
+.model .mirror{display:inline-block; margin-top:9px; font-size:.78em; font-weight:800; color:#fff; background:var(--magic); padding:4px 11px; border-radius:999px}
+.model .body{padding:14px 18px}
+.model .body p{margin:.55em 0; font-size:.96em}
+.model .hook{margin-top:10px; padding:11px 14px; border-radius:10px; background:var(--bg); border-left:3px solid var(--gold); font-size:.95em}
+.model .hook b{color:var(--gold)}
+.model .grab{margin-top:10px; padding:10px 14px; border-radius:10px; border:1px dashed var(--accent); font-size:.92em}
+.model .grab .gl{font-size:.7em; font-weight:800; letter-spacing:.08em; color:var(--accent); text-transform:uppercase}
+.model .warn{margin-top:8px; font-size:.82em; color:var(--muted)}
+.model .warn b{color:var(--red)}
+
+.pull{margin:36px 0; padding:6px 0 6px 22px; border-left:3px solid var(--accent);
+  font-size:1.16em; line-height:1.6; font-weight:600; letter-spacing:-0.02em}
+
+/* pick machine */
+.pick{margin:26px 0; padding:20px; border:2px solid var(--gold); border-radius:16px}
+.pick .ph{font-weight:800; color:var(--gold); text-align:center; margin-bottom:12px; letter-spacing:-0.02em}
+.pick ol{margin:0; padding-left:1.3em}
+.pick li{margin:.5em 0; font-size:.96em}
+
+.finale{margin-top:44px; padding:34px 0 0; border-top:2px solid var(--fg); text-align:center}
+.finale .rune{font-size:1.7em}
+.finale .big{font-size:1.24em; font-weight:800; letter-spacing:-0.03em; line-height:1.55; margin:.4em 0}
+.foot{margin-top:44px; padding-top:18px; border-top:1px solid var(--rule); font-size:.78em; color:var(--muted); text-align:center}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <div class="kicker">프리렌으로 배우는 AI 시대 · 나침반 편</div>
+    <div class="rune">🧭</div>
+    <h1>누구를 모델로 잡을까</h1>
+    <p class="sub">부러움을 질투가 아니라 나침반으로 바꿔줄 6명. 각자 당신의 <u>어떤 지문 가닥</u>을 비추는 거울인지 매핑했어요.</p>
+    <div class="meta">닿을 일 없는 사람들만 골랐어요 — 옆 치과·동기·SNS 이웃은 모델 아니라 라이벌이니까</div>
+  </header>
+
+  <div class="counts">
+    <span class="b">후보 <span class="n">6</span></span>
+    <span class="b">거울 매핑 <span class="n">6가닥</span></span>
+    <span class="b">고르는 장치 <span class="n">1</span></span>
+    <span class="b">경고 <span class="n">2</span></span>
+  </div>
+
+  <div class="co red" style="margin-top:26px">
+    <div class="co-t">⚠️ 먼저 — 이 추천 자체가 함정일 수 있어요 (5부·6부 정신)</div>
+    <p style="margin:.4em 0 0">제가 "이 사람 잡으세요"라고 하는 순간, 그건 또 <mark>남의 목표 빌리기</mark>예요. 그래서 규칙을 바꿨어요: 아래 6명은 <b>정답이 아니라 후보</b>고, 각자 당신이 이미 가진 지문의 <u>다른 조각</u>을 비춰요. 읽으면서 "오 이 사람"이 <b>몸에서 먼저 반응하는</b> 걸 고르세요 — 논리로 고르면 또 남의 것이 돼요. 맨 아래 고르는 장치까지 꼭.</p>
+  </div>
+
+  <nav class="chips">
+    <a class="chip" href="#m1">🎴 라이언 홀리데이</a>
+    <a class="chip" href="#m2">🧠 바버라 오클리</a>
+    <a class="chip" href="#m3">🎨 오노 요코노…아니 사사키</a>
+    <a class="chip" href="#m4">🏥 아툴 가완디</a>
+    <a class="chip" href="#m5">🎮 미야모토 시게루</a>
+    <a class="chip" href="#m6">💊 데릭 시버스</a>
+    <a class="chip" href="#pick">🎯 고르는 장치</a>
+  </nav>
+
+  <div class="pull">"부러움은 잘못 배달된 편지다. 겉봉을 뜯으면, 사실 내 이름이 적혀 있다."</div>
+
+  <!-- M1 -->
+  <section id="m1">
+    <div class="model">
+      <div class="top">
+        <div class="name">🎴 라이언 홀리데이</div>
+        <div class="one">고대 철학(스토아)을 현대 콘텐츠 제국으로 · 미디어 회사 + 시골 서점 주인</div>
+        <div class="mirror">거울: 당신의 "지식의 직관적 전달" 가닥</div>
+      </div>
+      <div class="body">
+        <p>마케터 출신(아메리칸 어패럴 마케팅 디렉터를 20대에)이 <b>2,000년 된 스토아 철학</b>을 골라서, 책·이메일(Daily Stoic, 구독자 수백만)·팟캐스트·유튜브·심지어 <u>텍사스 시골에 오프라인 서점</u>까지 — 하나의 지식을 온갖 형태로 복제해 먹는 미디어 시스템을 지었어요. 자기가 발명한 지식이 아니라 <b>남의 것(고대 철학)을 빌려</b> 재포장한 거예요. 딱 당신 방식.</p>
+        <div class="hook"><b>오 포인트:</b> "나는 창작자가 아니라 <u>번역자</u>다. 어려운 걸 쉽게, 오래된 걸 지금으로 옮긴다." — 자아가 '독창성'이 아니라 '전달력'에 있는 사람. 당신처럼.</div>
+        <div class="grab"><div class="gl">잡고 싶다면</div>그의 책 『스틸니스』나 Daily Stoic 이메일 하나 구독 → "지식 하나를 몇 개 형태로 복제하는가"를 관찰. 치과 지식을 그 구조에 얹으면?</div>
+        <div class="warn"><b>주의:</b> 콘텐츠 양치기(quantity) 논란 있음. 빌리되 그의 '속도 우선'은 걸러 담기. 🟡</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- M2 -->
+  <section id="m2">
+    <div class="model">
+      <div class="top">
+        <div class="name">🧠 바버라 오클리</div>
+        <div class="one">수포자 → 공대 교수 → 세계 최대 온라인 강의(400만 수강) 창시자</div>
+        <div class="mirror">거울: 당신의 "교육·후배·가치관 형성" 가닥</div>
+      </div>
+      <div class="body">
+        <p>초·중·고 수학을 <b>낙제</b>하고 "난 수학 절대 못 해"라던 사람이, 군 통신병 후 스스로 뇌를 '재장착'해 전기공학 학위를 따고 공대 교수가 됐어요. 그리고 결정적 한 방 — 자기가 어떻게 바뀌었는지를 <mark>'학습법 그 자체'로 코스화</mark>해서, Coursera의 <b>'Learning How to Learn'으로 누적 400만+ 수강</b>. 지구에서 가장 많이 들은 강의 중 하나예요.</p>
+        <div class="hook"><b>오 포인트:</b> 그는 "천재라서 가르친" 게 아니라 <u>"바보였다가 방법으로 바뀐 경험"을 팔았어요.</u> 콘텐츠는 '내가 잘하는 것'이 아니라 '내가 넘어본 벽'에서 나온다는 증거. 당신이 넘은 벽(진료 설득·시스템화)이 곧 강의예요.</div>
+        <div class="grab"><div class="gl">잡고 싶다면</div>그의 강의 첫 주차만 들어보기(무료) → "개인 경험을 어떻게 보편 커리큘럼으로 바꾸나"의 골조를 훔치기. 당신의 후배 교육 = 이것의 치과 버전.</div>
+        <div class="warn">🟢 학계+대중 양쪽 검증. 논란 거의 없음.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- M3 -->
+  <section id="m3">
+    <div class="model">
+      <div class="top">
+        <div class="name">🎨 사사키 후미오 (미니멀리스트)</div>
+        <div class="one">평범한 편집자 → "물건 버리기"라는 환경 설계 하나로 세계적 저자</div>
+        <div class="mirror">거울: 당신의 "환경 조성·동선·습관 설계" 가닥</div>
+      </div>
+      <div class="body">
+        <p>특별할 것 없던 일본 출판사 편집자가, <b>"공간과 물건을 어떻게 배치하면 사람이 달라지는가"</b>라는 아주 좁은 주제 하나를 파서 『나는 단순하게 살기로 했다』로 세계적 베스트셀러가 됐어요. 거대 사상이 아니라 <mark>극도로 구체적인 '환경 설계'</mark> 하나로요. 4-2부에서 당신이 "동선 배치·정리 습관·환경 조성"에 끌린다 했던 바로 그 크래프트.</p>
+        <div class="hook"><b>오 포인트:</b> "나는 물건을 버린 게 아니라 <u>내 행동을 설계했다.</u>" — 거대 담론 없이, 손에 잡히는 환경 한 조각으로 사람을 바꾸는 사람. 디즈니 이매지니어의 생활 버전.</div>
+        <div class="grab"><div class="gl">잡고 싶다면</div>그의 책 한 챕터 → "추상적 가치(행복)를 물리적 배치(물건 수)로 번역하는 법"을 관찰. 치과 대기실·진료 동선에 이식하면?</div>
+        <div class="warn">🟡 사상보다 실천서. 깊이보다 '적용 가능성'을 빌리기.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- M4 -->
+  <section id="m4">
+    <div class="model">
+      <div class="top">
+        <div class="name">🏥 아툴 가완디</div>
+        <div class="one">외과의사 + 작가 — "체크리스트" 하나로 전 세계 수술실을 바꾼 사람</div>
+        <div class="mirror">거울: 당신의 "진료 × 시스템 × 설득" 세 가닥이 만나는 지점</div>
+      </div>
+      <div class="body">
+        <p>당신과 <b>가장 가까운 직업</b>(현직 외과의사)인데도 라이벌이 아닌 이유 — 분야가 완전히 다르고 이미 대가라 닿을 일이 없으니까. 그는 진료를 하면서 <mark>『체크리스트 선언』으로 "복잡한 의료를 단순한 시스템으로 만드는 법"</mark>을 세계 표준으로 만들었어요. WHO 수술 안전 체크리스트가 그의 작품이고, 이게 전 세계 수술 사망률을 실제로 낮췄어요. 의사가 <u>진료 현장의 반복 문제를 시스템+글로 해결</u>한 정확한 원형.</p>
+        <div class="hook"><b>오 포인트:</b> "나는 더 뛰어난 외과의가 되려 한 게 아니라, <u>평범한 의사도 안 틀리게 만드는 구조</u>를 설계했다." — 4-2부 당신의 매듭("사람이 저절로 잘하게 만드는 구조 설계자")을 의료에서 실현한 사람. 거의 당신의 미래 초상.</div>
+        <div class="grab"><div class="gl">잡고 싶다면</div>『체크리스트 선언』 → "치과판 체크리스트/리콜 프로토콜"의 영감. 당신의 리콜 프로그램이 이 계보에 앉을 수 있어요.</div>
+        <div class="warn">🟢 의학+글쓰기 양쪽 정점. 당신 지문과 가장 정확히 겹침 — 그래서 위험할 수도(너무 닮아 라이벌 감정 유발 시 거리 두기).</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- M5 -->
+  <section id="m5">
+    <div class="model">
+      <div class="top">
+        <div class="name">🎮 미야모토 시게루</div>
+        <div class="one">마리오·젤다의 아버지 — "사람을 저절로 움직이게 하는 재미"의 설계자</div>
+        <div class="mirror">거울: 당신의 "게임식 즉시 피드백·자율성" 가닥</div>
+      </div>
+      <div class="body">
+        <p>당신이 "잘 설계된 게임 — 도파민 즉시, 자율성"에 끌린다 했잖아요. 그걸 <b>직업으로 정점을 찍은 사람</b>이에요. 미야모토의 철학이 소름 돋아요: 젤다는 어린 시절 <u>교토 시골의 동굴·숲을 탐험하던 경험</u>에서 나왔고, 그는 게임을 "규칙"이 아니라 <mark>"플레이어가 스스로 발견하게 만드는 정원"</mark>으로 설계해요. 튜토리얼 없이 첫 화면 배치만으로 사람이 오른쪽으로 가게 만드는 것 — 이게 넛지+선택설계의 게임 버전이에요.</p>
+        <div class="hook"><b>오 포인트:</b> "나는 명령하지 않는다. <u>플레이어가 자기 생각이라고 느끼게 유도</u>한다." — 당신이 4-2부에서 말한 "기획자 의도대로가 아니라 자율성이 있는 무언가"를 평생 만든 사람.</div>
+        <div class="grab"><div class="gl">잡고 싶다면</div>그의 게임 디자인 인터뷰 하나 → "가르치지 않고 발견하게 하는 법". 환자 교육·후배 교육을 '강의'가 아니라 '발견하는 게임'으로 바꾸면?</div>
+        <div class="warn">🟢 이견 없는 거장. 단, 게임업계라 직접 경로는 없음 — '설계 철학'만 빌리기.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- M6 -->
+  <section id="m6">
+    <div class="model">
+      <div class="top">
+        <div class="name">💊 데릭 시버스</div>
+        <div class="one">음악가 → CD Baby 창업·매각 → "적게, 내 방식대로"의 철학자</div>
+        <div class="mirror">거울: 당신의 "시스템 소유 + 관객 없이 파는" 성향</div>
+      </div>
+      <div class="body">
+        <p>뮤지션이던 시버스가 자기 CD 팔려고 만든 작은 사이트가 <b>CD Baby</b>가 됐고, 2,200만 달러에 팔았어요. 근데 그가 모델인 진짜 이유는 매각이 아니라 <mark>태도</mark>예요. "관객을 모으는 것"보다 <u>"내 방식대로 작동하는 작은 시스템을 소유하는 것"</u>을 택한 사람. 그의 유명한 말: <b>"'와, 대박!'이 아니면 '노(No)'다"</b> — 미지근한 건 다 거절하는 극단적 집중. 버핏 5/25의 삶 버전이에요.</p>
+        <div class="hook"><b>오 포인트:</b> "성공은 남에게 잘 보이는 게 아니라, <u>내가 설계한 규칙 안에서 자유로운 것</u>이다." — 당신의 부러움 정체("잠긴 문 없는 상태 = 선택권")를 이미 사는 사람.</div>
+        <div class="grab"><div class="gl">잡고 싶다면</div>그의 책 『Anything You Want』(2시간이면 읽음) → "작게, 내 규칙대로 소유하는 사업"의 감. 리콜 엔진 B2B가 이 계보.</div>
+        <div class="warn">🟢 담백하고 논란 없음. 야망 크기가 당신과 다를 수 있으니 '태도'만 빌리기.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PICK -->
+  <section id="pick">
+    <div class="pick">
+      <div class="ph">🎯 고르는 장치 — 논리 말고 몸으로</div>
+      <ol>
+        <li><b>6명 이름을 소리 내 읽어보세요.</b> 딱 한 명에서 <mark>가슴이 0.5초 먼저 반응</mark>하는 게 있어요. 그게 1순위. (지라르: 진짜 부러움은 논리 이전에 와요)</li>
+        <li>그 사람의 <b>거울 가닥</b>을 확인 — 그게 지금 당신이 키우고 싶은 지문 조각이에요.</li>
+        <li><b>이번 주 딱 하나:</b> 그 사람의 책 1챕터 or 영상 1개. 전부 X, 하나만.</li>
+        <li>읽고 나서 질문 하나: <u>"이 사람의 무엇을 빌리고, 무엇은 안 빌릴까?"</u> — 이 문장을 쓰는 순간, 남의 목표가 <b>당신이 서명한 목표</b>로 바뀌어요(2-4부 후회 1위 방어).</li>
+      </ol>
+    </div>
+    <div class="co green">
+      <div class="co-t">💡 내 관찰 하나 (참고만)</div>
+      <p style="margin:.3em 0 0">6부 레드팀 정신으로 정직하게 — 당신 지문과 <b>가장 정확히 겹치는 건 아툴 가완디</b>(진료×시스템×글)예요. 근데 <u>가장 안전하고 신선한 조합은 가완디의 '구조'</u> + <b>미야모토의 '발견하게 하는 설계'</b> + <b>시버스의 '작게 소유하는 태도'</b> 셋을 섞는 거예요. 한 명을 통째로 베끼는 게 아니라 — 애덤스식 <mark>재능 스택처럼 '모델 스택'</mark>을 짜는 거죠. 이게 당신을 유일하게 만들어요.</p>
+    </div>
+  </section>
+
+  <div class="finale">
+    <div class="rune">🧭✨</div>
+    <p class="big">모델은 '되고 싶은 사람'이 아니에요.<br><u>이미 내 안에 있는 조각을,<br>먼저 꺼내 보여준 사람</u>이에요.</p>
+    <p style="color:var(--fg-soft); margin-top:18px">그러니 6명 중 가슴이 반응한 한 명 —<br>그 사람은 당신의 미래가 아니라, <b>당신의 거울</b>이에요.<br>이번 주, 그 거울 하나만 들여다보세요.</p>
+  </div>
+
+  <div class="foot">
+    프리렌으로 배우는 AI 시대 · 나침반 편 — 누구를 모델로 잡을까<br>
+    홀리데이 · 오클리 · 사사키 · 가완디 · 미야모토 · 시버스 · 모델 스택 = 재능 스택의 인물판
+  </div>
+
+</div>
+</body>
+</html>

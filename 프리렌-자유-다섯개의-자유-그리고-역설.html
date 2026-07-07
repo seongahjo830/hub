@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>자유 — 다섯 개의 자유, 그리고 그 역설</title>
+<style>
+:root{
+  --bg:#FBFAF7; --bg-soft:#F4F1EA; --fg:#1F1F1F; --fg-soft:#3A3A3A;
+  --muted:#6E6E6E; --rule:#E8E3D6; --accent:#1D4ED8; --warm:#B8451F;
+  --magic:#5B3A8C; --magic-bg:#F1ECF7; --gold:#B8860B; --green:#3E7C43; --red:#B02A1F; --teal:#0E7C86;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#1A1816; --bg-soft:#252220; --fg:#E8E4DC; --fg-soft:#C7C2B8;
+    --muted:#9A968D; --rule:#36322C; --accent:#7AB0FF; --warm:#E89464;
+    --magic:#C9A9F0; --magic-bg:#2A2333; --gold:#E0B84C; --green:#7FB985; --red:#F08A7E; --teal:#4FC3CE;
+  }
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; background:var(--bg); color:var(--fg);
+  font-family:"Pretendard","Pretendard Variable",-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Segoe UI","Malgun Gothic",sans-serif;
+  font-size:17px; line-height:1.85; letter-spacing:-0.011em; -webkit-font-smoothing:antialiased;
+}
+@media (min-width:700px){ body{font-size:18px} }
+.wrap{max-width:680px; margin:0 auto; padding:0 22px 90px}
+
+.hero{padding:56px 0 30px; text-align:center; border-bottom:1px solid var(--rule)}
+.hero .kicker{font-size:.82em; letter-spacing:.14em; color:var(--muted); text-transform:uppercase; margin-bottom:16px}
+.hero .rune{font-size:2.2em; line-height:1; margin-bottom:14px}
+.hero h1{font-size:1.85em; line-height:1.32; letter-spacing:-0.03em; font-weight:800; margin:.1em 0 .35em}
+@media (min-width:700px){ .hero h1{font-size:2.25em} }
+.hero .sub{color:var(--fg-soft); font-size:1.05em; font-style:italic; max-width:31em; margin:0 auto}
+.hero .meta{margin-top:20px; font-size:.8em; color:var(--muted)}
+
+.counts{display:flex; justify-content:center; gap:8px; flex-wrap:wrap; margin:22px 0 4px}
+.counts .b{padding:6px 13px; border-radius:999px; background:var(--bg-soft); border:1px solid var(--rule); font-size:.82em; font-weight:700}
+.counts .b .n{color:var(--accent)}
+
+b{color:var(--warm); font-weight:700}
+u{text-decoration:none; background:linear-gradient(180deg,transparent 62%,rgba(29,78,216,.16) 62%); padding:0 2px}
+mark{background:rgba(255,214,64,.42); padding:1px 5px; border-radius:4px; font-weight:600; color:inherit}
+@media (prefers-color-scheme: dark){ mark{background:rgba(226,180,60,.28)} }
+
+.pull{margin:36px 0; padding:6px 0 6px 22px; border-left:3px solid var(--accent);
+  font-size:1.16em; line-height:1.6; font-weight:600; letter-spacing:-0.02em}
+.pull small{display:block; margin-top:8px; font-size:.62em; font-weight:500; color:var(--muted); font-style:normal}
+
+section.card{border-top:1px solid var(--rule); padding-top:14px; margin-top:8px}
+details.sec{margin:0}
+details.sec>summary{
+  list-style:none; cursor:pointer; padding:20px 0 18px;
+  font-size:1.2em; font-weight:800; letter-spacing:-0.028em; line-height:1.4;
+  display:flex; gap:14px; align-items:baseline;
+}
+details.sec>summary::-webkit-details-marker{display:none}
+.sec-num{flex:0 0 auto; font-size:.62em; font-weight:800; color:var(--accent)}
+.sec-body{padding-bottom:14px}
+.sec-body>p:first-child{margin-top:0}
+
+p{margin:.9em 0}
+h3{font-size:1.03em; font-weight:800; letter-spacing:-0.02em; margin:1.4em 0 .5em}
+.lead{font-size:1.05em; color:var(--fg-soft)}
+
+.co{margin:18px 0; padding:16px 18px; border-radius:12px; border-left:3px solid var(--accent);
+  background:linear-gradient(100deg, rgba(29,78,216,.07), transparent 70%); font-size:.98em}
+.co.magic{border-left-color:var(--magic); background:linear-gradient(100deg,var(--magic-bg),transparent 70%)}
+.co.red{border-left-color:var(--red); background:linear-gradient(100deg,rgba(176,42,31,.09),transparent 70%)}
+.co.gold{border-left-color:var(--gold); background:linear-gradient(100deg,rgba(184,134,11,.10),transparent 70%)}
+.co.green{border-left-color:var(--green); background:linear-gradient(100deg,rgba(62,124,67,.10),transparent 70%)}
+.co .co-t{font-weight:800; margin-bottom:4px; letter-spacing:-0.02em}
+.co.magic .co-t{color:var(--magic)} .co.red .co-t{color:var(--red)} .co.gold .co-t{color:var(--gold)} .co.green .co-t{color:var(--green)}
+
+.chips{display:flex; flex-wrap:wrap; gap:8px; margin:24px 0 8px}
+.chip{font-size:.85em; font-weight:600; text-decoration:none; color:var(--fg-soft);
+  padding:7px 13px; border:1px solid var(--rule); border-radius:999px; background:var(--bg-soft)}
+.chip:hover{border-color:var(--accent); color:var(--accent)}
+
+/* five freedoms */
+.five{margin:18px 0}
+.fr{display:flex; gap:14px; padding:14px 0; border-bottom:1px solid var(--rule); align-items:flex-start}
+.fr:last-child{border-bottom:none}
+.fr .ic{flex:0 0 auto; width:44px; height:44px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:1.3em; color:#fff}
+.fr.f1 .ic{background:var(--green)} .fr.f2 .ic{background:var(--magic)}
+.fr.f3 .ic{background:var(--warm)} .fr.f4 .ic{background:var(--gold)} .fr.f5 .ic{background:var(--teal)}
+.fr .ft{font-weight:800; letter-spacing:-0.02em}
+.fr .fd{font-size:.93em; color:var(--fg-soft); margin-top:1px}
+.fr .lever{font-size:.85em; margin-top:5px; padding:7px 11px; border-radius:8px; background:var(--bg-soft); border:1px dashed var(--rule)}
+.fr .lever b{color:var(--accent)}
+
+/* paradox svg box */
+.svgbox{margin:22px 0; padding:16px 10px 10px; border:1px solid var(--rule); border-radius:14px; background:var(--bg-soft)}
+.svgbox svg{width:100%; height:auto; display:block}
+.svgbox .cap{text-align:center; font-size:.85em; color:var(--muted); margin-top:8px}
+
+/* far-connect cards */
+.far{margin:16px 0; padding:15px 17px; border:1px solid var(--rule); border-radius:14px; background:var(--bg-soft)}
+.far .fh{font-weight:800; letter-spacing:-0.02em; color:var(--teal)}
+.far .fb{font-size:.95em; margin-top:4px}
+.far .fb b{color:var(--fg)}
+
+.att{margin:18px 0 6px; padding:15px 17px; border-radius:12px; border:2px solid var(--gold); font-size:.97em}
+.att .at{font-size:.72em; font-weight:800; letter-spacing:.08em; color:var(--gold); text-transform:uppercase; margin-bottom:3px}
+.att p{margin:.2em 0; font-weight:600}
+
+.finale{margin-top:44px; padding:34px 0 0; border-top:2px solid var(--fg); text-align:center}
+.finale .rune{font-size:1.7em}
+.finale .big{font-size:1.24em; font-weight:800; letter-spacing:-0.03em; line-height:1.55; margin:.4em 0}
+.foot{margin-top:44px; padding-top:18px; border-top:1px solid var(--rule); font-size:.78em; color:var(--muted); text-align:center}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <div class="kicker">프리렌으로 배우는 AI 시대 · 자유 편</div>
+    <div class="rune">🕊️</div>
+    <h1>다섯 개의 자유,<br>그리고 그 역설</h1>
+    <p class="sub">"내가 원하는 건 전부 자유였다" — 맞아요. 근데 자유는 <u>목적지가 아니라 연료</u>예요. 채워도 방향이 없으면 텅 비어요.</p>
+    <div class="meta">발산: 물리학·동물원·복권당첨자·등산·정원까지 끌어와 자유를 해부</div>
+  </header>
+
+  <div class="counts">
+    <span class="b">자유 종류 <span class="n">5</span></span>
+    <span class="b">먼 연결 <span class="n">5</span></span>
+    <span class="b">역설 <span class="n">1</span></span>
+    <span class="b">지렛대 <span class="n">5</span></span>
+  </div>
+
+  <div class="co gold" style="margin-top:26px">
+    <div class="co-t">🎯 30초 요약</div>
+    <p style="margin:.4em 0 0">당신이 원한 5자유 — <b>정신(똑똑함)·신체(건강)·경제(돈)·관계·시간</b>. 근데 결정적 발견: <mark>자유엔 두 종류가 있어요.</mark> ①<b>~로부터의 자유</b>(from, 속박이 없는 상태)와 ②<b>~를 향한 자유</b>(to, 뭔가를 할 힘). 당신이 말한 건 대부분 ①인데 — <u>①만 채우면 텅 빈 자유(허무)가 와요.</u> 복권 당첨자·은퇴자·동물원 동물이 그 증거예요. 진짜 원하는 건 ②고, ②는 <b>제약을 없애서가 아니라 방향을 골라야</b> 생겨요.</p>
+  </div>
+
+  <nav class="chips">
+    <a class="chip" href="#s1">🕊️ 자유의 두 얼굴</a>
+    <a class="chip" href="#s2">🧩 당신의 5자유 해부</a>
+    <a class="chip" href="#s3">🌀 자유의 역설</a>
+    <a class="chip" href="#s4">🔭 멀리서 온 5연결</a>
+    <a class="chip" href="#s5">🔧 그래서 뭘 하지</a>
+  </nav>
+
+  <div class="pull">"인간은 자유를 향해 저주받은 존재다."<small>— 사르트르. 자유는 선물이 아니라 <u>매일 골라야 하는 짐</u>이라는 뜻</small></div>
+
+  <!-- S1 -->
+  <section class="card" id="s1">
+    <details class="sec" open>
+      <summary><span class="sec-num">01</span> 자유의 두 얼굴 — from vs to</summary>
+      <div class="sec-body">
+        <p class="lead">철학자 이사야 벌린이 나눈 유명한 구분이에요 🟢. 이거 하나만 알면 당신 고민의 절반이 풀려요.</p>
+        <div class="svgbox">
+          <svg viewBox="0 0 620 170" xmlns="http://www.w3.org/2000/svg" aria-label="소극적 자유 vs 적극적 자유">
+            <!-- from -->
+            <rect x="20" y="30" width="270" height="110" rx="12" fill="none" stroke="#B02A1F" stroke-width="2"/>
+            <text x="155" y="58" font-size="15" font-weight="800" fill="#B02A1F" text-anchor="middle">~로부터의 자유 (FROM)</text>
+            <text x="155" y="84" font-size="12.5" fill="#8A857A" text-anchor="middle">속박·의무·간섭이 없는 상태</text>
+            <text x="155" y="106" font-size="12.5" fill="#8A857A" text-anchor="middle">"잠긴 문이 없다"</text>
+            <text x="155" y="128" font-size="12" font-weight="700" fill="#B02A1F" text-anchor="middle">채우면 → 텅 빔 위험</text>
+            <!-- arrow -->
+            <path d="M300,85 L320,85" stroke="#8A857A" stroke-width="2"/>
+            <path d="M316,80 L322,85 L316,90" fill="none" stroke="#8A857A" stroke-width="2"/>
+            <!-- to -->
+            <rect x="330" y="30" width="270" height="110" rx="12" fill="none" stroke="#3E7C43" stroke-width="2.5"/>
+            <text x="465" y="58" font-size="15" font-weight="800" fill="#3E7C43" text-anchor="middle">~를 향한 자유 (TO)</text>
+            <text x="465" y="84" font-size="12.5" fill="#8A857A" text-anchor="middle">무언가를 해낼 힘·방향</text>
+            <text x="465" y="106" font-size="12.5" fill="#8A857A" text-anchor="middle">"열고 들어갈 방이 있다"</text>
+            <text x="465" y="128" font-size="12" font-weight="700" fill="#3E7C43" text-anchor="middle">채우면 → 충만</text>
+          </svg>
+          <div class="cap">거의 모든 사람이 왼쪽(from)을 원한다고 말하지만, 진짜 갈망은 오른쪽(to)이에요.</div>
+        </div>
+        <p><b>from</b>은 뺄셈이에요 — 빚 없애기, 간섭 없애기, 의무 없애기. <b>to</b>는 덧셈이고요 — 그 자유로 <u>무엇을 할지</u>. 문제는 이거예요: <mark>from만 잔뜩 얻으면 '텅 빈 자유'가 와요.</mark> 아무 문도 안 잠겼는데 들어갈 방을 모르는 상태. 이게 은퇴 우울증, 복권 당첨자의 공허, 방학 3일차의 무기력의 정체예요.</p>
+      </div>
+    </details>
+  </section>
+
+  <!-- S2 -->
+  <section class="card" id="s2">
+    <details class="sec" open>
+      <summary><span class="sec-num">02</span> 당신의 5자유 해부 — 각자의 진짜 정체와 지렛대</summary>
+      <div class="sec-body">
+        <div class="five">
+          <div class="fr f1"><div class="ic">🏃</div><div><div class="ft">신체적 자유 — "건강해서 뛰어놀 수 있는"</div><div class="fd">당신이 "가장 작은 걸음"으로 직감한 그것. 5자유 중 <b>유일하게 100% 통제 가능</b>하고, 나머지 4개의 <u>토대</u>. 몸이 무너지면 정신·경제·관계 자유도 함께 무너져요.</div><div class="lever"><b>지렛대:</b> from(병 없음)을 넘어 to(할 수 있는 것)로 — "달리기로 산에 오른다" 같은 <u>능력형 목표</u> 하나</div></div></div>
+
+          <div class="fr f2"><div class="ic">🧠</div><div><div class="ft">정신적 자유 — "똑똑해서 이것저것 생각할 수 있는"</div><div class="fd">당신 지문 1번(구조 설계자)의 연료. 근데 정신적 자유의 역설: <b>정보가 많을수록 오히려 산만</b>해져요. 진짜 정신적 자유 = 아는 게 많은 것보다 <mark>깊이 몰입할 수 있는 것</mark>.</div><div class="lever"><b>지렛대:</b> 입력(쇼츠·정보) 줄이고, 한 주제를 깊이 파는 '집중의 자유'로 전환</div></div></div>
+
+          <div class="fr f3"><div class="ic">💰</div><div><div class="ft">경제적 자유 — 돈</div><div class="fd">정체는 '많은 돈'이 아니라 <b>"싫은 걸 안 해도 되는 상태"</b>(f-you money). 연구상 소득-행복은 어느 지점 넘으면 완만해지고, <u>'돈으로 시간을 사는 사람'</u>이 가장 행복해요. 즉 경제적 자유의 진짜 목적은 <mark>시간 자유를 사는 것.</mark></div><div class="lever"><b>지렛대:</b> 목표를 '얼마 벌기'가 아니라 '몇 시간을 자유롭게 만들기'로 번역 (2-2부 시스템 자산)</div></div></div>
+
+          <div class="fr f4"><div class="ic">👥</div><div><div class="ft">관계적 자유 — "가치를 창출하는 대인관계"</div><div class="fd">당신 표현이 날카로웠어요 — 그냥 관계가 아니라 <b>"가치를 창출할 수 있는"</b> 관계. 이건 인맥 수집이 아니라 <u>서로를 키우는 소수</u>예요(2-4부: 반세기 산 사람들이 꼽은 것도 넓은 인맥 아닌 깊은 소수).</div><div class="lever"><b>지렛대:</b> 후배·동료 중 '함께 뭔가 만들 3명'에 집중. 커뮤니티는 이 3명에서 자라남</div></div></div>
+
+          <div class="fr f5"><div class="ic">⏳</div><div><div class="ft">시간적 자유 — "아무 때나 자유롭게 쓸 무한한 시간"</div><div class="fd">당신이 가장 순수하게 갈망한 것. 근데 <b>가장 위험한 것</b>이기도 — 무한한 시간을 실제로 받은 사람들(은퇴자·거액 상속자)이 가장 방향을 잃어요. <mark>시간은 자유의 그릇일 뿐, 안에 담을 게 없으면 독.</mark></div><div class="lever"><b>지렛대:</b> "시간이 생기면 뭐 할까"에 지금 답이 없다면 → 먼저 필요한 건 시간이 아니라 '하고 싶은 하나'</div></div></div>
+        </div>
+        <div class="co magic">
+          <div class="co-t">🧩 5개를 관통하는 발견</div>
+          <p style="margin:.3em 0 0">신체·정신·경제·관계·시간 — 다섯 자유가 전부 <b>같은 구조</b>예요. 각각 'from(제약 없음)'은 시작일 뿐이고, 진짜 만족은 'to(그 자유로 뭘 하나)'에 있어요. 그리고 <mark>다섯 개 다 '방향(=하고 싶은 하나)'을 요구</mark>해요. 그래서 자유를 원하는 당신에게 진짜 필요한 건 — 더 많은 자유가 아니라, <u>그 자유를 쏟을 방 한 칸</u>이에요. 지금까지 시리즈 전체가 그 방을 찾는 여정이었어요.</p>
+        </div>
+      </div>
+    </details>
+  </section>
+
+  <!-- S3 -->
+  <section class="card" id="s3">
+    <details class="sec">
+      <summary><span class="sec-num">03</span> 🌀 자유의 역설 — 왜 자유를 얻고 길을 잃는가</summary>
+      <div class="sec-body">
+        <p class="lead">이건 실제로 이름 붙은 현상들이에요.</p>
+        <h3>① 선택의 역설 (Schwartz) 🟢</h3>
+        <p>심리학자 배리 슈워츠: <b>선택지가 많을수록 만족이 떨어져요.</b> 잼 24종을 진열하면 6종일 때보다 <u>덜 사고 덜 행복</u>했어요(유명한 실험). 자유(선택지)가 늘면 ⓐ결정 마비 ⓑ"더 나은 게 있었을 텐데" 후회 ⓒ책임의 무게가 커져요. <mark>당신이 "뭘 하고 싶은지 모르겠다"고 한 건, 자유가 부족해서가 아니라 오히려 많아서</mark>일 수 있어요.</p>
+        <h3>② 도망친 자유 (Fromm) 🟢</h3>
+        <p>에리히 프롬 『자유로부터의 도피』: 사람들은 자유를 원한다면서, 막상 얻으면 <b>불안해서 다시 속박(권위·유행·군중)으로 도망쳐요.</b> "남들이 좋다는 걸 하고 싶다"는 당신 말이 — 자유의 무게가 무서워 <u>군중이라는 안전한 감옥</u>으로 도피하는 것일 수도 있어요(6부 공격4와 연결).</p>
+        <div class="co red">
+          <div class="co-t">⚡ 그래서 무서운 결론 하나</div>
+          <p style="margin:.3em 0 0">당신이 5자유를 다 얻어도 — <b>'방향' 없이 얻으면 지금보다 더 길을 잃을 수 있어요.</b> 무한한 시간 + 무한한 돈 + 완벽한 건강을 가진 사람이 공허에 빠지는 건 흔해요. 그러니 자유는 <mark>1순위 목표가 아니라, 방향을 정한 뒤 그걸 실현하는 수단</mark>이에요. 순서가 뒤집히면 독이 돼요.</p>
+        </div>
+      </div>
+    </details>
+  </section>
+
+  <!-- S4 -->
+  <section class="card" id="s4">
+    <details class="sec" open>
+      <summary><span class="sec-num">04</span> 🔭 멀리서 끌어온 다섯 개의 통찰</summary>
+      <div class="sec-body">
+        <p class="lead">요청대로 발산 — 자유와 아무 상관 없어 보이는 다섯 세계에서.</p>
+
+        <div class="far"><div class="fh">🪁 연(kite) — 실이 끊기면 못 난다</div><div class="fb">연은 <b>실이 붙잡아주기 때문에</b> 하늘 높이 떠요. 실을 끊으면? 추락해요. <mark>자유(양력)는 제약(실의 장력)이 있을 때 생기는 힘</mark>이에요. 완전한 무제약은 비행이 아니라 낙하예요. → 당신에게 필요한 건 모든 실을 끊는 게 아니라, <u>'좋은 실 하나'(스스로 고른 제약=방향)</u>를 붙잡는 것.</div></div>
+
+        <div class="far"><div class="fh">🎼 재즈 — 규칙이 있어야 즉흥이 산다</div><div class="fb">재즈의 자유로운 솔로는 <b>코드 진행이라는 엄격한 틀</b> 위에서만 나와요. 틀이 없으면 즉흥이 아니라 소음이에요. 당신이 사랑한 "자율성 있는 게임"(4-2부)이 정확히 이거 — <mark>제약이 자유를 만드는 구조.</mark> → 진료·사업에 '내가 정한 규칙'을 깔면, 그 안에서 오히려 창조적 자유가 터져요.</div></div>
+
+        <div class="far"><div class="fh">🦁 동물원의 역설 — 문을 열어도 안 나간다</div><div class="fb">평생 우리에서 산 동물은 문을 열어줘도 안 나가요(학습된 무기력). 근데 더 소름은 반대 — <b>야생 방사된 동물이 오히려 죽는 경우가 많아요.</b> 자유(야생)엔 <u>그 자유를 쓸 능력</u>이 필요하거든요. → 자유를 원한다면, 자유를 받기 전에 <mark>'자유를 쓰는 근육'</mark>부터 길러야 해요. 작은 자유부터 연습.</div></div>
+
+        <div class="far"><div class="fh">🏔️ 등산 — 정상보다 능선</div><div class="fb">등산가들이 말하는 진짜 자유는 정상(도착=from의 완성)이 아니라 <b>능선을 걷는 과정</b>이에요. 정상에 서면 5분 뒤 내려갈 생각뿐이죠. <mark>자유는 도착 상태가 아니라 나아가는 움직임</mark>. → "자유로워지면 행복할 거야"는 정상 신화. 지금 <u>능선을 걷는 방식</u>(오늘의 몰입)을 설계하는 게 진짜 자유.</div></div>
+
+        <div class="far"><div class="fh">🌿 정원 — 울타리가 정원을 만든다</div><div class="fb">정원은 <b>경계(울타리)를 그었기 때문에</b> 정원이에요. 경계 없는 땅은 정원이 아니라 황무지죠. 자유롭게 아무 데나 심으면 잡초밭이 되고, <u>구획을 정해 심으면</u> 아름다워져요. → 당신의 5자유에 '경계'를 그으세요. "이건 안 한다"의 울타리가, 안쪽을 비옥하게 만들어요(버핏 5/25 = 자유의 정원사).</div></div>
+
+        <div class="att"><div class="at">💭 발산 질문</div><p>다섯 비유(연·재즈·동물원·등산·정원) 중 <b>몸이 먼저 반응한 하나</b>는? 그게 당신이 자유를 오해하고 있던 방식을 알려줘요. (예: 정원이 꽂히면 = 당신은 경계가 필요한 사람)</p></div>
+      </div>
+    </details>
+  </section>
+
+  <!-- S5 -->
+  <section class="card" id="s5">
+    <details class="sec" open>
+      <summary><span class="sec-num">05</span> 🔧 그래서 뭘 해야 하나 — 자유를 '지어가는' 4단계</summary>
+      <div class="sec-body">
+        <p>결론은 반직관적이에요: <b>자유를 목표로 쫓지 말고, 방향을 정한 뒤 자유를 '결과로' 쌓으세요.</b></p>
+        <div class="co green">
+          <div class="co-t">1️⃣ 신체 자유부터 (유일한 100% 통제 가능 영역)</div>
+          <p style="margin:.3em 0 0">5자유의 토대이자 유일하게 오늘 바로 늘릴 수 있는 것. <b>운동·수면·식사</b>는 자유 프로젝트의 1일차. 당신 직감이 맞았어요 — 이게 나머지 4개의 배터리예요.</p>
+        </div>
+        <div class="co">
+          <div class="co-t">2️⃣ 'from'을 'to'로 번역하기</div>
+          <p style="margin:.3em 0 0">5자유 각각에 질문 바꾸기: "무엇으로부터 벗어나고 싶나(from)" → <b>"그 자유로 구체적으로 뭘 하고 싶나(to)"</b>. to에 답이 없는 자유는 아직 준비 안 된 것. 시간 자유에 답이 없으면 → 지금 필요한 건 시간이 아님.</p>
+        </div>
+        <div class="co gold">
+          <div class="co-t">3️⃣ 경제·시간 자유는 '시스템'으로 (직접 X)</div>
+          <p style="margin:.3em 0 0">경제 자유의 진짜 정의 = 시간 자유를 사는 것. 그리고 시간 자유는 <b>나 없이 굴러가는 시스템</b>(2-2부 벌통)에서 나와요. 즉 두 자유는 별개 목표가 아니라 <u>같은 프로젝트(시스템 자산)의 두 결과</u>예요.</p>
+        </div>
+        <div class="co magic">
+          <div class="co-t">4️⃣ 역설 방어 — 자유를 '한 칸' 줄여서 시작</div>
+          <p style="margin:.3em 0 0">선택의 역설 때문에, 자유가 많을수록 마비돼요. 그래서 처방은 반대 — <mark>일부러 제약을 걸어요.</mark> "이번 분기엔 이것만 한다"는 울타리(정원), "이 코드 진행 안에서만 논다"는 틀(재즈), "좋은 실 하나만 붙잡는다"(연). <b>스스로 고른 제약 = 자유의 최고 형태.</b></p>
+        </div>
+      </div>
+    </details>
+  </section>
+
+  <div class="finale">
+    <div class="rune">🕊️🧭</div>
+    <p class="big">당신이 원한 건 '자유'가 아니라<br><u>자유를 쏟을 곳</u>이었어요.</p>
+    <p style="color:var(--fg-soft); margin-top:18px">잠긴 문을 다 여는 건 시작일 뿐이에요.<br>연은 실이 있어야 날고, 정원은 울타리가 있어야 자라요.<br><b>방향을 고르는 순간 — 자유는 짐이 아니라 날개가 돼요.</b></p>
+  </div>
+
+  <div class="foot">
+    프리렌으로 배우는 AI 시대 · 자유 편 — 다섯 개의 자유, 그리고 그 역설<br>
+    벌린(두 자유) · 슈워츠(선택의 역설) · 프롬(자유로부터의 도피) · 사르트르 · 연·재즈·동물원·등산·정원
+  </div>
+
+</div>
+</body>
+</html>
