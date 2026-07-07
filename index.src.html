@@ -29,6 +29,8 @@ body{background:var(--bg);color:var(--ink);font-family:"Pretendard","Apple SD Go
 .status .b{background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:7px 13px;font-size:.82em;font-weight:700}
 .status .b .n{color:var(--accent)}
 .status .b.live .n{color:var(--green)}
+.status .b.uptime{background:linear-gradient(135deg,rgba(62,124,67,.16),rgba(29,78,216,.1));border-color:var(--green)}
+.status .b.uptime .n{color:var(--green);font-weight:900}
 #dday{color:var(--warm)}
 
 /* section */
@@ -55,7 +57,19 @@ body{background:var(--bg);color:var(--ink);font-family:"Pretendard","Apple SD Go
 .card.read,.big-card.read{opacity:.42}
 .card.read .t::after,.big-card.read .t::after{content:"✓ 읽음";display:inline-block;font-size:.66em;font-weight:800;color:var(--muted);background:var(--line);border-radius:999px;padding:0 6px;margin-left:6px;vertical-align:middle}
 .card.read:hover,.big-card.read:hover{opacity:.8}
-.readbar{display:flex;justify-content:flex-end;gap:8px;margin:14px 0 -8px}
+.readbar{display:flex;justify-content:flex-end;gap:8px;margin:14px 0 -8px;flex-wrap:wrap}
+/* 여러 개 선택 모드 */
+body.selmode a.card,body.selmode a.big-card{position:relative}
+body.selmode a.card::after,body.selmode a.big-card::after{content:"";position:absolute;top:9px;right:9px;width:20px;height:20px;border:2px solid var(--muted);border-radius:50%;background:var(--panel)}
+a.card.sel::after,a.big-card.sel::after{content:"✓"!important;border-color:var(--accent)!important;background:var(--accent)!important;color:#fff;font-size:.8em;font-weight:900;text-align:center;line-height:20px}
+a.card.sel,a.big-card.sel{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent) inset}
+#selbar{position:fixed;left:0;right:0;bottom:0;z-index:40;background:var(--panel);border-top:1px solid var(--line);padding:10px 14px calc(10px + env(safe-area-inset-bottom));display:none;gap:6px;max-width:680px;margin:0 auto;box-shadow:0 -4px 16px rgba(0,0,0,.12)}
+#selbar.on{display:flex;align-items:center;flex-wrap:wrap}
+#selbar .cnt{font-weight:900;font-size:.86em;margin-right:auto}
+#selbar button{background:var(--bg);border:1px solid var(--line);border-radius:9px;padding:8px 11px;font-size:.82em;font-weight:800;color:var(--ink);font-family:inherit;cursor:pointer}
+#selbar button:active{background:var(--line)}
+#selbar button.danger{color:var(--warm);border-color:var(--warm)}
+#selbar button.done{color:var(--muted)}
 .readbar button{background:none;border:1px solid var(--line);color:var(--muted);font-size:.74em;font-weight:700;border-radius:999px;padding:4px 11px;cursor:pointer;font-family:inherit}
 .readbar button:active{background:var(--line)}
 /* 즐겨찾기·보관·숨김 */
@@ -87,8 +101,8 @@ body{background:var(--bg);color:var(--ink);font-family:"Pretendard","Apple SD Go
   </header>
 
   <div class="status">
+    <span class="b uptime">🟢 시스템 가동 <span class="n" id="uptime">D+?</span></span>
     <span class="b live">넛지 <span class="n">● LIVE</span></span>
-    <span class="b">알림 <span class="n">9개</span></span>
     <span class="b">읽을거리 <span class="n">25편</span></span>
     <span class="b">✈️ 발리 <span class="n" id="dday">D-?</span></span>
   </div>
@@ -183,7 +197,7 @@ body{background:var(--bg);color:var(--ink);font-family:"Pretendard","Apple SD Go
     </div>
   </section>
 
-  <div class="readbar"><button id="hiddenMgr">숨긴 글 관리</button><button id="readReset">읽음 표시 전부 지우기</button></div>
+  <div class="readbar"><button id="multiSel">☑️ 여러 개 선택</button><button id="hiddenMgr">숨긴 글 관리</button><button id="readReset">읽음 표시 전부 지우기</button></div>
 
   <div class="note">
     <b>이 대시보드의 구조:</b> 입력은 <b>디스코드 채널</b>(오늘의교훈·클로드알림)과 클로드코드로, 데이터는 <b>옵시디언 볼트</b> 뒷단에 쌓이고, 이 페이지는 그걸 <b>읽기 전용</b>으로 보여줘요. 노션 대신 깃허브 페이지라 폰에서 가볍게 열려요. 게시글 올리는 기능은 없음(입력은 디스코드로).
@@ -193,6 +207,16 @@ body{background:var(--bg);color:var(--ink);font-family:"Pretendard","Apple SD Go
     프리렌 대시보드 · 개인용 · seongahjo830<br>
     입력=디스코드/클로드코드 · 저장=볼트 · 열람=여기
   </div>
+</div>
+
+<!-- 여러 개 선택 액션바 -->
+<div id="selbar">
+  <span class="cnt" id="selCnt">0개 선택</span>
+  <button id="bFav">⭐ 즐겨찾기</button>
+  <button id="bRead">✓ 읽음</button>
+  <button id="bArch">📦 보관</button>
+  <button id="bHide" class="danger">🗑️ 삭제</button>
+  <button id="bDone" class="done">완료</button>
 </div>
 
 <!-- 길게 누르면 나오는 카드 메뉴 -->
@@ -212,6 +236,16 @@ body{background:var(--bg);color:var(--ink);font-family:"Pretendard","Apple SD Go
   var now = new Date();
   var d = Math.ceil((bali - now) / 86400000);
   document.getElementById('dday').textContent = d > 0 ? ('D-' + d) : (d === 0 ? '오늘!' : '다녀옴');
+
+  // 시스템 가동 D+일수 (하루 망해도 안 깎임 = 축적 게이지). 시작=2026-07-07
+  (function(){
+    var start = new Date('2026-07-07T00:00:00');
+    var t = new Date(); t.setHours(0,0,0,0);
+    var up = Math.floor((t - start) / 86400000);
+    if (up < 0) up = 0;
+    var el = document.getElementById('uptime');
+    if (el) el.textContent = 'D+' + up;
+  })();
 
   // 정체성 문구 로테이션 (자기지각: 반복 노출된 자기 서술 = 진짜가 됨)
   (function(){
@@ -274,15 +308,39 @@ body{background:var(--bg);color:var(--ink);font-family:"Pretendard","Apple SD Go
       });
     });
 
+    // ===== 여러 개 선택 모드 =====
+    var selMode = false, sel = {};
+    var selbar = document.getElementById('selbar');
+    function add(k,h){ if (S[k].indexOf(h) < 0){ S[k].push(h); save(k); } }
+    function rem(k,h){ var i = S[k].indexOf(h); if (i>=0){ S[k].splice(i,1); save(k); } }
+    function selKeys(){ return Object.keys(sel).filter(function(h){ return sel[h]; }); }
+    function paintSel(){
+      document.querySelectorAll('a.card, a.big-card').forEach(function(a){
+        a.classList.toggle('sel', !!sel[a.getAttribute('href')]);
+      });
+      document.getElementById('selCnt').textContent = selKeys().length + '개 선택';
+    }
+    function enterSel(){ selMode = true; sel = {}; document.body.classList.add('selmode'); selbar.classList.add('on'); document.getElementById('multiSel').textContent = '선택 취소'; paintSel(); }
+    function exitSel(){ selMode = false; sel = {}; document.body.classList.remove('selmode'); selbar.classList.remove('on'); document.getElementById('multiSel').textContent = '☑️ 여러 개 선택'; document.querySelectorAll('a.sel').forEach(function(a){ a.classList.remove('sel'); }); }
+    document.getElementById('multiSel').addEventListener('click', function(){ selMode ? exitSel() : enterSel(); });
+    document.getElementById('bDone').addEventListener('click', exitSel);
+    // 배치 액션: 선택된 전부에 적용 후 종료
+    function batch(fn){ var ks = selKeys(); if (!ks.length){ exitSel(); return; } ks.forEach(fn); apply(); exitSel(); }
+    document.getElementById('bFav').addEventListener('click', function(){ batch(function(h){ add('fav',h); }); });
+    document.getElementById('bRead').addEventListener('click', function(){ batch(function(h){ add('read',h); }); });
+    document.getElementById('bArch').addEventListener('click', function(){ batch(function(h){ add('arch',h); }); });
+    document.getElementById('bHide').addEventListener('click', function(){ batch(function(h){ add('hidden',h); }); });
+
     function bind(a){
       a.addEventListener('click', function(e){
+        if (selMode){ e.preventDefault(); var h0 = a.getAttribute('href'); sel[h0] = !sel[h0]; paintSel(); return; }
         if (suppress){ e.preventDefault(); return; }
         var h = a.getAttribute('href');
         if (!has('read',h)){ S.read.push(h); save('read'); }
         a.classList.add('read');
       });
-      a.addEventListener('contextmenu', function(e){ e.preventDefault(); openMenu(a); });
-      a.addEventListener('touchstart', function(){ timer = setTimeout(function(){ openMenu(a); }, 550); }, {passive:true});
+      a.addEventListener('contextmenu', function(e){ e.preventDefault(); if (!selMode) openMenu(a); });
+      a.addEventListener('touchstart', function(){ if (selMode) return; timer = setTimeout(function(){ openMenu(a); }, 550); }, {passive:true});
       a.addEventListener('touchmove', function(){ clearTimeout(timer); }, {passive:true});
       a.addEventListener('touchend', function(){ clearTimeout(timer); });
     }
