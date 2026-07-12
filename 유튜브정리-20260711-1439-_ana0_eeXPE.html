@@ -1,0 +1,33 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>🎬 유튜브 정리</title>
+<style>
+:root{--bg:#FBF7EE;--panel:#FFFDF7;--ink:#2A2620;--soft:#5A5348;--muted:#8A8170;--line:#E4D6B4;--accent:#1D4ED8;--warm:#C2571F;--gold:#B8860B}
+@media(prefers-color-scheme:dark){:root{--bg:#17150F;--panel:#211E17;--ink:#EDE7D8;--soft:#C9C2B2;--muted:#98917F;--line:#39342A;--accent:#7AB0FF;--warm:#E8925C;--gold:#E0B84C}}
+*{box-sizing:border-box}body{background:var(--bg);color:var(--ink);font-family:"Pretendard","Apple SD Gothic Neo","Malgun Gothic",sans-serif;line-height:1.75;margin:0;padding:0 18px 70px}
+.wrap{max-width:680px;margin:0 auto}.top{padding:16px 0;border-bottom:1px solid var(--line)}.top a{color:var(--accent);text-decoration:none;font-weight:700;font-size:.9em}
+.vwrap{position:relative;padding-bottom:56.25%;height:0;border-radius:13px;overflow:hidden;margin:16px 0;border:1px solid var(--line)}
+.vwrap iframe{position:absolute;inset:0;width:100%;height:100%}
+#c h1{font-size:1.5em;font-weight:900;letter-spacing:-.02em;margin:18px 0 8px;line-height:1.3}
+#c h2{font-size:1.2em;font-weight:900;margin:24px 0 8px;padding-top:6px;border-top:1px solid var(--line)}
+#c h3{font-size:1.05em;font-weight:800;margin:18px 0 6px;color:var(--warm)}
+#c blockquote{border-left:3px solid var(--gold);background:var(--panel);border-radius:0 8px 8px 0;padding:8px 14px;margin:12px 0;color:var(--soft)}
+#c ul,#c ol{padding-left:22px}#c li{margin:5px 0}#c strong{color:var(--ink)}#c hr{border:0;border-top:1px solid var(--line);margin:18px 0}
+#c code{background:var(--panel);border:1px solid var(--line);border-radius:5px;padding:1px 5px;font-size:.9em}
+.btn{display:inline-block;background:var(--accent);color:#fff;border-radius:10px;padding:10px 16px;margin:16px 0;text-decoration:none;font-weight:700}
+.foot{margin-top:30px;padding-top:14px;border-top:1px solid var(--line);font-size:.75em;color:var(--muted);text-align:center}
+</style></head>
+<body><div class="wrap">
+<div class="top"><a href="./index.html">← 프리렌 대시보드</a></div>
+<div class="vwrap"><iframe src="https://www.youtube.com/embed/_ana0_eeXPE" frameborder="0" allowfullscreen></iframe></div>
+<div id="c"></div>
+<a class="btn" href="https://www.youtube.com/watch?v=_ana0_eeXPE&list=PLYE_AnIQorhQEEOEoLhqUR4BNrvpTYxN_" target="_blank">▶️ 원본 영상 보기</a>
+<div class="foot">🎬 유튜브 정리 · #유튜브정리 채널 정리 기반 · 프리렌 대시보드</div>
+</div>
+<script type="text/markdown" id="md">
+❌ 오류: `RuntimeError: Failed to authenticate. API Error: 401 {"type":"error","error":{"type":"authentication_error","message":"Invalid authentication credentials"},"request_id":"req_011CcujRuDjGwNmdzhW4kKwp"}`
+</script>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script>
+try{ document.getElementById('c').innerHTML = marked.parse(document.getElementById('md').textContent.trim()); }
+catch(e){ document.getElementById('c').innerText = document.getElementById('md').textContent; }
+</script>
+</body></html>
